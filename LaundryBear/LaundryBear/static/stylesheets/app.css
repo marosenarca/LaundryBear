@@ -16,7 +16,7 @@ html, body {
 }
 #footer {
    position:absolute;
-   bottom:0;
+   bottom:0px;
    width:100%;
    height:100%px;   /* Height of the footer */
 /*   background:#6cf;*/
