@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="../../../static/management/foundation-5.5.3/css/foundation.css" />
 <link rel="stylesheet" href="../../../static/management/stylesheets/control.css"/>
 <script src="../../../static/management/foundation-5.5.3/js/vendor/modernizr.js"></script>
-<title>Untitled Document</title>
+<title>Laundry Bear</title>
 </head>
 
 <body>
@@ -79,7 +79,7 @@
                    
                   <div class="large-4 small-6 columns">
        
-                    <h4 id="rad">Recently Added Shops</h4><hr>
+                    <h3 id="rad">Recently Added Shops</h3><hr>
        
                     <div class="row">
                       <div class="large-1 column">
@@ -87,7 +87,7 @@
                       </div>
        
                       <div class="large-9 columns">
-                        <h5><a href="#">Kosh Kosh</a></h5>
+                       <span data-tooltip aria-haspopup="true" class="has-tip" title="Added three days ago"> <h5><a href="#">Kosh Kosh</a></h5></span>
                         <h6 class="subheader show-for-small">Doors at 00:00pm</h6>
                       </div>
                     </div><hr>
@@ -117,9 +117,22 @@
                         <div class="large-1 column">
                           <img src="../../../static/management/icons/steps.png">
                         </div>
-       
-                        <div class="large-9 columns">
+
+                      <div class="large-9 columns">
                           <h5 class="subheader"><a href="#">Benny's</a></h5>
+                        </div>
+                      </div><hr>
+
+
+
+                      <div class="row">
+                        <div class="large-1 column">
+                        </div>
+
+                        <div class="panel callout raius">
+                          <h6>Most Requested Shop</h5>
+                          <p>Mang Laba</p>
+                          <p>Rating: <img src="../../../static/management/icons/star.png"></p>
                         </div>
                       </div>
                     </div>
@@ -130,8 +143,8 @@
        
                   <div class="large-4 small-12 columns">
        
-                    <h4 id="requests">Requests</h4><hr>
-                    <div id="subheader" class="panel">
+                    <h2 id="requests">Requests</h2><hr>
+                    <div id="subheader" class="panel callout radius">
                       <h5><a href="#">Feed</a></h5>
        
                       <p class="subheader">
@@ -144,7 +157,7 @@
                     </div>
        
                     <div id="ufd" class="panel hide-for-small">
-                      <h5><a href="#">Unfulfilled Requests »</a></h5>
+                      <h5 id="ufr"><a href="#">Unfulfilled Requests »</a></h5>
                     </div>
        
                     <div id="vt" class="panel hide-for-small">

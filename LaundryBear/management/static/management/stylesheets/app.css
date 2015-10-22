@@ -28,3 +28,15 @@ hr{
   height: 0;
   margin: 1.25rem 0 1.1875rem;
 }
+img#logo {
+	width: 4%;
+	height: 3%;
+	margin-left: -12px;
+	margin-top: -3px;
+}
+img#writtenlogo {
+	width: 15%;
+	height: 10%;
+	margin-top: 2%;
+	margin-left:1%;
+}

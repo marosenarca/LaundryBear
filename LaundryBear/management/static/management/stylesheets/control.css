@@ -1,5 +1,9 @@
 @charset "utf-8";
 /* CSS Document */
+body {
+	background-color: #F0FFFF;
+}
+
 img#logo {
 	width: 4%;
 	height: 3%;
@@ -80,4 +84,8 @@ div#vt:hover {
 	animation: ease-in;
 	background: #000;
 	
+}
+img#star {
+	height: 2%;
+	width:  5s%;
 }
