@@ -1,0 +1,83 @@
+@charset "utf-8";
+/* CSS Document */
+img#logo {
+	width: 4%;
+	height: 3%;
+	margin-left: -12px;
+	margin-top: -3px;
+}
+img#writtenlogo {
+	width: 15%;
+	height: 10%;
+	margin-top: 2%;
+	margin-left:1%;
+}
+.top-bar {
+    background-color: #5ac8fa;
+}
+
+
+.top-bar-section ul {
+    background-color: #5ac8fa;
+}
+
+.top-bar-section ul.right {
+    background-color: #5ac8fa;
+}
+
+
+.top-bar-section li a:not(.button) {
+    background-color: #5ac8fa;
+}
+
+
+.top-bar-section ul li.active > a {
+   background-color: #5ac8fa;
+}
+.top-bar-section li:hover a {
+    background-color: 00FFFF;
+}
+
+
+.top-bar-section ul li > a {
+    background-color: #5ac8fa;
+}
+
+
+.top-bar-section ul.dropdown li a:hover:not(.button) {
+     background-color: 00FFFF;
+}
+
+
+.top-bar-section ul.dropdown {
+    background-color: red;
+}
+
+.top-bar-section .dropdown li:not(.has-form):not(.active):hover > a:not(.button) {
+color: #FFFFFF;
+background-color: red;
+}
+
+h4#requests {
+	margin-left: 30%;
+}
+
+h4 {
+	margin-top: 5%;	
+}
+
+div.panel {
+	width: 110%;
+	height:50%;
+}
+
+div#ufd:hover {
+	animation: ease-in;
+	background: #000;
+	
+}
+div#vt:hover {
+	animation: ease-in;
+	background: #000;
+	
+}
