@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
 
-    <title></title>
+    <title>View Laundry Shops</title>
     <!--change this later to django template tags-->
     <link rel="stylesheet" href="../../../static/management/foundation-5.5.3/css/foundation.css"/>
     <link rel="stylesheet" href="../../../static/management/stylesheets/app.css"/>
@@ -36,7 +36,27 @@
 </div>
 
 <div id="body">
-      <table>
+
+<a href="#" class="success button tiny">Back</a>
+
+
+      <div class="row" style="margin:auto">
+        <div class="large-3 columns"></div>
+        <div class="large-8 columns">
+        <input type="text"placeholder="Find Stuff">
+        </div>
+        <div class="large-2 columns">
+          <a href="#" class="button tiny">Search</a>
+        </div>
+        <div class="large-2 columns"></div>
+        </div>
+
+
+
+
+
+
+      <table style="margin:auto">
       <thead>
         <tr>
           <th width="200">Name</th>
@@ -49,24 +69,23 @@
           <td>Kosh Kosh</td>
           <td>Gori Building, Gorordo, Lahug, Cebu City, Cebu</td>
           <td>
-            <button href="#" data-dropdown="drop1" aria-controls="drop1" aria-expanded="false" class="button dropdown">Dropdown Button</button><br>
-            <ul id="drop1" data-dropdown-content class="f-dropdown" aria-hidden="true">
-              <li><a href="#">Edit</a></li>
-              <li><a href="#">Delete</a></li
-            </ul>
-
+            <button href="#" data-dropdown="drop1" aria-controls="drop1" aria-expanded="true" class="button secondary dropdown"></button><br>
+              <ul id="drop1" data-dropdown-content class="f-dropdown" aria-hidden="true">
+                <li><a href="#">Edit</a></li>
+                <li><a href="#">Delete</a></li>
+              </ul>
           </td>
         </tr>
       </tbody>
     </table>
+
 </div>
 <div id="footer">
     <dl class="sub-nav">
       <dt>Filter:</dt>
       <dd class="active"><a href="#">All</a></dd>
-      <dd><a href="#">Active</a></dd>
-      <dd><a href="#">Pending</a></dd>
-      <dd class="hide-for-small-only"><a href="#">Suspended</a></dd>
+      <dd><a href="#">City</a></dd>
+      <dd><a href="#">Province</a></dd>
     </dl>
 
 
@@ -85,10 +104,17 @@
     </a>
     </div>
 </div>
+  <script src="../../../static/management/foundation-5.5.3/js/vendor/modernizr.js"></script>
+  <script src="../../../static/management/foundation-5.5.3/js/vendor/jquery.js"></script>
+  <script src="../../../static/management/foundation-5.5.3/js/vendor/fastclick.js"></script>
+  <script src="../../../static/management/foundation-5.5.3/js/foundation.min.js"></script>
+  <script src="../../../static/management/javascripts/app.js"></script>
+  <script>
+      $(document).foundation();
+    </script>
 
 
-  <script src="../../../static/management/foundation-5.5.3/js/foundation.min.js"/>
-  </body>
+</body>
   <footer class="foot">
 
   </footer>
