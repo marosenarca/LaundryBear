@@ -6,8 +6,8 @@
 
     <title></title>
     <!--change this later to django template tags-->
-    <link rel="stylesheet" href="../../static/foundation-5.5.3/css/foundation.css"/>
-    <link rel="stylesheet" href="../../static/stylesheets/app.css"/>
+    <link rel="stylesheet" href="../../../static/management/foundation-5.5.3/css/foundation.css"/>
+    <link rel="stylesheet" href="../../../static/management/stylesheets/app.css"/>
   </head>
   <body>
 <div id="header">
@@ -40,31 +40,22 @@
       <thead>
         <tr>
           <th width="200">Name</th>
-          <th>Province</th>
-          <th width="150">City</th>
-          <th width="150">Barangay</th>
-          <th width="150">Street</th>
-          <th width="150">Building</th>
-          <th width="150">Contact number</th>
-          <th width="150">Email</th>
-          <th width="150">Website</th>
-          <th width="150">Hours Open</th>
-          <th width="150">Days Open</th>
+          <th>Address</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td>Kosh Kosh</td>
-          <td>Cebu</td>
-          <td>Cebu</td>
-          <td>Lahug</td>
-          <td>Gorordo</td>
-          <td>Gori Building</td>
-          <td>09425640954</td>
-          <td>laundry@koshkosh.com.ph</td>
-          <td>koshkosh.com</td>
-          <td>9AM</td>
-          <td>8PM</td>
+          <td>Gori Building, Gorordo, Lahug, Cebu City, Cebu</td>
+          <td>
+            <button href="#" data-dropdown="drop1" aria-controls="drop1" aria-expanded="false" class="button dropdown">Dropdown Button</button><br>
+            <ul id="drop1" data-dropdown-content class="f-dropdown" aria-hidden="true">
+              <li><a href="#">Edit</a></li>
+              <li><a href="#">Delete</a></li
+            </ul>
+
+          </td>
         </tr>
       </tbody>
     </table>
@@ -81,7 +72,6 @@
 
     <div class="icon-bar four-up">
     <a class="item">
-
     <label>Add Laundry Shop</label>
     </a>
     <a class="item">
@@ -97,7 +87,7 @@
 </div>
 
 
-  <script src="../../static/foundation-5.5.3/js/foundation.min.js"/>
+  <script src="../../../static/management/foundation-5.5.3/js/foundation.min.js"/>
   </body>
   <footer class="foot">
 
