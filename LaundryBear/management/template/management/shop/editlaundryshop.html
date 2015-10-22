@@ -129,7 +129,31 @@
                 </div>
               </div>
               <hr/>
-
+              <h4>Services</h4>
+              <table style="margin:auto">
+              <thead>
+                <tr>
+                  <th width="200">Service Name</th>
+                  <th>Description</th>
+                  <th>Price</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Wash, Dry, Fold</td>
+                  <td>Regular wash dry and fold, can be finished after 2 days</td>
+                  <td>P25/Kilo</td>
+                  <td>
+                    <button href="#" data-dropdown="drop1" aria-controls="drop1" aria-expanded="true" class="button secondary dropdown"></button><br>
+                      <ul id="drop1" data-dropdown-content class="f-dropdown" aria-hidden="true">
+                        <li><a href="editlaundryshop.html">Edit</a></li>
+                        <li><a href="#">Delete</a></li>
+                      </ul>
+                  </td>
+                </tr>
+              </tbody>
+              </table>
 
               <a href="#" data-reveal-id="firstModal" class="button">Add Service</a>
               <div id="firstModal" class="reveal-modal" data-reveal aria-labelledby="firstModalTitle" aria-hidden="true" role="dialog">
@@ -159,12 +183,13 @@
                   </div>
                 </div>
 
-                <a href="#" class="button">Save</a>
+                <a href="#" class="button small">Save</a>
 
                 <a class="close-reveal-modal" aria-label="Close">&#215;</a>
               </div>
-
-
+              <hr>
+              <a href="#" class="button small">Save</a>
+              <a href="#" class="warning button small">Cancel</a>
 
           </form>
 
