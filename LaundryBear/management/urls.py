@@ -5,5 +5,5 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.LaundryMenuView.as_view(), name='menu'),
-    url(r'^add$', views.LaundryCreateView.as_view(), name='add')
+    url(r'^shops/add$', views.LaundryCreateView.as_view(), name='add-shop')
 ]
