@@ -9,6 +9,11 @@ from management import forms
 class LaundryMenuView(TemplateView):
     template_name = 'management/shop/laundrybearmenu.html'
 
+    def get_context_data(self, **kwargs):
+        context = super(LaundryMenuView, self).get_context_data(**kwargs)
+        context['recent_shops'] = LaundryShop.objects.order_by('-creation_date')[:3]
+        return context
+
 
 class LaundryUpdateView(UpdateView):
     template_name = 'management/shop/editlaundryshop.html'
