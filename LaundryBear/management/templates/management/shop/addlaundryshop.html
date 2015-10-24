@@ -1,42 +1,8 @@
+{%extends 'management/base.html'%}
 {% load staticfiles %}
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Add Laundry Shop</title>
+    {% block title %}Add Laundry Shop | LaundryBear{% endblock %}
 
-    <link rel="stylesheet" href="{% static "management/css/app.css" %}"/>
-  </head>
-  <body>
-    <div id="header">
-      <nav class="top-bar" data-topbar role="navigation">
-        <ul class="title-area">
-          <li class="name">
-            <h1>
-              <a href="#">
-                <img id ="logo" src="{%static "management/icons/headlogo.png"%}"</a>
-                <img id="writtenlogo" src="{% "management/icons/written2.png"%}"</a></a>
-            </h1>
-          </li>
-        </ul>
-           <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
-          <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
-
-        <section class="top-bar-section">
-          <!-- Right Nav Section -->
-          <ul class="right">
-            <li class="has-dropdown">
-              <a href="#">Admin</a>
-              <ul class="dropdown">
-                <li><a href="#">Profile</a></li>
-                <li class="active"><a href="#">Logout</a></li>
-              </ul>
-            </li>
-          </ul>
-        </section>
-      </nav>
-    </div>
-    <div id="body">
+{%block body%}
       <a href="viewlaundryshops.html" class="success button tiny">Back</a>
       <div class="row">
       <div class="large-2  columns "></div>
@@ -48,7 +14,7 @@
               <div class="row">
                 <div class="large-8 columns">
                   <label>Name
-                    <input type="text"/>
+                    {{form.name}}
                   </label>
                 </div>
               </div>
@@ -56,7 +22,7 @@
               <div class="row">
                 <div class="large-8 columns">
                   <label>Province
-                    <input type="text"/>
+                    {{form.province}}
                   </label>
                 </div>
               </div>
@@ -64,7 +30,7 @@
               <div class="row">
                 <div class="large-8 columns">
                   <label>City
-                    <input type="text"/>
+                    {{form.city}}
                   </label>
                 </div>
               </div>
@@ -72,7 +38,7 @@
               <div class="row">
                 <div class="large-8 columns">
                   <label>Barangay
-                    <input type="text"/>
+                    {{form.barangay}}
                   </label>
                 </div>
               </div>
@@ -80,7 +46,7 @@
               <div class="row">
                 <div class="large-8 columns">
                   <label>Street
-                    <input type="text"/>
+                    {{form.street}}
                   </label>
                 </div>
               </div>
@@ -88,7 +54,7 @@
               <div class="row">
                 <div class="large-8 columns">
                   <label>Building
-                    <input type="text"/>
+                    {{form.building}}
                   </label>
                 </div>
               </div>
@@ -96,7 +62,7 @@
               <div class="row">
                 <div class="large-8 columns">
                   <label>Contact number
-                    <input type="text"/>
+                    {{form.contact_number}}
                   </label>
                 </div>
               </div>
@@ -104,7 +70,7 @@
               <div class="row">
                 <div class="large-8 columns">
                   <label>Email
-                    <input type="text"/>
+                    {{form.email}}
                   </label>
                 </div>
               </div>
@@ -112,7 +78,7 @@
               <div class="row">
                 <div class="large-8 columns">
                   <label>Website
-                    <input type="text"/>
+                    {{form.website}}
                   </label>
                 </div>
               </div>
@@ -120,7 +86,7 @@
               <div class="row">
                 <div class="large-8 columns">
                   <label>Hours Open
-                    <input type="text"/>
+                    {{form.hours_open}}
                   </label>
                 </div>
               </div>
@@ -128,7 +94,7 @@
               <div class="row">
                 <div class="large-8 columns">
                   <label>Days Open
-                    <input type="text"/>
+                    {{form.days_open}}
                   </label>
                 </div>
               </div>
@@ -178,12 +144,4 @@
       </div>
       <div class="large-2 columns"></div>
     </div>
-
-  </div>
-    <div id="footer">
-
-    </div>
-
-    
-  </body>
-</html>
+  {% endblock %}
