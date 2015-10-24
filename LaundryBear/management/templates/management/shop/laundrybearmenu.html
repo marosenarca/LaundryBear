@@ -1,11 +1,11 @@
+{% load staticfiles %}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="../../../static/management/foundation-5.5.3/css/foundation.css" />
-<link rel="stylesheet" href="../../../static/management/stylesheets/control.css"/>
-<script src="../../../static/management/foundation-5.5.3/js/vendor/modernizr.js"></script>
+<link rel="stylesheet" href="{% static "LaundryBear/css/foundation.css" %}" />
+<link rel="stylesheet" href="{% static "management/css/control.css" %}"/>
 <title>Laundry Bear</title>
 </head>
 
@@ -17,8 +17,8 @@
             <li class="name">
               <h1>
                 <a href="Laundry Bear.html">
-                  <img id="logo" src="../../../static/management/icons/headlogo.png"/>
-                  <img id="writtenlogo" src="../../../static/management/icons/written2.png" />
+                <img id ="logo" src="{% static "management/icons/headlogo.png" %}" />
+                <img id="writtenlogo" src="{% static "management/icons/written2.png" %}" />
                 </a>
               </h1>
             </li>
@@ -83,7 +83,7 @@
        
                     <div class="row">
                       <div class="large-1 column">
-                        <img src="../../../static/management/icons/steps.png">
+						<img src="{% static "management/icons/steps.png" %}" />
                       </div>
        
                       <div class="large-9 columns">
@@ -95,7 +95,7 @@
                     <div class="hide-for-small">
                       <div class="row">
                         <div class="large-1 column">
-                          <img src="../../../static/management/icons/steps.png">
+							<img src="{% static "management/icons/steps.png" %}" />
                         </div>
        
                         <div class="large-9 columns">
@@ -105,7 +105,7 @@
        
                       <div class="row">
                         <div class="large-1 column">
-                          <img src="../../../static/management/icons/steps.png">
+							<img src="{% static "management/icons/steps.png" %}" />
                         </div>
        
                         <div class="large-9 columns">
@@ -115,7 +115,7 @@
        
                       <div class="row">
                         <div class="large-1 column">
-                          <img src="../../../static/management/icons/steps.png">
+							<img src="{% static "management/icons/steps.png" %}" />
                         </div>
 
                       <div class="large-9 columns">
@@ -132,7 +132,7 @@
                         <div class="panel callout raius">
                           <h6>Most Requested Shop</h5>
                           <p>Mang Laba</p>
-                          <p>Rating: <img src="../../../static/management/icons/star.png"></p>
+						  <p>Rating: <img src="{% static "management/icons/star.png" %}" /></p>
                         </div>
                       </div>
                     </div>
@@ -204,11 +204,11 @@
        
     
 
-<script src="../../../static/management/foundation-5.5.3/js/vendor/jquery.js"></script>
-<script src="../../../static/management/foundation-5.5.3/js/foundation.min.js"></script>
-<script src="/f5/bower_components/jquery/dist/jquery.js"></script>
-    <script>
-      $(document).foundation();
-    </script>
+		<script src="{% static "LaundryBear/js/vendor/modernizr.js" %}"></script>
+		<script src="{% static "LaundryBear/js/vendor/jquery.js" %}"></script>
+		<script src="{% static "LaundryBear/js/foundation.min.js" %}"></script>
+		<script>
+			$(document).foundation();
+		</script>
 </body>
 </html>
