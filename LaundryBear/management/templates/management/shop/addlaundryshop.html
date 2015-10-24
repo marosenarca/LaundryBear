@@ -46,11 +46,10 @@
           <h3 align="center">Add Laundry Shop</h3>
           <!--forms-->
           <form method="post">
-            {% csrf_token %}
               <div class="row">
                 <div class="large-8 columns">
                   <label>Name
-                    {{ form.name }}
+                    <input type="text"/>
                   </label>
                 </div>
               </div>
@@ -58,7 +57,7 @@
               <div class="row">
                 <div class="large-8 columns">
                   <label>Province
-                    {{ form.province }}
+                    <input type="text"/>
                   </label>
                 </div>
               </div>
@@ -66,7 +65,7 @@
               <div class="row">
                 <div class="large-8 columns">
                   <label>City
-                    {{ form.city }}
+                    <input type="text"/>
                   </label>
                 </div>
               </div>
@@ -74,7 +73,7 @@
               <div class="row">
                 <div class="large-8 columns">
                   <label>Barangay
-                    {{ form.barangay }}
+                    <input type="text"/>
                   </label>
                 </div>
               </div>
@@ -82,7 +81,7 @@
               <div class="row">
                 <div class="large-8 columns">
                   <label>Street
-                    {{ form.street }}
+                    <input type="text"/>
                   </label>
                 </div>
               </div>
@@ -90,7 +89,7 @@
               <div class="row">
                 <div class="large-8 columns">
                   <label>Building
-                    {{ form.building }}
+                    <input type="text"/>
                   </label>
                 </div>
               </div>
@@ -98,7 +97,7 @@
               <div class="row">
                 <div class="large-8 columns">
                   <label>Contact number
-                    {{ form.contact_number }}
+                    <input type="text"/>
                   </label>
                 </div>
               </div>
@@ -106,7 +105,7 @@
               <div class="row">
                 <div class="large-8 columns">
                   <label>Email
-                    {{ form.email }}
+                    <input type="text"/>
                   </label>
                 </div>
               </div>
@@ -114,7 +113,7 @@
               <div class="row">
                 <div class="large-8 columns">
                   <label>Website
-                    {{ form.website }}
+                    <input type="text"/>
                   </label>
                 </div>
               </div>
@@ -122,7 +121,7 @@
               <div class="row">
                 <div class="large-8 columns">
                   <label>Hours Open
-                    {{ form.hours_open }}
+                    <input type="text"/>
                   </label>
                 </div>
               </div>
@@ -130,7 +129,7 @@
               <div class="row">
                 <div class="large-8 columns">
                   <label>Days Open
-                    {{ form.days_open }}
+                    <input type="text"/>
                   </label>
                 </div>
               </div>
@@ -139,13 +138,43 @@
               <h4>Services</h4>
               <a href="#" data-reveal-id="firstModal" class="button">Add Service</a>
               <div id="firstModal" class="reveal-modal" data-reveal aria-labelledby="firstModalTitle" aria-hidden="true" role="dialog">
-                <iframe src="{% url "management:add-service" %}" id="add-service-frame" scrolling="no"></iframe>
+                <h2 id="firstModalTitle">Service</h2>
+
+                <div class="row">
+                  <div class="large-8 columns">
+                    <label>Service Name:
+                      <input type="text"/>
+                    </label>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="large-8 columns">
+                    <label>Description:
+                      <input type="text"/>
+                    </label>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="large-8 columns">
+                    <label>Price:
+                      <input type="text"/>
+                    </label>
+                  </div>
+                </div>
+
+                <a href="#" class="button">Save</a>
+
                 <a class="close-reveal-modal" aria-label="Close">&#215;</a>
               </div>
               <hr/>
               <a href="#" class="button small">Save</a>
               <a href="#" class="warning button small">Cancel</a>
+
+
           </form>
+
         </div>
       </div>
       <div class="large-2 columns"></div>
