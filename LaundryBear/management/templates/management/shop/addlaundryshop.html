@@ -1,9 +1,10 @@
 {%extends 'management/base.html'%}
 {% load staticfiles %}
+
     {% block title %}Add Laundry Shop | LaundryBear{% endblock %}
 
 {%block body%}
-      <a href="viewlaundryshops.html" class="success button tiny">Back</a>
+      <a href="javascript:history.go(-1);" class="success button tiny">Back</a>
       <div class="row">
       <div class="large-2  columns "></div>
       <div class="large-8 large-offset-2 columns">
@@ -144,4 +145,5 @@
       </div>
       <div class="large-2 columns"></div>
     </div>
+
   {% endblock %}

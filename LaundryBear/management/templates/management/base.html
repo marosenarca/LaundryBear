@@ -32,9 +32,9 @@
           <li class="has-dropdown">
             <a href="#">Manage Shops</a>
             <ul class="dropdown">
-              <li><a href="addlaundryshop.html">Add Shop</a></li>
+              <li><a href="{% url "management:add-shop"%}">Add Shop</a></li>
               <li class="divider"></li>
-              <li><a href="viewlaundryshops.html">See all →</a></li>
+              <li><a href="{% url "management:viewall"%}">See all →</a></li>
             </ul>
           </li>
           <li class="divider"></li>
