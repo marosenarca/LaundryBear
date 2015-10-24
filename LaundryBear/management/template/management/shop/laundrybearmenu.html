@@ -33,8 +33,6 @@
                 <a href="#">Manage Shops</a>
                 <ul class="dropdown">
                   <li><a href="addlaundryshop.html">Add Shop</a></li>
-                  <li><a href="#">Delete Shop</a></li>
-                  <li><a href="editlaundryshop.html">Update Shop Info</a></li>
                   <li class="divider"></li>
                   <li><a href="viewlaundryshops.html">See all →</a></li>
                 </ul>
@@ -79,7 +77,7 @@
                    
                   <div class="large-4 small-6 columns">
        
-                    <h3 id="rad">Recently Added Shops</h3><hr>
+                    <h3>Recently Added Shops</h3><hr>
        
                     <div class="row">
                       <div class="large-1 column">
@@ -87,7 +85,9 @@
                       </div>
        
                       <div class="large-9 columns">
-                       <span data-tooltip aria-haspopup="true" class="has-tip" title="Added three days ago"> <h5><a href="#">Kosh Kosh</a></h5></span>
+                       <span id="days" data-tooltip aria-haspopup="true" class="has-tip" title="Added three days ago"> 
+                        <h5><a href="#">Kosh Kosh</a></h5>
+                       </span>
                         <h6 class="subheader show-for-small">Doors at 00:00pm</h6>
                       </div>
                     </div><hr>
@@ -99,7 +99,9 @@
                         </div>
        
                         <div class="large-9 columns">
-                          <h5 class="subheader"><a href="#">Mang Laba</a></h5>
+                          <span id="days" data-tooltip aria-haspopup="true" class="has-tip" title="Added three days ago">
+                           <h5><a href="#">Mang Laba</a></h5>
+                         </span>
                         </div>
                       </div><hr>
        
@@ -109,7 +111,9 @@
                         </div>
        
                         <div class="large-9 columns">
-                          <h5 class="subheader"><a href="#">Lavada Queen</a></h5>
+                          <span id="days" data-tooltip aria-haspopup="true" class="has-tip" title="Added three days ago"> 
+                            <h5><a href="#">Lavada Queen</a></h5>
+                          </span>
                         </div>
                       </div><hr>
        
@@ -119,7 +123,9 @@
                         </div>
 
                       <div class="large-9 columns">
-                          <h5 class="subheader"><a href="#">Benny's</a></h5>
+                          <span data-tooltip aria-haspopup="true"  class="has-tip" title="Added three days ago">
+                            <h5><a href="#">Benny's</a></h5>
+                          </span>
                         </div>
                       </div><hr>
 
@@ -129,8 +135,8 @@
                         <div class="large-1 column">
                         </div>
 
-                        <div class="panel callout raius">
-                          <h6>Most Requested Shop</h5>
+                        <div class="panel callout radius">
+                          <h6>Most Requested Shop:</h6>
                           <p>Mang Laba</p>
                           <p>Rating: <img src="../../../static/management/icons/star.png"></p>
                         </div>
@@ -147,21 +153,49 @@
                     <div id="subheader" class="panel callout radius">
                       <h5><a href="#">Feed</a></h5>
        
-                      <p class="subheader">
-                        1. Diana Mana: Request to KoshKosh<br><a href="#">View details</a>
-                        <br>2. Arnold Kol: Request to Mang Laba<br><a href="#">View details</a>
-                        <br>3. Adriana Lima: Request to Lavada Queen<br><a href="#">View details</a>
-                      </p>
-                      <p class="divider"></p>
-                      <h6><a href="#">View All »</a></h6>
-                    </div>
+                      <div class="row">
+                          <div class="small-9 columns small-centered">
+                            <article class="event">
+
+                                <div class="event-date">
+                                  <p class="event-month">Oct</p>
+                                  <p class="event-day">24</p>
+                                </div>
+
+                                <div class="event-desc">
+                                  <h5 class="event-desc-header">Adriana Lima</h5>
+                                  <p class="event-desc-detail"><span class="event-desc-time"></span>From IT Park: Mang Laba</p>
+                                  <a href="#" class="button radius button small">Details</a>
+                                </div>
+
+                              </article>
+
+                              <hr>
+
+                              <article class="event">
+
+                                <div class="event-date">
+                                  <p class="event-month">Oct</p>
+                                  <p class="event-day">24</p>
+                                </div>
+
+                                <div class="event-desc">
+                                  <h5 class="event-desc-header">Donald John</h5>
+                                  <p class="event-desc-detail"><span class="event-desc-time"></span>From Lahug: Kosh Kosh</p>
+                                  <a href="#" class="button radius button small">Details</a>
+                                </div>
+
+                              </article>
+                          </div>
+                        </div>
+
        
-                    <div id="ufd" class="panel hide-for-small">
-                      <h5 id="ufr"><a href="#">Unfulfilled Requests »</a></h5>
-                    </div>
+                    <div class="small-5 hide-for-small">
+                      <h5><a href="#">Unfulfilled Requests »</a></h5>
+                    </div><hr>
        
-                    <div id="vt" class="panel hide-for-small">
-                      <h5><a href="#">View Transactions »</a></h5>
+                    <div align="center">
+                      <a href="#" class="button round">View Transactions</a>
                     </div>
        
                   </div>
