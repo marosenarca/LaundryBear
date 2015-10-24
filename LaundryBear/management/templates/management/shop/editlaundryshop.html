@@ -1,11 +1,11 @@
-<!--{% editlaundryshop extends base.html%}-->
+{% load staticfiles %}
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
     <title>Edit Laundry Shop</title>
-    <link rel="stylesheet" href="../../../static/management/foundation-5.5.3/css/foundation.css"/>
-    <link rel="stylesheet" href="../../../static/management/stylesheets/app.css"/>
+    <link rel="stylesheet" href="{% static "LaundryBear/css/foundation.min.css" %}" />
+    <link rel="stylesheet" href="{% static "management/css/app.css" %}" />
   </head>
   <body>
     <div id="header">
@@ -14,8 +14,8 @@
           <li class="name">
             <h1>
               <a href="#">
-                <img id ="logo" src="../../../static/management/icons/headlogo.png"</a>
-                <img id="writtenlogo" src="../../../static/management/icons/written2.png"</a>
+                <img id ="logo" src="{% static "management/icons/headlogo.png" %}" />
+                <img id="writtenlogo" src="{% static "management/icons/written2.png" %}" />
               </a>
             </h1>
           </li>
@@ -207,11 +207,10 @@
     <div id="footer">
 
     </div>
-
-    <script src="../../../static/management/foundation-5.5.3/js/vendor/modernizr.js"></script>
-    <script src="../../../static/management/foundation-5.5.3/js/vendor/jquery.js"></script>
-    <script src="../../../static/management/foundation-5.5.3/js/vendor/fastclick.js"></script>
-    <script src="../../../static/management/foundation-5.5.3/js/foundation.min.js"></script>
-    <script src="../../../static/management/javascripts/app.js"></script>
+    <script src="{% static "LaundryBear/js/vendor/modernizr.js" %}"></script>
+    <script src="{% static "LaundryBear/js/vendor/jquery.js" %}"></script>
+    <script src="{% static "LaundryBear/js/vendor/fastclick.js" %}"></script>
+    <script src="{% static "LaundryBear/js/foundation.min.js" %}"></script>
+    <script src="{% static "management/js/app.js" %}"></script>
   </body>
 </html>
