@@ -79,52 +79,25 @@
                    
                   <div class="large-4 small-6 columns">
        
-                    <h3 id="rad">Recently Added Shops</h3><hr>
+                    <h3 id="rad">Recently Added Shops</h3>
+					<hr />
        
-                    <div class="row">
-                      <div class="large-1 column">
-						<img src="{% static "management/icons/steps.png" %}" />
-                      </div>
-       
-                      <div class="large-9 columns">
-                       <span data-tooltip aria-haspopup="true" class="has-tip" title="Added three days ago"> <h5><a href="#">Kosh Kosh</a></h5></span>
-                        <h6 class="subheader show-for-small">Doors at 00:00pm</h6>
-                      </div>
-                    </div><hr>
+					{% if recent_shops %}
+					{% with recent_shops.0 as shop %}
+					{% include "management/shop/partials/recent_shop_row.html" %}
+					{% endwith %}
+
+					<hr />
        
                     <div class="hide-for-small">
-                      <div class="row">
-                        <div class="large-1 column">
-							<img src="{% static "management/icons/steps.png" %}" />
-                        </div>
-       
-                        <div class="large-9 columns">
-                          <h5 class="subheader"><a href="#">Mang Laba</a></h5>
-                        </div>
-                      </div><hr>
-       
-                      <div class="row">
-                        <div class="large-1 column">
-							<img src="{% static "management/icons/steps.png" %}" />
-                        </div>
-       
-                        <div class="large-9 columns">
-                          <h5 class="subheader"><a href="#">Lavada Queen</a></h5>
-                        </div>
-                      </div><hr>
-       
-                      <div class="row">
-                        <div class="large-1 column">
-							<img src="{% static "management/icons/steps.png" %}" />
-                        </div>
-
-                      <div class="large-9 columns">
-                          <h5 class="subheader"><a href="#">Benny's</a></h5>
-                        </div>
-                      </div><hr>
-
-
-
+						{% for shop in recent_shops|slice:"1:"%}
+						{% include "management/shop/partials/recent_shop_row.html" %}
+						{% endfor %}
+                      </div>
+					  {% else %}
+					  No shops available.
+					  {% endif %}
+					  <br />
                       <div class="row">
                         <div class="large-1 column">
                         </div>
