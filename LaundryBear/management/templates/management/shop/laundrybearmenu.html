@@ -16,7 +16,7 @@
              
             <li class="name">
               <h1>
-                <a href="Laundry Bear.html">
+				  <a href="{% url "management:menu" %}">
                 <img id ="logo" src="{% static "management/icons/headlogo.png" %}" />
                 <img id="writtenlogo" src="{% static "management/icons/written2.png" %}" />
                 </a>
@@ -32,11 +32,11 @@
               <li class="has-dropdown">
                 <a href="#">Manage Shops</a>
                 <ul class="dropdown">
-                  <li><a href="addlaundryshop.html">Add Shop</a></li>
+					<li><a href="{% url "management:add-shop" %}">Add Shop</a></li>
                   <li><a href="#">Delete Shop</a></li>
                   <li><a href="editlaundryshop.html">Update Shop Info</a></li>
                   <li class="divider"></li>
-                  <li><a href="viewlaundryshops.html">See all →</a></li>
+				  <li><a href="{% url "management:list-shops" %}">See all →</a></li>
                 </ul>
               </li>
               <li class="divider"></li>
