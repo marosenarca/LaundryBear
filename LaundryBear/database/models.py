@@ -17,6 +17,10 @@ class LaundryShop(models.Model):
     days_open = models.CharField(max_length=100, blank=False)
     creation_date = models.DateTimeField(auto_now_add=True)
 
+    @property
+    def location(self):
+        return ''
+
 
 class Service(models.Model):
     name = models.CharField(max_length=100, blank=False)
