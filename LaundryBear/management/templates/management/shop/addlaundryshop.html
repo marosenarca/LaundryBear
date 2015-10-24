@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
     <title>Add Laundry Shop</title>
-    <link rel="stylesheet" href="{% static "LaundryBear/css/foundation.min.css" %}"/>
+
     <link rel="stylesheet" href="{% static "management/css/app.css" %}"/>
   </head>
   <body>
@@ -14,8 +14,8 @@
           <li class="name">
             <h1>
               <a href="#">
-                <img id ="logo" src="../../../static/management/icons/headlogo.png"</a>
-                <img id="writtenlogo" src="../../../static/management/icons/written2.png"</a></a>
+                <img id ="logo" src="{%static "management/icons/headlogo.png"%}"</a>
+                <img id="writtenlogo" src="{% "management/icons/written2.png"%}"</a></a>
             </h1>
           </li>
         </ul>
@@ -184,10 +184,6 @@
 
     </div>
 
-    <script src="../../../static/management/foundation-5.5.3/js/vendor/modernizr.js"></script>
-    <script src="../../../static/management/foundation-5.5.3/js/vendor/jquery.js"></script>
-    <script src="../../../static/management/foundation-5.5.3/js/vendor/fastclick.js"></script>
-    <script src="../../../static/management/foundation-5.5.3/js/foundation.min.js"></script>
-    <script src="../../../static/management/javascripts/app.js"></script>
+    
   </body>
 </html>
