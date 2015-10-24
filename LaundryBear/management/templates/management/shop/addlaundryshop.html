@@ -14,8 +14,9 @@
           <li class="name">
             <h1>
               <a href="#">
-                <img id ="logo" src="../../../static/management/icons/headlogo.png"</a>
-                <img id="writtenlogo" src="../../../static/management/icons/written2.png"</a></a>
+                <img id ="logo" src="{% static "management/icons/headlogo.png" %}" />
+                <img id="writtenlogo" src="{% static "management/icons/written2.png" %}" />
+              </a>
             </h1>
           </li>
         </ul>
@@ -45,10 +46,11 @@
           <h3 align="center">Add Laundry Shop</h3>
           <!--forms-->
           <form method="post">
+            {% csrf_token %}
               <div class="row">
                 <div class="large-8 columns">
                   <label>Name
-                    <input type="text"/>
+                    {{ form.name }}
                   </label>
                 </div>
               </div>
@@ -56,7 +58,7 @@
               <div class="row">
                 <div class="large-8 columns">
                   <label>Province
-                    <input type="text"/>
+                    {{ form.province }}
                   </label>
                 </div>
               </div>
@@ -64,7 +66,7 @@
               <div class="row">
                 <div class="large-8 columns">
                   <label>City
-                    <input type="text"/>
+                    {{ form.city }}
                   </label>
                 </div>
               </div>
@@ -72,7 +74,7 @@
               <div class="row">
                 <div class="large-8 columns">
                   <label>Barangay
-                    <input type="text"/>
+                    {{ form.barangay }}
                   </label>
                 </div>
               </div>
@@ -80,7 +82,7 @@
               <div class="row">
                 <div class="large-8 columns">
                   <label>Street
-                    <input type="text"/>
+                    {{ form.street }}
                   </label>
                 </div>
               </div>
@@ -88,7 +90,7 @@
               <div class="row">
                 <div class="large-8 columns">
                   <label>Building
-                    <input type="text"/>
+                    {{ form.building }}
                   </label>
                 </div>
               </div>
@@ -96,7 +98,7 @@
               <div class="row">
                 <div class="large-8 columns">
                   <label>Contact number
-                    <input type="text"/>
+                    {{ form.contact_number }}
                   </label>
                 </div>
               </div>
@@ -104,7 +106,7 @@
               <div class="row">
                 <div class="large-8 columns">
                   <label>Email
-                    <input type="text"/>
+                    {{ form.email }}
                   </label>
                 </div>
               </div>
@@ -112,7 +114,7 @@
               <div class="row">
                 <div class="large-8 columns">
                   <label>Website
-                    <input type="text"/>
+                    {{ form.website }}
                   </label>
                 </div>
               </div>
@@ -120,7 +122,7 @@
               <div class="row">
                 <div class="large-8 columns">
                   <label>Hours Open
-                    <input type="text"/>
+                    {{ form.hours_open }}
                   </label>
                 </div>
               </div>
@@ -128,7 +130,7 @@
               <div class="row">
                 <div class="large-8 columns">
                   <label>Days Open
-                    <input type="text"/>
+                    {{ form.days_open }}
                   </label>
                 </div>
               </div>
@@ -137,43 +139,13 @@
               <h4>Services</h4>
               <a href="#" data-reveal-id="firstModal" class="button">Add Service</a>
               <div id="firstModal" class="reveal-modal" data-reveal aria-labelledby="firstModalTitle" aria-hidden="true" role="dialog">
-                <h2 id="firstModalTitle">Service</h2>
-
-                <div class="row">
-                  <div class="large-8 columns">
-                    <label>Service Name:
-                      <input type="text"/>
-                    </label>
-                  </div>
-                </div>
-
-                <div class="row">
-                  <div class="large-8 columns">
-                    <label>Description:
-                      <input type="text"/>
-                    </label>
-                  </div>
-                </div>
-
-                <div class="row">
-                  <div class="large-8 columns">
-                    <label>Price:
-                      <input type="text"/>
-                    </label>
-                  </div>
-                </div>
-
-                <a href="#" class="button">Save</a>
-
+                <iframe src="{% url "management:add-service" %}" id="add-service-frame" scrolling="no"></iframe>
                 <a class="close-reveal-modal" aria-label="Close">&#215;</a>
               </div>
               <hr/>
               <a href="#" class="button small">Save</a>
               <a href="#" class="warning button small">Cancel</a>
-
-
           </form>
-
         </div>
       </div>
       <div class="large-2 columns"></div>
@@ -183,11 +155,10 @@
     <div id="footer">
 
     </div>
-
-    <script src="../../../static/management/foundation-5.5.3/js/vendor/modernizr.js"></script>
-    <script src="../../../static/management/foundation-5.5.3/js/vendor/jquery.js"></script>
-    <script src="../../../static/management/foundation-5.5.3/js/vendor/fastclick.js"></script>
-    <script src="../../../static/management/foundation-5.5.3/js/foundation.min.js"></script>
-    <script src="../../../static/management/javascripts/app.js"></script>
+    <script src="{% static "LaundryBear/js/vendor/modernizr.js" %}"></script>
+    <script src="{% static "LaundryBear/js/vendor/jquery.js" %}"></script>
+    <script src="{% static "LaundryBear/js/vendor/fastclick.js" %}"></script>
+    <script src="{% static "LaundryBear/js/foundation.min.js" %}"></script>
+    <script src="{% static "management/js/app.js" %}"></script>
   </body>
 </html>
