@@ -1,8 +1,69 @@
+<<<<<<< HEAD
 {%extends 'management/base.html'%}
 
 
 {%block title%} Menu | LaundryBear {%endblock%}
 {%block body%}
+=======
+{% load staticfiles %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="{% static "LaundryBear/css/foundation.css" %}" />
+<link rel="stylesheet" href="{% static "management/css/control.css" %}"/>
+<title>Laundry Bear</title>
+</head>
+
+<body>
+       
+        <nav class="top-bar" data-topbar>
+          <ul class="title-area">
+             
+            <li class="name">
+              <h1>
+                <a href="Laundry Bear.html">
+                <img id ="logo" src="{% static "management/icons/headlogo.png" %}" />
+                <img id="writtenlogo" src="{% static "management/icons/written2.png" %}" />
+                </a>
+              </h1>
+            </li>
+            <li class="toggle-topbar menu-icon"><a href="#"><span>menu</span></a></li>
+          </ul>
+       
+          <section class="top-bar-section">
+             
+            <ul class="right">
+              <li class="divider"></li>
+              <li class="has-dropdown">
+                <a href="#">Manage Shops</a>
+                <ul class="dropdown">
+                  <li><a href="addlaundryshop.html">Add Shop</a></li>
+                  <li><a href="#">Delete Shop</a></li>
+                  <li><a href="editlaundryshop.html">Update Shop Info</a></li>
+                  <li class="divider"></li>
+                  <li><a href="viewlaundryshops.html">See all →</a></li>
+                </ul>
+              </li>
+              <li class="divider"></li>
+              <li><a href="#">View Accounts</a></li>
+              <li class="divider"></li>
+              <li class="has-dropdown">
+                <a href="#">Administrator</a>
+                <ul class="dropdown">
+                  <li><a href="#">Settings</a></li>
+                  <li class="divider"></li>
+                  <li><a href="#">Sign Out →</a></li>
+                </ul>
+              </li>
+            </ul>
+          </section>
+        </nav>
+       
+         
+       
+>>>>>>> origin
         <div class="row">
           <div class="large-12 columns">
 
@@ -30,7 +91,7 @@
 
                     <div class="row">
                       <div class="large-1 column">
-                        <img src="../../../static/management/icons/steps.png">
+						<img src="{% static "management/icons/steps.png" %}" />
                       </div>
 
                       <div class="large-9 columns">
@@ -44,7 +105,7 @@
                     <div class="hide-for-small">
                       <div class="row">
                         <div class="large-1 column">
-                          <img src="../../../static/management/icons/steps.png">
+							<img src="{% static "management/icons/steps.png" %}" />
                         </div>
 
                         <div class="large-9 columns">
@@ -56,7 +117,7 @@
 
                       <div class="row">
                         <div class="large-1 column">
-                          <img src="../../../static/management/icons/steps.png">
+							<img src="{% static "management/icons/steps.png" %}" />
                         </div>
 
                         <div class="large-9 columns">
@@ -68,7 +129,7 @@
 
                       <div class="row">
                         <div class="large-1 column">
-                          <img src="../../../static/management/icons/steps.png">
+							<img src="{% static "management/icons/steps.png" %}" />
                         </div>
 
                       <div class="large-9 columns">
@@ -87,7 +148,7 @@
                         <div class="panel callout radius">
                           <h6>Most Requested Shop:</h6>
                           <p>Mang Laba</p>
-                          <p>Rating: <img src="../../../static/management/icons/star.png"></p>
+						  <p>Rating: <img src="{% static "management/icons/star.png" %}" /></p>
                         </div>
                       </div>
                     </div>
@@ -155,4 +216,19 @@
 
           </div>
         </div>
+<<<<<<< HEAD
 {%endblock%}
+=======
+       
+       
+    
+
+		<script src="{% static "LaundryBear/js/vendor/modernizr.js" %}"></script>
+		<script src="{% static "LaundryBear/js/vendor/jquery.js" %}"></script>
+		<script src="{% static "LaundryBear/js/foundation.min.js" %}"></script>
+		<script>
+			$(document).foundation();
+		</script>
+</body>
+</html>
+>>>>>>> origin

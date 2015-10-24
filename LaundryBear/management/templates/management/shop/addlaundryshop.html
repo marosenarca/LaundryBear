@@ -1,8 +1,50 @@
 {%extends 'management/base.html'%}
 {% load staticfiles %}
+<<<<<<< HEAD
     {% block title %}Add Laundry Shop | LaundryBear{% endblock %}
 
 {%block body%}
+=======
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Add Laundry Shop</title>
+    <link rel="stylesheet" href="{% static "LaundryBear/css/foundation.min.css" %}"/>
+    <link rel="stylesheet" href="{% static "management/css/app.css" %}"/>
+  </head>
+  <body>
+    <div id="header">
+      <nav class="top-bar" data-topbar role="navigation">
+        <ul class="title-area">
+          <li class="name">
+            <h1>
+              <a href="#">
+                <img id ="logo" src="{% static "management/icons/headlogo.png" %}" />
+                <img id="writtenlogo" src="{% static "management/icons/written2.png" %}" />
+              </a>
+            </h1>
+          </li>
+        </ul>
+           <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+          <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+
+        <section class="top-bar-section">
+          <!-- Right Nav Section -->
+          <ul class="right">
+            <li class="has-dropdown">
+              <a href="#">Admin</a>
+              <ul class="dropdown">
+                <li><a href="#">Profile</a></li>
+                <li class="active"><a href="#">Logout</a></li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+      </nav>
+    </div>
+    <div id="body">
+>>>>>>> origin
       <a href="viewlaundryshops.html" class="success button tiny">Back</a>
       <div class="row">
       <div class="large-2  columns "></div>
@@ -144,4 +186,19 @@
       </div>
       <div class="large-2 columns"></div>
     </div>
+<<<<<<< HEAD
   {% endblock %}
+=======
+
+  </div>
+    <div id="footer">
+
+    </div>
+    <script src="{% static "LaundryBear/js/vendor/modernizr.js" %}"></script>
+    <script src="{% static "LaundryBear/js/vendor/jquery.js" %}"></script>
+    <script src="{% static "LaundryBear/js/vendor/fastclick.js" %}"></script>
+    <script src="{% static "LaundryBear/js/foundation.min.js" %}"></script>
+    <script src="{% static "management/js/app.js" %}"></script>
+  </body>
+</html>
+>>>>>>> origin
