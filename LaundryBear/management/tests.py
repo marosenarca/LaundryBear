@@ -12,12 +12,15 @@ class ContextDataTestCase(TestCase):
         LaundryShop.objects.create(name='laundryshop1', province='lsprovince',
             barangay='lsbarangay', contact_number='123',
             hours_open='24 hours', days_open='Sun - Sat')
+        time.sleep(0.1)
         LaundryShop.objects.create(name='laundryshop2', province='lsprovince',
             barangay='lsbarangay', contact_number='123',
             hours_open='24 hours', days_open='Sun - Sat')
+        time.sleep(0.1)
         LaundryShop.objects.create(name='laundryshop3', province='lsprovince',
             barangay='lsbarangay', contact_number='123',
             hours_open='24 hours', days_open='Sun - Sat')
+        time.sleep(0.1)
         LaundryShop.objects.create(name='laundryshop4', province='lsprovince',
             barangay='lsbarangay', contact_number='123',
             hours_open='24 hours', days_open='Sun - Sat')
