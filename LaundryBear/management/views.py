@@ -29,12 +29,8 @@ class LaundryCreateView(CreateView):
         'street', 'website']
 
 
-class ServiceCreateView(CreateView):
-    template_name = 'management/shop/addservice.html'
-    model = Service
-    form_class = forms.ServiceForm
-
-class LaundryListView(TemplateView):
+class LaundryListView(ListView):
+    model = LaundryShop
+    paginate_by = 10
     template_name = 'management/shop/viewlaundryshops.html'
-    model = Service
-    form_class = forms.ServiceForm
+    context_object_name = 'shop_list'

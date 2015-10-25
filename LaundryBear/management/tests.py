@@ -22,7 +22,10 @@ class ContextDataTestCase(TestCase):
             barangay='lsbarangay', contact_number='123',
             hours_open='24 hours', days_open='Sun - Sat')
         response = self.client.get(reverse('management:menu'))
-        recent_shops = response.context.get('recent_shops', False)
+        try:
+            recent_shops = response.context['recent_shops']
+        except:
+            self.fail()
         if (recent_shops):
             shop_names = ['laundryshop2', 'laundryshop3', 'laundryshop4']
             recent_names = [shop.name for shop in recent_shops]

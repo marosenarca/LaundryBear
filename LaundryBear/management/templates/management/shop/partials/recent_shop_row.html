@@ -1,0 +1,11 @@
+{% load staticfiles %}
+<div class="row">
+  <div class="large-1 column">
+    <img src="{% static "management/icons/steps.png" %}" />
+  </div>
+
+  <div class="large-9 columns">
+    <span data-tooltip aria-haspopup="true" class="has-tip" title="Added {{ shop.creation_date|date:"l, F j o" }} at {{ shop.creation_date|time:"h:i A" }}"> <h5><a href="#">{{ shop.name }}</a></h5></span>
+    <h6 class="subheader show-for-small">Doors at 00:00pm</h6>
+  </div>
+</div>

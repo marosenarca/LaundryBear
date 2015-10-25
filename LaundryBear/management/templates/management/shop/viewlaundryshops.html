@@ -13,14 +13,9 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Kosh Kosh</td>
-              <td>Gori Building, Gorordo, Lahug, Cebu City, Cebu</td>
-              <td>
-                <a href="#" class="button secondary tiny">Edit</a>
-                <a href="#" class="button secondary tiny">Delete</a>
-              </td>
-            </tr>
+            {% for shop in shop_list %}
+            {% include "management/shop/partials/laundry_shop_list_row.html" %}
+            {% endfor %}
           </tbody>
         </table>
     {% endblock %}
