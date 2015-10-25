@@ -1,51 +1,9 @@
-<!DOCTYPE html>
-<!--{% laundryshops extends base.html %}-->
-<html>
-  <head>
-    <meta charset="utf-8">
+{% extends 'management/base.html' %}
+{% load staticfiles %}
+{% block title %}View Laundry Shops | LaundryBear{% endblock %}
 
-    <title>View Laundry Shops</title>
-    <!--change this later to django template tags-->
-    <link rel="stylesheet" href="../../../static/management/foundation-5.5.3/css/foundation.css"/>
-    <link rel="stylesheet" href="../../../static/management/stylesheets/app.css"/>
-    <link rel="stylesheet" href="{% static "LaundryBear/css/foundation.css" %}"/>
-    <link rel="stylesheet" href="{% static "management/css/app.css" %}"/>
-  </head>
-  <body>
-    <div id="header">
-        <nav class="top-bar" data-topbar role="navigation">
-          <ul class="title-area">
-            <li class="name">
-              <h1><a href="#">
-              <img id ="logo" src="../../../static/management/icons/headlogo.png"</a>
-              <img id="writtenlogo" src="../../../static/management/icons/written2.png"</a>
-              </h1>
-            </li>
-          </ul>
-             <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
-            <li class="toggle-topbar menu-icon"><a href="#"><span><br></span></a></li>
-          <section class="top-bar-section">
-            <!-- Right Nav Section  -->
-            <ul class="right">
-              <li class="has-dropdown">
-                <a href="#">Admin</a>
-                <ul class="dropdown">
-                  <li><a href="#">Profile</a></li>
-                  <li class="active"><a href="#">Logout</a></li>
-                </ul>
-              </li>
-            </ul>
-          </section>
-        </nav>
-    </div>
-
-    <div id="body">
-
-
-    <a href="#" class="success button tiny">Back</a>
-
-
-
+{% block body %}
+    <a href="{% url "management:menu"%}" class="success button tiny">Back</a>
           <table style="margin:auto">
           <thead>
             <tr>
@@ -59,31 +17,26 @@
               <td>Kosh Kosh</td>
               <td>Gori Building, Gorordo, Lahug, Cebu City, Cebu</td>
               <td>
-                <button href="#" data-dropdown="drop1" aria-controls="drop1" aria-expanded="true" class="button secondary dropdown"></button><br>
-                  <ul id="drop1" data-dropdown-content class="f-dropdown" aria-hidden="true">
-                    <li><a href="editlaundryshop.html">Edit</a></li>
-                    <li><a href="#">Delete</a></li>
-                  </ul>
+                <a href="#" class="button secondary tiny">Edit</a>
+                <a href="#" class="button secondary tiny">Delete</a>
               </td>
             </tr>
           </tbody>
         </table>
-
-    </div>
-    <div id="footer">
+    {% endblock %}
+    {% block footer %}
       <div class="row">
          <div class="large-12 columns">
            <div class="row collapse">
-             <div class="small-6 columns">
+             <div class="small-2 columns">
+             </div>
+             <div class="small-7 small-offset-2 columns">
                <input type="text" placeholder="Search Laundry Shop">
              </div>
-             <div class="small-2 columns">
+             <div class="small-1 columns">
                <a href="#" class="button postfix">Go</a>
              </div>
              <div class="small-2 columns">
-             </div>
-             <div class="small-2 columns">
-               <a href="addlaundryshop.html" class="button small">Add Laundry Shop</a>
              </div>
            </div>
          </div>
@@ -98,14 +51,4 @@
            <dd width="100"></dd>
          </dl>
       </div>
-    </div>
-
-    <script src="../../../static/management/foundation-5.5.3/js/vendor/modernizr.js"></script>
-    <script src="../../../static/management/foundation-5.5.3/js/vendor/jquery.js"></script>
-    <script src="../../../static/management/foundation-5.5.3/js/vendor/fastclick.js"></script>
-    <script src="../../../static/management/foundation-5.5.3/js/foundation.min.js"></script>
-    <script src="../../../static/management/javascripts/app.js"></script>
-
-
-  </body>
-</html>
+  {% endblock %}

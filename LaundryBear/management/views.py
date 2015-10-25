@@ -33,3 +33,8 @@ class ServiceCreateView(CreateView):
     template_name = 'management/shop/addservice.html'
     model = Service
     form_class = forms.ServiceForm
+
+class LaundryListView(TemplateView):
+    template_name = 'management/shop/viewlaundryshops.html'
+    model = Service
+    form_class = forms.ServiceForm
