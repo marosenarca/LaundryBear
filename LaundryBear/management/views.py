@@ -32,6 +32,16 @@ class LaundryCreateView(CreateView):
     def get_success_url(self):
         return reverse('management:list-shops')
 
+    def form_valid(self, form):
+        response = super(LaundryCreateView, self).form_valid(form)
+        post_data = self.request.POST.copy()
+        post_data.update({'laundry_shop': self.object.pk})
+        rating_form = forms.RatingForm(data=post_data)
+        if rating_form.is_valid():
+            rating_form.save()
+        return response
+
+
 class LaundryListView(ListView):
     model = LaundryShop
     paginate_by = 10
