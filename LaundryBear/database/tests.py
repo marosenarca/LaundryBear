@@ -25,5 +25,5 @@ class ModelTestCase(TestCase):
             hours_open='24 hours', days_open='mon - sat')
        Rating.objects.create(laundry_shop=shop, paws=4)
        Rating.objects.create(laundry_shop=shop, paws=5)
-       expected = (4 + 5) / 4.0
+       expected = (4 + 5) / 2.0
        self.assertEquals(shop.average_rating, expected)

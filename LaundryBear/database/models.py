@@ -27,7 +27,11 @@ class LaundryShop(models.Model):
 
     @property
     def average_rating(self):
-        return 0
+        ratings = self.ratings.all()
+        sum_ratings = 0.0
+        for rating in ratings:
+            sum_ratings += rating.paws
+        return sum_ratings / len(ratings)
 
 
 class Service(models.Model):
