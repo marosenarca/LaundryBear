@@ -90,6 +90,10 @@ img#star {
 	width:  5s%;
 }
 
+.large-9 columns {
+  margin-top: 3%;
+}
+
 .event {
   padding: 0rem 0rem 0rem 0;
   display: table; }
