@@ -31,8 +31,10 @@ img#writtenlogo {
 	margin-left:1%;
 }
 
-#add-service-frame {
-  width: 100%;
-  height: 25rem;
-  border: 0;
+div.paw-container {
+  overflow: hidden;
+}
+
+div.paw-container > img {
+  max-width: none !important;
 }
