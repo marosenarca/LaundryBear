@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.core.urlresolvers import reverse
 from django.views.generic import CreateView, ListView, UpdateView, TemplateView
 
 from database.models import LaundryShop, Service
@@ -28,6 +29,8 @@ class LaundryCreateView(CreateView):
         'days_open', 'email', 'hours_open', 'name', 'province',
         'street', 'website']
 
+    def get_success_url(self):
+        return reverse('management:list-shops')
 
 class LaundryListView(ListView):
     model = LaundryShop
