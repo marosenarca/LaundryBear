@@ -25,6 +25,10 @@ class LaundryShop(models.Model):
         	address.remove('')
         return ', '.join(address)
 
+    @property
+    def average_rating(self):
+        return 0
+
 
 class Service(models.Model):
     name = models.CharField(max_length=100, blank=False)
