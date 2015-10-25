@@ -7,8 +7,8 @@
 	<div class="large-9 columns">
 		<span id="days" data-tooltip aria-haspopup="true" class="has-tip" title="Added {{ shop.creation_date|date:"l, F j o" }} at {{ shop.creation_date|time:"h:i A" }}">
 			<h5>
-				<a href="#" data-reveal-id="shopmodal">{{ shop.name }}</a>
-				<div id="shopmodal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+				<a href="#" data-reveal-id="shopmodal{{ shop.pk }}">{{ shop.name }}</a>
+				<div id="shopmodal{{ shop.pk }}" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
 					<table style="margin:auto">
 						<thead>
 							<tr>
