@@ -19,7 +19,11 @@ class LaundryShop(models.Model):
 
     @property
     def location(self):
-        return ''
+    	address = [self.building, self.street, self.barangay, self.city,
+    		self.province]
+        while '' in address:
+        	address.remove('')
+        return ', '.join(address)
 
 
 class Service(models.Model):

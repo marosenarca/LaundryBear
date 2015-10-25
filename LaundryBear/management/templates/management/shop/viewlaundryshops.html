@@ -1,0 +1,50 @@
+{% extends 'management/base.html' %}
+{% load staticfiles %}
+{% block title %}View Laundry Shops | LaundryBear{% endblock %}
+
+{% block body %}
+    <a href="{% url "management:menu"%}" class="success button tiny">Back</a>
+          <table style="margin:auto">
+          <thead>
+            <tr>
+              <th width="200">Name</th>
+              <th>Address</th>
+              <th>Rating</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for shop in shop_list %}
+            {% include "management/shop/partials/laundry_shop_list_row.html" %}
+            {% endfor %}
+          </tbody>
+        </table>
+    {% endblock %}
+    {% block footer %}
+      <div class="row">
+         <div class="large-12 columns">
+           <div class="row collapse">
+             <div class="small-2 columns">
+             </div>
+             <div class="small-7 small-offset-2 columns">
+               <input type="text" placeholder="Search Laundry Shop">
+             </div>
+             <div class="small-1 columns">
+               <a href="#" class="button postfix">Go</a>
+             </div>
+             <div class="small-2 columns">
+             </div>
+           </div>
+         </div>
+       </div>
+       <br>
+       <div>
+         <dl class="sub-nav">
+           <dt>Filter:</dt>
+           <dd class="active"><a href="#">All</a></dd>
+           <dd><a href="#">City</a></dd>
+           <dd><a href="#">Province</a></dd>
+           <dd width="100"></dd>
+         </dl>
+      </div>
+  {% endblock %}
