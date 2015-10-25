@@ -28,6 +28,8 @@ class LaundryShop(models.Model):
     @property
     def average_rating(self):
         ratings = self.ratings.all()
+        if not ratings:
+            return 0.0
         sum_ratings = 0.0
         for rating in ratings:
             sum_ratings += rating.paws

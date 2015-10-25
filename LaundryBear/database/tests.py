@@ -27,3 +27,10 @@ class ModelTestCase(TestCase):
        Rating.objects.create(laundry_shop=shop, paws=5)
        expected = (4 + 5) / 2.0
        self.assertEquals(shop.average_rating, expected)
+
+    def test_average_rating_no_rating(self):
+       shop = LaundryShop.objects.create(name='ls1', province='province1',
+            barangay='barangay1', contact_number='12345',
+            hours_open='24 hours', days_open='mon - sat')
+       expected = 0
+       self.assertEquals(shop.average_rating, expected)
