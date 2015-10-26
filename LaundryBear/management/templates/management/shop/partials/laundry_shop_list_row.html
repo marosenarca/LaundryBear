@@ -28,7 +28,7 @@
   <td>{{ shop.location }}</td>
   <td><div class="paw-container" style="width: {% widthratio shop.average_rating 5 150 %}px;"><img src="{% static "management/icons/star.png" %}" /></div></td>
   <td>
-    <a href="#" class="button secondary tiny">Edit</a>
+    <a href="{% url "management:edit-shop" shop.pk %}" class="button secondary tiny">Edit</a>
     <a href="#" class="button secondary tiny">Delete</a>
   </td>
 </tr>
