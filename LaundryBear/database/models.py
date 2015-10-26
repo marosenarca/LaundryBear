@@ -35,12 +35,18 @@ class LaundryShop(models.Model):
             sum_ratings += rating.paws
         return sum_ratings / len(ratings)
 
+    def __unicode__(self):
+        return self.name
+
 
 class Service(models.Model):
     name = models.CharField(max_length=100, blank=False)
     description = models.TextField(blank=False)
     prices = models.ManyToManyField('LaundryShop', through='Price',
         related_name='services')
+
+    def __unicode__(self):
+        return self.name
 
 
 class Price(models.Model):
