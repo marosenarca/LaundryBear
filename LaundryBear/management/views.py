@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.core.urlresolvers import reverse
 from django.views.generic import CreateView, ListView, UpdateView, TemplateView
 
 from database.models import LaundryShop, Service
@@ -27,6 +28,18 @@ class LaundryCreateView(CreateView):
     fields = ['barangay', 'building', 'city', 'contact_number',
         'days_open', 'email', 'hours_open', 'name', 'province',
         'street', 'website']
+
+    def get_success_url(self):
+        return reverse('management:list-shops')
+
+    def form_valid(self, form):
+        response = super(LaundryCreateView, self).form_valid(form)
+        post_data = self.request.POST.copy()
+        post_data.update({'laundry_shop': self.object.pk})
+        rating_form = forms.RatingForm(data=post_data)
+        if rating_form.is_valid():
+            rating_form.save()
+        return response
 
 
 class LaundryListView(ListView):

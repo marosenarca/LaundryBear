@@ -18,3 +18,4 @@ class LaundryShopAdmin(admin.ModelAdmin):
 
 admin.site.register(LaundryShop, LaundryShopAdmin)
 admin.site.register(Service)
+admin.site.register(Rating)
