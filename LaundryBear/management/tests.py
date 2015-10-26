@@ -57,3 +57,38 @@ class ContextDataTestCase(TestCase):
         self.assertEqual(list(expected_shop_list),
             list(response.context['shop_list']))
 
+    def test_get_shops_by_city(self):
+        LaundryShop.objects.create(name='laundryshop1', province='lsprovince',
+            barangay='lsbarangay', contact_number='123', city='citycebu',
+            hours_open='24 hours', days_open='Sun - Sat')
+        LaundryShop.objects.create(name='laundryshop2', province='lsprovince',
+            barangay='lsbarangay', contact_number='123', city='citycebu',
+            hours_open='24 hours', days_open='Sun - Sat')
+        LaundryShop.objects.create(name='this should not appear',
+            province='lsprovince', barangay='lsbarangay',
+            contact_number='123', hours_open='24 hours',
+            days_open='Sun - Sat')
+        response = self.client.get(reverse('management:list-shops'),
+            {'city': 'cebu'})
+        expected_shop_list = LaundryShop.objects.filter(
+            city__icontains='cebu')
+        self.assertEqual(list(expected_shop_list),
+            list(response.context['shop_list']))
+
+    def test_get_shops_by_province(self):
+        LaundryShop.objects.create(name='laundryshop1', province='lsprovince',
+            barangay='lsbarangay', contact_number='123', city='citycebu',
+            hours_open='24 hours', days_open='Sun - Sat')
+        LaundryShop.objects.create(name='laundryshop2', province='lsprovince',
+            barangay='lsbarangay', contact_number='123', city='citycebu',
+            hours_open='24 hours', days_open='Sun - Sat')
+        LaundryShop.objects.create(name='this should not appear',
+            province='lsprovince', barangay='lsbarangay',
+            contact_number='123', hours_open='24 hours',
+            days_open='Sun - Sat')
+        response = self.client.get(reverse('management:list-shops'),
+            {'province': 'cebu'})
+        expected_shop_list = LaundryShop.objects.filter(
+            province__icontains='lsbarangay')
+        self.assertEqual(list(expected_shop_list),
+            list(response.context['shop_list']))

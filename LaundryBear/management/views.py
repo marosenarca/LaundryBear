@@ -51,12 +51,24 @@ class LaundryListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(LaundryListView, self).get_context_data(**kwargs)
+        shops = context['shop_list']
         name_query = self.request.GET.get('name', False)
         if name_query:
             shops = self.get_shops_by_name(name_query)
-            context.update({'shop_list': shops})
+        city_query = self.request.GET.get('city', False)
+        if city_query:
+            shops = self.get_shops_by_city(city_query)
+        province_query = self.request.GET.get('province', False)
+        if province_query:
+            shops = self.get_shops_by_province(province_query)
+        context.update({'shop_list': shops})
         return context
 
     def get_shops_by_name(self, name_query):
-        return LaundryShop.objects.filter(name__icontains=name_query)
+        return LaundryShop.objects.filter(name__icontains = name_query)
 
+    def get_shops_by_city(self, city_query):
+        return LaundryShop.objects.filter(city__icontains = city_query)
+
+    def get_shops_by_province(self, province_query):
+        return LaundryShop.objects.filter(province__icontains = province_query)
