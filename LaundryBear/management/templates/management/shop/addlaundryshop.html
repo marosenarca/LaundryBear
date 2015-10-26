@@ -105,17 +105,24 @@
 
               <div class="row">
                 <div class="large-8 columns">
-                  <label>Days Open
-                    {{ form.days_open }}
-                    {{ form.days_open.errors }}
+                  <label>Days Open<hr>
+                    <div class="large-12 columns">
+                      <input id="sunday" type="checkbox"><label for="checkbox1">Sunday</label>
+                      <input id="monday" type="checkbox"><label for="checkbox2">Monday</label>
+                      <input id="tuesday" type="checkbox"><label for="checkbox3">Tuesday</label>
+                      <input id="wednesday" type="checkbox"><label for="checkbox4">Wednesday</label>
+                      <input id="thursday" type="checkbox"><label for="checkbox5">Thursday</label>
+                      <input id="friday" type="checkbox"><label for="checkbox6">Friday</label>
+                      <input id="saturday" type="checkbox"><label for="checkbox7">Saturday</label>
+                  </div>
                   </label>
                 </div>
-              </div>
+              </div><hr>
 
               <div class="row">
                 <div class="large-8 columns">
                   <label>Rating
-					  <input type="number" min="1" max="5" name="paws" />
+					         <input type="number" min="1" max="5" name="paws" />
                   </label>
                 </div>
               </div>
