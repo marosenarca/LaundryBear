@@ -58,5 +58,5 @@ class LaundryListView(ListView):
         return context
 
     def get_shops_by_name(self, name_query):
-        return LaundryShop.objects.none()
+        return LaundryShop.objects.filter(name__icontains=name_query)
 
