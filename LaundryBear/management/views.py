@@ -19,7 +19,8 @@ class LaundryMenuView(TemplateView):
 class LaundryUpdateView(UpdateView):
     template_name = 'management/shop/editlaundryshop.html'
     model = LaundryShop
-    fields = ['name',]
+    fields = ['name','building','street','barangay','city','province'
+        'contact_number','website','email','hours_open','days_open']
 
 
 class LaundryCreateView(CreateView):
