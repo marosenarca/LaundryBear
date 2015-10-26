@@ -38,3 +38,22 @@ class ContextDataTestCase(TestCase):
                 len(set_expected.intersection(set_actual)), len(shop_names))
         else:
             self.fail()
+
+    def test_get_shops_by_name(self):
+        LaundryShop.objects.create(name='laundryshop1', province='lsprovince',
+            barangay='lsbarangay', contact_number='123',
+            hours_open='24 hours', days_open='Sun - Sat')
+        LaundryShop.objects.create(name='laundryshop2', province='lsprovince',
+            barangay='lsbarangay', contact_number='123',
+            hours_open='24 hours', days_open='Sun - Sat')
+        LaundryShop.objects.create(name='this should not appear',
+            province='lsprovince', barangay='lsbarangay',
+            contact_number='123', hours_open='24 hours',
+            days_open='Sun - Sat')
+        response = self.client.get(reverse('management:list-shops'),
+            {'name': 'laundryshop'})
+        expected_shop_list = LaundryShop.objects.filter(
+            name__icontains='laundryshop')
+        self.assertEqual(list(expected_shop_list),
+            list(response.context['shop_list']))
+

@@ -47,3 +47,15 @@ class LaundryListView(ListView):
     paginate_by = 10
     template_name = 'management/shop/viewlaundryshops.html'
     context_object_name = 'shop_list'
+
+    def get_context_data(self, **kwargs):
+        context = super(LaundryListView, self).get_context_data(**kwargs)
+        name_query = self.request.GET.get('name', False)
+        if name_query:
+            shops = self.get_shops_by_name(name_query)
+            context.update({'shop_list': shops})
+        return context
+
+    def get_shops_by_name(self, name_query):
+        return LaundryShop.objects.none()
+
