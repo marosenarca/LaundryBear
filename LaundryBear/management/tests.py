@@ -107,6 +107,6 @@ class ContextDataTestCase(TestCase):
         response = self.client.get(reverse('management:list-shops'),
             {'barnagay': 'cebu'})
         expected_shop_list = LaundryShop.objects.filter(
-            barangay__icontains='cebu')
+            barangay__icontains='lsbarangay')
         self.assertEqual(list(expected_shop_list),
             list(response.context['shop_list']))
