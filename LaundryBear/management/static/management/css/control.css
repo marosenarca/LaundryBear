@@ -1,7 +1,7 @@
 @charset "utf-8";
 /* CSS Document */
 body {
-	background-color: #456A6A;
+	background-color: #FEFDFA;
 }
 
 img#logo {
@@ -67,7 +67,7 @@ h4#requests {
 }
 
 h4 {
-	margin-top: 5%;	
+	margin-top: 5%;
 }
 
 div.panel {
@@ -78,12 +78,12 @@ div.panel {
 div#ufd:hover {
 	animation: ease-in;
 	background: #000;
-	
+
 }
 div#vt:hover {
 	animation: ease-in;
 	background: #000;
-	
+
 }
 img#star {
 	height: 2%;
