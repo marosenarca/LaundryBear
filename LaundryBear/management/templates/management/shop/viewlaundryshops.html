@@ -31,24 +31,25 @@
 		</div>
     {% endblock %}
     {% block footer %}
+    <form method="get">
+    {%csrf_token%}
       <div class="row">
          <div class="large-12 columns">
            <div class="row collapse">
              <div class="small-2 columns">
              </div>
-             <form method="get">
-             {%csrf_token%}
              <div class="small-7 small-offset-2 columns">
                <input name="name" id="search" type="text" placeholder="Search Laundry Shop">
              </div>
              <div class="small-1 columns">
                <button type="submit" class="button postfix">Go</button>
-             </div></form>
+             </div>
              <div class="small-2 columns">
              </div>
            </div>
          </div>
        </div>
+       </form>
        <br>
        <div>
          <dl class="sub-nav">
