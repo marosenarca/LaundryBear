@@ -53,10 +53,10 @@
        <div>
          <dl class="sub-nav">
            <dt>Filter:</dt>
-           <dd class="active"><a href="#">Name</a></dd>
-           <dd><a href="#">City</a></dd>
-           <dd><a href="#">Barangay</a></dd>
-           <dd><a href="#">Province</a></dd>
+		   <dd{% if query_type == "name" %} class="active"{% endif %}><a href="#">Name</a></dd>
+           <dd{% if query_type == "city" %} class="active"{% endif %}><a href="#">City</a></dd>
+           <dd{% if query_type == "barangay" %} class="active"{% endif %}><a href="#">Barangay</a></dd>
+           <dd{% if query_type == "province" %} class="active"{% endif %}><a href="#">Province</a></dd>
          </dl>
       </div>
   {% endblock %}

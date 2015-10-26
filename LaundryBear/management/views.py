@@ -56,15 +56,20 @@ class LaundryListView(ListView):
         context = super(LaundryListView, self).get_context_data(**kwargs)
         shops = context['shop_list']
         name_query = self.request.GET.get('name', False)
+        query_type = 'name'
         if name_query:
             shops = self.get_shops_by_name(name_query)
+            query_type = 'name'
         city_query = self.request.GET.get('city', False)
         if city_query:
             shops = self.get_shops_by_city(city_query)
+            query_type = 'city'
         province_query = self.request.GET.get('province', False)
         if province_query:
             shops = self.get_shops_by_province(province_query)
+            query_type = 'province'
         context.update({'shop_list': shops})
+        context['query_type'] = query_type
         return context
 
     def get_shops_by_name(self, name_query):
