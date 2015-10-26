@@ -82,6 +82,10 @@ class LaundryListView(ListView):
         if province_query:
             shops = self.get_shops_by_province(province_query)
             query_type = 'province'
+        barangay_query = self.request.GET.get('barangay', False)
+        if barangay_query:
+            shops = self.get_shops_by_barangay(barangay_query)
+            query_type = 'barangay'
         context.update({'shop_list': shops})
         context['query_type'] = query_type
         return context
@@ -94,3 +98,6 @@ class LaundryListView(ListView):
 
     def get_shops_by_province(self, province_query):
         return LaundryShop.objects.filter(province__icontains = province_query)
+
+    def get_shops_by_barangay(self, barangay_query):
+        return LaundryShop.objects.filter(barangay__icontains = barangay_query)
