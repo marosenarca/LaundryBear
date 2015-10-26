@@ -39,7 +39,7 @@
              <form method="get">
              {%csrf_token%}
              <div class="small-7 small-offset-2 columns">
-               <input name="name" type="text" placeholder="Search Laundry Shop">
+               <input name="name" id="search" type="text" placeholder="Search Laundry Shop">
              </div>
              <div class="small-1 columns">
                <button type="submit" class="button postfix">Go</button>
@@ -53,11 +53,10 @@
        <div>
          <dl class="sub-nav">
            <dt>Filter:</dt>
-           <dd class="active"><a href="#">All</a></dd>
+           <dd class="active"><a href="#">Name</a></dd>
            <dd><a href="#">City</a></dd>
            <dd><a href="#">Barangay</a></dd>
            <dd><a href="#">Province</a></dd>
-           <dd width="100"></dd>
          </dl>
       </div>
   {% endblock %}
