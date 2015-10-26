@@ -112,6 +112,24 @@
               <hr/>
 
               <h4>Services</h4>
+              <table style="margin:auto">
+                <thead>
+                  <tr>
+                    <th>Service Name</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+
+
               <a href="#" data-reveal-id="firstModal" class="button">Add Service</a>
               <div id="firstModal" class="reveal-modal" data-reveal aria-labelledby="firstModalTitle" aria-hidden="true" role="dialog">
                 <h2 id="firstModalTitle">Service</h2>
@@ -120,15 +138,13 @@
                   <div class="row">
                     <div class="large-8 columns">
                       <label>Service Name:
-                        <input type="text"/>
-                      </label>
-                    </div>
-                  </div>
+                        <button id="selected" href="#" data-dropdown="drop1" aria-controls="drop1" aria-expanded="false" class="button dropdown">Dropdown Button</button><br>
+                        <ul id="drop1" data-dropdown-content class="f-dropdown" aria-hidden="true">
+                          {%for service in service_list%}
+                          <option value="{{ service.name }}">{{ service.name }}</option>
+                          {% endfor %}
+                        </ul>
 
-                  <div class="row">
-                    <div class="large-8 columns">
-                      <label>Description:
-                        <input type="text"/>
                       </label>
                     </div>
                   </div>
@@ -141,16 +157,16 @@
                     </div>
                   </div>
 
-                  <a href="#" class="button">Save</a>
+                  <button type="submit" class="button">Save</button>
 
                   <a class="close-reveal-modal" aria-label="Close">&#215;</a>
               </form>
 
               </div>
+
               <hr/>
               <a href="#" class="button small">Save</a>
               <a href="#" class="warning button small">Cancel</a>
-
 
           </form>
 

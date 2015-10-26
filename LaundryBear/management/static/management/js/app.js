@@ -12,3 +12,14 @@ $(window).bind("load", function () {
        });
    }
 });
+
+$(document).foundation({
+    reveal : {
+        multiple_opened:true
+    }
+});
+
+$('#drop1 option').click(function(){
+  var value = $(this).val();
+  $('#selected').html(value);
+});

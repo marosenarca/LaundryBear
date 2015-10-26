@@ -41,6 +41,20 @@ class LaundryCreateView(CreateView):
             rating_form.save()
         return response
 
+    def get_context_data(self,**kwargs):
+        context = super(LaundryCreateView, self).get_context_data(**kwargs)
+        context["service_list"] = Service.objects.all()
+        return context
+
+    def post(self, request, *args, **kwargs):
+        response = super(LaundryCreateView, self).post(request, *args, **kwargs)
+        price_form = forms.ServicePriceForm(data=request.POST)
+        if price_form.is_valid():
+            price_form.save()
+        else:
+            print price_form.errors
+        return response
+
 
 class LaundryListView(ListView):
     model = LaundryShop
