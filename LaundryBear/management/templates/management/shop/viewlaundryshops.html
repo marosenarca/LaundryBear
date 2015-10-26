@@ -36,12 +36,14 @@
            <div class="row collapse">
              <div class="small-2 columns">
              </div>
+             <form method="get">
+             {%csrf_token%}
              <div class="small-7 small-offset-2 columns">
-               <input type="text" placeholder="Search Laundry Shop">
+               <input name="name" type="text" placeholder="Search Laundry Shop">
              </div>
              <div class="small-1 columns">
-               <a href="#" class="button postfix">Go</a>
-             </div>
+               <button type="submit" class="button postfix">Go</button>
+             </div></form>
              <div class="small-2 columns">
              </div>
            </div>
