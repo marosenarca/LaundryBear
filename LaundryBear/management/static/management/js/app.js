@@ -23,3 +23,10 @@ $('#drop1 option').click(function(){
   var value = $(this).val();
   $('#selected').html(value);
 });
+
+$("dl.sub-nav dd").click(function(){
+  $("dl.sub-nav dd.active").removeClass("active");
+  $(this).addClass("active");
+  $("#search").prop("name", $(this).children().html().toLowerCase());
+  return false;
+});
