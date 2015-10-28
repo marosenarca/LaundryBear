@@ -1,5 +1,6 @@
-from django.shortcuts import render
 from django.core.urlresolvers import reverse
+from django.forms.formsets import formset_factory
+from django.shortcuts import render
 from django.views.generic import CreateView, ListView, UpdateView, TemplateView
 
 from database.models import LaundryShop, Service
@@ -47,7 +48,9 @@ class LaundryCreateView(CreateView):
 
     def get_context_data(self,**kwargs):
         context = super(LaundryCreateView, self).get_context_data(**kwargs)
-        context["service_list"] = Service.objects.all()
+        context['service_list'] = Service.objects.all()
+        price_formset = formset_factory(forms.PriceForm)
+        context['price_formset'] = price_formset()
         return context
 
     def post(self, request, *args, **kwargs):
