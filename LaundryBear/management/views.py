@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.core.urlresolvers import reverse
-from django.views.generic import CreateView, ListView, UpdateView, TemplateView
+from django.views.generic import CreateView, ListView, UpdateView, TemplateView, DeleteView
 
 from database.models import LaundryShop, Service
 from django.forms.models import inlineformset_factory
@@ -48,6 +48,11 @@ class LaundryCreateView(CreateView):
             print price_form.errors
         return response
 
+class LaundryDeleteView(DeleteView):
+    model = LaundryShop
+
+    def get_success_url(self):
+        return reverse('management:list-shops')
 
 class LaundryListView(ListView):
     model = LaundryShop
