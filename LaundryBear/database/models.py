@@ -29,7 +29,7 @@ class LaundryShop(models.Model):
     def average_rating(self):
         ratings = self.ratings.all()
         if not ratings:
-            return 0.0
+            return 0
         sum_ratings = 0.0
         for rating in ratings:
             sum_ratings += rating.paws
@@ -57,4 +57,4 @@ class Price(models.Model):
 
 class Rating(models.Model):
     laundry_shop = models.ForeignKey('LaundryShop', related_name='ratings')
-    paws = models.IntegerField(null=True, blank=True)
+    paws = models.IntegerField(blank=False)
