@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="../../../../LaundryBear/static/LaundryBear/css/foundation.css" />
-<link rel="stylesheet" href="../../../static/management/css/signincomtrol.css" />
+<link rel="stylesheet" href="../../../static/management/css/signincontrol.css" />
 <script src="../../../../LaundryBear/static/LaundryBear/js/vendor/modernizr.js"></script>
 <title>Untitled Document</title>
 </head>
@@ -13,7 +13,7 @@
       <h1 class="main-header">Something clean is coming your way.</h1>
       <ul class="header-subnav">
         <li><a href="#" class="active">Home</a></li>
-        <li><a href="#" class="is-active">Sign Up</a></li>
+        <li><a href="signup.html" class="is-active">Sign Up</a></li>
         <li><a href="#" class="active">About Us</a></li>
       </ul>
     </header>
@@ -27,19 +27,19 @@
               </div>
               <div class="row">
                 <div class="large-12 columns">
-                  <label class="title">Email</label>
-                  <input type="text" name="username" placeholder="Enter your email" />
+                  <label class="title"><b>Email</b></label>
+                  <input type="text" name="username" placeholder="Enter your email" required="required" autocomplete="on" />
                 </div>
               </div>
               <div class="row">
                 <div class="large-12 columns">
-                  <label class="title">Password</label>
-                  <input type="password" name="password" placeholder="Enter your password" />
+                  <label class="title"><b>Password</b></label>
+                  <input type="password" name="password" placeholder="Enter your password" required="required" />
                 </div>
               </div>
               <div class="row">
                 <div class="large-12 large-centered columns">
-                  <input type="submit" class="button expand" value="Sign In" />
+                  <input type="submit" class="button expand" value="Sign" />
                 </div>
               </div>
             </form>
