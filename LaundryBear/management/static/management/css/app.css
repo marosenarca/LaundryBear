@@ -38,3 +38,7 @@ div.paw-container {
 div.paw-container > img {
   max-width: none !important;
 }
+
+.columns {
+  border: 2px solid #466d98;
+}

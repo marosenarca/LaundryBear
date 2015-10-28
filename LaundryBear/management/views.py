@@ -1,9 +1,9 @@
 from django.core.urlresolvers import reverse
-from django.forms.formsets import formset_factory
+from django.forms.models import inlineformset_factory
 from django.shortcuts import render
 from django.views.generic import CreateView, ListView, UpdateView, TemplateView
 
-from database.models import LaundryShop, Service
+from database.models import LaundryShop, Service, Price
 
 from management import forms
 
@@ -13,7 +13,8 @@ class LaundryMenuView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(LaundryMenuView, self).get_context_data(**kwargs)
-        context['recent_shops'] = LaundryShop.objects.order_by('-creation_date')[:3]
+        context['recent_shops'] = LaundryShop.objects.order_by(
+            '-creation_date')[:3]
         return context
 
 
@@ -49,12 +50,14 @@ class LaundryCreateView(CreateView):
     def get_context_data(self,**kwargs):
         context = super(LaundryCreateView, self).get_context_data(**kwargs)
         context['service_list'] = Service.objects.all()
-        price_formset = formset_factory(forms.PriceForm)
+        price_formset = inlineformset_factory(
+            LaundryShop, Price, fields=('service', 'price'))
         context['price_formset'] = price_formset()
         return context
 
     def post(self, request, *args, **kwargs):
-        response = super(LaundryCreateView, self).post(request, *args, **kwargs)
+        response = super(LaundryCreateView, self).post(
+            request, *args, **kwargs)
         price_form = forms.ServicePriceForm(data=request.POST)
         if price_form.is_valid():
             price_form.save()
@@ -94,13 +97,13 @@ class LaundryListView(ListView):
         return context
 
     def get_shops_by_name(self, name_query):
-        return LaundryShop.objects.filter(name__icontains = name_query)
+        return LaundryShop.objects.filter(name__icontains=name_query)
 
     def get_shops_by_city(self, city_query):
-        return LaundryShop.objects.filter(city__icontains = city_query)
+        return LaundryShop.objects.filter(city__icontains=city_query)
 
     def get_shops_by_province(self, province_query):
-        return LaundryShop.objects.filter(province__icontains = province_query)
+        return LaundryShop.objects.filter(province__icontains=province_query)
 
     def get_shops_by_barangay(self, barangay_query):
-        return LaundryShop.objects.filter(barangay__icontains = barangay_query)
+        return LaundryShop.objects.filter(barangay__icontains=barangay_query)
