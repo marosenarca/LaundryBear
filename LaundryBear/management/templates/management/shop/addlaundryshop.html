@@ -89,7 +89,7 @@
                   <label>Website
                     {{ form.website }}
                     {{ form.website.errors }}
-                  </label>
+                  </label><hr>
                 </div>
               </div>
 
@@ -97,32 +97,39 @@
                 <div class="large-8 columns">
                     <div class="row">
                       <div class="large-4 columns">
-                        <label>Hours Open<hr>
+                        <label>Opening Time
                           <select>
-                            <option value="husker">1</option>
-                            <option value="starbuck">2</option>
-                            <option value="hotdog">3</option>
-                            <option value="apollo">4</option>
-                            <option value="husker">5</option>
-                            <option value="starbuck">6</option>
-                            <option value="hotdog">7</option>
-                            <option value="apollo">8</option>
-                            <option value="husker">9</option>
-                            <option value="starbuck">10</option>
-                            <option value="hotdog">11</option>
-                            <option value="apollo">12</option>
-                            <option value="husker">13</option>
-                            <option value="starbuck">14</option>
-                            <option value="hotdog">15</option>
-                            <option value="apollo">16</option>
-                            <option value="husker">17</option>
-                            <option value="starbuck">18</option>
-                            <option value="hotdog">19</option>
-                            <option value="apollo">20</option>
-                            <option value="husker">21</option>
-                            <option value="starbuck">22</option>
-                            <option value="hotdog">23</option>
-                            <option value="apollo">24</option>
+                            <option value="husker">12:00 am</option>
+                            <option value="apollo">1:00 am</option>
+                            <option value="starbuck">2:00 am</option>
+                            <option value="hotdog">3:00 am</option>
+                            <option value="apollo">4:00 am</option>
+                            <option value="husker">5:00 am</option>
+                            <option value="starbuck">6:00 am</option>
+                            <option value="hotdog">7:00 am</option>
+                            <option value="apollo">8:00 am</option>
+                            <option value="husker">9:00 am</option>
+                            <option value="starbuck">10:00 am</option>
+                            <option value="hotdog">11:00 am</option>
+                          </select>                    
+                        </label>
+                        </label><hr>
+                      </div>
+                      <div class="large-4 columns">
+                        <label>Closing Time
+                          <select>                            
+                            <option value="husker">12:00 pm</option>
+                            <option value="apollo">1:00 pm</option>
+                            <option value="starbuck">2:00 pm</option>
+                            <option value="hotdog">3:00 pm</option>
+                            <option value="apollo">4:00 pm</option>
+                            <option value="husker">5:00 pm</option>
+                            <option value="starbuck">6:00 pm</option>
+                            <option value="hotdog">7::00 pm</option>
+                            <option value="apollo">8:00 pm</option>
+                            <option value="husker">9:00 pm</option>
+                            <option value="starbuck">10:00 pm</option>
+                            <option value="hotdog">11:00 pm</option>
                           </select>
                         </label><hr>
                       </div>
@@ -132,7 +139,7 @@
 
               <div class="row">
                 <div class="large-8 columns">
-                  <label>Days Open<hr>
+                  <label><h5>Days Open</h5>
                     <div class="large-12 columns">
                       <input id="sunday" type="checkbox"><label for="checkbox1">Sunday</label>
                       <input id="monday" type="checkbox"><label for="checkbox2">Monday</label>
@@ -170,23 +177,14 @@
                   <div class="large-6 columns">
                     <div class="row collapse prefix-radius">
                       <div class="small-3 columns">
-                        <span class="prefix">Desc.</span>
+                        <span class="prefix">Price</span>
                       </div>
-                      <div class="small-9 columns">
-                        <input type="text" placeholder="...">
-                      </div>
-                    </div>
-                  </div>
-                  <div class="large-6 columns">
-                    <div class="row collapse postfix-radius">
                       <div class="small-9 columns">
                         <input type="text" placeholder="0.00">
                       </div>
-                      <div class="small-3 columns">
-                        <span class="postfix">Price</span>
-                      </div>
                     </div>
                   </div>
+                  
                 </div>
               
               <!--<a href="#" data-reveal-id="firstModal" class="button">Add Service</a>
