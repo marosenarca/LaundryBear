@@ -30,3 +30,10 @@ $("dl.sub-nav dd").click(function(){
   $("#search").prop("name", $(this).children().html().toLowerCase());
   return false;
 });
+
+$("#set-service-button").click(function() {
+	// reset fields
+	$("#service-input")[0].selectedIndex = 0;
+	$("#price-input").val('');
+	return false;
+});
