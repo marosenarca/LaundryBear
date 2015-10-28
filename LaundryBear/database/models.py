@@ -58,3 +58,6 @@ class Price(models.Model):
 class Rating(models.Model):
     laundry_shop = models.ForeignKey('LaundryShop', related_name='ratings')
     paws = models.IntegerField(blank=False)
+
+    def __unicode__(self):
+        return "{1} paw rating for {0}".format(unicode(self.laundry_shop),self.paws)
