@@ -54,10 +54,13 @@ $("#set-service-button").click(function() {
 
 	// add to hidden formset
 	var $formsetContainer = $("#price-formset-container");
-	$formsetContainer.find("#id_price_set-0-service").val(servicePk);
-	$formsetContainer.find("#id_price_set-0-price").val(price);
+	var currentFormsetIndex = $formsetContainer.children().length - 1;
+	$formsetContainer.find("#id_price_set-" + currentFormsetIndex + "-service").val(servicePk);
+	$formsetContainer.find("#id_price_set-" + currentFormsetIndex + "-price").val(price);
 
 	$tableBody.append($tableRow);
+
+	addServiceFormset($formsetContainer);
 
 	// pop item off
 	$selectedService.remove();
@@ -68,6 +71,12 @@ $("#set-service-button").click(function() {
 	return false;
 });
 
-function cloneServiceFormset() {
+function addServiceFormset($formsetContainer) {
+	var formCount = $formsetContainer.children().length;
+	var template = $("#formset-form-template").html();
+	var compiledTemplate = template.replace(/__prefix__/g, formCount);
+	$formsetContainer.append(compiledTemplate);
 
+	$("#id_price_set-TOTAL_FORMS").val(formCount + 1);
+	return;
 }

@@ -162,9 +162,23 @@
                 </tbody>
               </table>
 		  </div>
+		  {{ price_formset.management_form }}
 		  <div class="hide" id="price-formset-container">
-			  {{ price_formset }}
+			{% for price_form in price_formset %}
+			<div id="item-{{ forloop.counter0 }}">
+				{{ price_form.service }}
+				{{ price_form.price }}
+				{{ price_form.DELETE }}
+			</div>
+			{% endfor %}
 		  </div>
+		  <template id="formset-form-template">
+			  <div id="item-__prefix__">
+				  {{ price_formset.empty_form.service }}
+				  {{ price_formset.empty_form.price }}
+				  {{ price_formset.empty_form.DELETE }}
+			  </div>
+		  </template>
 		  <template id="table-row-template">
 			  <tr>
 				  <td class="service-name"></td>
