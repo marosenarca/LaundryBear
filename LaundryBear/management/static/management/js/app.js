@@ -32,8 +32,33 @@ $("dl.sub-nav dd").click(function(){
 });
 
 $("#set-service-button").click(function() {
+	var $serviceInput = $("#service-input");
+	var $priceInput = $("#price-input");
+	var $tableBody = $("#service-table-body");
+	var template = $("#table-row-template")[0];
+
+	var servicePk = $serviceInput.val();
+	var price = $priceInput.val();
+
+	if (isNaN(servicePk) || price.length === 0) {
+		return false;
+	}
+
+	// create a new row
+	var $selectedService = $serviceInput.children(":selected");
+	var $tableRow = $("tr", template.content).clone(true);
+	$tableRow.data("service-pk", servicePk);
+	$tableRow.children(".service-name").html($selectedService.html());
+	$tableRow.children(".description").html($selectedService.data("description"));
+	$tableRow.children(".price").html(price);
+
+	$tableBody.append($tableRow);
+
+	// pop item off
+	$selectedService.remove();
 	// reset fields
-	$("#service-input")[0].selectedIndex = 0;
-	$("#price-input").val('');
+	$serviceInput[0].selectedIndex = 0;
+	$priceInput.val('');
+
 	return false;
 });

@@ -129,7 +129,7 @@
 							  <select id="service-input">
 								  <option>---------</option>
 								  {%for service in service_list%}
-								  <option value="{{ service.name }}">{{ service.name }}</option>
+								  <option value="{{ service.pk }}" data-description="{{ service.description }}">{{ service.name }}</option>
 								  {% endfor %}
 							  </select>
 						  </label>
@@ -158,15 +158,17 @@
                     <th>Price</th>
                   </tr>
                 </thead>
-                <tbody>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
+                <tbody id="service-table-body">
                 </tbody>
               </table>
 		  </div>
+		  <template id="table-row-template">
+			  <tr>
+				  <td class="service-name"></td>
+				  <td class="description"></td>
+				  <td class="price"></td>
+			  </tr>
+		  </template>
 
               <div id="firstModal" class="reveal-modal" data-reveal aria-labelledby="firstModalTitle" aria-hidden="true" role="dialog">
                 <h2 id="firstModalTitle">Service</h2>
