@@ -40,30 +40,23 @@ class LaundryCreateView(CreateView):
 
     def form_valid(self, form):
         response = super(LaundryCreateView, self).form_valid(form)
-        post_data = self.request.POST.copy()
-        post_data.update({'laundry_shop': self.object.pk})
-        rating_form = forms.RatingForm(data=post_data)
-        if rating_form.is_valid():
-            rating_form.save()
+        PriceInlineFormSet = inlineformset_factory(
+            LaundryShop, Price, fields=('service', 'price'), extra=1)
+        price_formset = PriceInlineFormSet(
+            data=self.request.POST, instance=self.object)
+        if price_formset.is_valid():
+            price_formset.save()
+        else:
+            print price_formset.errors
         return response
 
     def get_context_data(self,**kwargs):
         context = super(LaundryCreateView, self).get_context_data(**kwargs)
         context['service_list'] = Service.objects.all()
         price_formset = inlineformset_factory(
-            LaundryShop, Price, fields=('service', 'price'))
+            LaundryShop, Price, fields=('service', 'price'), extra=1)
         context['price_formset'] = price_formset()
         return context
-
-    def post(self, request, *args, **kwargs):
-        response = super(LaundryCreateView, self).post(
-            request, *args, **kwargs)
-        price_form = forms.ServicePriceForm(data=request.POST)
-        if price_form.is_valid():
-            price_form.save()
-        else:
-            print price_form.errors
-        return response
 
 
 class LaundryListView(ListView):

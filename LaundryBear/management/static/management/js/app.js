@@ -52,6 +52,11 @@ $("#set-service-button").click(function() {
 	$tableRow.children(".description").html($selectedService.data("description"));
 	$tableRow.children(".price").html(price);
 
+	// add to hidden formset
+	var $formsetContainer = $("#price-formset-container");
+	$formsetContainer.find("#id_price_set-0-service").val(servicePk);
+	$formsetContainer.find("#id_price_set-0-price").val(price);
+
 	$tableBody.append($tableRow);
 
 	// pop item off
@@ -62,3 +67,7 @@ $("#set-service-button").click(function() {
 
 	return false;
 });
+
+function cloneServiceFormset() {
+
+}
