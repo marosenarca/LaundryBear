@@ -51,7 +51,7 @@ $("#set-service-button").click(function() {
 	// create a new row
 	var $selectedService = $serviceInput.children(":selected");
 	var template = $("#table-row-template").html();
-	var compiledTemplate = template.replace(/__service-name__/g, $selectedService.html()).replace(/__description__/g, $selectedService.data("description")).replace(/__price__/g, price).replace(/__pk__/g, servicePk);
+	var compiledTemplate = template.replace(/__service-name__/g, $selectedService.html()).replace(/__description__/g, $selectedService.data("service-description")).replace(/__price__/g, price).replace(/__pk__/g, servicePk);
 
 	var $tableBody = $("#service-table-body");
 	$tableBody.append(compiledTemplate);
@@ -60,12 +60,14 @@ $("#set-service-button").click(function() {
 		var pk = $tr.data("service-pk");
 		var optionName = $tr.data("service-name");
 		var price = $tr.data("service-price");
+		var description = $tr.data("service-description");
 		// remove from table
 		$(this).closest("tr").remove();
 
 		// add back into combobox and set as selected
 		var optionTemplate = $("#option-template").html();
-		var compiledOptionTemplate = optionTemplate.replace(/__value__/, pk).replace(/__selected__/, "true").replace(/__optionname__/g, optionName)
+		var compiledOptionTemplate = optionTemplate.replace(/__value__/, pk).replace(/__selected__/, "true").replace(/__optionname__/g, optionName).replace(/__description__/, description);
+		$("#service-input").children(":selected").prop("selected", false);
 		var $option = $(compiledOptionTemplate);
 		$("#service-input").append($option);
 
