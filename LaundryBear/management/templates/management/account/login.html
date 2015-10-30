@@ -18,24 +18,25 @@
         <h3 id="adminlogin"align="center">Admin Login</h3>
         <br>
       <div class="large-12 columns">
-        <form method="post">
-          {% csrf_token %}
-           <div class="row">
-             <div class="large-12 columns">
-                 <input type="text" name="username" placeholder="Username" required />
-             </div>
-           </div>
-          <div class="row">
-             <div class="large-12 columns">
-                 <input type="password" name="password" placeholder="Password" required/>
-             </div>
-          </div>
-          <div class="row">
-            <div class="large-12 large-centered columns">
-              <input type="submit" class="button expand" value="Log In"/>
-            </div>
-          </div>
-        </form>
+         <form>
+              <div class="row">
+                <div class="large-12 columns">
+                  <label class="title"><b>Username</b></label>
+                  <input type="text" name="username" placeholder="Enter your username" required autocomplete="on" />
+                </div>
+              </div>
+              <div class="row">
+                <div class="large-12 columns">
+                  <label class="title"><b>Password</b></label>
+                  <input type="password" name="password" placeholder="Enter your password" required />
+                </div>
+              </div>
+              <div class="row">
+                <div class="large-12 large-centered columns">
+                  <input type="submit" class="button expand" value="Sign In" />
+                </div>
+              </div>
+            </form>
       </div>
     </div>
     </div>
