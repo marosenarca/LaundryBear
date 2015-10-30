@@ -35,7 +35,6 @@ $("#set-service-button").click(function() {
 	var $serviceInput = $("#service-input");
 	var $priceInput = $("#price-input");
 	var $tableBody = $("#service-table-body");
-	var template = $("#table-row-template")[0];
 
 	var servicePk = $serviceInput.val();
 	var price = $priceInput.val();
@@ -46,11 +45,8 @@ $("#set-service-button").click(function() {
 
 	// create a new row
 	var $selectedService = $serviceInput.children(":selected");
-	var $tableRow = $("tr", template.content).clone(true);
-	$tableRow.data("service-pk", servicePk);
-	$tableRow.children(".service-name").html($selectedService.html());
-	$tableRow.children(".description").html($selectedService.data("description"));
-	$tableRow.children(".price").html(price);
+	var template = $("#table-row-template").html();
+	var compiledTemplate = template.replace(/__service-name__/, $selectedService.html()).replace(/__description__/, $selectedService.data("description")).replace(/__price__/, price);
 
 	// add to hidden formset
 	var $formsetContainer = $("#price-formset-container");
@@ -58,7 +54,28 @@ $("#set-service-button").click(function() {
 	$formsetContainer.find("#id_price_set-" + currentFormsetIndex + "-service").val(servicePk);
 	$formsetContainer.find("#id_price_set-" + currentFormsetIndex + "-price").val(price);
 
-	$tableBody.append($tableRow);
+	$tableBody.append(compiledTemplate);
+	$tableBody.find("a.edit-service-button").last().click(function() {
+		var $serviceSelect = $("#service-input");
+		var sorted = $serviceSelect.children().sort(function(a, b) {
+			var aname = a.innerHtml;
+			var bname = b.innerHtml;
+
+			if (aname > bname) {
+				return 1;
+			}
+			if (aname < bname) {
+				return -1;
+			}
+			return 0;
+		});
+		console.log(sorted);
+		return false;
+	});
+	$tableBody.find("a.delete-service-button").last().click(function() {
+		console.log("click");
+		return false;
+	});
 
 	addServiceFormset($formsetContainer);
 
