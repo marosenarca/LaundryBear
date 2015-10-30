@@ -51,24 +51,26 @@ $("#set-service-button").click(function() {
 	// create a new row
 	var $selectedService = $serviceInput.children(":selected");
 	var template = $("#table-row-template").html();
-	var compiledTemplate = template.replace(/__service-name__/, $selectedService.html()).replace(/__description__/, $selectedService.data("description")).replace(/__price__/, price).replace(/__prefix__/, currentFormsetIndex).replace(/__pk__/, servicePk);
+	var compiledTemplate = template.replace(/__service-name__/g, $selectedService.html()).replace(/__description__/g, $selectedService.data("description")).replace(/__price__/g, price).replace(/__pk__/g, servicePk);
 
 	var $tableBody = $("#service-table-body");
 	$tableBody.append(compiledTemplate);
 	$tableBody.find("a.edit-service-button").last().click(function() {
-		var $serviceSelect = $("#service-input");
-		var sorted = $serviceSelect.append("<option value=\"" + $(this).data("service-pk") + "\">"+ $(this).siblings(".service-name").html() +"</option>");
-		var sorted = $serviceSelect.children().get().sort(function(a, b) {
-			var aname = a.innerHTML;
-			var bname = b.innerHTML;
-			if (aname > bname) {
-				return 1;
-			}
-			if (aname < bname) {
-				return -1;
-			}
-			return 0;
-		});
+		var $tr = $(this).closest("tr");
+		var pk = $tr.data("service-pk");
+		var optionName = $tr.data("service-name");
+		var price = $tr.data("service-price");
+		// remove from table
+		$(this).closest("tr").remove();
+
+		// add back into combobox and set as selected
+		var optionTemplate = $("#option-template").html();
+		var compiledOptionTemplate = optionTemplate.replace(/__value__/, pk).replace(/__selected__/, "true").replace(/__optionname__/g, optionName)
+		var $option = $(compiledOptionTemplate);
+		$("#service-input").append($option);
+
+		// put price back
+		$("#price-input").val(price);
 		return false;
 	});
 	$tableBody.find("a.delete-service-button").last().click(function() {
