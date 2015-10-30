@@ -4,10 +4,14 @@ from django.views.generic import CreateView, DeleteView, ListView, TemplateView,
 
 from database.models import LaundryShop, Price, Service
 
+from django.contrib.auth import authenticate, login
+
 from management import forms
+from management.mixins import LoginRequiredMixin
 
+from django.shortcuts import render
 
-class LaundryMenuView(TemplateView):
+class LaundryMenuView(LoginRequiredMixin, TemplateView):
     template_name = 'management/shop/laundrybearmenu.html'
 
     def get_context_data(self, **kwargs):
@@ -17,7 +21,7 @@ class LaundryMenuView(TemplateView):
         return context
 
 
-class LaundryUpdateView(UpdateView):
+class LaundryUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'management/shop/editlaundryshop.html'
     model = LaundryShop
     form_class = forms.LaundryShopForm
@@ -26,7 +30,7 @@ class LaundryUpdateView(UpdateView):
         return reverse('management:list-shops')
 
 
-class LaundryCreateView(CreateView):
+class LaundryCreateView(LoginRequiredMixin, CreateView):
     template_name = 'management/shop/addlaundryshop.html'
     model = LaundryShop
     form_class = forms.LaundryShopForm
@@ -55,13 +59,13 @@ class LaundryCreateView(CreateView):
         return context
 
 
-class LaundryDeleteView(DeleteView):
+class LaundryDeleteView(LoginRequiredMixin, DeleteView):
     model = LaundryShop
 
     def get_success_url(self):
         return reverse('management:list-shops')
 
-class LaundryListView(ListView):
+class LaundryListView(LoginRequiredMixin, ListView):
     model = LaundryShop
     paginate_by = 10
     template_name = 'management/shop/viewlaundryshops.html'
@@ -102,3 +106,18 @@ class LaundryListView(ListView):
 
     def get_shops_by_barangay(self, barangay_query):
         return LaundryShop.objects.filter(barangay__icontains=barangay_query)
+
+class LoginView(TemplateView):
+    template_name = "management/account/login.html"
+
+    def post(self, request):
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            return render(request, 'management/account/login.html')
+        else:
+            print 'wa kasuod'
+            return HttpResponseRedirect('/adsasd')

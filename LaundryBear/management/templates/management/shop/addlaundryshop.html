@@ -88,27 +88,107 @@
                   <label>Website
                     {{ form.website }}
                     {{ form.website.errors }}
-                  </label>
+                  </label><hr>
                 </div>
               </div>
 
               <div class="row">
                 <div class="large-8 columns">
-                  <label>Hours Open
-                    {{ form.hours_open }}
-                    {{ form.hours_open.errors }}
-                  </label>
+                    <div class="row">
+                      <div class="large-4 columns">
+                        <label>Opening Time
+                          <select>
+                            <option value="husker">12:00 am</option>
+                            <option value="apollo">1:00 am</option>
+                            <option value="starbuck">2:00 am</option>
+                            <option value="hotdog">3:00 am</option>
+                            <option value="apollo">4:00 am</option>
+                            <option value="husker">5:00 am</option>
+                            <option value="starbuck">6:00 am</option>
+                            <option value="hotdog">7:00 am</option>
+                            <option value="apollo">8:00 am</option>
+                            <option value="husker">9:00 am</option>
+                            <option value="starbuck">10:00 am</option>
+                            <option value="hotdog">11:00 am</option>
+                          </select>
+                        </label>
+                        </label><hr>
+                      </div>
+                      <div class="large-4 columns">
+                        <label>Closing Time
+                          <select>
+                            <option value="husker">12:00 pm</option>
+                            <option value="apollo">1:00 pm</option>
+                            <option value="starbuck">2:00 pm</option>
+                            <option value="hotdog">3:00 pm</option>
+                            <option value="apollo">4:00 pm</option>
+                            <option value="husker">5:00 pm</option>
+                            <option value="starbuck">6:00 pm</option>
+                            <option value="hotdog">7::00 pm</option>
+                            <option value="apollo">8:00 pm</option>
+                            <option value="husker">9:00 pm</option>
+                            <option value="starbuck">10:00 pm</option>
+                            <option value="hotdog">11:00 pm</option>
+                          </select>
+                        </label><hr>
+                      </div>
+                    </div>
                 </div>
               </div>
 
               <div class="row">
                 <div class="large-8 columns">
-                  <label>Days Open
-                    {{ form.days_open }}
-                    {{ form.days_open.errors }}
-                  </label>
-                </div>
+                  <label><h5>Days Open</h5>
+                    <div class="large-12 columns">
+                      <input id="sunday" type="checkbox"><label for="checkbox1">Sunday</label>
+                      <input id="monday" type="checkbox"><label for="checkbox2">Monday</label>
+                      <input id="tuesday" type="checkbox"><label for="checkbox3">Tuesday</label>
+                      <input id="wednesday" type="checkbox"><label for="checkbox4">Wednesday</label>
+                      <input id="thursday" type="checkbox"><label for="checkbox5">Thursday</label>
+                      <input id="friday" type="checkbox"><label for="checkbox6">Friday</label>
+                      <input id="saturday" type="checkbox"><label for="checkbox7">Saturday</label>
+                  </label><hr>
               </div>
+
+
+                <div class="row">
+                  <div class="large-2 columns">
+                    <label>Rating
+                      <select>
+                        <option value="one">1</option>
+                        <option value="two">2</option>
+                        <option value="three">3</option>
+                        <option value="four">4</option>
+                        <option value="five">5</option>
+                      </select>
+                    </label>
+                  </div>
+                </div><hr/>
+
+                <h4>Services</h4>
+                <button href="#" data-dropdown="drop1" aria-controls="drop1" aria-expanded="false" class="button dropdown">Add Service</button>
+                <ul id="drop1" data-dropdown-content class="f-dropdown" aria-hidden="true">
+                  <li><a href="#">Wash</a></li>
+                  <li><a href="#">Quick Dry</a></li>
+                  <li><a href="#">Press</a></li>
+                </ul>
+
+                <div class="row">
+                  <div class="large-6 columns">
+                    <div class="row collapse prefix-radius">
+                      <div class="small-3 columns">
+                        <span class="prefix">Price</span>
+                      </div>
+                      <div class="small-9 columns">
+                        <input type="text" placeholder="0.00">
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+
+              <!--<a href="#" data-reveal-id="firstModal" class="button">Add Service</a>
+
               <hr/>
 
               <h4>Services</h4>
@@ -181,7 +261,6 @@
 		  <template id="option-template">
 			  <option value="__value__" selected="__selected__" data-service-name="__optionname__" data-service-description="__description__">__optionname__</option>
 		  </template>
-
               <div id="firstModal" class="reveal-modal" data-reveal aria-labelledby="firstModalTitle" aria-hidden="true" role="dialog">
                 <h2 id="firstModalTitle">Service</h2>
                   <div class="row">
@@ -204,12 +283,32 @@
                       </label>
                     </div>
                   </div>
-
-                  <button type="submit" class="button">Save</button>
+                  <div class="large-2 columns">
+                    <button type="submit" class="button">Save</button>
+                  </div>
 
                   <a class="close-reveal-modal" aria-label="Close">&#215;</a>
 
-              </div>
+              </div>-->
+
+              <table style="margin-left: 0">
+                <thead>
+                  <tr>
+                    <th>Service Name</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+
+
 
               <hr/>
               <button type="submit" class="button small">Save</button>
