@@ -19,7 +19,7 @@
             <td>{{ shop.name }}</td>
             <td>{{ shop.location }}</td>
             <td>{{ shop.contact_number }}</td>
-            <td><div class="paw-container" style="width: {% widthratio 0.01 5 150 %}px;"><img src="{% static "management/icons/star.png" %}" /></div></td>
+            <td><div class="paw-container" style="width: {% widthratio shop.average_rating 5 150 %}px;"><img src="{% static "management/icons/star.png" %}" /></div></td>
             <td>{{ shop.days_open }}, {{ shop.hours_open }}</td>
             <td>{{ shop.email }}</td>
         </tbody>
@@ -31,6 +31,14 @@
   <td><div class="paw-container" style="width: {% widthratio shop.average_rating 5 150 %}px;"><img src="{% static "management/icons/star.png" %}" /></div></td>
   <td>
     <a href="{% url "management:edit-shop" shop.pk %}" class="button secondary tiny">Edit</a>
-    <a href="#" class="button secondary tiny">Delete</a>
+    <button data-reveal-id="delete-modal{{ shop.pk }}" class="button secondary tiny">Delete</button>
+    <div id="delete-modal{{ shop.pk }}" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+    <p>Are you sure?</p>
+    <form method="post" action="{%url 'management:delete-shop' shop.pk%}">
+      {%csrf_token%}
+      <button type="submit">Yes</button> <button>No</button>
+    </form>
+      <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+    </div>
   </td>
 </tr>

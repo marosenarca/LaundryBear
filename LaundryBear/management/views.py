@@ -1,7 +1,6 @@
 from django.core.urlresolvers import reverse
+from django.views.generic import CreateView, ListView, UpdateView, TemplateView, DeleteView
 from django.forms.models import inlineformset_factory
-from django.shortcuts import render
-from django.views.generic import CreateView, ListView, UpdateView, TemplateView
 
 from database.models import LaundryShop, Service, Price
 
@@ -21,8 +20,7 @@ class LaundryMenuView(TemplateView):
 class LaundryUpdateView(UpdateView):
     template_name = 'management/shop/editlaundryshop.html'
     model = LaundryShop
-    fields = ['name','building','street','barangay','city','province',
-        'contact_number','website','email','hours_open','days_open']
+    form_class = forms.LaundryShopForm
 
     def get_success_url(self):
         return reverse('management:list-shops')
@@ -31,9 +29,7 @@ class LaundryUpdateView(UpdateView):
 class LaundryCreateView(CreateView):
     template_name = 'management/shop/addlaundryshop.html'
     model = LaundryShop
-    fields = ['barangay', 'building', 'city', 'contact_number',
-        'days_open', 'email', 'hours_open', 'name', 'province',
-        'street', 'website']
+    form_class = forms.LaundryShopForm
 
     def get_success_url(self):
         return reverse('management:list-shops')
@@ -58,6 +54,21 @@ class LaundryCreateView(CreateView):
         context['price_formset'] = price_formset()
         return context
 
+    def post(self, request, *args, **kwargs):
+        response = super(LaundryCreateView, self).post(request, *args, **kwargs)
+        price_form = forms.ServicePriceForm(data=request.POST)
+        if price_form.is_valid():
+            price_form.save()
+        else:
+            print price_form.errors
+        return response
+
+
+class LaundryDeleteView(DeleteView):
+    model = LaundryShop
+
+    def get_success_url(self):
+        return reverse('management:list-shops')
 
 class LaundryListView(ListView):
     model = LaundryShop

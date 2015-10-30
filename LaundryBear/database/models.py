@@ -1,6 +1,21 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
+class UserProfile(models.Model):
+    client = models.OneToOneField(User)
+    contact_number = models.CharField(max_length=30, blank=False)
+    province = models.CharField(max_length=50, blank=False)
+    city = models.CharField(max_length=50, blank=True)
+    barangay = models.CharField(max_length=50, blank=False)
+    street = models.CharField(max_length=50, blank=True)
+    building = models.CharField(max_length=50, blank=True)
+    contact_number = models.CharField(max_length=30, blank=False)
+    email = models.EmailField(blank=True)
+
+    def __unicode__(self):
+        return self.client.get_full_name()
+
 class LaundryShop(models.Model):
     class Meta:
         get_latest_by = 'creation_date'
@@ -29,7 +44,7 @@ class LaundryShop(models.Model):
     def average_rating(self):
         ratings = self.ratings.all()
         if not ratings:
-            return 0.0
+            return 0
         sum_ratings = 0.0
         for rating in ratings:
             sum_ratings += rating.paws
@@ -57,4 +72,7 @@ class Price(models.Model):
 
 class Rating(models.Model):
     laundry_shop = models.ForeignKey('LaundryShop', related_name='ratings')
-    paws = models.IntegerField(null=True, blank=True)
+    paws = models.IntegerField(blank=False)
+
+    def __unicode__(self):
+        return "{1} paw rating for {0}".format(unicode(self.laundry_shop),self.paws)
