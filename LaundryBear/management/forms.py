@@ -1,6 +1,6 @@
 from django import forms
 
-from database.models import Rating, Service, Price
+from database.models import Rating, Service, Price, LaundryShop
 
 
 class ServiceForm(forms.ModelForm):
@@ -20,3 +20,10 @@ class ServicePriceForm(forms.ModelForm):
     class Meta:
         model = Price
         fields = ['laundry_shop', 'service', 'price']
+
+class LaundryShopForm(forms.ModelForm):
+    class Meta:
+        model = LaundryShop
+        fields = ['barangay', 'building', 'city', 'contact_number',
+        'days_open', 'email', 'hours_open', 'name', 'province',
+        'street', 'website']

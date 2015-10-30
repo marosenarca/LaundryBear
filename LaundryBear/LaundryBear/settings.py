@@ -40,7 +40,8 @@ INSTALLED_APPS = (
 
     'LaundryBear',
     'database',
-    'management'
+    'management',
+    'client'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -105,3 +106,5 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = './static/'
+LOGIN_URL = '/management/login'
+LOGIN_REDIRECT_URL = 'menu'
