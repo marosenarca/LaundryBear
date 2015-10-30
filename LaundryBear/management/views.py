@@ -1,8 +1,8 @@
 from django.core.urlresolvers import reverse
-from django.views.generic import CreateView, ListView, UpdateView, TemplateView, DeleteView
 from django.forms.models import inlineformset_factory
+from django.views.generic import CreateView, DeleteView, ListView, TemplateView, UpdateView
 
-from database.models import LaundryShop, Service, Price
+from database.models import LaundryShop, Price, Service
 
 from management import forms
 
@@ -53,15 +53,6 @@ class LaundryCreateView(CreateView):
             LaundryShop, Price, fields=('service', 'price'), extra=1)
         context['price_formset'] = price_formset()
         return context
-
-    def post(self, request, *args, **kwargs):
-        response = super(LaundryCreateView, self).post(request, *args, **kwargs)
-        price_form = forms.ServicePriceForm(data=request.POST)
-        if price_form.is_valid():
-            price_form.save()
-        else:
-            print price_form.errors
-        return response
 
 
 class LaundryDeleteView(DeleteView):
