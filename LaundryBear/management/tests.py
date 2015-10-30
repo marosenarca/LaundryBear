@@ -2,11 +2,17 @@ import time
 
 from django.core.urlresolvers import reverse
 from django.test import TestCase
+from django.contrib.auth.models import User
 
 from database.models import LaundryShop
 
 # Create your tests here.
 class ContextDataTestCase(TestCase):
+    def setUp(self):
+        # login client
+        User.objects.create_user(username='test', password='runner')
+        self.client.login(username='test', password='runner')
+
     def test_laundry_menu_get_recent_shops(self):
         # testing only 3 visible laundry shops
         LaundryShop.objects.create(name='laundryshop1', province='lsprovince',
