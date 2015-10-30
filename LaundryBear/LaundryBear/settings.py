@@ -40,7 +40,8 @@ INSTALLED_APPS = (
 
     'LaundryBear',
     'database',
-    'management'
+    'management',
+    'client'
 )
 
 MIDDLEWARE_CLASSES = (
