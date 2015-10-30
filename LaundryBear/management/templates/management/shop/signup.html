@@ -5,43 +5,44 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="../../../../LaundryBear/static/LaundryBear/css/foundation.css" />
 <link rel="stylesheet" href="../../../static/management/css/signupcontrol.css" />
+<link rel="stylesheet" href="../../../../LaundryBear/static/LaundryBear/foundation-icons/foundation-icons.css" />
 <script src="../../../../LaundryBear/static/LaundryBear/js/vendor/modernizr.js"></script>
 <title>Laundry Bear | Sign Up</title>
 </head>
 <body>
 <div class="row">
-    <div class="large-6 columns">
-      <div class="signup-panel">
-        <p class="welcome">Laundry Bear</p>
+    <div id="form" class="large-6 columns">
+      <div id="insideform" class="signup-panel">
+        <p class="welcome"><a href="usersignin.html"><img src="../../../static/management/icons/logologin.png" /></a></p>
         <form>
         <div class="row collapse">
             <div class="small-2 columns">
-              <span class="prefix"><i class="fi-mail"></i></span>
+              <span class="prefix"><i class="fi-torso" ></i></span>
             </div>
             <div class="small-10  columns">
-              <input type="text" placeholder="Last Name">
+              <input type="text" placeholder="Last Name" required="required">
             </div>
           </div>
           <div class="row collapse">
             <div class="small-2 columns">
-              <span class="prefix"><i class="fi-mail"></i></span>
+              <span class="prefix"><i class="fi-torso" ></i></span>
             </div>
             <div class="small-10  columns">
-              <input type="text" placeholder="First Name">
+              <input type="text" placeholder="First Name" required="required">
             </div>
           </div>
           <div class="row collapse">
             <div class="small-2 columns">
-              <span class="prefix"><i class="fi-mail"></i></span>
+              <span class="prefix"><i class="fi-mobile" ></i></span>
             </div>
             <div class="small-10  columns">
-              <input type="text" placeholder="Contact Number">
+              <input type="text" placeholder="Contact Number" required="required">
             </div>
           </div><hr />
           <div class="row collapse">
           <h4>Address</h4>
             <div class="small-2 columns">
-              <span class="prefix"><i class="fi-mail"></i></span>
+              <span class="prefix"><i class="fi-map"></i></span>
             </div>
             <div class="small-10  columns">
               <input type="text" placeholder="Barangay">
@@ -49,14 +50,14 @@
           </div>
           <div class="row collapse">
             <div class="small-2 columns">
-              <span class="prefix"><i class="fi-mail"></i></span>
+              <span class="prefix"><i class="fi-map"></i></span>
             </div>
             <div class="small-10  columns">
               <input type="text" placeholder="City">
             </div>
           </div><div class="row collapse">
             <div class="small-2 columns">
-              <span class="prefix"><i class="fi-mail"></i></span>
+              <span class="prefix"><i class="fi-map"></i></span>
             </div>
             <div class="small-10  columns">
               <input type="text" placeholder="Province">
@@ -67,7 +68,7 @@
               <span class="prefix"><i class="fi-mail"></i></span>
             </div>
             <div class="small-10  columns">
-              <input type="text" placeholder="Email">
+              <input type="text" placeholder="Email" required="required">
             </div>
           </div>
           <div class="row collapse">
@@ -75,11 +76,23 @@
               <span class="prefix"><i class="fi-lock"></i></span>
             </div>
             <div class="small-10 columns ">
-              <input type="text" placeholder="Password">
+              <input type="text" placeholder="Password" required="required">
             </div>
           </div>
+           <div class="row collapse">
+            <div class="small-2 columns ">
+              <span class="prefix"><i class="fi-lock"></i></span>
+            </div>
+            <div class="small-10 columns ">
+              <input type="text" placeholder="Re-type Password" required="required">
+            </div>
+          </div>
+          <div class="row">
+            <div class="large-12 large-centered columns">
+              <input type="submit" class="button" value="Sign Up!" align="middle" />
+            </div>
+           </div>
         </form>
-        <a href="#" class="button ">Sign Up! </a>
          <p>Already have an account? <a href="usersignin.html">Login here </a></p>
       </div>
     </div>
