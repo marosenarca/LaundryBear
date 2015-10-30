@@ -1,6 +1,21 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
+class UserProfile(models.Model):
+    client = models.OneToOneField(User)
+    contact_number = models.CharField(max_length=30, blank=False)
+    province = models.CharField(max_length=50, blank=False)
+    city = models.CharField(max_length=50, blank=True)
+    barangay = models.CharField(max_length=50, blank=False)
+    street = models.CharField(max_length=50, blank=True)
+    building = models.CharField(max_length=50, blank=True)
+    contact_number = models.CharField(max_length=30, blank=False)
+    email = models.EmailField(blank=True)
+
+    def __unicode__(self):
+        return self.client.get_full_name()
+
 class LaundryShop(models.Model):
     class Meta:
         get_latest_by = 'creation_date'
