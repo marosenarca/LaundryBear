@@ -94,3 +94,6 @@ class LaundryListView(ListView):
 
     def get_shops_by_province(self, province_query):
         return LaundryShop.objects.filter(province__icontains = province_query)
+
+class AdminLoginView(TemplateView):
+    template_name = "management/account/login.html"
