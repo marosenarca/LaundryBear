@@ -10,6 +10,7 @@
 	  <link rel="stylesheet" href="{% static "LaundryBear/foundation-icons/foundation-icons.css" %}" />
   </head>
   <body style="background-image: url(/static/management/icons/headlogo.png); overflow:hidden;  background-position: center 180px;">
+  {%if not user.is.authenticated %}
   <div class="login">
     <div class="large-3 large-centered columns">
       <div class="login-box">
@@ -17,7 +18,8 @@
         <h3 style="text-align:center">Admin Login</h3>
         <br>
       <div class="large-12 columns">
-        <form>
+        <form method="post">
+          {% csrf_token %}
            <div class="row">
              <div class="large-12 columns">
                  <input type="text" name="username" placeholder="Username" />
@@ -39,7 +41,7 @@
     </div>
     </div>
   </div>
-
+  {%endif%}
     <script src="{%static "LaundryBear/js/vendor/modernizr.js"%}"></script>
     <script src="{%static "LaundryBear/js/vendor/jquery.js"%}"></script>
     <script src="{%static "LaundryBear/js/vendor/fastclick.js"%}"></script>
