@@ -39,10 +39,6 @@ div.paw-container > img {
   max-width: none !important;
 }
 
-.columns {
-  border: 2px solid red;
-}
-
 #set-service-button-container {
   position: relative;
   top: 8px;
