@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from django.core.urlresolvers import reverse
-from django.views.generic import CreateView, ListView, UpdateView, TemplateView
+from django.views.generic import CreateView, ListView, UpdateView, TemplateView, DeleteView
 
 from database.models import LaundryShop, Service
+from django.forms.models import inlineformset_factory
 
 from management import forms
 
@@ -19,8 +20,7 @@ class LaundryMenuView(TemplateView):
 class LaundryUpdateView(UpdateView):
     template_name = 'management/shop/editlaundryshop.html'
     model = LaundryShop
-    fields = ['name','building','street','barangay','city','province',
-        'contact_number','website','email','hours_open','days_open']
+    form_class = forms.LaundryShopForm
 
     def get_success_url(self):
         return reverse('management:list-shops')
@@ -29,21 +29,10 @@ class LaundryUpdateView(UpdateView):
 class LaundryCreateView(CreateView):
     template_name = 'management/shop/addlaundryshop.html'
     model = LaundryShop
-    fields = ['barangay', 'building', 'city', 'contact_number',
-        'days_open', 'email', 'hours_open', 'name', 'province',
-        'street', 'website']
+    form_class = forms.LaundryShopForm
 
     def get_success_url(self):
         return reverse('management:list-shops')
-
-    def form_valid(self, form):
-        response = super(LaundryCreateView, self).form_valid(form)
-        post_data = self.request.POST.copy()
-        post_data.update({'laundry_shop': self.object.pk})
-        rating_form = forms.RatingForm(data=post_data)
-        if rating_form.is_valid():
-            rating_form.save()
-        return response
 
     def get_context_data(self,**kwargs):
         context = super(LaundryCreateView, self).get_context_data(**kwargs)
@@ -59,6 +48,11 @@ class LaundryCreateView(CreateView):
             print price_form.errors
         return response
 
+class LaundryDeleteView(DeleteView):
+    model = LaundryShop
+
+    def get_success_url(self):
+        return reverse('management:list-shops')
 
 class LaundryListView(ListView):
     model = LaundryShop
@@ -82,6 +76,10 @@ class LaundryListView(ListView):
         if province_query:
             shops = self.get_shops_by_province(province_query)
             query_type = 'province'
+        barangay_query = self.request.GET.get('barangay', False)
+        if barangay_query:
+            shops = self.get_shops_by_barangay(barangay_query)
+            query_type = 'barangay'
         context.update({'shop_list': shops})
         context['query_type'] = query_type
         return context
@@ -94,6 +92,10 @@ class LaundryListView(ListView):
 
     def get_shops_by_province(self, province_query):
         return LaundryShop.objects.filter(province__icontains = province_query)
+
+    def get_shops_by_barangay(self, barangay_query):
+        return LaundryShop.objects.filter(barangay__icontains = barangay_query)
+
 
 class AdminLoginView(TemplateView):
     template_name = "management/account/login.html"
