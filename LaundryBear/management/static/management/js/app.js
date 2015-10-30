@@ -32,10 +32,9 @@ $("dl.sub-nav dd").click(function(){
 });
 
 $("#set-service-button").click(function() {
+
 	var $serviceInput = $("#service-input");
 	var $priceInput = $("#price-input");
-	var $tableBody = $("#service-table-body");
-
 	var servicePk = $serviceInput.val();
 	var price = $priceInput.val();
 
@@ -43,24 +42,25 @@ $("#set-service-button").click(function() {
 		return false;
 	}
 
-	// create a new row
-	var $selectedService = $serviceInput.children(":selected");
-	var template = $("#table-row-template").html();
-	var compiledTemplate = template.replace(/__service-name__/, $selectedService.html()).replace(/__description__/, $selectedService.data("description")).replace(/__price__/, price);
-
 	// add to hidden formset
 	var $formsetContainer = $("#price-formset-container");
 	var currentFormsetIndex = $formsetContainer.children().length - 1;
 	$formsetContainer.find("#id_price_set-" + currentFormsetIndex + "-service").val(servicePk);
 	$formsetContainer.find("#id_price_set-" + currentFormsetIndex + "-price").val(price);
 
+	// create a new row
+	var $selectedService = $serviceInput.children(":selected");
+	var template = $("#table-row-template").html();
+	var compiledTemplate = template.replace(/__service-name__/, $selectedService.html()).replace(/__description__/, $selectedService.data("description")).replace(/__price__/, price).replace(/__prefix__/, currentFormsetIndex).replace(/__pk__/, servicePk);
+
+	var $tableBody = $("#service-table-body");
 	$tableBody.append(compiledTemplate);
 	$tableBody.find("a.edit-service-button").last().click(function() {
 		var $serviceSelect = $("#service-input");
-		var sorted = $serviceSelect.children().sort(function(a, b) {
-			var aname = a.innerHtml;
-			var bname = b.innerHtml;
-
+		var sorted = $serviceSelect.append("<option value=\"" + $(this).data("service-pk") + "\">"+ $(this).siblings(".service-name").html() +"</option>");
+		var sorted = $serviceSelect.children().get().sort(function(a, b) {
+			var aname = a.innerHTML;
+			var bname = b.innerHTML;
 			if (aname > bname) {
 				return 1;
 			}
@@ -69,7 +69,6 @@ $("#set-service-button").click(function() {
 			}
 			return 0;
 		});
-		console.log(sorted);
 		return false;
 	});
 	$tableBody.find("a.delete-service-button").last().click(function() {

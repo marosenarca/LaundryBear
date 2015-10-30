@@ -48,7 +48,7 @@ class LaundryCreateView(CreateView):
 
     def get_context_data(self,**kwargs):
         context = super(LaundryCreateView, self).get_context_data(**kwargs)
-        context['service_list'] = Service.objects.all().order_by('name')
+        context['service_list'] = Service.objects.all().order_by('pk')
         price_formset = inlineformset_factory(
             LaundryShop, Price, fields=('service', 'price'), extra=1)
         context['price_formset'] = price_formset()
