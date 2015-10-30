@@ -4,6 +4,28 @@ body {
 	background-color: #FEFDFA;
 }
 
+body#admin {
+	background-image: url(../icons/headlogo.png);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-attachment: fixed;
+}
+
+div#form{
+	margin-top: 25%;
+}
+
+h3#adminlogin {
+	color: #0CF;
+}
+
+.login-box {
+  background-color: transparent;
+  border: 2px solid transparent; 
+  margin-top: 5%;
+  padding: 40px 20px 0 20px;
+}
+
 img#logo {
 	width: 4%;
 	height: 3%;

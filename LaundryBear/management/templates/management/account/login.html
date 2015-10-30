@@ -7,27 +7,27 @@
     <link rel="stylesheet" href="{% static "LaundryBear/css/foundation.min.css" %}"/>
     <link rel="stylesheet" href="{% static "management/css/app.css" %}"/>
     <link rel="stylesheet" href="{% static "management/css/control.css" %}"/>
-	  <link rel="stylesheet" href="{% static "LaundryBear/foundation-icons/foundation-icons.css" %}" />
+	<link rel="stylesheet" href="{% static "LaundryBear/foundation-icons/foundation-icons.css" %}" />
   </head>
-  <body style="background-image: url(/static/management/icons/headlogo.png); overflow:hidden;  background-position: center 180px;">
+  <body id="admin">
   {%if not user.is.authenticated %}
-  <div class="login">
+  <div id="form" class="login">
     <div class="large-3 large-centered columns">
       <div class="login-box">
       <div class="row">
-        <h3 style="text-align:center">Admin Login</h3>
+        <h3 id="adminlogin"align="center">Admin Login</h3>
         <br>
       <div class="large-12 columns">
         <form method="post">
           {% csrf_token %}
            <div class="row">
              <div class="large-12 columns">
-                 <input type="text" name="username" placeholder="Username" />
+                 <input type="text" name="username" placeholder="Username" required />
              </div>
            </div>
           <div class="row">
              <div class="large-12 columns">
-                 <input type="password" name="password" placeholder="Password" />
+                 <input type="password" name="password" placeholder="Password" required/>
              </div>
           </div>
           <div class="row">
