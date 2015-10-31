@@ -129,5 +129,4 @@ class LogoutView(RedirectView):
     def post(self, request):
         print 'logged out'
         logout(request)
-        #return logout_then_login(request, login_url='management/login', current_app='management', extra_context=None)
         return redirect('management:login-admin')

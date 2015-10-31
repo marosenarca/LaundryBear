@@ -30,3 +30,5 @@ $("dl.sub-nav dd").click(function(){
   $("#search").prop("name", $(this).children().html().toLowerCase());
   return false;
 });
+
+$('#logout_submit').click(function(){$('#logout_form').submit();});
