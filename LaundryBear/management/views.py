@@ -126,7 +126,7 @@ class LoginView(TemplateView):
                 login(request, user)
                 return redirect('management:menu')
             else:
-                return render(request, self.template_name, {})
+                return redirect('client:menu')
         else:
             return render(request, self.template_name, {})
 

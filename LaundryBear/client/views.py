@@ -15,7 +15,7 @@ class ClientLoginView(TemplateView):
 
     def render_to_response(self, context, **response_kwargs):
         if self.request.user.is_authenticated():
-            return render(self.request, SuccessView.template_name, {})
+            return render(self.request, DashView.template_name, {})
         return render(self.request, self.template_name, {})
 
     def post(self, request):
@@ -40,5 +40,10 @@ class ClientLogoutView(RedirectView):
         return redirect('client:login')
 
 
-class SuccessView(LoginRequiredMixin, TemplateView):
+class DashView(LoginRequiredMixin, TemplateView):
     template_name = "client/success.html"
+
+    def get(self, request):
+        if request.user.is_authenticated():
+            return render(request, self.template_name, {})
+        return redirect('client:login')

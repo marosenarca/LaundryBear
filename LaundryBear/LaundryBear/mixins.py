@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import user_passes_test
 from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView
 from django.shortcuts import redirect, render
@@ -12,11 +13,7 @@ class LoginRequiredMixin(object):
     """
     View mixin which requires that the user is authenticated.
     """
-    #@method_decorator(login_required)
-    def get(self, request, *args, **kwargs):
-        if request.user.is_staff:
-            return render(request, self.template_name, {})
-        return redirect('%s?next=%s' % (settings.CLIENT_LOGIN_URL, request.path))
-        #return super(LoginRequiredMixin, self).dispatch(
-        #    request, *args, **kwargs)
-        #return render(request, "base.html", {})
+    @method_decorator(user_passes_test(lambda u:u.is_staff, login_url='/client/login'))
+    def dispatch(self, request, *args, **kwargs):
+        return super(LoginRequiredMixin, self).dispatch(
+            request, *args, **kwargs)

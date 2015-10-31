@@ -106,7 +106,4 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = './static/'
-CLIENT_LOGIN_URL = '/client/login'
-#LOGIN_URL = '/management/login'
-MANAGEMENT_LOGIN_URL = '/management/login'
-MANAGEMENT_LOGIN_REDIRECT_URL = '/management'
+LOGIN_URL = '/client/login'
