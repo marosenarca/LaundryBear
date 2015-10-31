@@ -16,6 +16,14 @@ class UserProfile(models.Model):
     def __unicode__(self):
         return self.client.get_full_name()
 
+    @property
+    def location(self):
+        address = [self.building, self.street, self.barangay, self.city,
+            self.province]
+        while '' in address:
+            address.remove('')
+        return ', '.join(address)
+
 class LaundryShop(models.Model):
     class Meta:
         get_latest_by = 'creation_date'
