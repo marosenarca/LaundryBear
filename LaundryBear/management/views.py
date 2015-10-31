@@ -9,17 +9,6 @@ from django.utils.decorators import method_decorator
 
 from database.models import LaundryShop, Price, Service, UserProfile
 
-<<<<<<< HEAD
-=======
-from django.contrib.auth import authenticate, login, logout
-from django.shortcuts import redirect, render
-from django.core.urlresolvers import reverse
-from django.contrib.auth.decorators import login_required
-from django.utils.decorators import method_decorator
-from django.db.models import Q
-from django.contrib.auth.models import User
-
->>>>>>> origin
 from management import forms
 from LaundryBear.mixins import LoginRequiredMixin
 
@@ -144,17 +133,12 @@ class LoginView(TemplateView):
 
 class LogoutView(RedirectView):
     @method_decorator(login_required)
-<<<<<<< HEAD
     def get(self, request):
         if request.user.is_staff:
             logout(request)
             return redirect('management:login-admin')
         return redirect('management:menu')
-=======
-    def post(self, request):
-        print 'logged out'
-        logout(request)
-        return redirect('management:login-admin')
+
 
 class ClientListView(LoginRequiredMixin, ListView):
     model = UserProfile
@@ -199,4 +183,3 @@ class ClientListView(LoginRequiredMixin, ListView):
 
     def get_user_by_barangay(self, barangay_query):
         return UserProfile.objects.filter(barangay__icontains=barangay_query)
->>>>>>> origin
