@@ -46,9 +46,7 @@
             <ul class="dropdown">
               <li><a href="#">Settings</a></li>
               <li class="divider"></li>
-              <!--<li><a href="{%url "management:logout-admin"%}">Sign Out →</a></li>-->
-              <li><form id="logout_form" action="{%url "management:logout-admin"%}" method="post">{% csrf_token %}</form>
-              <a id="logout_submit">Logout</a></li>
+              <li><a href="{%url "management:logout-admin"%}">Sign Out →</a></li>
             </ul>
           </li>
         </ul>

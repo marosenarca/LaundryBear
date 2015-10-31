@@ -12,7 +12,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 
 from management import forms
-from management.mixins import LoginRequiredMixin
+from LaundryBear.mixins import LoginRequiredMixin
 
 class LaundryMenuView(LoginRequiredMixin, TemplateView):
     template_name = 'management/shop/laundrybearmenu.html'
@@ -117,16 +117,13 @@ class LoginView(TemplateView):
         if user is not None:
             if user.is_active:
                 login(request, user)
-                print 'yes'
                 return redirect('management:menu')
         else:
-            print 'no'
             return render(request, self.template_name, {})
 
 
 class LogoutView(RedirectView):
     @method_decorator(login_required)
-    def post(self, request):
-        print 'logged out'
+    def get(self, request):
         logout(request)
         return redirect('management:login-admin')
