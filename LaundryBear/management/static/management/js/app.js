@@ -96,7 +96,10 @@ $("#set-service-button").click(function() {
 
 $("#save-button").click(function() {
 	var $addedServices = $("#service-table-body").children();
+	var $formsetContainer = $("#price-formset-container");
 	$addedServices.each(function(index, element) {
+		var servicePk = $(element).data("service-pk");
+		var price = $(element).data("service-price");
 		$formsetContainer.find("#id_price_set-" + index + "-service").val(servicePk);
 		$formsetContainer.find("#id_price_set-" + index + "-price").val(price);
 		addServiceFormset($("price-formset-container"));
