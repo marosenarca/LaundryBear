@@ -206,11 +206,20 @@
 						  <a href="#" class="button medium" id="set-service-button"><i class="fi-plus"></i></a>
 					  </div>
 				  </div>
-				  <div class="row">
-					  <div class="medium-4 columns" id="add-service-button-container">
-						  <a href="#">Add Service...</a>
-					  </div>
-				  </div>
+          <form action="#">
+  				  <div class="row">
+  					  <div class="medium-4 columns" id="add-service-button-container">
+  						  <a href="#" data-reveal-id="firstModal">Add Service...</a>
+                <div id="firstModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog" style="width: 760px">
+                  <h2 id="modalTitle">Add New Service...</h2>
+                  Service Name: <input type="text" id="sname" style="width: 700px">
+                  Description:  <textarea type="text" id="desc" style="width: 700px" cols="10"></textarea> 
+                  <button type="submit" class="button small">Save</button>
+                  <a id="closeModal" class="close-reveal-modal" aria-label="Close">&#215;</a>
+                </div>
+  					  </div>
+  				  </div>
+          </form>
 			  </div>
 			  <div class="medium-12 columns">
               <table style="width: 100%">

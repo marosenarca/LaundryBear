@@ -57,3 +57,8 @@ $("#days-container input").on("change", function() {
 });
 
 $('#logout_submit').click(function(){$('#logout_form').submit();});
+
+
+$("#closeModal").on("click",function(){
+	$("form")[0].reset();
+})
