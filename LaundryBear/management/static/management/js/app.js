@@ -42,12 +42,6 @@ $("#set-service-button").click(function() {
 		return false;
 	}
 
-	// add to hidden formset
-	var $formsetContainer = $("#price-formset-container");
-	var currentFormsetIndex = $formsetContainer.children().length - 1;
-	$formsetContainer.find("#id_price_set-" + currentFormsetIndex + "-service").val(servicePk);
-	$formsetContainer.find("#id_price_set-" + currentFormsetIndex + "-price").val(price);
-
 	// create a new row
 	var $selectedService = $serviceInput.children(":selected");
 	var template = $("#table-row-template").html();
@@ -62,25 +56,34 @@ $("#set-service-button").click(function() {
 		var price = $tr.data("service-price");
 		var description = $tr.data("service-description");
 		// remove from table
-		$(this).closest("tr").remove();
+		$tr.remove();
 
 		// add back into combobox and set as selected
 		var optionTemplate = $("#option-template").html();
-		var compiledOptionTemplate = optionTemplate.replace(/__value__/, pk).replace(/__selected__/, "true").replace(/__optionname__/g, optionName).replace(/__description__/, description);
-		$("#service-input").children(":selected").prop("selected", false);
+		var compiledOptionTemplate = optionTemplate.replace(/__value__/, pk).replace(/__optionname__/g, optionName).replace(/__description__/, description);
 		var $option = $(compiledOptionTemplate);
 		$("#service-input").append($option);
+		$("#service-input").val(pk);
 
 		// put price back
 		$("#price-input").val(price);
 		return false;
 	});
 	$tableBody.find("a.delete-service-button").last().click(function() {
-		console.log("click");
+		var $tr = $(this).closest("tr");
+		var pk = $tr.data("service-pk");
+		var optionName = $tr.data("service-name");
+		var description = $tr.data("service-description");
+		// remove from table
+		$tr.remove();
+		// add back into combobox
+		var optionTemplate = $("#option-template").html();
+		var compiledOptionTemplate = optionTemplate.replace(/__value__/, pk).replace(/__optionname__/g, optionName).replace(/__description__/, description);
+		var $option = $(compiledOptionTemplate);
+		$("#service-input").val("null");
+		$("#service-input").append($option);
 		return false;
 	});
-
-	addServiceFormset($formsetContainer);
 
 	// pop item off
 	$selectedService.remove();
@@ -89,6 +92,19 @@ $("#set-service-button").click(function() {
 	$priceInput.val('');
 
 	return false;
+});
+
+$("#save-button").click(function() {
+	var $addedServices = $("#service-table-body").children();
+	var $formsetContainer = $("#price-formset-container");
+	$addedServices.each(function(index, element) {
+		var servicePk = $(element).data("service-pk");
+		var price = $(element).data("service-price");
+		$formsetContainer.find("#id_price_set-" + index + "-service").val(servicePk);
+		$formsetContainer.find("#id_price_set-" + index + "-price").val(price);
+		addServiceFormset($("price-formset-container"));
+	});
+	$(this).parent().submit();
 });
 
 function addServiceFormset($formsetContainer) {
@@ -100,5 +116,30 @@ function addServiceFormset($formsetContainer) {
 	$("#id_price_set-TOTAL_FORMS").val(formCount + 1);
 	return;
 }
+
+$("#open-time, #close-time").on("change", function() {
+	var openTime = $("#open-time").val();
+	var closeTime = $("#close-time").val();
+
+	if (openTime == 'null' || closeTime == 'null') {
+		$("#id_hours_open").val('');
+	}
+
+	var timeString = openTime + ' - ' + closeTime;
+
+	$("#id_hours_open").val(timeString);
+});
+
+$("#days-container input").on("change", function() {
+	var checked = [];
+	$("#days-container input").each(function(index, element) {
+		var $element = $(element);
+		if ($element.prop("checked")) {
+			checked.push($element.next().html());
+		}
+	});
+	var dayString = checked.join(', ');
+	$("#id_days_open").val(dayString);
+});
 
 $('#logout_submit').click(function(){$('#logout_form').submit();});
