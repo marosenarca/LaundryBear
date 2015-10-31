@@ -118,9 +118,25 @@ $("#open-time, #close-time").on("change", function() {
 	var openTime = $("#open-time").val();
 	var closeTime = $("#close-time").val();
 
+	if (openTime == 'null' || closeTime == 'null') {
+		$("#id_hours_open").val('');
+	}
+
 	var timeString = openTime + ' - ' + closeTime;
 
 	$("#id_hours_open").val(timeString);
-}
+});
+
+$("#days-container input").on("change", function() {
+	var checked = [];
+	$("#days-container input").each(function(index, element) {
+		var $element = $(element);
+		if ($element.prop("checked")) {
+			checked.push($element.next().html());
+		}
+	});
+	var dayString = checked.join(', ');
+	$("#id_days_open").val(dayString);
+});
 
 $('#logout_submit').click(function(){$('#logout_form').submit();});
