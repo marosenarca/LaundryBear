@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Login | LaundryBear</title>
+    <link rel="stylesheet" href="{% static "LaundryBear/css/foundation.min.css" %}"/>
+    <link rel="stylesheet" href="{% static "management/css/app.css" %}"/>
+    <link rel="stylesheet" href="{% static "management/css/control.css" %}"/>
+	<link rel="stylesheet" href="{% static "LaundryBear/foundation-icons/foundation-icons.css" %}" />
+  </head>
+  <body id="admin">
+
+  {%if not user.is_authenticated %}
+  <div id="form" class="login">
+    <div class="large-3 large-centered columns">
+      <div class="login-box">
+      <div class="row">
+        <h3 id="adminlogin"align="center">Admin Login</h3>
+        <br>
+      <div class="large-12 columns">
+         <form method="post">
+             {% csrf_token %}
+              <div class="row">
+                <div class="large-12 columns">
+                  <label class="title"><b>Username</b></label>
+                  <input type="text" name="username" placeholder="Enter your username" required autocomplete="on" />
+                </div>
+              </div>
+              <div class="row">
+                <div class="large-12 columns">
+                  <label class="title"><b>Password</b></label>
+                  <input type="password" name="password" placeholder="Enter your password" required />
+                </div>
+              </div>
+              <div class="row">
+                <div class="large-12 large-centered columns">
+                  <input type="submit" class="button expand" value="Sign In" />
+                </div>
+              </div>
+            </form>
+      </div>
+    </div>
+    </div>
+    </div>
+  </div>
+  {% else %}
+  <meta http-equiv="refresh"
+    content="0; url="{% url "management:menu"%}">
+  {%endif%}
+    <script src="{%static "LaundryBear/js/vendor/modernizr.js"%}"></script>
+    <script src="{%static "LaundryBear/js/vendor/jquery.js"%}"></script>
+    <script src="{%static "LaundryBear/js/vendor/fastclick.js"%}"></script>
+    <script src="{%static "LaundryBear/js/foundation.min.js"%}"></script>
+    <script src="{%static "management/js/app.js"%}"></script>
+
+  </body>
+</html>

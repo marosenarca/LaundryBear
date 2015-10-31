@@ -18,12 +18,14 @@ from django.conf.urls import include, url
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.contrib import admin
 
+import client
 import management
 
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^management/', include('management.urls', namespace='management'))
+    url(r'^client/', include('client.urls', namespace='client'))
 ]
 
 urlpatterns += staticfiles_urlpatterns()

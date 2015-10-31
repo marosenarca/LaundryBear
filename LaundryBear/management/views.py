@@ -102,6 +102,7 @@ class LaundryListView(LoginRequiredMixin, ListView):
     def get_shops_by_barangay(self, barangay_query):
         return LaundryShop.objects.filter(barangay__icontains = barangay_query)
 
+
 class LoginView(TemplateView):
     template_name = "management/account/login.html"
 
@@ -115,9 +116,11 @@ class LoginView(TemplateView):
         password = request.POST['password']
         user = authenticate(username=username, password=password)
         if user is not None:
-            if user.is_active:
+            if user.is_active and user.is_staff:
                 login(request, user)
                 return redirect('management:menu')
+            else:
+                return render(request, self.template_name, {})
         else:
             return render(request, self.template_name, {})
 
