@@ -60,5 +60,5 @@ $('#logout_submit').click(function(){$('#logout_form').submit();});
 
 
 $("#closeModal").on("click",function(){
-	$("form")[0].reset();
+	$('form')[0].reset();
 })
