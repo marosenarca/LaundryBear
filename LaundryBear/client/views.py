@@ -25,7 +25,7 @@ class ClientLoginView(TemplateView):
         if user is not None:
             if user.is_active:
                 login(request, user)
-                return redirect('client:success')
+                return redirect('client:menu')
             else:
                 return render(request, self.template_name, {})
         else:
@@ -36,7 +36,9 @@ class ClientLogoutView(RedirectView):
     @method_decorator(login_required)
     def get(self, request):
         logout(request)
-        return redirect('client:success')
+        print 'logged out'
+        return redirect('client:login')
+
 
 class SuccessView(LoginRequiredMixin, TemplateView):
     template_name = "client/success.html"

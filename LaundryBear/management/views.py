@@ -134,5 +134,7 @@ class LoginView(TemplateView):
 class LogoutView(RedirectView):
     @method_decorator(login_required)
     def get(self, request):
-        logout(request)
-        return redirect('management:login-admin')
+        if request.user.is_staff:
+            logout(request)
+            return redirect('management:login-admin')
+        return redirect('management:menu')

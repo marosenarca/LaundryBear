@@ -17,7 +17,7 @@
 
         <li class="name">
           <h1>
-			  <a href="{% url "management:menu" %}">
+			  <a href="{% url "client:menu" %}">
 			  <img id="logo" src="{% static "management/icons/headlogo.png" %}"/>
 			  <img id="writtenlogo" src="{% static "management/icons/written2.png" %}" />
             </a>
@@ -46,7 +46,7 @@
             <ul class="dropdown">
               <li><a href="#">Settings</a></li>
               <li class="divider"></li>
-              <li><a href="{%url "management:logout-admin"%}">Sign Out →</a></li>
+              <li><a href="{%url "client:logout"%}">Sign Out →</a></li>
             </ul>
           </li>
         </ul>
@@ -79,7 +79,7 @@
     <script src="{%static "LaundryBear/js/vendor/jquery.js"%}"></script>
     <script src="{%static "LaundryBear/js/vendor/fastclick.js"%}"></script>
     <script src="{%static "LaundryBear/js/foundation.min.js"%}"></script>
-    <script src="{%static "management/js/app.js"%}"></script>
+    <script src="{%static "client/js/app.js"%}"></script>
     {%block javascripts%} {% endblock %}
   </body>
 </html>
