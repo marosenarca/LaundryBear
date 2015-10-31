@@ -1,15 +1,13 @@
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.forms.models import inlineformset_factory
+from django.shortcuts import redirect, render
 from django.views.generic import (CreateView, DeleteView, ListView,
     RedirectView, TemplateView, UpdateView)
+from django.utils.decorators import method_decorator
 
 from database.models import LaundryShop, Price, Service
-
-from django.contrib.auth import authenticate, login, logout
-from django.shortcuts import redirect, render
-from django.core.urlresolvers import reverse
-from django.contrib.auth.decorators import login_required
-from django.utils.decorators import method_decorator
 
 from management import forms
 from LaundryBear.mixins import LoginRequiredMixin

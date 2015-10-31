@@ -1,0 +1,65 @@
+{% load staticfiles %}
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="{% static "LaundryBear/css/foundation.css"%}" />
+<link rel="stylesheet" href="{% static "client/css/signincontrol.css" %}"/>
+<title>Welcome to LaundryBear</title>
+</head>
+<body>
+    <header class="header">
+      <h1 class="main-header">Something clean is coming your way.</h1>
+      <ul class="header-subnav">
+        <li><a href="#" class="active">Home</a></li>
+        <li><a href="signup.html" class="is-active">Sign Up</a></li>
+        <li><a href="#" class="active">About Us</a></li>
+      </ul>
+    </header>
+    {%if not user.is_authenticated %}
+    <div id="form" class="login">
+      <div class="large-3 large-centered columns">
+        <div class="login-box">
+        <div class="row">
+          <h3 id="adminlogin"align="center">Admin Login</h3>
+          <br>
+        <div class="large-12 columns">
+           <form method="post">
+               {% csrf_token %}
+                <div class="row">
+                  <div class="large-12 columns">
+                    <label class="title"><b>Username</b></label>
+                    <input type="text" name="username" placeholder="Enter your username" required autocomplete="on" />
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="large-12 columns">
+                    <label class="title"><b>Password</b></label>
+                    <input type="password" name="password" placeholder="Enter your password" required />
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="large-12 large-centered columns">
+                    <input type="submit" class="button expand" value="Sign In" />
+                  </div>
+                </div>
+              </form>
+        </div>
+      </div>
+      </div>
+      </div>
+    </div>
+    {%endif%}
+    </div>
+    <div id="logos">
+    	<a href="http://www.instagram.com"><img src="../../../static/management/icons/instagram-icon-black.png" alt="" align="right"/></a>
+        <a href="http://www.twitter.com"><img src="../../../static/management/icons/twitter-icon-circle-logo.png" alt="" align="right"/></a>
+        <a href="http://www.facebook.com"><img src="../../../static/management/icons/kNPKJ.gif" alt="" align="right"/></a>
+    </div>
+    <script src="{%static "LaundryBear/js/vendor/modernizr.js"%}"></script>
+    <script src="{%static "LaundryBear/js/vendor/jquery.js"%}"></script>
+    <script src="{%static "LaundryBear/js/vendor/fastclick.js"%}"></script>
+    <script src="{%static "LaundryBear/js/foundation.min.js"%}"></script>
+    <script src="{%static "management/js/app.js"%}"></script>
+</body>
+</html>

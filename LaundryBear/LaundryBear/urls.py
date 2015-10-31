@@ -24,7 +24,7 @@ import management
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^management/', include('management.urls', namespace='management'))
+    url(r'^management/', include('management.urls', namespace='management')),
     url(r'^client/', include('client.urls', namespace='client'))
 ]
 
