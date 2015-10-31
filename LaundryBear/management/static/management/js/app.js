@@ -58,10 +58,11 @@ $("#days-container input").on("change", function() {
 
 $('#logout_submit').click(function(){$('#logout_form').submit();});
 
-// $('#closeModal').click(function(){
-// 	$('form')[0].reset();
-// 	});
+// $("#new-service-modal-close-reveal").click(function(){$('form')[0].reset();});
 
-$("#closeModal").on("click",function(){
-	$('form')[0].reset();
-})
+ $("#new-service-modal-close-reveal").click(function(){
+ 	$("#sname").val("");
+ 	$("#desc").val("");
+ });
+
+// $("#add-new-service-button").
