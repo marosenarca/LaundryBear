@@ -1,5 +1,8 @@
 from django.conf.urls import include, url
 from django.core.urlresolvers import reverse
+from django.contrib.auth import views as auth_views
+from django.contrib import admin
+admin.autodiscover()
 
 from . import views
 
@@ -11,8 +14,7 @@ urlpatterns = [
         name='edit-shop'),
     url(r'^shops/list$', views.LaundryListView.as_view(), name='list-shops'),
     url(r'^shops/delete/(?P<pk>\d+)$', views.LaundryDeleteView.as_view(), name='delete-shop'),
-    url(r'^login', views.LoginView.as_view(), name='login-admin')
-    #url(r'^login$', auth_views.login, {'template_name':'management/account/login.html', 'current_app':'management'}, name='login-admin'),
-    #url(r'^logout$', auth_views.logout_then_login, {'login_url':'/management/login'}, name='logout-admin')
-    #url(r'^login$', include('django.contrib.auth.urls', namespace='auth'))
+    url(r'^login$', views.LoginView.as_view(), name='login-admin'),
+    url(r'^logout$', views.LogoutView.as_view(), name='logout-admin'),
+    url(r'^clients/list$', views.ClientListView.as_view(), name='list-client')
 ]

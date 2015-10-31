@@ -1,15 +1,20 @@
 from django.core.urlresolvers import reverse
 from django.forms.models import inlineformset_factory
-from django.views.generic import CreateView, DeleteView, ListView, TemplateView, UpdateView
+from django.views.generic import (CreateView, DeleteView, ListView,
+    RedirectView, TemplateView, UpdateView)
 
-from database.models import LaundryShop, Price, Service
+from database.models import LaundryShop, Price, Service, UserProfile
 
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
+from django.shortcuts import redirect, render
+from django.core.urlresolvers import reverse
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+from django.db.models import Q
+from django.contrib.auth.models import User
 
 from management import forms
 from management.mixins import LoginRequiredMixin
-
-from django.shortcuts import render
 
 class LaundryMenuView(LoginRequiredMixin, TemplateView):
     template_name = 'management/shop/laundrybearmenu.html'
@@ -110,14 +115,72 @@ class LaundryListView(LoginRequiredMixin, ListView):
 class LoginView(TemplateView):
     template_name = "management/account/login.html"
 
+    def render_to_response(self, context, **response_kwargs):
+        if self.request.user.is_authenticated():
+            return redirect('management:menu')
+        return render(self.request, self.template_name, {})
+
     def post(self, request):
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(username=username, password=password)
-
         if user is not None:
-            login(request, user)
-            return render(request, 'management/account/login.html')
+            if user.is_active:
+                login(request, user)
+                print 'yes'
+                return redirect('management:menu')
         else:
-            print 'wa kasuod'
-            return HttpResponseRedirect('/adsasd')
+            print 'no'
+            return render(request, self.template_name, {})
+
+
+class LogoutView(RedirectView):
+    @method_decorator(login_required)
+    def post(self, request):
+        print 'logged out'
+        logout(request)
+        return redirect('management:login-admin')
+
+class ClientListView(LoginRequiredMixin, ListView):
+    model = UserProfile
+    paginate_by = 10
+    template_name = 'management/client/viewclients.html'
+    context_object_name = 'client_list'
+
+    def get_context_data(self, **kwargs):
+        context = super(ClientListView, self).get_context_data(**kwargs)
+        client = context['client_list']
+
+        name_query = self.request.GET.get('name', False)
+        query_type = 'name'
+        if name_query:
+            client = self.get_user_by_name(name_query)
+            query_type = 'name'
+        city_query = self.request.GET.get('city', False)
+        if city_query:
+            client = self.get_user_by_city(city_query)
+            query_type = 'city'
+        province_query = self.request.GET.get('province', False)
+        if province_query:
+            client = self.get_user_by_province(province_query)
+            query_type = 'province'
+        barangay_query = self.request.GET.get('barangay', False)
+        if barangay_query:
+            client = self.get_user_by_barangay(barangay_query)
+            query_type = 'barangay'
+        context.update({'client_list': client})
+        context['query_type'] = query_type
+        return context
+
+    def get_user_by_name(self, name_query):
+        return UserProfile.objects.filter(Q(client__first_name__icontains=name_query)|
+            Q(client__last_name__icontains=name_query))
+
+    def get_user_by_city(self, city_query):
+        return UserProfile.objects.filter(city__icontains=city_query)
+
+    def get_user_by_province(self, province_query):
+        return UserProfile.objects.filter(province__icontains=province_query)
+
+    def get_user_by_barangay(self, barangay_query):
+        return UserProfile.objects.filter(barangay__icontains=barangay_query)

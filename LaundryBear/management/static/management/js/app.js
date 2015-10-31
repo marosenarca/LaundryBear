@@ -118,6 +118,9 @@ $("#open-time, #close-time").on("change", function() {
 	var openTime = $("#open-time").val();
 	var closeTime = $("#close-time").val();
 
-	var timeString = ''
+	var timeString = openTime + ' - ' + closeTime;
 
-	$("#id_hours_open").val();
+	$("#id_hours_open").val(timeString);
+}
+
+$('#logout_submit').click(function(){$('#logout_form').submit();});

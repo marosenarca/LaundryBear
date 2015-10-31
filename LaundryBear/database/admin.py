@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from database.models import LaundryShop, Price, Rating, Service
+from database.models import LaundryShop, Price, Rating, Service, UserProfile
 # Register your models here.
 
 
@@ -19,3 +19,4 @@ class LaundryShopAdmin(admin.ModelAdmin):
 admin.site.register(LaundryShop, LaundryShopAdmin)
 admin.site.register(Service)
 admin.site.register(Rating)
+admin.site.register(UserProfile)
