@@ -1,9 +1,9 @@
-from django.shortcuts import render
 from django.core.urlresolvers import reverse
-from django.views.generic import CreateView, ListView, UpdateView, TemplateView, DeleteView, RedirectView
-
-from database.models import LaundryShop, Service
 from django.forms.models import inlineformset_factory
+from django.views.generic import (CreateView, DeleteView, ListView,
+    RedirectView, TemplateView, UpdateView)
+
+from database.models import LaundryShop, Price, Service
 
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect, render
@@ -19,7 +19,8 @@ class LaundryMenuView(LoginRequiredMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(LaundryMenuView, self).get_context_data(**kwargs)
-        context['recent_shops'] = LaundryShop.objects.order_by('-creation_date')[:3]
+        context['recent_shops'] = LaundryShop.objects.order_by(
+            '-creation_date')[:3]
         return context
 
 
@@ -40,19 +41,26 @@ class LaundryCreateView(LoginRequiredMixin, CreateView):
     def get_success_url(self):
         return reverse('management:list-shops')
 
+    def form_valid(self, form):
+        response = super(LaundryCreateView, self).form_valid(form)
+        PriceInlineFormSet = inlineformset_factory(
+            LaundryShop, Price, fields=('service', 'price'), extra=1)
+        price_formset = PriceInlineFormSet(
+            data=self.request.POST, instance=self.object)
+        if price_formset.is_valid():
+            price_formset.save()
+        else:
+            print price_formset.errors
+        return response
+
     def get_context_data(self,**kwargs):
         context = super(LaundryCreateView, self).get_context_data(**kwargs)
-        context["service_list"] = Service.objects.all()
+        context['service_list'] = Service.objects.all().order_by('pk')
+        price_formset = inlineformset_factory(
+            LaundryShop, Price, fields=('service', 'price'), extra=1)
+        context['price_formset'] = price_formset()
         return context
 
-    def post(self, request, *args, **kwargs):
-        response = super(LaundryCreateView, self).post(request, *args, **kwargs)
-        price_form = forms.ServicePriceForm(data=request.POST)
-        if price_form.is_valid():
-            price_form.save()
-        else:
-            print price_form.errors
-        return response
 
 class LaundryDeleteView(LoginRequiredMixin, DeleteView):
     model = LaundryShop
@@ -91,16 +99,16 @@ class LaundryListView(LoginRequiredMixin, ListView):
         return context
 
     def get_shops_by_name(self, name_query):
-        return LaundryShop.objects.filter(name__icontains = name_query)
+        return LaundryShop.objects.filter(name__icontains=name_query)
 
     def get_shops_by_city(self, city_query):
-        return LaundryShop.objects.filter(city__icontains = city_query)
+        return LaundryShop.objects.filter(city__icontains=city_query)
 
     def get_shops_by_province(self, province_query):
-        return LaundryShop.objects.filter(province__icontains = province_query)
+        return LaundryShop.objects.filter(province__icontains=province_query)
 
     def get_shops_by_barangay(self, barangay_query):
-        return LaundryShop.objects.filter(barangay__icontains = barangay_query)
+        return LaundryShop.objects.filter(barangay__icontains=barangay_query)
 
 
 class LoginView(TemplateView):

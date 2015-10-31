@@ -32,5 +32,5 @@ class ModelTestCase(TestCase):
        shop = LaundryShop.objects.create(name='ls1', province='province1',
             barangay='barangay1', contact_number='12345',
             hours_open='24 hours', days_open='mon - sat')
-       expected = 0.001
+       expected = 0
        self.assertEquals(shop.average_rating, expected)

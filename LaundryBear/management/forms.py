@@ -16,10 +16,11 @@ class RatingForm(forms.ModelForm):
         fields = ['laundry_shop', 'paws']
 
 
-class ServicePriceForm(forms.ModelForm):
+class PriceForm(forms.ModelForm):
     class Meta:
         model = Price
         fields = ['laundry_shop', 'service', 'price']
+
 
 class LaundryShopForm(forms.ModelForm):
     class Meta:
