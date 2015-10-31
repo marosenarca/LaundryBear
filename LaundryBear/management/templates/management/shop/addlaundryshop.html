@@ -94,42 +94,70 @@
 
               <div class="row">
                 <div class="large-8 columns">
+					{{ form.hours_open.errors }}
+					<div class="hide">
+						{{ form.hours_open }}
+					</div>
                     <div class="row">
                       <div class="large-4 columns">
                         <label>Opening Time
-                          <select>
-                            <option value="husker">12:00 am</option>
-                            <option value="apollo">1:00 am</option>
-                            <option value="starbuck">2:00 am</option>
-                            <option value="hotdog">3:00 am</option>
-                            <option value="apollo">4:00 am</option>
-                            <option value="husker">5:00 am</option>
-                            <option value="starbuck">6:00 am</option>
-                            <option value="hotdog">7:00 am</option>
-                            <option value="apollo">8:00 am</option>
-                            <option value="husker">9:00 am</option>
-                            <option value="starbuck">10:00 am</option>
-                            <option value="hotdog">11:00 am</option>
+                          <select id="open-time">
+                            <option value="0">12:00 AM</option>
+                            <option value="1">1:00 AM</option>
+                            <option value="2">2:00 AM</option>
+                            <option value="3">3:00 AM</option>
+                            <option value="4">4:00 AM</option>
+                            <option value="5">5:00 AM</option>
+                            <option value="6">6:00 AM</option>
+                            <option value="7">7:00 AM</option>
+                            <option value="8">8:00 AM</option>
+                            <option value="9">9:00 AM</option>
+                            <option value="10">10:00 AM</option>
+                            <option value="11">11:00 AM</option>
+                            <option value="12">12:00 PM</option>
+                            <option value="13">1:00 PM</option>
+                            <option value="14">2:00 PM</option>
+                            <option value="15">3:00 PM</option>
+                            <option value="16">4:00 PM</option>
+                            <option value="17">5:00 PM</option>
+                            <option value="18">6:00 PM</option>
+                            <option value="19">7:00 PM</option>
+                            <option value="20">8:00 PM</option>
+                            <option value="21">9:00 PM</option>
+                            <option value="22">10:00 PM</option>
+                            <option value="23">11:00 PM</option>
                           </select>
                         </label>
                         </label><hr>
                       </div>
                       <div class="large-4 columns">
                         <label>Closing Time
-                          <select>
-                            <option value="husker">12:00 pm</option>
-                            <option value="apollo">1:00 pm</option>
-                            <option value="starbuck">2:00 pm</option>
-                            <option value="hotdog">3:00 pm</option>
-                            <option value="apollo">4:00 pm</option>
-                            <option value="husker">5:00 pm</option>
-                            <option value="starbuck">6:00 pm</option>
-                            <option value="hotdog">7::00 pm</option>
-                            <option value="apollo">8:00 pm</option>
-                            <option value="husker">9:00 pm</option>
-                            <option value="starbuck">10:00 pm</option>
-                            <option value="hotdog">11:00 pm</option>
-                          </select>
+                          <select id="close-time">
+                            <option value="0">12:00 AM</option>
+                            <option value="1">1:00 AM</option>
+                            <option value="2">2:00 AM</option>
+                            <option value="3">3:00 AM</option>
+                            <option value="4">4:00 AM</option>
+                            <option value="5">5:00 AM</option>
+                            <option value="6">6:00 AM</option>
+                            <option value="7">7:00 AM</option>
+                            <option value="8">8:00 AM</option>
+                            <option value="9">9:00 AM</option>
+                            <option value="10">10:00 AM</option>
+                            <option value="11">11:00 AM</option>
+                            <option value="12">12:00 PM</option>
+                            <option value="13">1:00 PM</option>
+                            <option value="14">2:00 PM</option>
+                            <option value="15">3:00 PM</option>
+                            <option value="16">4:00 PM</option>
+                            <option value="17">5:00 PM</option>
+                            <option value="18">6:00 PM</option>
+                            <option value="19">7:00 PM</option>
+                            <option value="20">8:00 PM</option>
+                            <option value="21">9:00 PM</option>
+                            <option value="22">10:00 PM</option>
+                            <option value="23">11:00 PM</option>
+						  </select>
                         </label><hr>
                       </div>
                     </div>
@@ -139,6 +167,10 @@
               <div class="row">
                 <div class="large-8 columns">
                   <label><h5>Days Open</h5>
+					  {{ form.days_open.errors }}
+					  <div class="hide">
+						  {{ form.days_open }}
+					  </div>
                     <div class="large-12 columns">
                       <input id="sunday" type="checkbox"><label for="checkbox1">Sunday</label>
                       <input id="monday" type="checkbox"><label for="checkbox2">Monday</label>
@@ -171,7 +203,7 @@
 					  <div class="medium-6 columns">
 						  <label>Service
 							  <select id="service-input">
-								  <option>---------</option>
+								  <option value="null">---------</option>
 								  {%for service in service_list%}
 								  <option value="{{ service.pk }}" data-service-description="{{ service.description }}" data-service-name="{{ service.name }}">{{ service.name }}</option>
 								  {% endfor %}
@@ -233,7 +265,7 @@
 			  </tr>
 		  </template>
 		  <template id="option-template">
-			  <option value="__value__" selected="__selected__" data-service-name="__optionname__" data-service-description="__description__">__optionname__</option>
+			  <option value="__value__" data-service-name="__optionname__" data-service-description="__description__">__optionname__</option>
 		  </template>
 
               <hr/>

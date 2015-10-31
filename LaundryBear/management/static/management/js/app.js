@@ -56,21 +56,32 @@ $("#set-service-button").click(function() {
 		var price = $tr.data("service-price");
 		var description = $tr.data("service-description");
 		// remove from table
-		$(this).closest("tr").remove();
+		$tr.remove();
 
 		// add back into combobox and set as selected
 		var optionTemplate = $("#option-template").html();
-		var compiledOptionTemplate = optionTemplate.replace(/__value__/, pk).replace(/__selected__/, "true").replace(/__optionname__/g, optionName).replace(/__description__/, description);
-		$("#service-input").children(":selected").prop("selected", false);
+		var compiledOptionTemplate = optionTemplate.replace(/__value__/, pk).replace(/__optionname__/g, optionName).replace(/__description__/, description);
 		var $option = $(compiledOptionTemplate);
 		$("#service-input").append($option);
+		$("#service-input").val(pk);
 
 		// put price back
 		$("#price-input").val(price);
 		return false;
 	});
 	$tableBody.find("a.delete-service-button").last().click(function() {
-		console.log("click");
+		var $tr = $(this).closest("tr");
+		var pk = $tr.data("service-pk");
+		var optionName = $tr.data("service-name");
+		var description = $tr.data("service-description");
+		// remove from table
+		$tr.remove();
+		// add back into combobox
+		var optionTemplate = $("#option-template").html();
+		var compiledOptionTemplate = optionTemplate.replace(/__value__/, pk).replace(/__optionname__/g, optionName).replace(/__description__/, description);
+		var $option = $(compiledOptionTemplate);
+		$("#service-input").val("null");
+		$("#service-input").append($option);
 		return false;
 	});
 
@@ -90,6 +101,7 @@ $("#save-button").click(function() {
 		$formsetContainer.find("#id_price_set-" + index + "-price").val(price);
 		addServiceFormset($("price-formset-container"));
 	});
+	$(this).parent().submit();
 });
 
 function addServiceFormset($formsetContainer) {
@@ -101,3 +113,11 @@ function addServiceFormset($formsetContainer) {
 	$("#id_price_set-TOTAL_FORMS").val(formCount + 1);
 	return;
 }
+
+$("#open-time, #close-time").on("change", function() {
+	var openTime = $("#open-time").val();
+	var closeTime = $("#close-time").val();
+
+	var timeString = ''
+
+	$("#id_hours_open").val();
