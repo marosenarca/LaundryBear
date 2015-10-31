@@ -42,11 +42,13 @@
           <li><a href="#">View Accounts</a></li>
           <li class="divider"></li>
           <li class="has-dropdown">
-            <a href="#">Administrator</a>
+            <a href="#">Hi, {{user.username}}</a>
             <ul class="dropdown">
               <li><a href="#">Settings</a></li>
               <li class="divider"></li>
-              <li><a href="#">Sign Out →</a></li>
+              <!--<li><a href="{%url "management:logout-admin"%}">Sign Out →</a></li>-->
+              <li><form action="{%url "management:logout-admin"%}" method="post">{% csrf_token %}
+                  <input type="submit" value="logout"/></li>
             </ul>
           </li>
         </ul>
