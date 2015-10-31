@@ -7,8 +7,19 @@ from django.views.generic import (CreateView, DeleteView, ListView,
     RedirectView, TemplateView, UpdateView)
 from django.utils.decorators import method_decorator
 
-from database.models import LaundryShop, Price, Service
+from database.models import LaundryShop, Price, Service, UserProfile
 
+<<<<<<< HEAD
+=======
+from django.contrib.auth import authenticate, login, logout
+from django.shortcuts import redirect, render
+from django.core.urlresolvers import reverse
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+from django.db.models import Q
+from django.contrib.auth.models import User
+
+>>>>>>> origin
 from management import forms
 from LaundryBear.mixins import LoginRequiredMixin
 
@@ -133,8 +144,59 @@ class LoginView(TemplateView):
 
 class LogoutView(RedirectView):
     @method_decorator(login_required)
+<<<<<<< HEAD
     def get(self, request):
         if request.user.is_staff:
             logout(request)
             return redirect('management:login-admin')
         return redirect('management:menu')
+=======
+    def post(self, request):
+        print 'logged out'
+        logout(request)
+        return redirect('management:login-admin')
+
+class ClientListView(LoginRequiredMixin, ListView):
+    model = UserProfile
+    paginate_by = 10
+    template_name = 'management/client/viewclients.html'
+    context_object_name = 'client_list'
+
+    def get_context_data(self, **kwargs):
+        context = super(ClientListView, self).get_context_data(**kwargs)
+        client = context['client_list']
+
+        name_query = self.request.GET.get('name', False)
+        query_type = 'name'
+        if name_query:
+            client = self.get_user_by_name(name_query)
+            query_type = 'name'
+        city_query = self.request.GET.get('city', False)
+        if city_query:
+            client = self.get_user_by_city(city_query)
+            query_type = 'city'
+        province_query = self.request.GET.get('province', False)
+        if province_query:
+            client = self.get_user_by_province(province_query)
+            query_type = 'province'
+        barangay_query = self.request.GET.get('barangay', False)
+        if barangay_query:
+            client = self.get_user_by_barangay(barangay_query)
+            query_type = 'barangay'
+        context.update({'client_list': client})
+        context['query_type'] = query_type
+        return context
+
+    def get_user_by_name(self, name_query):
+        return UserProfile.objects.filter(Q(client__first_name__icontains=name_query)|
+            Q(client__last_name__icontains=name_query))
+
+    def get_user_by_city(self, city_query):
+        return UserProfile.objects.filter(city__icontains=city_query)
+
+    def get_user_by_province(self, province_query):
+        return UserProfile.objects.filter(province__icontains=province_query)
+
+    def get_user_by_barangay(self, barangay_query):
+        return UserProfile.objects.filter(barangay__icontains=barangay_query)
+>>>>>>> origin
