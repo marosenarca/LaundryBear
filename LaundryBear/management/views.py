@@ -1,15 +1,18 @@
 from django.core.urlresolvers import reverse
 from django.forms.models import inlineformset_factory
-from django.views.generic import CreateView, DeleteView, ListView, TemplateView, UpdateView
+from django.views.generic import (CreateView, DeleteView, ListView,
+    RedirectView, TemplateView, UpdateView)
 
 from database.models import LaundryShop, Price, Service
 
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
+from django.shortcuts import redirect, render
+from django.core.urlresolvers import reverse
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 
 from management import forms
 from management.mixins import LoginRequiredMixin
-
-from django.shortcuts import render
 
 class LaundryMenuView(LoginRequiredMixin, TemplateView):
     template_name = 'management/shop/laundrybearmenu.html'
@@ -110,14 +113,28 @@ class LaundryListView(LoginRequiredMixin, ListView):
 class LoginView(TemplateView):
     template_name = "management/account/login.html"
 
+    def render_to_response(self, context, **response_kwargs):
+        if self.request.user.is_authenticated():
+            return redirect('management:menu')
+        return render(self.request, self.template_name, {})
+
     def post(self, request):
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(username=username, password=password)
-
         if user is not None:
-            login(request, user)
-            return render(request, 'management/account/login.html')
+            if user.is_active:
+                login(request, user)
+                print 'yes'
+                return redirect('management:menu')
         else:
-            print 'wa kasuod'
-            return HttpResponseRedirect('/adsasd')
+            print 'no'
+            return render(request, self.template_name, {})
+
+
+class LogoutView(RedirectView):
+    @method_decorator(login_required)
+    def post(self, request):
+        print 'logged out'
+        logout(request)
+        return redirect('management:login-admin')

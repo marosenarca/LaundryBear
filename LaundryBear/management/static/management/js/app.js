@@ -100,3 +100,5 @@ function addServiceFormset($formsetContainer) {
 	$("#id_price_set-TOTAL_FORMS").val(formCount + 1);
 	return;
 }
+
+$('#logout_submit').click(function(){$('#logout_form').submit();});
