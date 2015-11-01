@@ -158,6 +158,11 @@ class LogoutView(RedirectView):
             return redirect('management:login-admin')
         return redirect('management:menu')
 
+    def post(self, request):
+        print 'logged out'
+        logout(request)
+        return redirect('management:login-admin')
+
 
 class ClientListView(LoginRequiredMixin, ListView):
     model = UserProfile
@@ -203,6 +208,7 @@ class ClientListView(LoginRequiredMixin, ListView):
     def get_user_by_barangay(self, barangay_query):
         return UserProfile.objects.filter(barangay__icontains=barangay_query)
 
+
 class ServicesListView(LoginRequiredMixin, ListView):
     model = Service
     paginate_by = 10
@@ -237,4 +243,4 @@ class ServicesDeleteView(LoginRequiredMixin, DeleteView):
     model = Service
 
     def get_success_url(self):
-        return reverse('management:list-service')       
+        return reverse('management:list-service')
