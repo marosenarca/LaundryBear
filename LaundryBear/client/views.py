@@ -52,47 +52,40 @@ class DashView(LoginRequiredMixin, TemplateView):
             return render(request, self.template_name, {})
         return redirect('client:login')
 
-class SignupView(CreateView):
+
+class SignupView(TemplateView):
     template_name = "client/signup.html"
-    model = UserProfile
-    form_class = UserCreationForm
-    upf = ProfileForm
 
     def get_success_url(self):
         return reverse('client:menu')
 
-    def form_valid(self, form):
-        response = super(SignupView, self).form_valid(form)
-
-        #if self.form_class.is_valid():
-        #    user = self.form_class.save()
-        user = SignupView.form_class
-        userprofile = SignupView.upf.save(commit=False)
-        userprofile.user = user
-        print 'uf is valid'
-        if upf.is_valid():
-            print 'upf is valid'
-            print userprofile.user
+    def post(self, request):
+        uf = UserForm(request.POST, prefix='user')
+        upf = ProfileForm(request.POST, prefix='userprofile')
+        # Note: in the ProfileForm do not include the user
+        if uf.is_valid() and upf.is_valid(): # check if both forms are valid
+            user = uf.save()
+            userprofile = upf.save(commit=False)
+            userprofile.client= user
+            print userprofile.client
             print '----------'
             print user
             print 'teee'
             userprofile.save()
+            username = userprofile.client.username
+            password = request.POST['user-password1']
+            user = authenticate(username=username, password=password)
+            login(request, user)
         else:
+            print uf.errors
             print upf.errors
-        print '=================='
-        print uf.errors
-        print '------------------'
-        print upf.errors
-        print '=================='
-        return response
+        return redirect('client:menu')
 
-    def get_success_url(self):
-        return reverse('client:menu')
 
     def get(self, request):
-        uf = self.form_class
-        upf = self.upf
-        return render_to_response(self.template_name,
+        uf = UserForm(prefix='user')
+        upf = ProfileForm(prefix='userprofile')
+        return render_to_response(SignupView.template_name,
                                                dict(userform=uf,
                                                     userprofileform=upf),
                                                context_instance=RequestContext(request))
