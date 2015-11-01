@@ -11,7 +11,6 @@ class UserProfile(models.Model):
     street = models.CharField(max_length=50, blank=True)
     building = models.CharField(max_length=50, blank=True)
     contact_number = models.CharField(max_length=30, blank=False)
-    email = models.EmailField(blank=True)
 
     def __unicode__(self):
         return self.client.get_full_name()

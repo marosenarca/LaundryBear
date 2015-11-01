@@ -8,5 +8,6 @@ from . import views
 urlpatterns = [
     url(r'^login', views.ClientLoginView.as_view(), name='login'),
     url(r'^logout', views.ClientLogoutView.as_view(), name='logout'),
+    url(r'^signup', views.SignupView.as_view(), name='signup'),
     url(r'', views.DashView.as_view(), name='menu')
 ]
