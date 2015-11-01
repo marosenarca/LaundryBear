@@ -16,16 +16,13 @@
         <form action="{%url 'client:signup'%}"method="post">
             {% csrf_token %}
         <hr>
-        userform
         {{userform}}
         <hr>
-        userprofileform
         {{userprofileform}}
-        <hr>
-        
-        <input type="submit" class="button" value="submitnow"/>
+
+        <input type="submit" class="button" value="Sign Up"/>
         </form>
-         <p>Already have an account? <a href="usersignin.html">Login here </a></p>
+         <p>Already have an account? <a href="{%url 'client:login'%}">Login here </a></p>
       </div>
     </div>
    </div>
