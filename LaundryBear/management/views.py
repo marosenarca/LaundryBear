@@ -30,6 +30,13 @@ class LaundryUpdateView(LoginRequiredMixin, UpdateView):
     def get_success_url(self):
         return reverse('management:list-shops')
 
+    def get_context_data(self,**kwargs):
+        context = super(LaundryUpdateView, self).get_context_data(**kwargs)
+        context['service_list'] = Service.objects.all().order_by('pk')
+        price_formset = inlineformset_factory(
+            LaundryShop, Price, fields=('service', 'price'), extra=1)
+        context['price_formset'] = price_formset(instance=self.object)
+        return context
 
 class LaundryCreateView(LoginRequiredMixin, CreateView):
     template_name = 'management/shop/addlaundryshop.html'
