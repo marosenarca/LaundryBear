@@ -68,6 +68,10 @@ function addServiceRow(service, price) {
 		var pk = $row.data("service-pk");
 		$("#service-input").children("option[value=" + pk + "]").prop("disabled", false);
 		var $row = $(this).closest("tr");
+		// mark as deleted
+		var $formsetDiv = $("#price-formset-container").find("div[data-pk=\"" + pk + "\"]");
+		console.log($formsetDiv);
+		$formsetDiv.find("input[type=\"checkbox\"]").prop("checked", true);
 		// remove from table
 		$row.remove();
 		return false;
