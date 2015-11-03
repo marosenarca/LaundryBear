@@ -17,7 +17,7 @@ $("#set-service-button").on("click", function() {
 
 	// remove from options
 	var serviceInput = $("#service-input")
-	serviceInput.children("option[value=" + servicePk + "]").remove();
+	serviceInput.children("option[value=" + servicePk + "]").prop("disabled", true);
 	serviceInput.val("null");
 	$("#price-input").val("");
 
@@ -42,7 +42,22 @@ function addServiceRow(service, price) {
 	var compiledTemplate = template.replace(/__pk__/g, service.pk).replace(/__service-name__/g, service.name).replace(/__price__/g, price).replace(/__description__/g, service.description);
 
 	// add to the table
-	$("#service-table-body").append(compiledTemplate);
+	$tableBody = $("#service-table-body");
+	$tableBody.append(compiledTemplate);
+
+	// attach some event listeners
+	var latestRow = $tableBody.children().last();
+	latestRow.find(".edit-service-button").on("click", function() {
+		// renable option
+		var pk = $(this).data("service-pk");
+		$("#service-input").children("option[value=" + pk + "]").prop("disabled", false);
+
+		// remove from formset
+
+		return false;
+	});
+	latestRow.find(".delete-service-button").on("click", function() {
+	});
 }
 
 function addToServiceFormset(service, price, index) {
