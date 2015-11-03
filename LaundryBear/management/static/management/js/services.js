@@ -49,12 +49,12 @@ function addServiceRow(service, price) {
 	var latestRow = $tableBody.children().last();
 	latestRow.find(".edit-service-button").on("click", function() {
 		// renable option
-		var pk = $(this).data("service-pk");
+		var $row = $(this).closest("tr");
+		var pk = $row.data("service-pk");
 		var serviceInput = $("#service-input");
 		serviceInput.children("option[value=" + pk + "]").prop("disabled", false);
 
 		// place service and price in input boxes
-		var $row = $(this).closest("tr");
 		serviceInput.val($row.data("service-pk"));
 		$("#price-input").val($row.data("service-price"));
 
@@ -64,7 +64,14 @@ function addServiceRow(service, price) {
 		return false;
 	});
 	latestRow.find(".delete-service-button").on("click", function() {
-
+		var $row = $(this).closest("tr");
+		var pk = $row.data("service-pk");
+		console.log(pk);
+		$("#service-input").children("option[value=" + pk + "]").prop("disabled", false);
+		var $row = $(this).closest("tr");
+		// remove from table
+		$row.remove();
+		return false;
 	});
 }
 
