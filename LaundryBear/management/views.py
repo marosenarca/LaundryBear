@@ -219,7 +219,7 @@ class ServicesListView(LoginRequiredMixin, ListView):
         return Service.objects.filter(name__icontains=name_query)
 
     def get_user_by_city(self, description_query):
-        return UserProfile.objects.filter(description__icontains=city_query)
+        return UserProfile.objects.filter(description__icontains=description_query)
 
 class ServicesDeleteView(LoginRequiredMixin, DeleteView):
     model = Service
