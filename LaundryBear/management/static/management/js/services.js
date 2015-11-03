@@ -66,7 +66,6 @@ function addServiceRow(service, price) {
 	latestRow.find(".delete-service-button").on("click", function() {
 		var $row = $(this).closest("tr");
 		var pk = $row.data("service-pk");
-		console.log(pk);
 		$("#service-input").children("option[value=" + pk + "]").prop("disabled", false);
 		var $row = $(this).closest("tr");
 		// remove from table
