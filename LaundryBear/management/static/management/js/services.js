@@ -145,3 +145,11 @@ function loadServiceItems() {
 	});
 }
 
+$("iframe").on("load", function() {
+	var contents = $(this).contents();
+
+	contents.find("button").on("click", function() {
+		$(this).closest("form").submit();
+	});
+});
+
