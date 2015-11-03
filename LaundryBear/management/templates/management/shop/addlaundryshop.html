@@ -254,6 +254,12 @@
 		  <template id="option-template">
 			  <option value="__value__" data-service-name="__optionname__" data-service-description="__description__">__optionname__</option>
 		  </template>
+		  <div class="hide" id="services-list">
+			  {% for service in service_list %}
+
+			  <i data-pk="{{ service.pk }}" data-service-description="{{ service.description }}" data-service-name="{{ service.name }}"></i>
+			  {% endfor %}
+		  </div>
 
               <hr/>
               <button type="submit" class="button small" id="save-button">Save</button>
