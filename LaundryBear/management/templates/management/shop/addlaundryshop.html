@@ -227,9 +227,10 @@
               </table>
 		  </div>
 		  {{ price_formset.management_form }}
-		  <div class="hide" id="price-formset-container">
+		  <div class="hide" id="price-formset-container" data-edit-pk="None">
 			{% for price_form in price_formset %}
-			<div class="item-{{ forloop.counter0 }}">
+			<div data-item="{{ forloop.counter0 }}" data-pk="{{ price_form.service.value }}">
+				{{ price_form.id }}
 				{{ price_form.service }}
 				{{ price_form.price }}
 				{{ price_form.DELETE }}
@@ -237,7 +238,8 @@
 			{% endfor %}
 		  </div>
 		  <template id="formset-form-template">
-			  <div class="item-__prefix__">
+			  <div data-item="__prefix__">
+				  {{ price_formset.empty_form.id }}
 				  {{ price_formset.empty_form.service }}
 				  {{ price_formset.empty_form.price }}
 				  {{ price_formset.empty_form.DELETE }}
@@ -248,7 +250,7 @@
 				  <td>__service-name__</td>
 				  <td>__description__</td>
 				  <td>__price__</td>
-				  <td><a href="#" data-service-pk="__pk__" class="button secondary tiny edit-service-button">Edit</a> <a href="#" class="button secondary tiny delete-service-button">Delete</a> </td>
+				  <td><a href="#" class="button secondary tiny edit-service-button">Edit</a> <a href="#" class="button secondary tiny delete-service-button">Delete</a> </td>
 			  </tr>
 		  </template>
 		  <template id="option-template">
@@ -256,7 +258,6 @@
 		  </template>
 		  <div class="hide" id="services-list">
 			  {% for service in service_list %}
-
 			  <i data-pk="{{ service.pk }}" data-service-description="{{ service.description }}" data-service-name="{{ service.name }}"></i>
 			  {% endfor %}
 		  </div>
