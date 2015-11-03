@@ -190,3 +190,39 @@ class ClientListView(LoginRequiredMixin, ListView):
 
     def get_user_by_barangay(self, barangay_query):
         return UserProfile.objects.filter(barangay__icontains=barangay_query)
+
+class ServicesListView(LoginRequiredMixin, ListView):
+    model = Service
+    paginate_by = 10
+    template_name = 'management/shop/viewservices.html'
+    context_object_name = 'service_list'
+
+    def get_context_data(self, **kwargs):
+        context = super(ServicesListView, self).get_context_data(**kwargs)
+        service = context['service_list']
+
+        name_query = self.request.GET.get('name', False)
+        query_type = 'name'
+        if name_query:
+            service = self.get_user_by_name(name_query)
+            query_type = 'name'
+        description_query = self.request.GET.get('description', False)
+        if description_query:
+            service = self.get_user_by_city(description_query)
+            query_type = 'description'
+
+        context.update({'service_list': service})
+        context['query_type'] = query_type
+        return context
+
+    def get_user_by_name(self, name_query):
+        return Service.objects.filter(name__icontains=name_query)
+
+    def get_user_by_city(self, description_query):
+        return UserProfile.objects.filter(description__icontains=description_query)
+
+class ServicesDeleteView(LoginRequiredMixin, DeleteView):
+    model = Service
+
+    def get_success_url(self):
+        return reverse('management:list-service')       
