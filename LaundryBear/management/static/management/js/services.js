@@ -12,17 +12,36 @@ $("#set-service-button").on("click", function() {
 	var service = getService(servicePk);
 
 	addServiceRow(service, price);
-	var index = $("#price-formset-container").children().size() - 1;
+	var index = getNextIndex();
 	addToServiceFormset(service, price, index);
+	if ($("#price-formset-container").data("edit-pk") == "None") {
+		addEmptyFormset();
+	}
 
-	// remove from options
-	var serviceInput = $("#service-input")
-	serviceInput.children("option[value=" + servicePk + "]").prop("disabled", true);
-	serviceInput.val("null");
+	$("#service-input").val("null");
 	$("#price-input").val("");
+	$("#price-formset-container").data("edit-pk", "None");
 
 	return false;
 });
+
+function getNextIndex() {
+	var $formsetContainer = $("#price-formset-container");
+	var editPk = $formsetContainer.data("edit-pk");
+	if (editPk != "None") {
+		return $formsetContainer.find("div[data-pk=\"" + editPk + "\"]").data("item");
+	}
+	return $formsetContainer.children().size() - 1;
+}
+
+function addEmptyFormset() {
+	var template = $("#formset-form-template").html();
+	var $formsetContainer = $("#price-formset-container");
+	var totalForms = $formsetContainer.children().size();
+	var compiledTemplate = template.replace(/__prefix__/g, totalForms);
+	$("#id_price_set-TOTAL_FORMS").val(totalForms + 1)
+	$formsetContainer.append(compiledTemplate);
+}
 
 // takes a service pk and returns a service object
 function getService(pk) {
@@ -35,6 +54,8 @@ function getService(pk) {
 }
 
 function addServiceRow(service, price) {
+	// disable from option
+	$("#service-input").find("option[value=\"" + service.pk + "\"]").prop("disabled", true);
 	// grab the template
 	var template = $("#table-row-template").html();
 
@@ -48,15 +69,20 @@ function addServiceRow(service, price) {
 	// attach some event listeners
 	var latestRow = $tableBody.children().last();
 	latestRow.find(".edit-service-button").on("click", function() {
-		// renable option
 		var $row = $(this).closest("tr");
 		var pk = $row.data("service-pk");
+
+		// renable option
 		var serviceInput = $("#service-input");
 		serviceInput.children("option[value=" + pk + "]").prop("disabled", false);
 
-		// place service and price in input boxes
+		// place service and price in input boxes to edit
 		serviceInput.val($row.data("service-pk"));
 		$("#price-input").val($row.data("service-price"));
+
+
+		// set a var that we are editing
+		$("#price-formset-container").data("edit-pk", pk);
 
 		// remove from table
 		$row.remove();
@@ -66,12 +92,14 @@ function addServiceRow(service, price) {
 	latestRow.find(".delete-service-button").on("click", function() {
 		var $row = $(this).closest("tr");
 		var pk = $row.data("service-pk");
+
+		// re-enable the option
 		$("#service-input").children("option[value=" + pk + "]").prop("disabled", false);
-		var $row = $(this).closest("tr");
+
 		// mark as deleted
 		var $formsetDiv = $("#price-formset-container").find("div[data-pk=\"" + pk + "\"]");
-		console.log($formsetDiv);
 		$formsetDiv.find("input[type=\"checkbox\"]").prop("checked", true);
+
 		// remove from table
 		$row.remove();
 		return false;
@@ -116,3 +144,4 @@ function loadServiceItems() {
 		addServiceRow(service, price);
 	});
 }
+

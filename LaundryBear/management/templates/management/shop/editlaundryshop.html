@@ -227,7 +227,7 @@
               </table>
 		  </div>
 		  {{ price_formset.management_form }}
-		  <div class="hide" id="price-formset-container">
+		  <div class="hide" id="price-formset-container" data-edit-pk="None">
 			{% for price_form in price_formset %}
 			<div data-item="{{ forloop.counter0 }}" data-pk="{{ price_form.service.value }}">
 				{{ price_form.id }}
