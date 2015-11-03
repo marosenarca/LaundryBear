@@ -220,3 +220,9 @@ class ServicesListView(LoginRequiredMixin, ListView):
 
     def get_user_by_city(self, description_query):
         return UserProfile.objects.filter(description__icontains=city_query)
+
+class ServicesDeleteView(LoginRequiredMixin, DeleteView):
+    model = Service
+
+    def get_success_url(self):
+        return reverse('management:list-service')       
