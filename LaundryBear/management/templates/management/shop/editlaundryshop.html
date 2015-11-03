@@ -230,6 +230,7 @@
 		  <div class="hide" id="price-formset-container">
 			{% for price_form in price_formset %}
 			<div data-item="{{ forloop.counter0 }}">
+				{{ price_form.id }}
 				{{ price_form.service }}
 				{{ price_form.price }}
 				{{ price_form.DELETE }}
@@ -238,6 +239,7 @@
 		  </div>
 		  <template id="formset-form-template">
 			  <div data-item="__prefix__">
+				  {{ price_formset.empty_form.id }}
 				  {{ price_formset.empty_form.service }}
 				  {{ price_formset.empty_form.price }}
 				  {{ price_formset.empty_form.DELETE }}
@@ -265,4 +267,8 @@
       </div>
     </div>
 
+  {% endblock %}
+
+  {% block javascripts %}
+  <script src="{% static "management/js/services.js" %}"></script>
   {% endblock %}
