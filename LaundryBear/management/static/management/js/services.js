@@ -27,9 +27,9 @@ $("#set-service-button").on("click", function() {
 // takes a service pk and returns a service object
 function getService(pk) {
 	var service = new Object();
-	var $serviceOption = $("#service-input").children("option[value=" + pk + "]");
-	service.description = $serviceOption.data("service-description");
-	service.name = $serviceOption.data("service-name");
+	var $serviceList = $("#services-list").children("i[data-pk=" + pk + "]");
+	service.description = $serviceList.data("service-description");
+	service.name = $serviceList.data("service-name");
 	service.pk = pk;
 	return service;
 }
@@ -57,6 +57,7 @@ function addServiceRow(service, price) {
 		return false;
 	});
 	latestRow.find(".delete-service-button").on("click", function() {
+
 	});
 }
 
@@ -83,4 +84,18 @@ $(function() {
 	});
 
 	// load services
+	loadServiceItems();
 });
+
+function loadServiceItems() {
+	var $savedServices = $("#price-formset-container").children();
+	$savedServices.each(function(index, element) {
+		var pk = $(element).find("select").val();
+		if (pk.length === 0) {
+			return;
+		}
+		var service = getService(pk);
+		var price = $(element).find("input[type=\"number\"]").val();
+		addServiceRow(service, price);
+	});
+}
