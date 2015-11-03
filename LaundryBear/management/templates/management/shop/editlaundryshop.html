@@ -184,21 +184,6 @@
                   </label><hr>
               </div>
 
-
-                <div class="row">
-                  <div class="large-2 columns">
-                    <label>Rating
-                      <select>
-                        <option value="one">1</option>
-                        <option value="two">2</option>
-                        <option value="three">3</option>
-                        <option value="four">4</option>
-                        <option value="five">5</option>
-                      </select>
-                    </label>
-                  </div>
-                </div><hr/>
-
               <h4>Services</h4>
 			  <div class="large-12 columns">
 				  <div class="row">
@@ -242,9 +227,10 @@
               </table>
 		  </div>
 		  {{ price_formset.management_form }}
-		  <div class="hide" id="price-formset-container">
+		  <div class="hide" id="price-formset-container" data-edit-pk="None">
 			{% for price_form in price_formset %}
-			<div data-item="{{ forloop.counter0 }}">
+			<div data-item="{{ forloop.counter0 }}" data-pk="{{ price_form.service.value }}">
+				{{ price_form.id }}
 				{{ price_form.service }}
 				{{ price_form.price }}
 				{{ price_form.DELETE }}
@@ -253,6 +239,7 @@
 		  </div>
 		  <template id="formset-form-template">
 			  <div data-item="__prefix__">
+				  {{ price_formset.empty_form.id }}
 				  {{ price_formset.empty_form.service }}
 				  {{ price_formset.empty_form.price }}
 				  {{ price_formset.empty_form.DELETE }}
@@ -263,12 +250,17 @@
 				  <td>__service-name__</td>
 				  <td>__description__</td>
 				  <td>__price__</td>
-				  <td><a href="#" data-service-pk="__pk__" class="button secondary tiny edit-service-button">Edit</a> <a href="#" class="button secondary tiny delete-service-button">Delete</a> </td>
+				  <td><a href="#" class="button secondary tiny edit-service-button">Edit</a> <a href="#" class="button secondary tiny delete-service-button">Delete</a> </td>
 			  </tr>
 		  </template>
 		  <template id="option-template">
 			  <option value="__value__" data-service-name="__optionname__" data-service-description="__description__">__optionname__</option>
 		  </template>
+		  <div class="hide" id="services-list">
+			  {% for service in service_list %}
+			  <i data-pk="{{ service.pk }}" data-service-description="{{ service.description }}" data-service-name="{{ service.name }}"></i>
+			  {% endfor %}
+		  </div>
 
               <hr/>
               <button type="submit" class="button small" id="save-button">Save</button>
@@ -280,4 +272,8 @@
       </div>
     </div>
 
+  {% endblock %}
+
+  {% block javascripts %}
+  <script src="{% static "management/js/services.js" %}"></script>
   {% endblock %}

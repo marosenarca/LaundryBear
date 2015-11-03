@@ -184,21 +184,6 @@
                   </label><hr>
               </div>
 
-
-                <div class="row">
-                  <div class="large-2 columns">
-                    <label>Rating
-                      <select>
-                        <option value="one">1</option>
-                        <option value="two">2</option>
-                        <option value="three">3</option>
-                        <option value="four">4</option>
-                        <option value="five">5</option>
-                      </select>
-                    </label>
-                  </div>
-                </div><hr/>
-
               <h4>Services</h4>
 			  <div class="large-12 columns">
 				  <div class="row">
@@ -269,6 +254,12 @@
 		  <template id="option-template">
 			  <option value="__value__" data-service-name="__optionname__" data-service-description="__description__">__optionname__</option>
 		  </template>
+		  <div class="hide" id="services-list">
+			  {% for service in service_list %}
+
+			  <i data-pk="{{ service.pk }}" data-service-description="{{ service.description }}" data-service-name="{{ service.name }}"></i>
+			  {% endfor %}
+		  </div>
 
               <hr/>
               <button type="submit" class="button small" id="save-button">Save</button>
@@ -280,4 +271,8 @@
       </div>
     </div>
 
+  {% endblock %}
+
+  {% block javascripts %}
+  <script src="{% static "management/js/services.js" %}"></script>
   {% endblock %}

@@ -30,6 +30,18 @@ class LaundryUpdateView(LoginRequiredMixin, UpdateView):
     def get_success_url(self):
         return reverse('management:list-shops')
 
+    def form_valid(self, form):
+        response = super(LaundryUpdateView, self).form_valid(form)
+        PriceInlineFormSet = inlineformset_factory(
+            LaundryShop, Price, fields=('service', 'price'), extra=1)
+        price_formset = PriceInlineFormSet(
+            data=self.request.POST, instance=self.object)
+        if price_formset.is_valid():
+            price_formset.save()
+        else:
+            print price_formset.errors
+        return response
+
     def get_context_data(self,**kwargs):
         context = super(LaundryUpdateView, self).get_context_data(**kwargs)
         context['service_list'] = Service.objects.all().order_by('pk')
