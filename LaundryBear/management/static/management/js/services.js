@@ -50,9 +50,16 @@ function addServiceRow(service, price) {
 	latestRow.find(".edit-service-button").on("click", function() {
 		// renable option
 		var pk = $(this).data("service-pk");
-		$("#service-input").children("option[value=" + pk + "]").prop("disabled", false);
+		var serviceInput = $("#service-input");
+		serviceInput.children("option[value=" + pk + "]").prop("disabled", false);
 
-		// remove from formset
+		// place service and price in input boxes
+		var $row = $(this).closest("tr");
+		serviceInput.val($row.data("service-pk"));
+		$("#price-input").val($row.data("service-price"));
+
+		// remove from table
+		$row.remove();
 
 		return false;
 	});
