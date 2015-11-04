@@ -260,13 +260,15 @@ class ServiceCreateView(CreateView):
     form_class = forms.ServiceForm
 
     def post(self, request, *args, **kwargs):
-        super(ServiceCreateView, self).post(request, *args, **kwargs)
-        service = {}
+        response = super(ServiceCreateView, self).post(request, *args, **kwargs)
         if self.object:
+            service = {}
             service['name'] = self.object.name
             service['description'] = self.object.description
             service['pk'] = self.object.pk
-        return HttpResponse(json.dumps(service))
+            return HttpResponse(json.dumps(service))
+        else:
+            return response
 
     def get_success_url(self):
         return reverse('management:create-service')
