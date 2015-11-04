@@ -1,13 +1,13 @@
 {%extends 'management/base.html'%}
 {% load staticfiles %}
 
-    {% block title %}Edit Service | LaundryBear{% endblock %}
+    {% block title %}Add New Service | LaundryBear{% endblock %}
 
 {%block body%}
       <div class="row">
       <div class="large-8 large-offset-2 columns">
         <div class="panel">
-          <h3 align="center">Edit Service</h3>
+          <h3 align="center">Add New Service</h3>
           <!--forms-->
           <form method="post">
               {% csrf_token %}

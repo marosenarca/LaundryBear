@@ -242,10 +242,19 @@ class ServicesDeleteView(LoginRequiredMixin, DeleteView):
     model = Service
 
     def get_success_url(self):
-        return reverse('management:list-service')       
+        return reverse('management:list-service')
 
 class ServiceUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'management/shop/editservices.html'
+    model = Service
+    form_class = forms.ServiceForm
+
+    def get_success_url(self):
+        return reverse('management:list-service')
+
+
+class AddNewServiceView(LoginRequiredMixin, CreateView):
+    template_name = 'management/shop/addnewservice.html'
     model = Service
     form_class = forms.ServiceForm
 
