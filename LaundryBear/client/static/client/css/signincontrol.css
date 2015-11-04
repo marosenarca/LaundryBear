@@ -5,13 +5,9 @@ body {
 	background-position: center;
 }
 img#logo {
-<<<<<<< HEAD
-	width: 30%;
-	height: 18%;
-=======
-	width: 30px;
-	height: 30px;
->>>>>>> 0972d88483e803de00c99d9119babb742586197f
+
+	width: 80px;
+	height: 125px;
 	display:block;
 	margin-left:auto;
 	margin-right:auto;
@@ -26,13 +22,11 @@ img#logo {
 
 div#logos img {
     display: inline-block;
-<<<<<<< HEAD
-    width: 3%;
-    height: 6%;
-=======
-    width: 30px;
-    height: 30px;
->>>>>>> 0972d88483e803de00c99d9119babb742586197f
+
+    width: 40px;
+    height: 40px;
+
+
 }
 
 div#logos:after {
