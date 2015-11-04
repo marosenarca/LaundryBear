@@ -149,7 +149,6 @@ $("iframe").on("load", function() {
 	var contents = $(this).contents();
 
 	contents.find("button").on("click", function() {
-		console.log('click');
 		var $form = $(this).closest("form");
 		var url = '/management/services/add';
 		var data = $form.serializeArray();
