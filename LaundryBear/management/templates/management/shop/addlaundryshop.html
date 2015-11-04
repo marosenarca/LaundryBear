@@ -14,8 +14,11 @@
               <div class="row">
                 <div class="large-8 columns">
                   <label>Name
-                    {{ form.name }}
+                  	<div>
+                    <span id="required" class="warning label">Required field</span>
+                    {{ form.name }} 
                     {{ form.name.errors }}
+                    </div>
                   </label>
                 </div>
               </div>
@@ -23,8 +26,11 @@
               <div class="row">
                 <div class="large-8 columns">
                   <label>Province
+                  	<div>
+                    <span id="required" class="warning label">Required field</span>
                     {{ form.province }}
                     {{ form.province.errors }}
+                    </div>
                   </label>
                 </div>
               </div>
@@ -32,8 +38,11 @@
               <div class="row">
                 <div class="large-8 columns">
                   <label>City
+                  	<div>
+                    <span id="required" class="warning label">Required field</span>
                     {{ form.city }}
                     {{ form.city.errors }}
+                    </div>
                   </label>
                 </div>
               </div>
@@ -41,8 +50,11 @@
               <div class="row">
                 <div class="large-8 columns">
                   <label>Barangay
+                  	<div>
+                    <span id="required" class="warning label">Required field</span>
                     {{ form.barangay }}
                     {{ form.barangay.errors }}
+                    </div>
                   </label>
                 </div>
               </div>
@@ -50,8 +62,11 @@
               <div class="row">
                 <div class="large-8 columns">
                   <label>Street
+                  	<div>
+                    <span id="required" class="warning label">Required field</span>
                     {{ form.street }}
                     {{ form.street.errors }}
+                    </div>
                   </label>
                 </div>
               </div>
@@ -59,8 +74,11 @@
               <div class="row">
                 <div class="large-8 columns">
                   <label>Building
+                  	<div>
+                    <span id="required" class="warning label">Required field</span>
                     {{ form.building }}
                     {{ form.building.errors }}
+                  	</div>
                   </label>
                 </div>
               </div>
@@ -68,8 +86,11 @@
               <div class="row">
                 <div class="large-8 columns">
                   <label>Contact number
+                  	<div>
+                    <span id="required" class="warning label">Required field</span>
                     {{ form.contact_number }}
                     {{ form.contact_number.errors }}
+                    </div>
                   </label>
                 </div>
               </div>
@@ -77,8 +98,11 @@
               <div class="row">
                 <div class="large-8 columns">
                   <label>Email
+                  	<div>
+                    <span id="required" class="warning label">Required field</span>
                     {{ form.email }}
                     {{ form.email.errors }}
+                    </div>
                   </label>
                 </div>
               </div>
@@ -99,6 +123,7 @@
 						{{ form.hours_open }}
 					</div>
                     <div class="row">
+                    <span id="required" class="warning label">Required field</span>
                       <div class="large-4 columns">
                         <label>Opening Time
                           <select id="open-time">
@@ -168,6 +193,7 @@
 
               <div class="row">
                 <div class="large-8 columns">
+                <span id="required" class="warning label">Required field</span>
                   <label><h5>Days Open</h5>
 					  {{ form.days_open.errors }}
 					  <div class="hide">

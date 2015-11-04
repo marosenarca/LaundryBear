@@ -16,7 +16,9 @@
         <form action="{%url 'client:signup'%}"method="post">
             {% csrf_token %}
         <hr>
+        <div>
         {{userform}}
+        </div>
         <hr>
         {{userprofileform}}
         <hr>
