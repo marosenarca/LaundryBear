@@ -14,8 +14,11 @@
               <div class="row">
                 <div class="large-8 columns">
                   <label>Name
+                  <div>
+                    <span id="required" class="warning label">Required field</span>
                     {{ form.name }}
                     {{ form.name.errors }}
+                  </div>
                   </label>
                 </div>
               </div>
@@ -23,8 +26,11 @@
               <div class="row">
                 <div class="large-8 columns">
                   <label>Description
+                  <div>
+                    <span id="required" class="warning label">Required field</span>
                     {{ form.description }}
                     {{ form.description.errors }}
+                  </div>
                   </label>
                 </div>
               </div>
