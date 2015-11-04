@@ -10,9 +10,9 @@
         <header class="header">
           <h1 class="main-header">Something clean is coming your way.</h1>
           <ul class="header-subnav">
-            <li><a href="#" class="active">Home</a></li>
+            <li><a href="#" class="is-active">Home</a></li>
             <li><a href="{% url 'client:signup' %}" class="is-active">Sign Up</a></li>
-            <li><a href="#" class="active">About Us</a></li>
+            <li><a href="#" class="is-active">About Us</a></li>
           </ul>
         </header>
         {%if not user.is_authenticated %}
@@ -20,7 +20,7 @@
           <div class="large-3 large-centered columns">
             <div class="login-box">
             <div class="row">
-              <h3 id="adminlogin"align="center">Login</h3>
+              <h3 id="adminlogin"align="center"><img id="logo"src="{% static "management/icons/logologin.png"%}" /></h3>
               <br>
             <div class="large-12 columns">
                <form method="post">
