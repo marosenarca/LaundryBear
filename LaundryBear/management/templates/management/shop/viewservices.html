@@ -37,7 +37,7 @@
              <div class="small-2 columns">
              </div>
              <div class="small-7 small-offset-2 columns">
-               <input name="name" id="search" type="text" placeholder="Search Services">
+               <input name="{{ query_type }}" id="search" type="text" placeholder="Search Services">
              </div>
              <div class="small-1 columns">
                <button type="submit" class="button postfix">Go</button>
@@ -52,7 +52,10 @@
        <div>
          <dl class="sub-nav">
            <dt>Filter:</dt>
-		   <dd{% if query_type == "name" %} class="active"{% endif %}><a href="#">Name</a></dd>
+		   <dd{% if query_type == "name" %} class="active"{% endif %}>
+        <a href="#">Name</a></dd>
+       <dd{% if query_type == "description" %} class="active"{% endif %}>
+        <a href="#">Description</a></dd>
          </dl>
       </div>
   {% endblock %}

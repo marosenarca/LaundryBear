@@ -1,16 +1,19 @@
+from database.models import LaundryShop, Price, Service, UserProfile
+
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
+from django.db.models import Q
 from django.forms.models import inlineformset_factory
 from django.shortcuts import redirect, render
+from django.utils.decorators import method_decorator
 from django.views.generic import (CreateView, DeleteView, ListView,
     RedirectView, TemplateView, UpdateView)
-from django.utils.decorators import method_decorator
 
-from database.models import LaundryShop, Price, Service, UserProfile
+from LaundryBear.mixins import LoginRequiredMixin
 
 from management import forms
-from LaundryBear.mixins import LoginRequiredMixin
+
 
 class LaundryMenuView(LoginRequiredMixin, TemplateView):
     template_name = 'management/shop/laundrybearmenu.html'
@@ -95,6 +98,7 @@ class LaundryListView(LoginRequiredMixin, ListView):
         context = super(LaundryListView, self).get_context_data(**kwargs)
         shops = context['shop_list']
         name_query = self.request.GET.get('name', False)
+
         query_type = 'name'
         if name_query:
             shops = self.get_shops_by_name(name_query)
@@ -216,22 +220,23 @@ class ServicesListView(LoginRequiredMixin, ListView):
         name_query = self.request.GET.get('name', False)
         query_type = 'name'
         if name_query:
-            service = self.get_user_by_name(name_query)
+            service = self.get_service_by_name(name_query)
             query_type = 'name'
         description_query = self.request.GET.get('description', False)
+        query_type = 'description'
         if description_query:
-            service = self.get_user_by_city(description_query)
+            service = self.get_service_by_description(description_query)
             query_type = 'description'
 
         context.update({'service_list': service})
         context['query_type'] = query_type
         return context
 
-    def get_user_by_name(self, name_query):
+    def get_service_by_name(self, name_query):
         return Service.objects.filter(name__icontains=name_query)
 
-    def get_user_by_city(self, description_query):
-        return UserProfile.objects.filter(description__icontains=description_query)
+    def get_service_by_description(self, description_query):
+        return Service.objects.filter(description__icontains=description_query)
 
 class ServicesDeleteView(LoginRequiredMixin, DeleteView):
     model = Service
