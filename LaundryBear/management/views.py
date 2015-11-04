@@ -1,10 +1,15 @@
+<<<<<<< HEAD
+import json
+=======
 from database.models import LaundryShop, Price, Service, UserProfile
+>>>>>>> origin/master
 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.db.models import Q
 from django.forms.models import inlineformset_factory
+from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.utils.decorators import method_decorator
 from django.views.generic import (CreateView, DeleteView, ListView,
@@ -14,6 +19,10 @@ from LaundryBear.mixins import LoginRequiredMixin
 
 from management import forms
 
+<<<<<<< HEAD
+from LaundryBear.mixins import LoginRequiredMixin
+=======
+>>>>>>> origin/master
 
 class LaundryMenuView(LoginRequiredMixin, TemplateView):
     template_name = 'management/shop/laundrybearmenu.html'
@@ -162,6 +171,11 @@ class LogoutView(RedirectView):
             return redirect('management:login-admin')
         return redirect('management:menu')
 
+    def post(self, request):
+        print 'logged out'
+        logout(request)
+        return redirect('management:login-admin')
+
 
 class ClientListView(LoginRequiredMixin, ListView):
     model = UserProfile
@@ -207,6 +221,7 @@ class ClientListView(LoginRequiredMixin, ListView):
     def get_user_by_barangay(self, barangay_query):
         return UserProfile.objects.filter(barangay__icontains=barangay_query)
 
+
 class ServicesListView(LoginRequiredMixin, ListView):
     model = Service
     paginate_by = 10
@@ -243,6 +258,25 @@ class ServicesDeleteView(LoginRequiredMixin, DeleteView):
 
     def get_success_url(self):
         return reverse('management:list-service')
+
+
+class ServiceCreateView(CreateView):
+    template_name = 'management/shop/partials/createservice.html'
+    model = Service
+    form_class = forms.ServiceForm
+
+    def post(self, request, *args, **kwargs):
+        super(ServiceCreateView, self).post(request, *args, **kwargs)
+        service = {}
+        if self.object:
+            service['name'] = self.object.name
+            service['description'] = self.object.description
+            service['pk'] = self.object.pk
+        return HttpResponse(json.dumps(service))
+
+    def get_success_url(self):
+        return reverse('management:create-service')
+
 
 class ServiceUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'management/shop/editservices.html'

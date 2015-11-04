@@ -192,7 +192,7 @@
 							  <select id="service-input">
 								  <option value="null">---------</option>
 								  {%for service in service_list%}
-								  <option value="{{ service.pk }}" data-service-description="{{ service.description }}" data-service-name="{{ service.name }}">{{ service.name }}</option>
+								  <option id = "services" value="{{ service.pk }}" data-service-description="{{ service.description }}" data-service-name="{{ service.name }}">{{ service.name }}</option>
 								  {% endfor %}
 							  </select>
 						  </label>
@@ -206,11 +206,15 @@
 						  <a href="#" class="button medium" id="set-service-button"><i class="fi-plus"></i></a>
 					  </div>
 				  </div>
-				  <div class="row">
-					  <div class="medium-4 columns" id="add-service-button-container">
-						  <a href="#">Add Service...</a>
-					  </div>
-				  </div>
+  				  <div class="row">
+  					  <div class="medium-4 columns" id="add-service-button-container">
+  						  <a href="#" data-reveal-id="firstModal">Add Service...</a>
+                <div id="firstModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog" style="width:500px; height: 380px">
+                  <iframe src="{%url 'management:create-service' %}" style="width:100%; height:100%; border:0;"></iframe>
+                  <a id="new-service-modal-close-reveal" class="close-reveal-modal" aria-label="Close">&#215;</a>
+                </div>
+  					  </div>
+  				  </div>
 			  </div>
 			  <div class="medium-12 columns">
               <table style="width: 100%">
@@ -255,6 +259,9 @@
 		  </template>
 		  <template id="option-template">
 			  <option value="__value__" data-service-name="__optionname__" data-service-description="__description__">__optionname__</option>
+		  </template>
+		  <template id="service-list-template">
+		  <i data-pk="__pk__" data-service-description="__description__" data-service-name="__name__"></i>
 		  </template>
 		  <div class="hide" id="services-list">
 			  {% for service in service_list %}

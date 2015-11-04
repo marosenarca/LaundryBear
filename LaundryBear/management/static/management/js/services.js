@@ -145,3 +145,30 @@ function loadServiceItems() {
 	});
 }
 
+$("iframe").on("load", function() {
+	var contents = $(this).contents();
+
+	contents.find("button").on("click", function() {
+		var $form = $(this).closest("form");
+		var url = '/management/services/add';
+		var data = $form.serializeArray();
+		$.post(url, data, function(response) {
+			$("#new-service-modal-close-reveal").click();
+			service = JSON.parse(response);
+			if (service.length != 0) {
+				createOption(service);
+			}
+		});
+		return false;
+	});
+
+});
+
+function createOption(service) {
+	var template = $("#option-template").html();
+	var compiledTemplate = template.replace(/__value__/g, service.pk).replace(/__optionname__/g, service.name).replace(/__description__/g, service.description);
+	var serviceTemplate = $("#service-list-template").html();
+	var compiledServiceTemplate = serviceTemplate.replace(/__pk__/g, service.pk).replace(/__description__/g, service.description).replace(/__name__/g, service.name);
+	$("#service-input").append(compiledTemplate);
+	$("#services-list").append(compiledServiceTemplate);
+}
