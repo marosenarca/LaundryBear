@@ -1,0 +1,42 @@
+{%extends 'management/base.html'%}
+{% load staticfiles %}
+
+    {% block title %}Add New Service | LaundryBear{% endblock %}
+
+{%block body%}
+      <div class="row">
+      <div class="large-8 large-offset-2 columns">
+        <div class="panel">
+          <h3 align="center">Add New Service</h3>
+          <!--forms-->
+          <form method="post">
+              {% csrf_token %}
+              <div class="row">
+                <div class="large-8 columns">
+                  <label>Name
+                    {{ form.name }}
+                    {{ form.name.errors }}
+                  </label>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="large-8 columns">
+                  <label>Description
+                    {{ form.description }}
+                    {{ form.description.errors }}
+                  </label>
+                </div>
+              </div>
+              <button type="submit" class="button small" id="save-button">Save</button>
+              <a href="javascript:history.go(-1);" class="warning button small">Cancel</a>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  {% endblock %}
+
+  {% block javascripts %}
+  <script src="{% static "management/js/services.js" %}"></script>
+  {% endblock %}

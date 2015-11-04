@@ -23,5 +23,8 @@ urlpatterns = [
     url(r'^services/delete/(?P<pk>\d+)$', views.ServicesDeleteView.as_view(),
         name='delete-service'),
     url(r'^services/add$', views.ServiceCreateView.as_view(),
-        name='create-service')
+        name='create-service'),
+    url(r'^services/edit/(?P<pk>\d+)$', views.ServiceUpdateView.as_view(),
+        name='edit-service'),
+    url(r'^service/add$', views.AddNewServiceView.as_view(), name='add-service')
 ]
