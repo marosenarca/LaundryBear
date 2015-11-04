@@ -168,5 +168,8 @@ $("iframe").on("load", function() {
 function createOption(service) {
 	var template = $("#option-template").html();
 	var compiledTemplate = template.replace(/__value__/g, service.pk).replace(/__optionname__/g, service.name).replace(/__description__/g, service.description);
-	$("service-input").append(compiledTemplate);
+	var serviceTemplate = $("#service-list-template").html();
+	var compiledServiceTemplate = serviceTemplate.replace(/__pk__/g, service.pk).replace(/__description__/g, service.description).replace(/__name__/g, service.name);
+	$("#service-input").append(compiledTemplate);
+	$("#services-list").append(compiledServiceTemplate);
 }

@@ -260,6 +260,9 @@
 		  <template id="option-template">
 			  <option value="__value__" data-service-name="__optionname__" data-service-description="__description__">__optionname__</option>
 		  </template>
+		  <template id="service-list-template">
+		  <i data-pk="__pk__" data-service-description="__description__" data-service-name="__name__"></i>
+		  </template>
 		  <div class="hide" id="services-list">
 			  {% for service in service_list %}
 			  <i data-pk="{{ service.pk }}" data-service-description="{{ service.description }}" data-service-name="{{ service.name }}"></i>
