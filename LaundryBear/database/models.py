@@ -62,7 +62,7 @@ class LaundryShop(models.Model):
 
 
 class Service(models.Model):
-    name = models.CharField(max_length=100, blank=False)
+    name = models.CharField(max_length=100, blank=False, unique=True)
     description = models.TextField(blank=False)
     prices = models.ManyToManyField('LaundryShop', through='Price',
         related_name='services')
