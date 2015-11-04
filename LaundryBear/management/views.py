@@ -1,7 +1,10 @@
+import json
+
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.forms.models import inlineformset_factory
+from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.views.generic import (CreateView, DeleteView, ListView,
     RedirectView, TemplateView, UpdateView)
@@ -10,6 +13,7 @@ from django.utils.decorators import method_decorator
 from database.models import LaundryShop, Price, Service, UserProfile
 
 from management import forms
+
 from LaundryBear.mixins import LoginRequiredMixin
 
 class LaundryMenuView(LoginRequiredMixin, TemplateView):
@@ -250,6 +254,15 @@ class ServiceCreateView(CreateView):
     template_name = 'management/shop/partials/createservice.html'
     model = Service
     form_class = forms.ServiceForm
+
+    def post(self, request, *args, **kwargs):
+        super(ServiceCreateView, self).post(request, *args, **kwargs)
+        service = {}
+        if self.object:
+            service['name'] = self.object.name
+            service['description'] = self.object.description
+            service['pk'] = self.object.pk
+        return HttpResponse(json.dumps(service))
 
     def get_success_url(self):
         return reverse('management:create-service')
