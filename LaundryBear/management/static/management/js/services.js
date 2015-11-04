@@ -107,6 +107,7 @@ function addServiceRow(service, price) {
 }
 
 function addToServiceFormset(service, price, index) {
+	$("#price-formset-container").find("div[data-item=\"" + index + "\"]").data("pk", service.pk);
 	$("#id_price_set-" + index + "-price").val(price);
 	$("#id_price_set-" + index + "-service").val(service.pk);
 	$("#id_price_set-" + index + "-DELETE").val(false);
@@ -171,4 +172,7 @@ function createOption(service) {
 	var compiledServiceTemplate = serviceTemplate.replace(/__pk__/g, service.pk).replace(/__description__/g, service.description).replace(/__name__/g, service.name);
 	$("#service-input").append(compiledTemplate);
 	$("#services-list").append(compiledServiceTemplate);
+
+	// update all options of the hidden formset
+	$("#price-formset-container").find("select").append(compiledTemplate);
 }
