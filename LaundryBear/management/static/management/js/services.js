@@ -148,14 +148,23 @@ function loadServiceItems() {
 
 $("iframe").on("load", function() {
 	var contents = $(this).contents();
+	console.log("loead");
 
 	contents.find("button").on("click", function() {
 		var $form = $(this).closest("form");
 		var url = '/management/services/add';
 		var data = $form.serializeArray();
 		$.post(url, data, function(response) {
+			try {
+				service = JSON.parse(response);
+			} catch (e) {
+				var iframe = $("iframe")[0];
+				iframe.contentWindow.document.open();
+				iframe.contentWindow.document.write(response);
+				$("iframe").trigger("load");
+				return;
+			}
 			$("#new-service-modal-close-reveal").click();
-			service = JSON.parse(response);
 			if (service.length != 0) {
 				createOption(service);
 				// select after creating
