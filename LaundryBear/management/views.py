@@ -1,8 +1,6 @@
-<<<<<<< HEAD
 import json
-=======
+
 from database.models import LaundryShop, Price, Service, UserProfile
->>>>>>> origin/master
 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -19,10 +17,6 @@ from LaundryBear.mixins import LoginRequiredMixin
 
 from management import forms
 
-<<<<<<< HEAD
-from LaundryBear.mixins import LoginRequiredMixin
-=======
->>>>>>> origin/master
 
 class LaundryMenuView(LoginRequiredMixin, TemplateView):
     template_name = 'management/shop/laundrybearmenu.html'
