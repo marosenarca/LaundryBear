@@ -158,6 +158,8 @@ $("iframe").on("load", function() {
 			service = JSON.parse(response);
 			if (service.length != 0) {
 				createOption(service);
+				// select after creating
+				$("#service-input").val(service.pk);
 			}
 		});
 		return false;
