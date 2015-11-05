@@ -34,6 +34,17 @@
       <div class="row">
          <div class="large-12 columns">
            <div class="row collapse">
+
+      
+         <dl id="filter" class="sub-nav">
+           <dt>Filter:</dt>
+       <dd{% if query_type == "name" %} class="active"{% endif %}>
+        <a href="#">Name</a></dd>
+       <dd{% if query_type == "description" %} class="active"{% endif %}>
+        <a href="#">Description</a></dd>
+         </dl>
+      
+
              <div class="small-2 columns">
              </div>
              <div class="small-7 small-offset-2 columns">
@@ -49,13 +60,5 @@
        </div>
        </form>
        <br>
-       <div>
-         <dl class="sub-nav">
-           <dt>Filter:</dt>
-		   <dd{% if query_type == "name" %} class="active"{% endif %}>
-        <a href="#">Name</a></dd>
-       <dd{% if query_type == "description" %} class="active"{% endif %}>
-        <a href="#">Description</a></dd>
-         </dl>
-      </div>
+
   {% endblock %}
