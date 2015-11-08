@@ -1,0 +1,244 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="../../static/client/css/viewcontrol.css" />
+<link rel="stylesheet" type="text/css" href="../../../LaundryBear/static/LaundryBear/css/foundation.min.css" />
+<link rel="stylesheet" href="../../../management/static/management/css/control.css"/>
+
+<title>Laundry Bear | Shops</title>
+</head>
+
+<body>
+<div id="header">
+    <nav class="top-bar" data-topbar role="navigation">
+      <ul class="title-area">
+
+        <li class="name">
+          <h1>
+			  <a href="{% url "management:menu" %}">
+			  <img src="../../../LaundryBear/static/LaundryBear/images/header-logo.png" width="60%" height="60%"/>
+            </a>
+          </h1>
+        </li>
+        <li class="toggle-topbar menu-icon"><a href="#"><span>menu</span></a></li>
+      </ul>
+
+      <section class="top-bar-section">
+
+        <ul class="right">
+    	  <li class="divider"></li>
+          <li class="has-dropdown">
+            <a>Transactions</a>
+            <ul class="dropdown">
+              <li><a href="#">Add Service</a></li>
+              <li class="divider"></li>
+              <li><a href="#">See all →</a></li>
+            </ul>
+          </li>
+
+          <li class="divider"></li>
+          <li id="cont"><img id="pic" src="../../../LaundryBear/static/LaundryBear/images/1407787806_cara-delevingne-lg.jpg" /></li>
+          <li class="has-dropdown">
+            <a href="#">Cara</a>
+            <ul class="dropdown">
+              <li><a href="#">Settings</a></li>
+              <li class="divider"></li>
+              <li><a href="{%url "management:logout-admin"%}">Sign Out →</a></li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </nav>
+    </div>
+    
+<div class="row results">
+  <div class="large-12 columns ">
+    <div class="row">
+      <div class="row">
+         <div class="large-12 columns">
+           <div class="row collapse">
+           	<dl id="filter" class="sub-nav">
+           <dt>Filter:</dt>
+              <a id="filt" href="#"> Name</a>
+              <a id="filt" href="#">City</a>
+              <a id="filt" href="#">Barangay</a>
+              <a id="filt" href="#">Province</a>
+              <a id="filt" href="#">Rating</a>	
+             </dl>
+             <div class="small-2 columns">
+             </div>
+             <div class="small-7 small-offset-2 columns">
+               <input name="{{ query_type }}" id="search" type="text" placeholder="Search Laundry Shop">
+             </div>
+             <div class="small-1 columns">
+               <button type="submit" class="button postfix">Go</button>
+             </div>
+             <div class="small-2 columns">
+             </div>
+           </div>
+         </div>
+       </div>
+       </form>
+       <br>
+       <div class="large-9 columns">
+        <h4>Shops near you.</h4>
+       </div>
+       <hr>
+
+    </div>
+    <div class="search-results">
+      <div class="row ">
+        <div class="large-2 columns">
+          <a href="#"><img src="../../../LaundryBear/static/LaundryBear/images/asda.jpg" /></a>
+        </div>
+        <div class="large-10 columns">
+          <div class="row">
+            <div class=" large-9 columns">
+              <h4><a href="#">Laundry Kita</a></h4>
+              
+                <a href="#" data-reveal-id="info">More Info</a> | Rating: <img src="../../../LaundryBear/static/LaundryBear/images/star.png" />
+                <div id="info" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+                  <table style="margin:auto">
+                    <thead>
+                      <tr>
+                        <th width="200">Name</th>
+                        <th width="500">Address</th>
+                        <th width="150">Contact Information</th>
+                        <th>Rating</th>
+                        <th>Operating Hours</th>
+                        <th>Email</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>{{ shop.name }}</td>
+                        <td>{{ shop.location }}</td>
+                        <td>{{ shop.contact_number }}</td>
+                        <td><div class="paw-container" style="width: {% widthratio shop.average_rating 5 150 %}px;"><img src="{% static "management/icons/star.png" %}" /></div></td>
+                        <td>{{ shop.days_open }}, {{ shop.hours_open }}</td>
+                        <td>{{ shop.email }}</td>
+                    </tbody>
+                  </table>
+                  <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+                </div>
+              
+            </div>
+            <div class=" large-3 columns">
+              <a href="#"  class="button  expand medium"><span>Send Request</span> </a>
+            </div>
+            <div class="row">
+              <div class=" large-12 columns">
+                <ul class="large-block-grid-2">
+                  <li>
+                    <ul>
+                      <li><strong>Address: </strong>Mango Avenue, Cebu City, Cebu</li>
+                      <li><strong>Opens:</strong> 8 a.m.</li>
+                      <li><strong>Closes:</strong> 6 p.m.</li>
+                    </ul>
+                  </li>
+                  <h5><strong>Services</strong></h5>
+                  <li>
+                    <ul>
+                      <li><strong>Wash:</strong> Php 27.00</li>
+                      <li><strong>Dry:</strong> Php 60.00</li>
+                      <li><strong>Press:</strong> Php 45.00</li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr>
+      </div>
+      <div class="row ">
+        <div class="large-2 columns">
+          <a href="#"> <span> </span><img src="../../../LaundryBear/static/LaundryBear/images/file_18131516_85.jpg" /></a>
+        </div>
+        <div class="large-10 columns">
+          <div class="row">
+            <div class=" large-9 columns">
+              <h4><a href="#">Gems</a></h4>
+              <p><a href="#">More Info</a> | Rating: <img src="../../../LaundryBear/static/LaundryBear/images/star.png" class="thumbnail" /></p>
+            </div>
+            <div class=" large-3 columns">
+              <a href="#"  class="button  expand medium"><span>Send Request</span> </a>
+            </div>
+            <div class="row">
+              <div class=" large-12 columns">
+                <ul class="large-block-grid-2">
+                  <li>
+                    <ul>
+                      <li><strong>Address: </strong>Mango Avenue, Cebu City, Cebu</li>
+                      <li><strong>Opens:</strong> 8 a.m.</li>
+                      <li><strong>Closes:</strong> 6 p.m.</li>
+                    </ul>
+                  </li>
+                  <h5><strong>Services</strong></h5>
+                  <li>
+                    <ul>
+                      <li><strong>Wash:</strong> Php 27.00</li>
+                      <li><strong>Dry:</strong> Php 60.00</li>
+                      <li><strong>Press:</strong> Php 45.00</li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr>
+      </div>
+      <div class="row ">
+        <div class="large-2 columns">
+          <a href="#"> <span> </span><img src="../../../LaundryBear/static/LaundryBear/images/11127242213_4c4ef4e227_b.jpg" /></a>
+        </div>
+        <div class="large-10 columns">
+          <div class="row">
+            <div class=" large-9 columns">
+              <h4><a href="#">Tita Gi's</a></h4>
+              <p><a href="#">More Info</a> | Rating: <img src="../../../LaundryBear/static/LaundryBear/images/star.png" /></p>
+            </div>
+            <div class=" large-3 columns">
+              <a href="#"  class="button  expand medium"><span>Send Request</span> </a>
+            </div>
+            <div class="row">
+              <div class=" large-12 columns">
+                <ul class="large-block-grid-2">
+                  <li>
+                    <ul>
+                      <li><strong>Address: </strong>Mango Avenue, Cebu City, Cebu</li>
+                      <li><strong>Opens:</strong> 8 a.m.</li>
+                      <li><strong>Closes:</strong> 6 p.m.</li>
+                    </ul>
+                  </li>
+                  <h5><strong>Services</strong></h5>
+                  <li>
+                    <ul>
+                      <li><strong>Wash:</strong> Php 27.00</li>
+                      <li><strong>Dry:</strong> Php 60.00</li>
+                      <li><strong>Press:</strong> Php 45.00</li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr>
+      </div>
+      </div>
+    </div>
+    <a href="#" class="button right">All Shops &raquo;</a>
+  </div>
+</div>
+
+
+    <script src="../../../LaundryBear/static/LaundryBear/js/vendor/modernizr.js"></script>
+    <script src="../../../LaundryBear/static/LaundryBear/js/vendor/jquery.js"></script>
+    <script src="../../../LaundryBear/static/LaundryBear/js/vendor/fastclick.js"></script>
+    <script src="../../../LaundryBear/static/LaundryBear/js/foundation.min.js"></script>
+    <script src="../../../LaundryBear/static/LaundryBear/js/foundation/foundation.topbar.js"></script>
+</body>
+</html>

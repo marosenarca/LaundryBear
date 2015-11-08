@@ -107,6 +107,7 @@ function addServiceRow(service, price) {
 }
 
 function addToServiceFormset(service, price, index) {
+	$("#price-formset-container").find("div[data-item=\"" + index + "\"]").data("pk", service.pk);
 	$("#id_price_set-" + index + "-price").val(price);
 	$("#id_price_set-" + index + "-service").val(service.pk);
 	$("#id_price_set-" + index + "-DELETE").val(false);
@@ -147,16 +148,27 @@ function loadServiceItems() {
 
 $("iframe").on("load", function() {
 	var contents = $(this).contents();
+	console.log("loead");
 
 	contents.find("button").on("click", function() {
 		var $form = $(this).closest("form");
 		var url = '/management/services/add';
 		var data = $form.serializeArray();
 		$.post(url, data, function(response) {
+			try {
+				service = JSON.parse(response);
+			} catch (e) {
+				var iframe = $("iframe")[0];
+				iframe.contentWindow.document.open();
+				iframe.contentWindow.document.write(response);
+				$("iframe").trigger("load");
+				return;
+			}
 			$("#new-service-modal-close-reveal").click();
-			service = JSON.parse(response);
 			if (service.length != 0) {
 				createOption(service);
+				// select after creating
+				$("#service-input").val(service.pk);
 			}
 		});
 		return false;
@@ -171,4 +183,7 @@ function createOption(service) {
 	var compiledServiceTemplate = serviceTemplate.replace(/__pk__/g, service.pk).replace(/__description__/g, service.description).replace(/__name__/g, service.name);
 	$("#service-input").append(compiledTemplate);
 	$("#services-list").append(compiledServiceTemplate);
+
+	// update all options of the hidden formset
+	$("#price-formset-container").find("select").append(compiledTemplate);
 }

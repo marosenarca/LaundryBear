@@ -40,7 +40,6 @@ class ClientLogoutView(RedirectView):
     @method_decorator(login_required)
     def get(self, request):
         logout(request)
-        print 'logged out'
         return redirect('client:login')
 
 
@@ -67,10 +66,6 @@ class SignupView(TemplateView):
             user = uf.save()
             userprofile = upf.save(commit=False)
             userprofile.client= user
-            print userprofile.client
-            print '----------'
-            print user
-            print 'teee'
             userprofile.save()
             username = userprofile.client.username
             password = request.POST['user-password1']
