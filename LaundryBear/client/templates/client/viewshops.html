@@ -17,7 +17,7 @@
         <li class="name">
           <h1>
 			  <a href="{% url "management:menu" %}">
-			  <img src="../../../LaundryBear/static/LaundryBear/images/header-logo.png" width="60%" height="60%"/>
+			  <img src="{% static 'LaundryBear/images/header-logo.png' %}" width="60%" height="60%"/>
             </a>
           </h1>
         </li>
@@ -55,6 +55,11 @@
 <div class="row results">
   <div class="large-12 columns ">
     <div class="row">
+
+      <div class="large-9 columns">
+        <h4>Shops near you.</h4>
+      </div>
+
       <div class="row">
          <div class="large-12 columns">
            <div class="row collapse">
@@ -126,6 +131,10 @@
             </div>
             <div class=" large-3 columns">
               <a href="#"  class="button  expand medium"><span>Send Request</span> </a>
+              <p><a href="#">More Info</a> | Rating: <img src="../../../LaundryBear/static/LaundryBear/images/star.png" /></p>
+            </div>
+            <div class=" large-3 columns">
+              <a href="#"  class="button  expand medium"><span>Select Shop</span> </a>
             </div>
             <div class="row">
               <div class=" large-12 columns">
@@ -164,6 +173,7 @@
             </div>
             <div class=" large-3 columns">
               <a href="#"  class="button  expand medium"><span>Send Request</span> </a>
+              <a href="#"  class="button  expand medium"><span>Select Shop</span> </a>
             </div>
             <div class="row">
               <div class=" large-12 columns">
@@ -202,6 +212,7 @@
             </div>
             <div class=" large-3 columns">
               <a href="#"  class="button  expand medium"><span>Send Request</span> </a>
+              <a href="#"  class="button  expand medium"><span>Select Shop</span> </a>
             </div>
             <div class="row">
               <div class=" large-12 columns">
