@@ -1,0 +1,179 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../../LaundryBear/static/LaundryBear/css/foundation.min.css" />
+<link rel="stylesheet" href="../../static/client/css/selectshopcontrol.css" />
+<link rel="stylesheet" href="../../static/client/css/viewcontrol.css" />
+<link rel="stylesheet" href="../../../LaundryBear/static/LaundryBear/css/foundation.min.css" />
+<link rel="stylesheet" href="../../../management/static/management/css/control.css"/>
+<link rel="stylesheet" href="../../../LaundryBear/static/LaundryBear/css/normalize.css" />
+<link rel="stylesheet" href="../../../LaundryBear/static/LaundryBear/reveal/reveal.css" />
+<title>Laundry Bear | Request</title>
+</head>
+
+<body>
+<div id="header">
+    <nav class="top-bar" data-topbar role="navigation">
+      <ul class="title-area">
+
+        <li class="name">
+          <h1>
+			  <a href="{% url "management:menu" %}">
+			  <img src="../../../LaundryBear/static/LaundryBear/images/header-logo.png" width="60%" height="60%"/>
+            </a>
+          </h1>
+        </li>
+        <li class="toggle-topbar menu-icon"><a href="#"><span>menu</span></a></li>
+      </ul>
+
+      <section class="top-bar-section">
+
+        <ul class="right">
+    	  <li class="divider"></li>
+          <li class="has-dropdown">
+            <a>Transactions</a>
+            <ul class="dropdown">
+              <li><a href="#">Add Service</a></li>
+              <li class="divider"></li>
+              <li><a href="#">See all →</a></li>
+            </ul>
+          </li>
+
+          <li class="divider"></li>
+          <li id="cont"><img id="pic" src="../../../LaundryBear/static/LaundryBear/images/1407787806_cara-delevingne-lg.jpg" /></li>
+          <li class="has-dropdown">
+            <a href="#">Cara</a>
+            <ul class="dropdown">
+              <li><a href="#">Settings</a></li>
+              <li class="divider"></li>
+              <li><a href="{%url "management:logout-admin"%}">Sign Out →</a></li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </nav>
+ </div>
+<section class="services">
+  <div class="row">
+    <div class="small-12 large-10 columns small-centered">
+      <h2>Laundry Kita </h2><br>
+      <div class="row">
+              <div class=" large-12 columns" align="center">
+                <ul class="small-block-grid-1">
+                  <li>
+                    <ul>
+                      <li><strong>Address: </strong>Mango Avenue, Cebu City, Cebu</li>
+                       <li><strong>Working Days:</strong> Mnonday-Friday</li>
+                      <li><strong>Opens:</strong> 8 a.m.</li>
+                      <li><strong>Closes:</strong> 6 p.m.</li>    
+                       <li><strong>Rating:</strong> <img src="../../../LaundryBear/static/LaundryBear/images/star.png"/></li>                  
+                    </ul>
+                  </li><br>
+                  <h5><strong>Services:</strong></h5>
+                  <li>
+                    <ul>
+                      <li><strong>Wash:</strong> Php 27.00</li>
+                      <li><strong>Dry:</strong> Php 60.00</li>
+                      <li><strong>Press:</strong> Php 45.00</li>
+                     
+                    </ul>
+                  </li>                   
+                      
+                </ul>
+              </div>
+            </div><br>
+      <form class="custom">
+        <div class="row">
+          <div class="large-6 small-12 columns">
+            <label>
+              Select Service
+            </label>
+              <select>
+                <option value="All">All</option>
+                <option value="Wash"><a href="#">Wash</a></option>
+                <option value="Dry"><a href="#">Dry</a></option>
+                <option value="Press"><a href="#">Press</a></option>
+              </select>
+          </div>
+          
+          <div class="large-3 small-6 columns"></div>
+
+          <div class="large-3 small-12 columns expand">
+            <a href="#" class="button expand">Add to Basket</a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+	<table align="center">
+      <thead>
+        <tr>
+          <th width="200">Service</th>
+          <th>Number of Items</th>
+          <th>Estimated Price</th>
+          <th width="275" align="center">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Wash</td>
+          <td><input type="number" placeholder="Pieces" /></td>
+          <td align="center">80</td>
+          <td>
+          	<ul class="button-group round">
+            	<li><a href="#" class="button info">Edit</a></li>
+  				<li><a href="#" class="button alert">Delete</a></li>
+			</ul>
+          </td>
+       <tr>
+          <td>Dry</td>
+          <td><input type="number" placeholder="Pieces" /></td>
+          <td align="center">80</td>
+          <td>
+          	<ul class="button-group round">
+            	<li><a href="#" class="button info">Edit</a></li>
+  				<li><a href="#" class="button alert">Delete</a></li>
+			</ul>
+          </td>
+        <tr>
+          <td>Press</td>
+          <td><input type="number" placeholder="Pieces" /></td>
+          <td align="center">80</td>
+          <td>
+          	<ul class="button-group round">
+            	<li><a href="#" class="button info">Edit</a></li>
+  				<li><a href="#" class="button alert">Delete</a></li>
+			</ul>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="row" align="center">
+	    <div align="right">
+    		<a href="#" class="button success">Request</a>
+    	</div>
+   </div>
+
+  
+    
+ 
+<script src="../../../LaundryBear/static/LaundryBear/js/foundation/foundation.js"></script>
+<script src="../../../LaundryBear/static/LaundryBear/js/foundation/foundation.reveal.js"></script>
+<script src="../../../LaundryBear/static/LaundryBear/js/foundation.min.js"></script>
+<script src="../../../LaundryBear/static/LaundryBear/js/vendor/modernizr.js"></script>
+<script src="../../../LaundryBear/static/LaundryBear/reveal/jquery-1.4.4.min.js" type="text/javascript"></script>
+<script src="../../../LaundryBear/static/LaundryBear/reveal/jquery.reveal.js" type="text/javascript"></script>
+   <script type="text/javascript">
+  $(document).ready(function() {
+    $("#buttonForModal").click(function() {
+      $("#myModal").reveal();
+    });
+  });
+  
+</script>
+</body>
+</html>
+
