@@ -4,14 +4,15 @@
 	{%csrf_token%}
 	<h2 id="modalTitle">Add New Service</h2>
 
-
 	<div>
 		<span id="required" class="warning label">Required field</span>
-		<p>Service Name:</p> {{form.name}} {{ form.name.errors }} <br>
+		<p>Service Name:</p> {{form.name}} <br>
+		{{ form.name.errors }}
 	</div>
 	<div>
 		<span id="required" class="warning label">Required field</span>
-		<p>Description:</p>  {{form.description}} {{ form.description.errors }}<br><br>
+		<p>Description:</p>  {{form.description}} <br><br>
+		{{ form.description.errors }}
 	</div>
 	<button type="submit" class="button small" class="close-reveal-modal" aria-label="Close" id="add-new-service-button">Save</button>
 </form>

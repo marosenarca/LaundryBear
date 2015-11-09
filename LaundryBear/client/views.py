@@ -70,11 +70,12 @@ class SignupView(TemplateView):
             username = userprofile.client.username
             password = request.POST['user-password1']
             user = authenticate(username=username, password=password)
-            login(request, user)
+            login(request, user)    
+            return redirect('client:menu')
         else:
             print uf.errors
             print upf.errors
-        return redirect('client:menu')
+            return self.render_to_response({'userform': uf, 'userprofileform': upf, 'view': self})
 
 
     def get(self, request):
@@ -84,3 +85,7 @@ class SignupView(TemplateView):
                                                dict(userform=uf,
                                                     userprofileform=upf),
                                                context_instance=RequestContext(request))
+
+    def render_to_response(self, context, **response_kwargs):
+        response_kwargs.setdefault('content_type', self.content_type)
+        return self.response_class(request=self.request, template=self.template_name, context=context, using=None, **response_kwargs)
