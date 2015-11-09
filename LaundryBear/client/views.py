@@ -89,3 +89,7 @@ class SignupView(TemplateView):
     def render_to_response(self, context, **response_kwargs):
         response_kwargs.setdefault('content_type', self.content_type)
         return self.response_class(request=self.request, template=self.template_name, context=context, using=None, **response_kwargs)
+
+class OrderView(LoginRequiredMixin, TemplateView):
+    template_name = ""
+    
