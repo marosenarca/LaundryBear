@@ -1,10 +1,11 @@
+{% load staticfiles %}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" type="text/css" href="../../static/client/css/viewcontrol.css" />
-<link rel="stylesheet" type="text/css" href="../../../LaundryBear/static/LaundryBear/css/foundation.min.css" />
-<link rel="stylesheet" href="../../../management/static/management/css/control.css"/>
+<link rel="stylesheet" type="text/css" href="{% static 'client/css/viewcontrol.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'LaundryBear/css/foundation.min.css' %}" />
+<link rel="stylesheet" href="{% static 'management/css/control.css' %}"/>
 
 <title>Laundry Bear | Shops</title>
 </head>
@@ -38,7 +39,6 @@
           </li>
 
           <li class="divider"></li>
-          <li id="cont"><img id="pic" src="../../../LaundryBear/static/LaundryBear/images/1407787806_cara-delevingne-lg.jpg" /></li>
           <li class="has-dropdown">
             <a href="#">Cara</a>
             <ul class="dropdown">
@@ -95,14 +95,14 @@
     <div class="search-results">
       <div class="row ">
         <div class="large-2 columns">
-          <a href="#"><img src="../../../LaundryBear/static/LaundryBear/images/asda.jpg" /></a>
+          <a href="#"><img src="{% static 'LaundryBear/images/asda.jpg' %}" /></a>
         </div>
         <div class="large-10 columns">
           <div class="row">
             <div class=" large-9 columns">
               <h4><a href="#">Laundry Kita</a></h4>
               
-                <a href="#" data-reveal-id="info">More Info</a> | Rating: <img src="../../../LaundryBear/static/LaundryBear/images/star.png" />
+                <a href="#" data-reveal-id="info">More Info</a> | Rating: <img src="{% static 'LaundryBear/images/star.png' %}" />
                 <div id="info" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
                   <table style="margin:auto">
                     <thead>
@@ -131,7 +131,7 @@
             </div>
             <div class=" large-3 columns">
               <a href="#"  class="button  expand medium"><span>Send Request</span> </a>
-              <p><a href="#">More Info</a> | Rating: <img src="../../../LaundryBear/static/LaundryBear/images/star.png" /></p>
+              <p><a href="#">More Info</a> | Rating: <img src="{% static 'LaundryBear/images/star.png' %}" /></p>
             </div>
             <div class=" large-3 columns">
               <a href="#"  class="button  expand medium"><span>Select Shop</span> </a>
@@ -163,13 +163,13 @@
       </div>
       <div class="row ">
         <div class="large-2 columns">
-          <a href="#"> <span> </span><img src="../../../LaundryBear/static/LaundryBear/images/file_18131516_85.jpg" /></a>
+          <a href="#"> <span> </span><img src="{% static 'LaundryBear/images/file_18131516_85.jpg' %}" /></a>
         </div>
         <div class="large-10 columns">
           <div class="row">
             <div class=" large-9 columns">
               <h4><a href="#">Gems</a></h4>
-              <p><a href="#">More Info</a> | Rating: <img src="../../../LaundryBear/static/LaundryBear/images/star.png" class="thumbnail" /></p>
+              <p><a href="#">More Info</a> | Rating: <img src="{% static 'LaundryBear/images/star.png' %}" class="thumbnail" /></p>
             </div>
             <div class=" large-3 columns">
               <a href="#"  class="button  expand medium"><span>Send Request</span> </a>
@@ -202,13 +202,13 @@
       </div>
       <div class="row ">
         <div class="large-2 columns">
-          <a href="#"> <span> </span><img src="../../../LaundryBear/static/LaundryBear/images/11127242213_4c4ef4e227_b.jpg" /></a>
+          <a href="#"> <span> </span><img src="{% static 'LaundryBear/images/11127242213_4c4ef4e227_b.jpg' %}" /></a>
         </div>
         <div class="large-10 columns">
           <div class="row">
             <div class=" large-9 columns">
               <h4><a href="#">Tita Gi's</a></h4>
-              <p><a href="#">More Info</a> | Rating: <img src="../../../LaundryBear/static/LaundryBear/images/star.png" /></p>
+              <p><a href="#">More Info</a> | Rating: <img src="{% static 'LaundryBear/images/star.png' %}" /></p>
             </div>
             <div class=" large-3 columns">
               <a href="#"  class="button  expand medium"><span>Send Request</span> </a>
@@ -246,10 +246,10 @@
 </div>
 
 
-    <script src="../../../LaundryBear/static/LaundryBear/js/vendor/modernizr.js"></script>
-    <script src="../../../LaundryBear/static/LaundryBear/js/vendor/jquery.js"></script>
-    <script src="../../../LaundryBear/static/LaundryBear/js/vendor/fastclick.js"></script>
-    <script src="../../../LaundryBear/static/LaundryBear/js/foundation.min.js"></script>
-    <script src="../../../LaundryBear/static/LaundryBear/js/foundation/foundation.topbar.js"></script>
+    <script src="{% static 'LaundryBear/js/vendor/modernizr.js' %}"></script>
+    <script src="{% static 'LaundryBear/js/vendor/jquery.js' %}"></script>
+    <script src="{% static 'LaundryBear/js/vendor/fastclick.js' %}"></script>
+    <script src="{% static 'LaundryBear/js/foundation.min.js' %}"></script>
+    <script src="{% static 'LaundryBear/js/foundation/foundation.topbar.js' %}"></script>
 </body>
 </html>
