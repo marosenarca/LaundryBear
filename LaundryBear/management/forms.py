@@ -1,6 +1,7 @@
 from django import forms
 
 from database.models import Rating, Service, Price, LaundryShop
+from LaundryBear.forms import LoginForm
 
 
 class ServiceForm(forms.ModelForm):
@@ -28,3 +29,13 @@ class LaundryShopForm(forms.ModelForm):
         fields = ['barangay', 'building', 'city', 'contact_number',
         'days_open', 'email', 'hours_open', 'name', 'province',
         'street', 'website']
+
+
+class AdminLoginForm(LoginForm):
+    def clean(self):
+        cleaned_data = super(AdminLoginForm, self).clean()
+        user = cleaned_data.get('user')
+
+        if not user.is_staff:
+            raise forms.ValidationError('You have no power here.')
+

@@ -10,15 +10,14 @@ from django.forms.models import inlineformset_factory
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.utils.decorators import method_decorator
-from django.views.generic import (CreateView, DeleteView, ListView,
+from django.views.generic import (CreateView, DeleteView, FormView, ListView,
     RedirectView, TemplateView, UpdateView)
 
-from LaundryBear.mixins import LoginRequiredMixin
-
 from management import forms
+from management.mixins import AdminLoginRequiredMixin
 
 
-class LaundryMenuView(LoginRequiredMixin, TemplateView):
+class LaundryMenuView(AdminLoginRequiredMixin, TemplateView):
     template_name = 'management/shop/laundrybearmenu.html'
 
     def get_context_data(self, **kwargs):
@@ -28,7 +27,7 @@ class LaundryMenuView(LoginRequiredMixin, TemplateView):
         return context
 
 
-class LaundryUpdateView(LoginRequiredMixin, UpdateView):
+class LaundryUpdateView(AdminLoginRequiredMixin, UpdateView):
     template_name = 'management/shop/editlaundryshop.html'
     model = LaundryShop
     form_class = forms.LaundryShopForm
@@ -56,7 +55,7 @@ class LaundryUpdateView(LoginRequiredMixin, UpdateView):
         context['price_formset'] = price_formset(instance=self.object)
         return context
 
-class LaundryCreateView(LoginRequiredMixin, CreateView):
+class LaundryCreateView(AdminLoginRequiredMixin, CreateView):
     template_name = 'management/shop/addlaundryshop.html'
     model = LaundryShop
     form_class = forms.LaundryShopForm
@@ -85,13 +84,13 @@ class LaundryCreateView(LoginRequiredMixin, CreateView):
         return context
 
 
-class LaundryDeleteView(LoginRequiredMixin, DeleteView):
+class LaundryDeleteView(AdminLoginRequiredMixin, DeleteView):
     model = LaundryShop
 
     def get_success_url(self):
         return reverse('management:list-shops')
 
-class LaundryListView(LoginRequiredMixin, ListView):
+class LaundryListView(AdminLoginRequiredMixin, ListView):
     model = LaundryShop
     paginate_by = 10
     template_name = 'management/shop/viewlaundryshops.html'
@@ -135,26 +134,24 @@ class LaundryListView(LoginRequiredMixin, ListView):
         return LaundryShop.objects.filter(barangay__icontains=barangay_query)
 
 
-class LoginView(TemplateView):
+class LoginView(FormView):
     template_name = "management/account/login.html"
+    form_class = forms.AdminLoginForm
 
-    def render_to_response(self, context, **response_kwargs):
-        if self.request.user.is_authenticated():
-            return redirect('management:menu')
-        return render(self.request, self.template_name, {})
+    def form_valid(self, form):
+        response = super(LoginView, self).form_valid(form)
+        user = form.cleaned_data['user']
+        login(self.request, user)
+        return response
 
-    def post(self, request):
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(username=username, password=password)
-        if user is not None:
-            if user.is_active and user.is_staff:
-                login(request, user)
-                return redirect('management:menu')
-            else:
-                return redirect('client:menu')
+
+    def get_success_url(self):
+        next = self.request.GET.get('next')
+
+        if next:
+            return next
         else:
-            return render(request, self.template_name, {})
+            return reverse('management:menu')
 
 
 class LogoutView(RedirectView):
@@ -171,7 +168,7 @@ class LogoutView(RedirectView):
         return redirect('management:login-admin')
 
 
-class ClientListView(LoginRequiredMixin, ListView):
+class ClientListView(AdminLoginRequiredMixin, ListView):
     model = UserProfile
     paginate_by = 10
     template_name = 'management/client/viewclients.html'
@@ -216,7 +213,7 @@ class ClientListView(LoginRequiredMixin, ListView):
         return UserProfile.objects.filter(barangay__icontains=barangay_query)
 
 
-class ServicesListView(LoginRequiredMixin, ListView):
+class ServicesListView(AdminLoginRequiredMixin, ListView):
     model = Service
     paginate_by = 10
     template_name = 'management/shop/viewservices.html'
@@ -247,7 +244,7 @@ class ServicesListView(LoginRequiredMixin, ListView):
     def get_service_by_description(self, description_query):
         return Service.objects.filter(description__icontains=description_query)
 
-class ServicesDeleteView(LoginRequiredMixin, DeleteView):
+class ServicesDeleteView(AdminLoginRequiredMixin, DeleteView):
     model = Service
 
     def get_success_url(self):
@@ -274,7 +271,7 @@ class ServiceCreateView(CreateView):
         return reverse('management:create-service')
 
 
-class ServiceUpdateView(LoginRequiredMixin, UpdateView):
+class ServiceUpdateView(AdminLoginRequiredMixin, UpdateView):
     template_name = 'management/shop/editservices.html'
     model = Service
     form_class = forms.ServiceForm
@@ -283,7 +280,7 @@ class ServiceUpdateView(LoginRequiredMixin, UpdateView):
         return reverse('management:list-service')
 
 
-class AddNewServiceView(LoginRequiredMixin, CreateView):
+class AddNewServiceView(AdminLoginRequiredMixin, CreateView):
     template_name = 'management/shop/addnewservice.html'
     model = Service
     form_class = forms.ServiceForm
