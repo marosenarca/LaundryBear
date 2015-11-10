@@ -4,8 +4,6 @@ from django.shortcuts import redirect
 from django.core.urlresolvers import reverse
 
 
-#from management.views import LoginView
-
 class LoginRequiredMixin(object):
     """
     View mixin which requires that the user is authenticated.
