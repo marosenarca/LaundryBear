@@ -145,5 +145,5 @@ class ShopsListView(ListView):
 class OrderView(LoginRequiredMixin, CreateView):
     template_name="client/shopselect.html"
 
-    def get(self, request):
+    def get(self, request, *args, **kwargs):
         return render(self.request, self.template_name, {})
