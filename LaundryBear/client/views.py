@@ -38,6 +38,7 @@ class ClientLoginView(TemplateView):
 
 
 class ClientLogoutView(RedirectView):
+    permanent = False
 
     @method_decorator(login_required)
     def get(self, request):

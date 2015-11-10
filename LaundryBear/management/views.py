@@ -3,13 +3,11 @@ import json
 from database.models import LaundryShop, Price, Service, UserProfile
 
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.db.models import Q
 from django.forms.models import inlineformset_factory
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
-from django.utils.decorators import method_decorator
 from django.views.generic import (CreateView, DeleteView, FormView, ListView,
     RedirectView, TemplateView, UpdateView)
 
@@ -155,17 +153,16 @@ class LoginView(FormView):
 
 
 class LogoutView(RedirectView):
-    @method_decorator(login_required)
-    def get(self, request):
-        if request.user.is_staff:
-            logout(request)
-            return redirect('management:login-admin')
-        return redirect('management:menu')
+    permanent = False
 
-    def post(self, request):
-        print 'logged out'
+    def get_redirect_url(self, *args, **kwargs):
+        return reverse('management:login-admin')
+
+    def get(self, request, *args, **kwargs):
+        response = super(LogoutView, self).get(request, *args, **kwargs)
         logout(request)
-        return redirect('management:login-admin')
+        return response
+
 
 
 class ClientListView(AdminLoginRequiredMixin, ListView):
