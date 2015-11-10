@@ -141,15 +141,7 @@ class AdminLoginView(LoginView):
 
 
 class AdminLogoutView(LogoutView):
-    permanent = False
-
-    def get_redirect_url(self, *args, **kwargs):
-        return reverse('management:login-admin')
-
-    def get(self, request, *args, **kwargs):
-        response = super(LogoutView, self).get(request, *args, **kwargs)
-        logout(request)
-        return response
+    login_view_name = 'management:login-admin'
 
 
 
