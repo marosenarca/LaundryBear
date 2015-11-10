@@ -10,7 +10,8 @@ from database.models import LaundryShop
 class ContextDataTestCase(TestCase):
     def setUp(self):
         # login client
-        User.objects.create_superuser(username='test', password='runner', email='user@mail.com')
+        User.objects.create_superuser(username='test', password='runner',
+            email='user@mail.com')
         self.client.login(username='test', password='runner')
 
     def test_laundry_menu_get_recent_shops(self):
@@ -58,34 +59,34 @@ class ContextDataTestCase(TestCase):
             days_open='Sun - Sat')
         response = self.client.get(reverse('management:list-shops'),
             {'name': 'laundryshop'})
-        expected_shop_list = LaundryShop.objects.filter(
-            name__icontains='laundryshop')
-        self.assertEqual(list(expected_shop_list),
-            list(response.context['shop_list']))
+        expected_shop_list = [u'laundryshop1', u'laundryshop2']
+        actual_shop_list = [
+            shop.name for shop in response.context['shop_list']]
+        self.assertEqual(expected_shop_list, actual_shop_list)
 
     def test_get_shops_by_city(self):
         LaundryShop.objects.create(name='laundryshop1', province='lsprovince',
             barangay='lsbarangay', contact_number='123', city='citycebu',
             hours_open='24 hours', days_open='Sun - Sat')
         LaundryShop.objects.create(name='laundryshop2', province='lsprovince',
-            barangay='lsbarangay', contact_number='123', city='citycebu',
+            barangay='lsbarangay', contact_number='123', city='davao',
             hours_open='24 hours', days_open='Sun - Sat')
-        LaundryShop.objects.create(name='this should not appear',
+        LaundryShop.objects.create(name='laundryshop3', city='cebu',
             province='lsprovince', barangay='lsbarangay',
             contact_number='123', hours_open='24 hours',
             days_open='Sun - Sat')
         response = self.client.get(reverse('management:list-shops'),
             {'city': 'cebu'})
-        expected_shop_list = LaundryShop.objects.filter(
-            city__icontains='cebu')
-        self.assertEqual(list(expected_shop_list),
-            list(response.context['shop_list']))
+        expected_shop_list = [u'laundryshop1', u'laundryshop3']
+        actual_shop_list = [
+            shop.name for shop in response.context['shop_list']]
+        self.assertEqual(expected_shop_list, actual_shop_list)
 
     def test_get_shops_by_province(self):
-        LaundryShop.objects.create(name='laundryshop1', province='lsprovince',
+        LaundryShop.objects.create(name='laundryshop1', province='cebu',
             barangay='lsbarangay', contact_number='123', city='citycebu',
             hours_open='24 hours', days_open='Sun - Sat')
-        LaundryShop.objects.create(name='laundryshop2', province='lsprovince',
+        LaundryShop.objects.create(name='laundryshop2', province='cebu',
             barangay='lsbarangay', contact_number='123', city='citycebu',
             hours_open='24 hours', days_open='Sun - Sat')
         LaundryShop.objects.create(name='this should not appear',
@@ -94,28 +95,29 @@ class ContextDataTestCase(TestCase):
             days_open='Sun - Sat')
         response = self.client.get(reverse('management:list-shops'),
             {'province': 'cebu'})
-        expected_shop_list = LaundryShop.objects.filter(
-            province__icontains='lsbarangay')
-        self.assertEqual(list(expected_shop_list),
-            list(response.context['shop_list']))
+        expected_shop_list = [u'laundryshop1', u'laundryshop2']
+        actual_shop_list = [
+            shop.name for shop in response.context['shop_list']]
+        self.assertEqual(expected_shop_list, actual_shop_list)
 
     def test_get_shops_by_barangay(self):
 
-        ls1 = LaundryShop.objects.create(name='laundryshop1', province='lsprovince',
+        LaundryShop.objects.create(name='laundryshop1', province='lsprovince',
             barangay='lsbarangay', contact_number='123', city='citycebu',
             hours_open='24 hours', days_open='Sun - Sat')
-        ls2 = LaundryShop.objects.create(name='laundryshop2', province='lsprovince',
+        LaundryShop.objects.create(name='laundryshop2', province='lsprovince',
             barangay='lsbarangay', contact_number='123', city='citycebu',
             hours_open='24 hours', days_open='Sun - Sat')
         LaundryShop.objects.create(name='this should not appear',
-            province='lsprovince', barangay='lsbarangay',
+            province='lsprovince', barangay='notappear',
             contact_number='123', hours_open='24 hours',
             days_open='Sun - Sat')
         response = self.client.get(reverse('management:list-shops'),
-            {'barnagay': 'cebu'})
-        expected_shop_list = [ls1, ls2]
-        self.assertEqual(list(expected_shop_list),
-            list(response.context['shop_list']))
+            {'barangay': 'lsbarangay'})
+        expected_shop_list = [u'laundryshop1', u'laundryshop2']
+        actual_shop_list = [
+            shop.name for shop in response.context['shop_list']]
+        self.assertEqual(expected_shop_list, actual_shop_list)
 
 
 class LoginTestCase(TestCase):
@@ -126,7 +128,7 @@ class LoginTestCase(TestCase):
     def test_login_required_redirect(self):
         response = self.client.get(reverse('management:menu'), follow=True)
         expected = 'management/account/login.html'
-        self.assertEqual(response.templates[0].name, expected)
+        self.assertTemplateUsed(response, expected)
 
     def test_redirect_to_menu_after_login_with_next(self):
         response = self.client.get(reverse('management:menu'), follow=True)
@@ -136,7 +138,7 @@ class LoginTestCase(TestCase):
             {'username': 'test', 'password': 'runner'}, secure=True,
             follow=True)
         expected = 'management/shop/laundrybearmenu.html'
-        self.assertEqual(response.templates[0].name, expected)
+        self.assertTemplateUsed(response, expected)
 
     def test_invalid_login(self):
         response = self.client.get(reverse('management:menu'), follow=True)
@@ -145,15 +147,15 @@ class LoginTestCase(TestCase):
             request['QUERY_STRING']),
             {'username': 'tester', 'password': 'runner'}, secure=True,
             follow=True)
-        expected = 'management/shop/laundrybearmenu.html'
-        self.assertNotEqual(response.templates[0].name, expected)
+        expected = 'management/account/login.html'
+        self.assertTemplateUsed(response, expected)
 
     def test_redirect_to_menu_after_login_without_next(self):
         response = self.client.post(reverse('management:login-admin'),
             {'username': 'test', 'password': 'runner'}, secure=True,
             follow=True)
         expected = 'management/shop/laundrybearmenu.html'
-        self.assertEqual(response.templates[0].name, expected)
+        self.assertTemplateUsed(response, expected)
 
     def test_only_superuser(self):
         # create non-superuser account
@@ -161,6 +163,6 @@ class LoginTestCase(TestCase):
         response = self.client.post(reverse('management:login-admin'),
             {'username': 'test', 'password': 'runner'}, secure=True,
             follow=True)
-        expected = 'management/shop/laundrybearmenu.html'
-        self.assertNotEqual(response.templates[0].name, expected)
+        expected = 'management/account/login.html'
+        self.assertTemplateUsed(response, expected)
 
