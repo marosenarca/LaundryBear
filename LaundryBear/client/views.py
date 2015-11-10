@@ -143,8 +143,13 @@ class ShopsListView(ClientLoginRequiredMixin, ListView):
         return LaundryShop.objects.filter(barangay__icontains=barangay_query)
 
 
-class OrderView(ClientLoginRequiredMixin, CreateView):
+class OrderView(ClientLoginRequiredMixin, DetailView):
+    context_object_name = 'shop'
+    model = LaundryShop
     template_name="client/shopselect.html"
 
-    def get(self, request, *args, **kwargs):
-        return render(self.request, self.template_name, {})
+    
+    def get_context_data(self, **kwargs):
+        context = super(OrderView, self).get_context_data(**kwargs)
+        context['service_list'] = Service.objects.all().order_by('pk')
+        return context

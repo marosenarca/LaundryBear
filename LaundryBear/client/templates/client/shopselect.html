@@ -51,6 +51,9 @@
             </label>
               <select>
               <!-- place services of this shop here -->
+              {% for service in shop.prices.service %}
+              <li><a href="#" >shop.prices.service.name</a></li>
+              {% endfor %}
               </select>
           </div>
           
