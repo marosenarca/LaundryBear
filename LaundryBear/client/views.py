@@ -30,7 +30,7 @@ class ClientLoginView(TemplateView):
         if user is not None:
             if user.is_active:
                 login(request, user)
-                return redirect('client:menu')
+                return redirect('client:view-shops')
             else:
                 return render(request, self.template_name, {})
         else:
@@ -45,7 +45,7 @@ class ClientLogoutView(RedirectView):
         return redirect('client:login')
 
 
-class DashView(LoginRequiredMixin, TemplateView):
+class DashView(LoginRequiredMixin, ListView):
     template_name = "client/success.html"
 
     def get(self, request):
@@ -73,7 +73,7 @@ class SignupView(TemplateView):
             password = request.POST['user-password1']
             user = authenticate(username=username, password=password)
             login(request, user)
-            return redirect('client:menu')
+            return redirect('client:viewshops')
         else:
             print uf.errors
             print upf.errors
@@ -92,7 +92,7 @@ class SignupView(TemplateView):
         return self.response_class(request=self.request, template=self.template_name, context=context, using=None, **response_kwargs)
 
 
-class ShopsListView(LoginRequiredMixin, ListView):
+class ShopsListView(ListView):
     model = LaundryShop
     paginate_by = 10
     template_name="client/viewshops.html"
@@ -101,24 +101,30 @@ class ShopsListView(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super(ShopsListView, self).get_context_data(**kwargs)
         shops = context['shop_list']
-        name_query = self.request.GET.get('name', False)
 
-        query_type = 'name'
+        query_type = ''
+
+        name_query = self.request.GET.get('name', False)
         if name_query:
             shops = self.get_shops_by_name(name_query)
             query_type = 'name'
+
         city_query = self.request.GET.get('city', False)
         if city_query:
             shops = self.get_shops_by_city(city_query)
             query_type = 'city'
+
         province_query = self.request.GET.get('province', False)
         if province_query:
             shops = self.get_shops_by_province(province_query)
             query_type = 'province'
+
+        
         barangay_query = self.request.GET.get('barangay', False)
-        if barangay_query:
-            shops = self.get_shops_by_barangay(barangay_query)
+        if barangay_query or not query_type:
+            shops = self.get_shops_by_barangay(barangay_query or self.request.user.userprofile.barangay)
             query_type = 'barangay'
+        
         context.update({'shop_list': shops})
         context['query_type'] = query_type
         return context
