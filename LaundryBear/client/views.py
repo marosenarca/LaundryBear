@@ -93,7 +93,6 @@ class SignupView(TemplateView):
 
 
 class ShopsListView(LoginRequiredMixin, ListView):
-    template_name="client/viewshops.html"
     model = LaundryShop
     paginate_by = 10
     template_name="client/viewshops.html"

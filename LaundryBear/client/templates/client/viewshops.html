@@ -5,6 +5,51 @@
 
 
 {% block body %}
+
+    <form method="get">
+    {% csrf_token %}
+      <div class="large-12 columns">
+      <div class="row">
+            <dl id="filter" class="sub-nav">
+
+               <dt>Filter:</dt>
+
+               <dd {% if query_type == "name" %} class="active"{% endif %}><a href="#">Name</a></dd>
+               <dd {% if query_type == "city" %} class="active"{% endif %}><a href="#">City</a></dd>
+               <dd {% if query_type == "barangay" %} class="active"{% endif %}><a href="#">Barangay</a></dd>
+               <dd {% if query_type == "province" %} class="active"{% endif %}><a href="#">Province</a></dd>
+
+          </dl>
+          </div>
+
+
+</div>
+
+
+ <div class="row">
+         <div class="large-12 columns">
+           <div class="row collapse">
+
+             <div class="small-2 columns">
+             </div>
+             <div class="small-7 small-offset-2 columns">
+               <input name="{{ query_type }}" id="search" type="text" placeholder="Search Laundry Shop">
+             </div>
+             <div class="small-1 columns">
+               <button type="submit" class="button postfix">Go</button>
+             </div>
+             <div class="small-2 columns">
+             </div>
+           </div>
+         </div>
+       </div>
+       </form>
+
+
+
+
+
+
           <table style="margin:auto">
           <thead>
             <tr>
@@ -32,35 +77,5 @@
     </div>
     {% endblock %}
     {% block footer %}
-    <form method="get">
-    {%csrf_token%}
-      <div class="row">
-         <div class="large-12 columns">
-           <div class="row collapse">
-            <dl id="filter" class="sub-nav">
-
-               <dt>Filter:</dt>
-
-               <dd{% if query_type == "name" %} class="active"{% endif %}><a href="#">Name</a></dd>
-               <dd{% if query_type == "city" %} class="active"{% endif %}><a href="#">City</a></dd>
-               <dd{% if query_type == "barangay" %} class="active"{% endif %}><a href="#">Barangay</a></dd>
-               <dd{% if query_type == "province" %} class="active"{% endif %}><a href="#">Province</a></dd>
-
-          </dl>
-
-             <div class="small-2 columns">
-             </div>
-             <div class="small-7 small-offset-2 columns">
-               <input name="{{ query_type }}" id="search" type="text" placeholder="Search Laundry Shop">
-             </div>
-             <div class="small-1 columns">
-               <button type="submit" class="button postfix">Go</button>
-             </div>
-             <div class="small-2 columns">
-             </div>
-           </div>
-         </div>
-       </div>
-       </form>
        <br>
 {% endblock %}
