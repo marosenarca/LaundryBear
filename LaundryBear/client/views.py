@@ -7,12 +7,13 @@ from django.shortcuts import redirect, render, render_to_response
 from django.template import RequestContext
 from django.utils.decorators import method_decorator
 from django.views.generic import (CreateView, DeleteView, ListView,
-    RedirectView, TemplateView, UpdateView)
+                                  RedirectView, TemplateView, UpdateView)
 
 from client.forms import ProfileForm, UserForm
 from database.models import LaundryShop, Price, Service, UserProfile
 from LaundryBear.mixins import LoginRequiredMixin
 # Create your views here.
+
 
 class ClientLoginView(TemplateView):
     template_name = "client/usersignin.html"
@@ -37,10 +38,10 @@ class ClientLoginView(TemplateView):
 
 
 class ClientLogoutView(RedirectView):
+
     @method_decorator(login_required)
     def get(self, request):
         logout(request)
-        print 'logged out'
         return redirect('client:login')
 
 
@@ -63,37 +64,33 @@ class SignupView(TemplateView):
         uf = UserForm(request.POST, prefix='user')
         upf = ProfileForm(request.POST, prefix='userprofile')
         # Note: in the ProfileForm do not include the user
-        if uf.is_valid() and upf.is_valid(): # check if both forms are valid
+        if uf.is_valid() and upf.is_valid():  # check if both forms are valid
             user = uf.save()
             userprofile = upf.save(commit=False)
-            userprofile.client= user
-            print userprofile.client
-            print '----------'
-            print user
-            print 'teee'
+            userprofile.client = user
             userprofile.save()
             username = userprofile.client.username
             password = request.POST['user-password1']
             user = authenticate(username=username, password=password)
-            login(request, user)    
+            login(request, user)
             return redirect('client:menu')
         else:
             print uf.errors
             print upf.errors
             return self.render_to_response({'userform': uf, 'userprofileform': upf, 'view': self})
 
-
     def get(self, request):
         uf = UserForm(prefix='user')
         upf = ProfileForm(prefix='userprofile')
         return render_to_response(SignupView.template_name,
-                                               dict(userform=uf,
-                                                    userprofileform=upf),
-                                               context_instance=RequestContext(request))
+                                  dict(userform=uf,
+                                       userprofileform=upf),
+                                  context_instance=RequestContext(request))
 
     def render_to_response(self, context, **response_kwargs):
         response_kwargs.setdefault('content_type', self.content_type)
         return self.response_class(request=self.request, template=self.template_name, context=context, using=None, **response_kwargs)
+
 
 class ShopsListView(LoginRequiredMixin, ListView):
     template_name="client/viewshops.html"
