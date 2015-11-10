@@ -10,7 +10,7 @@ from database.models import LaundryShop
 class ContextDataTestCase(TestCase):
     def setUp(self):
         # login client
-        User.objects.create_user(username='test', password='runner')
+        User.objects.create_superuser(username='test', password='runner', email='user@mail.com')
         self.client.login(username='test', password='runner')
 
     def test_laundry_menu_get_recent_shops(self):
@@ -100,10 +100,11 @@ class ContextDataTestCase(TestCase):
             list(response.context['shop_list']))
 
     def test_get_shops_by_barangay(self):
-        LaundryShop.objects.create(name='laundryshop1', province='lsprovince',
+
+        ls1 = LaundryShop.objects.create(name='laundryshop1', province='lsprovince',
             barangay='lsbarangay', contact_number='123', city='citycebu',
             hours_open='24 hours', days_open='Sun - Sat')
-        LaundryShop.objects.create(name='laundryshop2', province='lsprovince',
+        ls2 = LaundryShop.objects.create(name='laundryshop2', province='lsprovince',
             barangay='lsbarangay', contact_number='123', city='citycebu',
             hours_open='24 hours', days_open='Sun - Sat')
         LaundryShop.objects.create(name='this should not appear',
@@ -112,8 +113,7 @@ class ContextDataTestCase(TestCase):
             days_open='Sun - Sat')
         response = self.client.get(reverse('management:list-shops'),
             {'barnagay': 'cebu'})
-        expected_shop_list = LaundryShop.objects.filter(
-            barangay__icontains='lsbarangay')
+        expected_shop_list = [ls1, ls2]
         self.assertEqual(list(expected_shop_list),
             list(response.context['shop_list']))
 
