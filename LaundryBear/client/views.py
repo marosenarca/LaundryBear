@@ -45,8 +45,54 @@ class ClientLogoutView(RedirectView):
         return redirect('client:login')
 
 
-class DashView(LoginRequiredMixin, TemplateView):
-    template_name = "client/success.html"
+class DashView(LoginRequiredMixin, ListView):
+    model = LaundryShop
+    paginate_by = 10
+    template_name="client/viewshops.html"
+    context_object_name = 'shop_list'
+
+    def get_context_data(self, **kwargs):
+        context = super(ShopsListView, self).get_context_data(**kwargs)
+        shops = context['shop_list']
+
+        query_type = ''
+
+        name_query = self.request.GET.get('name', False)
+        if name_query:
+            shops = self.get_shops_by_name(name_query)
+            query_type = 'name'
+
+        city_query = self.request.GET.get('city', False)
+        if city_query:
+            shops = self.get_shops_by_city(city_query)
+            query_type = 'city'
+
+        province_query = self.request.GET.get('province', False)
+        if province_query:
+            shops = self.get_shops_by_province(province_query)
+            query_type = 'province'
+
+        
+        barangay_query = self.request.GET.get('barangay', False)
+        if barangay_query or not query_type:
+            shops = self.get_shops_by_barangay(barangay_query or request.user.userprofile.barangay)
+            query_type = 'barangay'
+        
+        context.update({'shop_list': shops})
+        context['query_type'] = query_type
+        return context
+
+    def get_shops_by_name(self, name_query):
+        return LaundryShop.objects.filter(name__icontains=name_query)
+
+    def get_shops_by_city(self, city_query):
+        return LaundryShop.objects.filter(city__icontains=city_query)
+
+    def get_shops_by_province(self, province_query):
+        return LaundryShop.objects.filter(province__icontains=province_query)
+
+    def get_shops_by_barangay(self, barangay_query):
+        return LaundryShop.objects.filter(barangay__icontains=barangay_query)
 
     def get(self, request):
         if request.user.is_authenticated():
@@ -93,52 +139,7 @@ class SignupView(TemplateView):
 
 
 class ShopsListView(LoginRequiredMixin, ListView):
-    model = LaundryShop
-    paginate_by = 10
-    template_name="client/viewshops.html"
-    context_object_name = 'shop_list'
-
-    def get_context_data(self, **kwargs):
-        context = super(ShopsListView, self).get_context_data(**kwargs)
-        shops = context['shop_list']
-
-        query_type = ''
-
-        name_query = self.request.GET.get('name', False)
-        if name_query:
-            shops = self.get_shops_by_name(name_query)
-            query_type = 'name'
-
-        city_query = self.request.GET.get('city', False)
-        if city_query:
-            shops = self.get_shops_by_city(city_query)
-            query_type = 'city'
-
-        province_query = self.request.GET.get('province', False)
-        if province_query:
-            shops = self.get_shops_by_province(province_query)
-            query_type = 'province'
-
-        barangay_query = self.request.GET.get('barangay', False)
-        if barangay_query or not query_type:
-            shops = self.get_shops_by_barangay(barangay_query or request.user.userprofile.barangay)
-            query_type = 'barangay'
-            
-        context.update({'shop_list': shops})
-        context['query_type'] = query_type
-        return context
-
-    def get_shops_by_name(self, name_query):
-        return LaundryShop.objects.filter(name__icontains=name_query)
-
-    def get_shops_by_city(self, city_query):
-        return LaundryShop.objects.filter(city__icontains=city_query)
-
-    def get_shops_by_province(self, province_query):
-        return LaundryShop.objects.filter(province__icontains=province_query)
-
-    def get_shops_by_barangay(self, barangay_query):
-        return LaundryShop.objects.filter(barangay__icontains=barangay_query)
+    
 
 
 class OrderView(LoginRequiredMixin, CreateView):
