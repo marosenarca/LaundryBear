@@ -10,8 +10,9 @@ from django.views.generic import (CreateView, DeleteView, FormView, ListView,
                                   RedirectView, TemplateView, UpdateView)
 
 from client.forms import ProfileForm, UserForm
+from client.mixins import ClientLoginRequiredMixin
 from database.models import LaundryShop, Price, Service, UserProfile
-from LaundryBear.mixins import LoginRequiredMixin
+
 from LaundryBear.forms import LoginForm
 from LaundryBear.views import LoginView, LogoutView
 # Create your views here.
@@ -27,7 +28,7 @@ class ClientLogoutView(LogoutView):
     login_view_name = 'client:login'
 
 
-class DashView(LoginRequiredMixin, ListView):
+class DashView(ClientLoginRequiredMixin, ListView):
     template_name = "client/success.html"
 
     def get(self, request):
@@ -74,7 +75,7 @@ class SignupView(TemplateView):
         return self.response_class(request=self.request, template=self.template_name, context=context, using=None, **response_kwargs)
 
 
-class ShopsListView(ListView):
+class ShopsListView(ClientLoginRequiredMixin, ListView):
     model = LaundryShop
     paginate_by = 10
     template_name="client/viewshops.html"
@@ -101,12 +102,12 @@ class ShopsListView(ListView):
             shops = self.get_shops_by_province(province_query)
             query_type = 'province'
 
-        
+
         barangay_query = self.request.GET.get('barangay', False)
         if barangay_query or not query_type:
             shops = self.get_shops_by_barangay(barangay_query or self.request.user.userprofile.barangay)
             query_type = 'barangay'
-        
+
         context.update({'shop_list': shops})
         context['query_type'] = query_type
         return context
@@ -124,7 +125,7 @@ class ShopsListView(ListView):
         return LaundryShop.objects.filter(barangay__icontains=barangay_query)
 
 
-class OrderView(LoginRequiredMixin, CreateView):
+class OrderView(ClientLoginRequiredMixin, CreateView):
     template_name="client/shopselect.html"
 
     def get(self, request):
