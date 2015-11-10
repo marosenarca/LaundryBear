@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="{% static "LaundryBear/css/foundation.min.css" %}"/>
     <link rel="stylesheet" href="{% static "client/css/app.css" %}"/>
     <link rel="stylesheet" href="{% static "client/css/control.css" %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'client/css/viewcontrol.css' %}" />
 	<link rel="stylesheet" href="{% static "LaundryBear/foundation-icons/foundation-icons.css" %}" />
     {%block stylesheets%} {% endblock %}
   </head>
@@ -16,10 +17,9 @@
       <ul class="title-area">
 
         <li class="name">
-          <h1>
-			  <a href="{% url "client:menu" %}">
-			  <img id="logo" src="{% static "management/icons/headlogo.png" %}"/>
-			  <img id="writtenlogo" src="{% static "management/icons/written2.png" %}" />
+         <h1>
+        <a href="{% url "client:menu" %}">
+        <img src="{% static "LaundryBear/images/header-logo.png" %}" width="60%" height="60%"/>
             </a>
           </h1>
         </li>
@@ -29,6 +29,7 @@
       <section class="top-bar-section">
         <ul class="right">
 
+          <li><a href="{% url 'client:order'%}">Order</a></li>
           <li class="divider"></li>
 
 

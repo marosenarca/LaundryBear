@@ -32,3 +32,10 @@ $("dl.sub-nav dd").click(function(){
 });
 
 $('#logout_submit').click(function(){$('#logout_form').submit();});
+
+
+$(document).ready(function() {
+    $("#buttonForModal").click(function() {
+      $("#myModal").reveal();
+    });
+  });
