@@ -6,7 +6,7 @@ from django.forms.models import inlineformset_factory
 from django.shortcuts import redirect, render, render_to_response
 from django.template import RequestContext
 from django.utils.decorators import method_decorator
-from django.views.generic import (CreateView, DeleteView, FormView, ListView,
+from django.views.generic import (CreateView, DeleteView, DetailView, FormView, ListView,
                                   RedirectView, TemplateView, UpdateView)
 
 from client.forms import ProfileForm, UserForm
@@ -147,9 +147,10 @@ class OrderView(ClientLoginRequiredMixin, DetailView):
     context_object_name = 'shop'
     model = LaundryShop
     template_name="client/shopselect.html"
-
     
     def get_context_data(self, **kwargs):
         context = super(OrderView, self).get_context_data(**kwargs)
         context['service_list'] = Service.objects.all().order_by('pk')
         return context
+    #def get(self, request, *args, **kwargs):
+    #   return render(self.request, self.template_name, {})
