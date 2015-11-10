@@ -6,43 +6,25 @@ from django.forms.models import inlineformset_factory
 from django.shortcuts import redirect, render, render_to_response
 from django.template import RequestContext
 from django.utils.decorators import method_decorator
-from django.views.generic import (CreateView, DeleteView, ListView,
+from django.views.generic import (CreateView, DeleteView, FormView, ListView,
                                   RedirectView, TemplateView, UpdateView)
 
 from client.forms import ProfileForm, UserForm
 from database.models import LaundryShop, Price, Service, UserProfile
 from LaundryBear.mixins import LoginRequiredMixin
+from LaundryBear.forms import LoginForm
+from LaundryBear.views import LoginView, LogoutView
 # Create your views here.
 
 
-class ClientLoginView(TemplateView):
+class ClientLoginView(LoginView):
     template_name = "client/usersignin.html"
-
-    def render_to_response(self, context, **response_kwargs):
-        if self.request.user.is_authenticated():
-            return render(self.request, DashView.template_name, {})
-        return render(self.request, self.template_name, {})
-
-    def post(self, request):
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(username=username, password=password)
-        if user is not None:
-            if user.is_active:
-                login(request, user)
-                return redirect('client:menu')
-            else:
-                return render(request, self.template_name, {})
-        else:
-            return render(request, self.template_name, {})
+    form_class = LoginForm
+    success_view_name = 'client:menu'
 
 
-class ClientLogoutView(RedirectView):
-
-    @method_decorator(login_required)
-    def get(self, request):
-        logout(request)
-        return redirect('client:login')
+class ClientLogoutView(LogoutView):
+    login_view_name = 'client:login'
 
 
 class DashView(LoginRequiredMixin, ListView):
