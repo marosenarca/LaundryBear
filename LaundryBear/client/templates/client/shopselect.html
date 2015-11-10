@@ -39,7 +39,20 @@
 <button href="#" data-dropdown="drop1" aria-controls="drop1" aria-expanded="false" class="button dropdown">Choose Service</button><br>
 <ul id="drop1" data-dropdown-content class="f-dropdown" aria-hidden="true">
   {% for service in service_list %}
-  <li value="{{service.pk}}"><a href="#" data-reveal-id="modalidhere">{{service.name}}</a></li>
+  <li value="{{ service.pk }}"><a href="#" data-reveal-id="shopmodal{{ service.pk }}">{{ service.name }}</a></li>
+
+
+<!----this is the modal... -->
+<div id="shopmodal{{ service.pk }}" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+    <h4>{{ service.name }} </h4>
+    <p> {{ service.prices.price }} </p>
+    <p> details here </p>
+    <input type="number" />
+    <a class="button"> Add to Basket </a> <a class="button warning"> Cancel </a>
+    <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+</div>
+<!--yeeaaahh---->
+
   {% endfor %}
 </ul>
 
@@ -92,23 +105,6 @@
 </div>
 
 
-<!----this is the modal... -->
-<div id="modalidhere" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
-    <h4>Service Name here </h4>
-    <p> price/kilo </p>
-    <p> details here </p>
-    <input type="number" />
-    <a class="button"> Add to Basket </a> <a class="button warning"> Cancel </a>
-    <a class="close-reveal-modal" aria-label="Close">&#215;</a>
-</div>
-<!-- all in foundation.min.js
-<script src="../../../LaundryBear/static/LaundryBear/js/foundation/foundation.js"></script>
-<script src="../../../LaundryBear/static/LaundryBear/js/foundation/foundation.reveal.js"></script>
-<script src="../../../LaundryBear/static/LaundryBear/js/foundation.min.js"></script>
-<script src="../../../LaundryBear/static/LaundryBear/js/vendor/modernizr.js"></script>
-<script src="../../../LaundryBear/static/LaundryBear/reveal/jquery-1.4.4.min.js" type="text/javascript"></script>
-<script src="../../../LaundryBear/static/LaundryBear/reveal/jquery.reveal.js" type="text/javascript"></script>
-  -->
 {% endblock %}
 
 </html>
