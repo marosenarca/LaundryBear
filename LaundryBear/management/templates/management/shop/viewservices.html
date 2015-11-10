@@ -3,7 +3,55 @@
 {% block title %}View Services | LaundryBear{% endblock %}
 
 {% block body %}
-          <table style="margin:auto">
+
+   <form method="get">
+    {%csrf_token%}
+
+      <div class="row">
+         <div class="large-12 columns">
+           <div class="row collapse">
+
+ <div class="small-2 columns">
+             </div>
+
+              <div class="small-8 small-offset-2 columns">
+             
+
+         <dl id="filter" class="sub-nav">
+           <dt>Filter:</dt>
+       <dd {% if query_type == "name" %} class="active"{% endif %}>
+        <a href="#">Name</a></dd>
+       <dd {% if query_type == "description" %} class="active"{% endif %}>
+        <a href="#">Description</a></dd>
+         </dl>
+</div>
+ <div class="small-2 columns">
+             </div>
+
+         </div></div></div>
+
+      <div class="row">
+         <div class="large-12 columns">
+           <div class="row collapse">
+
+             <div class="small-2 columns">
+             </div>
+             <div class="small-7 small-offset-2 columns">
+               <input name="{{ query_type }}" id="search" type="text" placeholder="Search Services">
+             </div>
+             <div class="small-1 columns">
+               <button type="submit" class="button postfix">Go</button>
+             </div>
+             <div class="small-2 columns">
+             </div>
+           </div>
+         </div>
+       </div>
+       </form>
+
+
+
+        <table style="margin:auto">
           <thead>
             <tr>
               <th width="200">Name</th>
@@ -29,36 +77,6 @@
 		</div>
     {% endblock %}
     {% block footer %}
-    <form method="get">
-    {%csrf_token%}
-      <div class="row">
-         <div class="large-12 columns">
-           <div class="row collapse">
-
-      
-         <dl id="filter" class="sub-nav">
-           <dt>Filter:</dt>
-       <dd{% if query_type == "name" %} class="active"{% endif %}>
-        <a href="#">Name</a></dd>
-       <dd{% if query_type == "description" %} class="active"{% endif %}>
-        <a href="#">Description</a></dd>
-         </dl>
-      
-
-             <div class="small-2 columns">
-             </div>
-             <div class="small-7 small-offset-2 columns">
-               <input name="{{ query_type }}" id="search" type="text" placeholder="Search Services">
-             </div>
-             <div class="small-1 columns">
-               <button type="submit" class="button postfix">Go</button>
-             </div>
-             <div class="small-2 columns">
-             </div>
-           </div>
-         </div>
-       </div>
-       </form>
        <br>
 
   {% endblock %}
