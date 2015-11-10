@@ -101,24 +101,29 @@ class ShopsListView(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super(ShopsListView, self).get_context_data(**kwargs)
         shops = context['shop_list']
-        name_query = self.request.GET.get('name', False)
 
-        query_type = 'name'
+        query_type = ''
+
+        name_query = self.request.GET.get('name', False)
         if name_query:
             shops = self.get_shops_by_name(name_query)
             query_type = 'name'
+
         city_query = self.request.GET.get('city', False)
         if city_query:
             shops = self.get_shops_by_city(city_query)
             query_type = 'city'
+
         province_query = self.request.GET.get('province', False)
         if province_query:
             shops = self.get_shops_by_province(province_query)
             query_type = 'province'
+
         barangay_query = self.request.GET.get('barangay', False)
-        if barangay_query:
-            shops = self.get_shops_by_barangay(barangay_query)
+        if barangay_query or not query_type:
+            shops = self.get_shops_by_barangay(barangay_query or request.user.userprofile.barangay)
             query_type = 'barangay'
+            
         context.update({'shop_list': shops})
         context['query_type'] = query_type
         return context
