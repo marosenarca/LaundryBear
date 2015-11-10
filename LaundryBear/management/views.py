@@ -14,6 +14,8 @@ from django.views.generic import (CreateView, DeleteView, FormView, ListView,
 from management import forms
 from management.mixins import AdminLoginRequiredMixin
 
+from LaundryBear.views import LoginView, LogoutView
+
 
 class LaundryMenuView(AdminLoginRequiredMixin, TemplateView):
     template_name = 'management/shop/laundrybearmenu.html'
@@ -132,27 +134,13 @@ class LaundryListView(AdminLoginRequiredMixin, ListView):
         return LaundryShop.objects.filter(barangay__icontains=barangay_query)
 
 
-class LoginView(FormView):
+class AdminLoginView(LoginView):
     template_name = "management/account/login.html"
     form_class = forms.AdminLoginForm
-
-    def form_valid(self, form):
-        response = super(LoginView, self).form_valid(form)
-        user = form.cleaned_data['user']
-        login(self.request, user)
-        return response
+    success_view_name = 'management:menu'
 
 
-    def get_success_url(self):
-        next = self.request.GET.get('next')
-
-        if next:
-            return next
-        else:
-            return reverse('management:menu')
-
-
-class LogoutView(RedirectView):
+class AdminLogoutView(LogoutView):
     permanent = False
 
     def get_redirect_url(self, *args, **kwargs):
