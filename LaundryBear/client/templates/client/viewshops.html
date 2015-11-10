@@ -10,7 +10,9 @@
     {% csrf_token %}
       <div class="large-12 columns">
       <div class="row">
-            <dl id="filter" class="sub-nav">
+        <div class="small-3 columns"></div>
+        <div class="small-6 small-offset-3 columns">
+            <dl class="sub-nav">
 
                <dt>Filter:</dt>
 
@@ -20,6 +22,8 @@
                <dd {% if query_type == "province" %} class="active"{% endif %}><a href="#">Province</a></dd>
 
           </dl>
+        </div>
+        <div class="small-3 columns"></div>
           </div>
 </div>
 

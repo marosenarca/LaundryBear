@@ -6,10 +6,11 @@
 
     <form method="get">
     {% csrf_token %}
+      <div class="large-12 columns">
       <div class="row">
-         <div class="large-12 columns">
-           <div class="row collapse">
-            <dl id="filter" class="sub-nav">
+        <div class="small-3 columns"></div>
+        <div class="small-6 small-offset-3 columns">
+            <dl class="sub-nav">
 
                <dt>Filter:</dt>
 
@@ -19,6 +20,15 @@
                <dd {% if query_type == "province" %} class="active"{% endif %}><a href="#">Province</a></dd>
 
           </dl>
+        </div>
+        <div class="small-3 columns"></div>
+          </div>
+</div>
+
+
+ <div class="row">
+         <div class="large-12 columns">
+           <div class="row collapse">
 
              <div class="small-2 columns">
              </div>
