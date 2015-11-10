@@ -166,3 +166,13 @@ class LoginTestCase(TestCase):
         expected = 'management/account/login.html'
         self.assertTemplateUsed(response, expected)
 
+    def test_redirect_to_menu_already_logged_in(self):
+        """
+        Tests that a redirect will occur if going to the login page manually
+        """
+        # login
+        self.client.post(reverse('management:login-admin'),
+            {'username': 'test', 'password': 'runner'}, secure=True,
+            follow=True)
+        response = self.client.get(reverse('management:login-admin'))
+        self.assertRedirects(response, reverse('management:menu'))

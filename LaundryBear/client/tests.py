@@ -1,40 +1,51 @@
+from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
 from django.test import TestCase
 
 # Create your tests here.
-"""
 class LoginTestCase(TestCase):
     def setUp(self):
         User.objects.create_user(username='test', password='runner')
 
     def test_login_required_redirect(self):
-        response = self.client.get(reverse('management:menu'), follow=True)
-        expected = 'management/account/login.html'
-        self.assertEqual(response.templates[0].name, expected)
+        response = self.client.get(reverse('client:menu'), follow=True)
+        expected = 'client/usersignin.html'
+        self.assertTemplateUsed(response, expected)
 
     def test_redirect_to_menu_after_login_with_next(self):
-        response = self.client.get(reverse('management:menu'), follow=True)
+        response = self.client.get(reverse('client:menu'), follow=True)
         request = response.request
         response = self.client.post('{0}?{1}'.format(request['PATH_INFO'],
             request['QUERY_STRING']),
             {'username': 'test', 'password': 'runner'}, secure=True,
             follow=True)
-        expected = 'management/shop/laundrybearmenu.html'
-        self.assertEqual(response.templates[0].name, expected)
+        expected = 'client/success.html'
+        self.assertTemplateUsed(response, expected)
 
     def test_invalid_login(self):
-        response = self.client.get(reverse('management:menu'), follow=True)
+        response = self.client.get(reverse('client:menu'), follow=True)
         request = response.request
         response = self.client.post('{0}?{1}'.format(request['PATH_INFO'],
             request['QUERY_STRING']),
             {'username': 'tester', 'password': 'runner'}, secure=True,
             follow=True)
-        expected = 'management/shop/laundrybearmenu.html'
-        self.assertNotEqual(response.templates[0].name, expected)
+        expected = 'client/usersignin.html'
+        self.assertTemplateUsed(response, expected)
 
     def test_redirect_to_menu_after_login_without_next(self):
-        response = self.client.post(reverse('management:login-admin'),
+        response = self.client.post(reverse('client:login'),
             {'username': 'test', 'password': 'runner'}, secure=True,
             follow=True)
-        expected = 'management/shop/laundrybearmenu.html'
-        self.assertEqual(response.templates[0].name, expected)
-"""
+        expected = 'client/success.html'
+        self.assertTemplateUsed(response, expected)
+
+    def test_redirect_to_menu_already_logged_in(self):
+        """
+        Tests that a redirect will occur if going to the login page manually
+        """
+        # login
+        self.client.post(reverse('client:login'),
+            {'username': 'test', 'password': 'runner'}, secure=True,
+            follow=True)
+        response = self.client.get(reverse('client:login'))
+        self.assertRedirects(response, reverse('client:menu'))

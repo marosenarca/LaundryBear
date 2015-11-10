@@ -3,18 +3,18 @@ import json
 from database.models import LaundryShop, Price, Service, UserProfile
 
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.db.models import Q
 from django.forms.models import inlineformset_factory
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
-from django.utils.decorators import method_decorator
 from django.views.generic import (CreateView, DeleteView, FormView, ListView,
     RedirectView, TemplateView, UpdateView)
 
 from management import forms
 from management.mixins import AdminLoginRequiredMixin
+
+from LaundryBear.views import LoginView, LogoutView
 
 
 class LaundryMenuView(AdminLoginRequiredMixin, TemplateView):
@@ -134,38 +134,15 @@ class LaundryListView(AdminLoginRequiredMixin, ListView):
         return LaundryShop.objects.filter(barangay__icontains=barangay_query)
 
 
-class LoginView(FormView):
+class AdminLoginView(LoginView):
     template_name = "management/account/login.html"
     form_class = forms.AdminLoginForm
-
-    def form_valid(self, form):
-        response = super(LoginView, self).form_valid(form)
-        user = form.cleaned_data['user']
-        login(self.request, user)
-        return response
+    success_view_name = 'management:menu'
 
 
-    def get_success_url(self):
-        next = self.request.GET.get('next')
+class AdminLogoutView(LogoutView):
+    login_view_name = 'management:login-admin'
 
-        if next:
-            return next
-        else:
-            return reverse('management:menu')
-
-
-class LogoutView(RedirectView):
-    @method_decorator(login_required)
-    def get(self, request):
-        if request.user.is_staff:
-            logout(request)
-            return redirect('management:login-admin')
-        return redirect('management:menu')
-
-    def post(self, request):
-        print 'logged out'
-        logout(request)
-        return redirect('management:login-admin')
 
 
 class ClientListView(AdminLoginRequiredMixin, ListView):
