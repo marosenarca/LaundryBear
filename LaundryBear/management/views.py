@@ -16,8 +16,6 @@ from django.views.generic import (CreateView, DeleteView, FormView, ListView,
 from management import forms
 from management.mixins import AdminLoginRequiredMixin
 
-from LaundryBear.forms import LoginForm
-
 
 class LaundryMenuView(AdminLoginRequiredMixin, TemplateView):
     template_name = 'management/shop/laundrybearmenu.html'
@@ -138,7 +136,7 @@ class LaundryListView(AdminLoginRequiredMixin, ListView):
 
 class LoginView(FormView):
     template_name = "management/account/login.html"
-    form_class = LoginForm
+    form_class = forms.AdminLoginForm
 
     def form_valid(self, form):
         response = super(LoginView, self).form_valid(form)

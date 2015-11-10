@@ -161,7 +161,7 @@ class LoginTestCase(TestCase):
         # create non-superuser account
         User.objects.create_user(username='weak', password='soweak')
         response = self.client.post(reverse('management:login-admin'),
-            {'username': 'test', 'password': 'runner'}, secure=True,
+            {'username': 'weak', 'password': 'soweak'}, secure=True,
             follow=True)
         expected = 'management/account/login.html'
         self.assertTemplateUsed(response, expected)

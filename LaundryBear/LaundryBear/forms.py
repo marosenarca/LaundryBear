@@ -8,13 +8,14 @@ class LoginForm(forms.Form):
 
     def clean(self):
         cleaned_data = super(LoginForm, self).clean()
-        username = self.cleaned_data.get('username')
-        password = self.cleaned_data.get('password')
+        username = cleaned_data.get('username')
+        password = cleaned_data.get('password')
 
         user = authenticate(username=username, password=password)
 
         if user:
-            self.cleaned_data['user'] = user
+            cleaned_data['user'] = user
         else:
             raise forms.ValidationError(
                 'Username and/or password is incorrect.')
+        return cleaned_data
