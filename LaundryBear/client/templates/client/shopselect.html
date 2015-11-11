@@ -42,7 +42,7 @@
                                 <h4>{{ service.service.name }}</h4>
                                 <p>Price: {{ service.price }} pesos per kilo </p>
                                 <p>Description: {{ service.service.description}} </p>
-                                <input type="number" />
+                                Input number of clothes: <input type="number" min="1" />
 								<a data-servicename="{{ service.service.name }}" data-price-per-kilo="{{ service.price }}" data-pk="{{ service.pk }}" class="button right add-to-basket"> Add to Basket </a>
                                 <a class="close-reveal-modal" aria-label="Close">&#215;</a>
                             </div>

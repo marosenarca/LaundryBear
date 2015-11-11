@@ -11,7 +11,8 @@
     <p>Are you sure?</p>
     <form method="post" action="{%url 'management:delete-service' service.pk%}">
       {%csrf_token%}
-      <button type="submit">Yes</button> <button>No</button>
+      <button type="submit">Yes</button> 
+      <button>No</button>
     </form>
       <a class="close-reveal-modal" aria-label="Close">&#215;</a>
     </div>

@@ -21,25 +21,7 @@ from LaundryBear.views import LoginView, LogoutView
 class ClientLoginView(LoginView):
     template_name = "client/usersignin.html"
     form_class = LoginForm
-    success_view_name = 'client:menu'
-
-    def render_to_response(self, context, **response_kwargs):
-        if self.request.user.is_authenticated():
-            return render(self.request, DashView.template_name, {})
-        return render(self.request, self.template_name, {})
-
-    def post(self, request):
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(username=username, password=password)
-        if user is not None:
-            if user.is_active:
-                login(request, user)
-                return redirect('client:view-shops')
-            else:
-                return render(request, self.template_name, {})
-        else:
-            return render(request, self.template_name, {})
+    success_view_name = 'client:view-shops'
 
 
 class ClientLogoutView(LogoutView):
@@ -74,7 +56,7 @@ class SignupView(TemplateView):
             password = request.POST['user-password1']
             user = authenticate(username=username, password=password)
             login(request, user)
-            return redirect('client:viewshops')
+            return redirect('client:view-shops')
         else:
             print uf.errors
             print upf.errors
