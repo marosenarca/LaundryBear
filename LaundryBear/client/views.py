@@ -150,8 +150,6 @@ class OrderView(ClientLoginRequiredMixin, DetailView):
     
     def get_context_data(self, **kwargs):
         context = super(OrderView, self).get_context_data(**kwargs)
-        print '-----------dasldkjasdklasj______--------skladjasldka----'
-        print context
         the_shop = context['shop']
         context['service_list'] = Price.objects.filter(laundry_shop__name=the_shop)
         return context

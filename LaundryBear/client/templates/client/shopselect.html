@@ -6,64 +6,56 @@
 <section class="services">
     <div class="row">
         <div class="small-12 large-10 columns small-centered">
-            <h2> {{ shop.name }} </h2>
+            <h2 style="text-align:center"> {{ shop.name }} </h2>
             <br>
-            <table style="margin:auto">
-                <thead>
-                    <tr>
-                        <th width="200">Name</th>
-                        <th width="500">Address</th>
-                        <th width="150">Contact Information</th>
-                        <th>Rating</th>
-                        <th>Operating Hours</th>
-                        <th>Email</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>{{ shop.name }}</td>
-                        <td>{{ shop.location }}</td>
-                        <td>{{ shop.contact_number }}</td>
-                        <td>
-                            <div class="paw-container" style="width: {% widthratio shop.average_rating 5 150 %}px;"><img src="{% static " management/icons/star.png " %}" /></div>
-                        </td>
-                        <td>{{ shop.days_open }}, {{ shop.hours_open }}</td>
-                        <td>{{ shop.email }}</td>
-                </tbody>
-            </table>
-            <br>
-            <form class="custom">
+            <div class="panel">
                 <div class="row">
-                    <div class="large-6 small-12 columns">
-
-<button href="#" data-dropdown="drop1" aria-controls="drop1" aria-expanded="false" class="button dropdown">Choose Service</button><br>
-<ul id="drop1" data-dropdown-content class="f-dropdown" aria-hidden="true">
-  {% for service in service_list %}
-  <li value="{{ service.pk }}"><a href="#" data-reveal-id="shopmodal{{ service.pk }}">{{ service.service.name }}</a></li>
-
-
-<!----this is the modal... -->
-<div id="shopmodal{{ service.pk }}" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
-    <h4>{{ service.service.name }} </h4>
-    <p> {{ service.price }} </p>
-    <p> details here </p>
-    <input type="number" />
-    <a class="button"> Add to Basket </a> <a class="button warning"> Cancel </a>
-    <a class="close-reveal-modal" aria-label="Close">&#215;</a>
-</div>
-<!--yeeaaahh---->
-
-  {% endfor %}
-</ul>
-
-                    </div>
-                    <div class="large-3 small-6 columns"></div>
-                    <div class="large-3 small-12 columns">
+                    <div class="small-12 large-10 columns small-centered">
+                        <div class="paw-container" style="width: {% widthratio shop.average_rating 5 150 %}px;"><img src="{% static " management/icons/star.png " %}" /></div>
                     </div>
                 </div>
-            </form>
+                <p><strong>Location:</strong> {{ shop.location }} </p>
+                <p><strong>Contact number: </strong> {{ shop.contact_number}}</p>
+                <p><strong>Days Open:</strong> {{shop.days_open}}, {{ shop.hours_open }}</p>
+                {% if shop.email %}
+                <p><strong>Email:</strong> {{ shop.email}} </p>
+                {% else %} {% endif %}
+            </div>
         </div>
     </div>
+    <hr>
+   
+    <br>
+    <form class="custom">
+        <div class="row">
+            <div class="large-12 columns">
+                <div class="row collapse">
+                    <div class="large-3 columns"></div>
+                    <div class="large-6 large-offset-3 columns">
+                        <button href="#" data-dropdown="drop1" aria-controls="drop1" aria-expanded="false" class="secondary button dropdown expand">Choose Service</button>
+                        <br>
+                        <ul id="drop1" data-dropdown-content class="f-dropdown" aria-hidden="true">
+                            {% for service in service_list %}
+                            <li value="{{ service.pk }}"><a href="#" data-reveal-id="shopmodal{{ service.pk }}">{{ service.service.name }}</a></li>
+                            <!----this is the modal... -->
+                            <div id="shopmodal{{ service.pk }}" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+                                <h4>{{ service.service.name }} </h4>
+                                <p>Price: {{ service.price }} pesos per kilo </p>
+                                <p>Description: {{ service.service.description}} </p>
+                                <input type="number" />
+                                <a class="button right"> Add to Basket </a>
+                                <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+                            </div>
+                            <!--yeeaaahh---->
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="large-3 columns">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
 </section>
 <h3 style="text-align:center"> My Laundry Basket </h3>
 <table align="center">
@@ -93,18 +85,16 @@
 </table>
 <div class="row" align="center">
     <div class="large-2 small-12 columns expand" align="left">
-        <a href="#" class="button expand">Back</a>
     </div>
     <div class="large-10 small-12" align="center">
         <span class="info label">Total:</span>
         <p><strong>240</strong></p>
     </div>
-    <div class="large-12 small-2 columns expand" align="right">
-        <a href="#" class="button success">Request</a>
+    <div class="large-12 small-2 columns expand">
+        <a href="{% url "client:view-shops" %}" class="button left">Back</a>
+        <a href="#" class="button success right">Request</a>
     </div>
 </div>
-
-
 {% endblock %}
 
 </html>
