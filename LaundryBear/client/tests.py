@@ -2,10 +2,15 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.test import TestCase
 
+from database.models import UserProfile
+
+
 # Create your tests here.
 class LoginTestCase(TestCase):
     def setUp(self):
-        User.objects.create_user(username='test', password='runner')
+        u = User.objects.create_user(username='test', password='runner')
+        UserProfile.objects.create(client=u, contact_number='12345',
+            province='cebu', city='cebu', barangay='lahug')
 
     def test_login_required_redirect(self):
         response = self.client.get(reverse('client:menu'), follow=True)
@@ -19,7 +24,7 @@ class LoginTestCase(TestCase):
             request['QUERY_STRING']),
             {'username': 'test', 'password': 'runner'}, secure=True,
             follow=True)
-        expected = 'client/success.html'
+        expected = 'client/viewshops.html'
         self.assertTemplateUsed(response, expected)
 
     def test_invalid_login(self):
@@ -36,7 +41,7 @@ class LoginTestCase(TestCase):
         response = self.client.post(reverse('client:login'),
             {'username': 'test', 'password': 'runner'}, secure=True,
             follow=True)
-        expected = 'client/success.html'
+        expected = 'client/viewshops.html'
         self.assertTemplateUsed(response, expected)
 
     def test_redirect_to_menu_already_logged_in(self):
