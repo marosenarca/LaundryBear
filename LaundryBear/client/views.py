@@ -150,7 +150,8 @@ class OrderView(ClientLoginRequiredMixin, DetailView):
     
     def get_context_data(self, **kwargs):
         context = super(OrderView, self).get_context_data(**kwargs)
-        context['service_list'] = Service.objects.all().order_by('pk')
+        print '-----------dasldkjasdklasj______--------skladjasldka----'
+        print context
+        the_shop = context['shop']
+        context['service_list'] = Price.objects.filter(laundry_shop__name=the_shop)
         return context
-    #def get(self, request, *args, **kwargs):
-    #   return render(self.request, self.template_name, {})

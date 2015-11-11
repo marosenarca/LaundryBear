@@ -39,13 +39,13 @@
 <button href="#" data-dropdown="drop1" aria-controls="drop1" aria-expanded="false" class="button dropdown">Choose Service</button><br>
 <ul id="drop1" data-dropdown-content class="f-dropdown" aria-hidden="true">
   {% for service in service_list %}
-  <li value="{{ service.pk }}"><a href="#" data-reveal-id="shopmodal{{ service.pk }}">{{ service.name }}</a></li>
+  <li value="{{ service.pk }}"><a href="#" data-reveal-id="shopmodal{{ service.pk }}">{{ service.service.name }}</a></li>
 
 
 <!----this is the modal... -->
 <div id="shopmodal{{ service.pk }}" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
-    <h4>{{ service.name }} </h4>
-    <p> {{ service.prices.price }} </p>
+    <h4>{{ service.service.name }} </h4>
+    <p> {{ service.price }} </p>
     <p> details here </p>
     <input type="number" />
     <a class="button"> Add to Basket </a> <a class="button warning"> Cancel </a>
