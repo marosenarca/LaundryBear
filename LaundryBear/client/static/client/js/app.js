@@ -39,3 +39,38 @@ $(document).ready(function() {
       $("#myModal").reveal();
     });
   });
+
+$(".reveal-modal-button").click(function() {
+	var modalId = $(this).data("reveal-id");
+	$("#" + modalId + " input").val(0);
+});
+
+$(".add-to-basket").click(function() {
+	var pieces = $(this).siblings("input").val();
+	pieces = parseFloat(pieces).toFixed(0);
+	if (pieces.length === 0 || pieces == 0) {
+		return false;
+	}
+
+	var servicename = $(this).data("servicename");
+	var pricePerKg = $(this).data("price-per-kilo");
+	var price = pieces * pricePerKg / 7;
+	price = parseFloat(price).toFixed(2);
+	var template = $("#row-template").html();
+	var compiledTemplate = template.replace(/__servicename__/, servicename).replace(/__pieces__/, pieces).replace(/__price__/g, price);
+
+	$("#table-body").append(compiledTemplate);
+
+	$(this).siblings("input").val(0);
+	$(this).parent().foundation("reveal", "close");
+
+	updateTotals();
+});
+
+function updateTotals() {
+	var total = 0;
+	$("#table-body").children().each(function(index, element) {
+		total += +$(element).data("price").valueOf();
+	});
+	$("#total-price").html(total);
+}

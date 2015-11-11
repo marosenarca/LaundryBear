@@ -1,8 +1,8 @@
 {% extends 'client/base.html' %} {% load staticfiles %} {% block stylesheets %}
-<link rel="stylesheet" href="{% static " client/css/selectshopcontrol.css " %}" />
-<link rel="stylesheet" href="{% static " client/css/viewcontrol.css " %}" />
-<link rel="stylesheet" href="{% static " LaundryBear/css/normalize.css " %}" />
-<link rel="stylesheet" href="{% static " LaundryBear/reveal/reveal.css " %}" /> {% endblock %} {% block title %}Laundry Bear | Request {% endblock %} {% block body %}
+<link rel="stylesheet" href="{% static "client/css/selectshopcontrol.css" %}" />
+<link rel="stylesheet" href="{% static "client/css/viewcontrol.css" %}" />
+<link rel="stylesheet" href="{% static "LaundryBear/css/normalize.css" %}" />
+<link rel="stylesheet" href="{% static "LaundryBear/reveal/reveal.css" %}" /> {% endblock %} {% block title %}Laundry Bear | Request {% endblock %} {% block body %}
 <section class="services">
     <div class="row">
         <div class="small-12 large-10 columns small-centered">
@@ -11,7 +11,7 @@
             <div class="panel">
                 <div class="row">
                     <div class="small-12 large-10 columns small-centered">
-                        <div class="paw-container" style="width: {% widthratio shop.average_rating 5 150 %}px;"><img src="{% static " management/icons/star.png " %}" /></div>
+                        <div class="paw-container" style="width: {% widthratio shop.average_rating 5 150 %}px;"><img src="{% static "management/icons/star.png" %}" /></div>
                     </div>
                 </div>
                 <p><strong>Location:</strong> {{ shop.location }} </p>
@@ -36,17 +36,17 @@
                         <br>
                         <ul id="drop1" data-dropdown-content class="f-dropdown" aria-hidden="true">
                             {% for service in service_list %}
-                            <li value="{{ service.pk }}"><a href="#" data-reveal-id="shopmodal{{ service.pk }}">{{ service.service.name }}</a></li>
-                            <!----this is the modal... -->
+                            <li value="{{ service.pk }}"><a href="#" class="reveal-modal-button" data-reveal-id="shopmodal{{ service.pk }}">{{ service.service.name }}</a></li>
+                            <!--this is the modal... -->
                             <div id="shopmodal{{ service.pk }}" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
-                                <h4>{{ service.service.name }} </h4>
+                                <h4>{{ service.service.name }}</h4>
                                 <p>Price: {{ service.price }} pesos per kilo </p>
                                 <p>Description: {{ service.service.description}} </p>
                                 <input type="number" />
-                                <a class="button right"> Add to Basket </a>
+								<a data-servicename="{{ service.service.name }}" data-price-per-kilo="{{ service.price }}" class="button right add-to-basket"> Add to Basket </a>
                                 <a class="close-reveal-modal" aria-label="Close">&#215;</a>
                             </div>
-                            <!--yeeaaahh---->
+                            <!--yeeaaahh-->
                             {% endfor %}
                         </ul>
                     </div>
@@ -67,28 +67,30 @@
             <th width="275" align="center">Actions</th>
         </tr>
     </thead>
-    <tbody>
-        <tr>
-            <td>Wash</td>
-            <td>
-                <input type="number" placeholder="Pieces" />
-            </td>
-            <td align="center">80</td>
-            <td>
-                <ul class="button-group round">
-                    <li><a href="#" class="button info">Edit</a></li>
-                    <li><a href="#" class="button alert">Delete</a></li>
-                </ul>
-            </td>
-        </tr>
+    <tbody id="table-body">
     </tbody>
 </table>
+<template id="row-template">
+	<tr data-price="__price__">
+		<td>__servicename__</td>
+		<td>
+			__pieces__
+		</td>
+		<td align="center">__price__</td>
+		<td>
+			<ul class="button-group round">
+				<li><a href="#" class="button info">Edit</a></li>
+				<li><a href="#" class="button alert">Delete</a></li>
+			</ul>
+		</td>
+	</tr>
+</template>
 <div class="row" align="center">
     <div class="large-2 small-12 columns expand" align="left">
     </div>
     <div class="large-10 small-12" align="center">
         <span class="info label">Total:</span>
-        <p><strong>240</strong></p>
+        <p><strong id="total-price">0</strong></p>
     </div>
     <div class="large-12 small-2 columns expand">
         <a href="{% url "client:view-shops" %}" class="button left">Back</a>
@@ -96,5 +98,3 @@
     </div>
 </div>
 {% endblock %}
-
-</html>
