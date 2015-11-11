@@ -36,14 +36,14 @@
                         <br>
                         <ul id="drop1" data-dropdown-content class="f-dropdown" aria-hidden="true">
                             {% for service in service_list %}
-                            <li value="{{ service.pk }}"><a href="#" class="reveal-modal-button" data-reveal-id="shopmodal{{ service.pk }}">{{ service.service.name }}</a></li>
+                            <li value="{{ service.pk }}"><a href="#" class="reveal-modal-button" data-reveal-id="servicemodal{{ service.pk }}">{{ service.service.name }}</a></li>
                             <!--this is the modal... -->
-                            <div id="shopmodal{{ service.pk }}" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+                            <div id="servicemodal{{ service.pk }}" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
                                 <h4>{{ service.service.name }}</h4>
                                 <p>Price: {{ service.price }} pesos per kilo </p>
                                 <p>Description: {{ service.service.description}} </p>
                                 <input type="number" />
-								<a data-servicename="{{ service.service.name }}" data-price-per-kilo="{{ service.price }}" class="button right add-to-basket"> Add to Basket </a>
+								<a data-servicename="{{ service.service.name }}" data-price-per-kilo="{{ service.price }}" data-pk="{{ service.pk }}" class="button right add-to-basket"> Add to Basket </a>
                                 <a class="close-reveal-modal" aria-label="Close">&#215;</a>
                             </div>
                             <!--yeeaaahh-->
@@ -79,7 +79,7 @@
 		<td align="center">__price__</td>
 		<td>
 			<ul class="button-group round">
-				<li><a href="#" class="button info">Edit</a></li>
+				<li><a href="#" class="button info" data-reveal-id="servicemodal__pk__" data-pieces="__pieces__">Edit</a></li>
 				<li><a href="#" class="button alert">Delete</a></li>
 			</ul>
 		</td>

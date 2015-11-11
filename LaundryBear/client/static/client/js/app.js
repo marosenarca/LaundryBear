@@ -53,11 +53,12 @@ $(".add-to-basket").click(function() {
 	}
 
 	var servicename = $(this).data("servicename");
+	var pk = $(this).data("pk")
 	var pricePerKg = $(this).data("price-per-kilo");
 	var price = pieces * pricePerKg / 7;
 	price = parseFloat(price).toFixed(2);
 	var template = $("#row-template").html();
-	var compiledTemplate = template.replace(/__servicename__/, servicename).replace(/__pieces__/, pieces).replace(/__price__/g, price);
+	var compiledTemplate = template.replace(/__servicename__/, servicename).replace(/__pieces__/g, pieces).replace(/__price__/g, price).replace(/__pk__/, pk);
 
 	$("#table-body").append(compiledTemplate);
 
@@ -75,8 +76,19 @@ function updateTotals() {
 	$("#total-price").html(total);
 }
 
-$("#table-body").click(".button-group alert", function(e) {
+$("#table-body").on("click", ".alert", function(e) {
 	$(e.target).closest("tr").remove();
 	updateTotals();
+	return false;
+});
+
+$("#table-body").on("click", ".info", function(e) {
+	var revealId = $(e.target).data("reveal-id");
+	var modal = $("#" + revealId);
+	modal.foundation("reveal", "open");
+	var items = $(e.target).data("pieces");
+	modal.find("input").val(+items);
+
+	$(e.target).closest("tr").remove();
 	return false;
 })
