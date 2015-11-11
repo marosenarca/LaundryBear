@@ -74,3 +74,9 @@ function updateTotals() {
 	});
 	$("#total-price").html(total);
 }
+
+$("#table-body").click(".button-group alert", function(e) {
+	$(e.target).closest("tr").remove();
+	updateTotals();
+	return false;
+})
