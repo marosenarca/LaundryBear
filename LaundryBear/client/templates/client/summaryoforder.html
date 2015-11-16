@@ -1,0 +1,44 @@
+{% extends 'client/base.html' %}
+
+{% block title %} Order: Summary | LaundryBear {% endblock %}
+
+    {% block body %}
+        <div class="row">
+            <div class="large-2 columns"></div>
+            <div class="large-8 large-offset-2 columns">
+                <div class="panel small-centered">
+                    <h3 style="text-align:center">Summary</h3>
+                        <table style="margin:auto">
+                            <thead>
+                                <th>Shizz1</th>
+                                <th>Shizz2</th>
+                                <th>Shizz3</th>
+                            </thead>
+                            <tbody>
+                                <!-partial shizz? i dont really know...-->
+                            </tbody>
+                        </table>
+                        <div class="row">
+                            <div class="large-2 columns"></div>
+                            <div class="large-10 large-offset-2 columns">
+                                <strong>Subtotal:</strong> "insert subtotal here"
+                                <br>
+                                <strong>+Delivery fee:</strong> "insert fee here"
+                                <hr>
+                                <strong>GRAND TOTAL:</strong> "insert total here"
+                            </div>
+                        </div>
+                </div>
+                <hr>
+                <strong>Date of delivery: </strong>
+                <span style="background-color:#1df064">"date here"</span>
+                <br><br>
+                <a href="#" class="button left">Back</a>
+                <a href="#" class="button success right">Order</a>
+
+            </div>
+            <div class="large-2 columns"></div>
+
+        </div>
+
+    {% endblock %}
