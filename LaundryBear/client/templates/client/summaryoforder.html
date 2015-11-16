@@ -15,7 +15,7 @@
                                 <th>Estimated Price</th>
                             </thead>
                             <tbody>
-                                <!-partial shizz? i dont really know...-->
+                                <!-partial cookies shizz? i dont really know...-->
                             </tbody>
                         </table>
                         <div class="row">
@@ -33,12 +33,32 @@
                 <strong>Date of delivery: </strong>
                 <span style="background-color:#1df064">"date here"</span>
                 <br><br>
-                <a href="#" class="button left">Back</a>
-                <a href="#" class="button success right">Order</a>
+                <a href="javascript:history.go(-1)" class="button left">Back</a>
+                <a href="#" data-reveal-id="confirmModal" class="button success right">Order</a>
+                <!-- Are you sure? -->
+                <div id="confirmModal" class="reveal-modal" data-reveal aria-labelledby="firstModalTitle" aria-hidden="true" role="dialog">
+                    <h2 id="firstModalTitle">Are You Sure?</h2>
+                    <a href="{% url 'client:menu' %}" data-reveal-id="sendModal" class="button success right">Yes</a>
+                    <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+                </div>
+                <!--your request has been processed. please wait for futher announcements-->
+                <div id="sendModal" class="reveal-modal" data-reveal aria-labelledby="firstModalTitle" aria-hidden="true" role="dialog">
+                  <h5 id="firstModalTitle">your request has been received. Please wait for the confirmation message</h5>
+                  <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+                </div>
 
             </div>
             <div class="large-2 columns"></div>
 
         </div>
 
+    {% endblock %}
+    {% block javascripts %}
+        <script type="text/javascript">
+            $(document).foundation({
+                reveal : {
+                    multiple_opened:false
+                }
+            });
+        </script>
     {% endblock %}
