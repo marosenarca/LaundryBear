@@ -82,3 +82,12 @@ class Rating(models.Model):
 
     def __unicode__(self):
         return "{1} paw rating for {0}".format(unicode(self.laundry_shop),self.paws)
+
+class Order (models.Model):
+
+
+class Transaction(models.Model):
+    laundry_shop = models.ForeignKey('LaundryShop')
+    client = models.ForeignKey('UserProfile')
+    is_pending = models.BooleanField()
+    request_date = models.DateField(auto_now_add=True)
