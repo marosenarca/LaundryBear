@@ -38,7 +38,7 @@ class LaundryUpdateView(AdminLoginRequiredMixin, UpdateView):
     def form_valid(self, form):
         response = super(LaundryUpdateView, self).form_valid(form)
         PriceInlineFormSet = inlineformset_factory(
-            LaundryShop, Price, fields=('service', 'price'), extra=1)
+            LaundryShop, Price, fields=('service', 'price', 'duration'), extra=1)
         price_formset = PriceInlineFormSet(
             data=self.request.POST, instance=self.object)
         if price_formset.is_valid():
@@ -51,7 +51,7 @@ class LaundryUpdateView(AdminLoginRequiredMixin, UpdateView):
         context = super(LaundryUpdateView, self).get_context_data(**kwargs)
         context['service_list'] = Service.objects.all().order_by('pk')
         price_formset = inlineformset_factory(
-            LaundryShop, Price, fields=('service', 'price'), extra=1)
+            LaundryShop, Price, fields=('service', 'price', 'duration'), extra=1)
         context['price_formset'] = price_formset(instance=self.object)
         return context
 
@@ -66,7 +66,7 @@ class LaundryCreateView(AdminLoginRequiredMixin, CreateView):
     def form_valid(self, form):
         response = super(LaundryCreateView, self).form_valid(form)
         PriceInlineFormSet = inlineformset_factory(
-            LaundryShop, Price, fields=('service', 'price'), extra=1)
+            LaundryShop, Price, fields=('service', 'price', 'duration'), extra=1)
         price_formset = PriceInlineFormSet(
             data=self.request.POST, instance=self.object)
         if price_formset.is_valid():
@@ -79,7 +79,7 @@ class LaundryCreateView(AdminLoginRequiredMixin, CreateView):
         context = super(LaundryCreateView, self).get_context_data(**kwargs)
         context['service_list'] = Service.objects.all().order_by('pk')
         price_formset = inlineformset_factory(
-            LaundryShop, Price, fields=('service', 'price'), extra=1)
+            LaundryShop, Price, fields=('service', 'price', 'duration'), extra=1)
         context['price_formset'] = price_formset()
         return context
 
