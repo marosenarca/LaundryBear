@@ -264,3 +264,7 @@ class AddNewServiceView(AdminLoginRequiredMixin, CreateView):
 
     def get_success_url(self):
         return reverse('management:list-service')
+
+
+class RequestedTransactionsView(TemplateView):
+    template_name = 'management/transactions/requestedtransactions.html'

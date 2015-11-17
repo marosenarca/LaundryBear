@@ -37,7 +37,7 @@
               <li><a href="{% url "management:list-shops"%}">See all →</a></li>
             </ul>
           </li>
-    <li class="divider"></li>
+        <li class="divider"></li>
           <li class="has-dropdown">
             <a>Manage Services</a>
             <ul class="dropdown">
@@ -50,7 +50,20 @@
           <li class="divider"></li>
           <li><a href="{% url "management:list-client" %}">View Accounts</a></li>
           <li class="divider"></li>
-          <li><a href="{% url "management:list-client" %}">View Transactions</a></li>
+
+          <li class="has-dropdown">
+            <a href="{% url "management:requested-transactions" %}">View Transactions</a>
+            <ul class="dropdown">
+              <li><a href="{% url "management:requested-transactions" %}">Requested</a></li>
+              <li class="divider"></li>
+              <li><a href="#">Ongoing</a></li>
+              <li class="divider"></li>
+              <li><a href="#">History</a></li>
+            </ul>
+          </li>
+
+
+
           <li class="divider"></li>
           <li class="has-dropdown">
             <a href="#">Hi, {{user.username}}</a>
