@@ -11,5 +11,6 @@ urlpatterns = [
     url(r'^signup', views.SignupView.as_view(), name='signup'),
     url(r'^viewshops', views.ShopsListView.as_view(), name='view-shops'),
     url(r'^order/(?P<pk>\d+)$', views.OrderView.as_view(), name='order'),
+    url(r'^ordersummary', views.OrderSummaryView.as_view(), name='order-summary'),
     url(r'', views.DashView.as_view(), name='menu')
 ]
