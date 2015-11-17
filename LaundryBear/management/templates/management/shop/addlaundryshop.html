@@ -219,8 +219,13 @@
 							  </select>
 						  </label>
 					  </div>
-					  <div class="medium-4 columns">
+					  <div class="medium-2 columns">
 						  <label>Price
+							  <input type="number" id="price-input" min="1" />
+						  </label>
+					  </div>
+                      <div class="medium-2 columns">
+						  <label>Duration
 							  <input type="number" id="price-input" min="1" />
 						  </label>
 					  </div>
@@ -245,6 +250,7 @@
                     <th>Service Name</th>
                     <th>Description</th>
                     <th>Price</th>
+                    <th>Duration</th>
                     <th>Actions</th>
                   </tr>
                 </thead>
@@ -259,6 +265,7 @@
 				{{ price_form.id }}
 				{{ price_form.service }}
 				{{ price_form.price }}
+                {{ price_form.duration }}
 				{{ price_form.DELETE }}
 			</div>
 			{% endfor %}
