@@ -74,7 +74,7 @@ class Price(models.Model):
     laundry_shop = models.ForeignKey('LaundryShop', on_delete=models.CASCADE)
     service = models.ForeignKey('Service', on_delete=models.CASCADE)
     price = models.DecimalField(max_digits=10, decimal_places=2, blank=False)
-
+    duration = models.IntegerField()
 
 class Rating(models.Model):
     laundry_shop = models.ForeignKey('LaundryShop', related_name='ratings')

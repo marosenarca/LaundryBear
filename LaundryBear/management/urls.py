@@ -26,5 +26,6 @@ urlpatterns = [
         name='create-service'),
     url(r'^services/edit/(?P<pk>\d+)$', views.ServiceUpdateView.as_view(),
         name='edit-service'),
-    url(r'^service/add$', views.AddNewServiceView.as_view(), name='add-service')
+    url(r'^service/add$', views.AddNewServiceView.as_view(), name='add-service'),
+    url(r'^transactions/requested$', views.RequestedTransactionsView.as_view(), name='requested-transactions')
 ]

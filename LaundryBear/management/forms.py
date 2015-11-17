@@ -20,7 +20,7 @@ class RatingForm(forms.ModelForm):
 class PriceForm(forms.ModelForm):
     class Meta:
         model = Price
-        fields = ['laundry_shop', 'service', 'price']
+        fields = ['laundry_shop', 'service', 'price', 'duration']
 
 
 class LaundryShopForm(forms.ModelForm):
@@ -38,4 +38,3 @@ class AdminLoginForm(LoginForm):
 
         if not user.is_staff:
             raise forms.ValidationError('You have no power here.')
-

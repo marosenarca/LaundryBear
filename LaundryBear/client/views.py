@@ -136,5 +136,14 @@ class OrderView(ClientLoginRequiredMixin, DetailView):
         context['service_list'] = Price.objects.filter(laundry_shop__name=the_shop)
         return context
 
-class OrderSummaryView(TemplateView):
+
+class OrderSummaryView(ClientLoginRequiredMixin, DetailView):
+    context_object_name = 'shop'
     template_name="client/summaryoforder.html"
+    model=LaundryShop
+
+    def get_context_data(self, **kwargs):
+        context = super(OrderSummaryView, self).get_context_data(**kwargs)
+        context['delivery_fee'] = float(50)
+        context['service_charge'] = float(50)
+        return context

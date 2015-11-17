@@ -7,7 +7,7 @@
       <div class="row">
       <div class="large-8 large-offset-2 columns">
         <div class="panel">
-          <h3 align="center">Edit Laundry Shop</h3>
+          <h3 align="center">Add Laundry Shop</h3>
           <!--forms-->
           <form method="post">
               {% csrf_token %}
@@ -219,9 +219,14 @@
 							  </select>
 						  </label>
 					  </div>
-					  <div class="medium-4 columns">
+					  <div class="medium-2 columns">
 						  <label>Price
-							  <input type="number" id="price-input" />
+							  <input type="number" id="price-input" min="1" />
+						  </label>
+					  </div>
+                      <div class="medium-2 columns">
+						  <label>Duration
+							  <input type="number" id="duration-input" min="1" />
 						  </label>
 					  </div>
 					  <div class="medium-2 columns" id="set-service-button-container">
@@ -245,6 +250,7 @@
                     <th>Service Name</th>
                     <th>Description</th>
                     <th>Price</th>
+                    <th>Duration</th>
                     <th>Actions</th>
                   </tr>
                 </thead>
@@ -259,6 +265,7 @@
 				{{ price_form.id }}
 				{{ price_form.service }}
 				{{ price_form.price }}
+                {{ price_form.duration }}
 				{{ price_form.DELETE }}
 			</div>
 			{% endfor %}

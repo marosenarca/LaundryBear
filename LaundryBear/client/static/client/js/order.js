@@ -50,7 +50,7 @@ $(".add-to-basket").click(function() {
 		selectedServices = JSON.parse(selectedServices);
 	}
 	selectedServices.push({name: servicename, pk: pk, pricePerKg: pricePerKg, price: price, pieces: pieces});
-	document.cookie = "selectedServices=" + JSON.stringify(selectedServices);
+	document.cookie = "selectedServices=" + JSON.stringify(selectedServices) + ";path=/;domain=;";
 
 	updateTotals();
 });
@@ -79,7 +79,7 @@ $("#table-body").on("click", ".alert", function(e) {
 	selectedServices = JSON.parse(selectedServices);
 	var index = $("#table-body .alert").index(this);
 	selectedServices.splice(index, 1);
-	document.cookie = "selectedServices=" + JSON.stringify(selectedServices);
+	document.cookie = "selectedServices=" + JSON.stringify(selectedServices) + ";path=/;domain=;";
 	$(e.target).closest("tr").remove();
 	updateTotals();
 	return false;
@@ -95,7 +95,7 @@ $("#table-body").on("click", ".info", function(e) {
 	selectedServices = JSON.parse(selectedServices);
 	var index = $("#table-body .info").index(this);
 	var removed = selectedServices.splice(index, 1);
-	document.cookie = "selectedServices=" + JSON.stringify(selectedServices);
+	document.cookie = "selectedServices=" + JSON.stringify(selectedServices) + ";path=/;domain=;";
 
 	$("#drop1 li[value=\"" + removed.pk + "\"]").prop("disabled", false);
 	$(e.target).closest("tr").remove();
