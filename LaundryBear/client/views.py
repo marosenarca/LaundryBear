@@ -129,9 +129,12 @@ class OrderView(ClientLoginRequiredMixin, DetailView):
     context_object_name = 'shop'
     model = LaundryShop
     template_name="client/shopselect.html"
-    
+
     def get_context_data(self, **kwargs):
         context = super(OrderView, self).get_context_data(**kwargs)
         the_shop = context['shop']
         context['service_list'] = Price.objects.filter(laundry_shop__name=the_shop)
         return context
+
+class OrderSummaryView(TemplateView):
+    template_name="client/summaryoforder.html"

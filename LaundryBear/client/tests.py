@@ -18,7 +18,7 @@ class LoginTestCase(TestCase):
         self.assertTemplateUsed(response, expected)
 
     def test_redirect_to_menu_after_login_with_next(self):
-        response = self.client.get(reverse('client:menu'), follow=True)
+        response = self.client.get(reverse('client:view-shops'), follow=True)
         request = response.request
         response = self.client.post('{0}?{1}'.format(request['PATH_INFO'],
             request['QUERY_STRING']),
@@ -53,4 +53,4 @@ class LoginTestCase(TestCase):
             {'username': 'test', 'password': 'runner'}, secure=True,
             follow=True)
         response = self.client.get(reverse('client:login'))
-        self.assertRedirects(response, reverse('client:menu'))
+        self.assertRedirects(response, reverse('client:view-shops'))
