@@ -143,4 +143,7 @@ class OrderSummaryView(ClientLoginRequiredMixin, DetailView):
     model=LaundryShop
 
     def get_context_data(self, **kwargs):
-        return super(OrderSummaryView, self).get_context_data(**kwargs)
+        context = super(OrderSummaryView, self).get_context_data(**kwargs)
+        context['delivery_fee'] = float(50)
+        context['service_charge'] = float(50)
+        return context
