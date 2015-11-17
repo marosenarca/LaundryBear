@@ -138,3 +138,8 @@ class OrderView(ClientLoginRequiredMixin, DetailView):
 
 class OrderSummaryView(TemplateView):
     template_name="client/summaryoforder.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(OrderSummaryView, self).get_context_data(**kwargs)
+        context['delivery_fee'] = float(50)
+        return context

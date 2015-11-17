@@ -1,4 +1,5 @@
 {% extends 'client/base.html' %}
+{% load staticfiles %}
 
 {% block title %} Order: Summary | LaundryBear {% endblock %}
 
@@ -14,19 +15,19 @@
                                 <th>Number of Items</th>
                                 <th>Estimated Price</th>
                             </thead>
-                            <tbody>
-                                <!-partial cookies shizz? i dont really know...-->
+                            <tbody id="table-body">
+                                <!---partial cookies shizz? i dont really know...-->
                             </tbody>
                         </table>
                         <div class="row">
                             <div class="large-2 columns"></div>
                             <div class="large-10 large-offset-2 columns">
-                                <strong>Subtotal:</strong> "insert subtotal here"
+								<strong>Subtotal:</strong> <span id="subtotal">0.00</span>
                                 <br>
-                                <strong>+Delivery fee:</strong> "insert fee here"
+								<strong>+Delivery fee:</strong> <span id="deliveryfee">{{ delivery_fee }}</span>
                                 <hr>
-                                <strong>GRAND TOTAL:</strong> "insert total here"
-                            </div>
+								<strong>GRAND TOTAL: <span id="total">0.00</span>
+</strong>                             </div>
                         </div>
                 </div>
                 <hr>
@@ -52,6 +53,16 @@
 
         </div>
 
+		<template id="row-template">
+		<tr data-price="__price__">
+			<td>__servicename__</td>
+			<td>
+				__pieces__
+			</td>
+			<td align="center">__price__</td>
+		</tr>
+		</template>
+
     {% endblock %}
     {% block javascripts %}
         <script type="text/javascript">
@@ -61,4 +72,6 @@
                 }
             });
         </script>
+		<script src="{% static "client/js/summary.js" %}"></script>
     {% endblock %}
+
