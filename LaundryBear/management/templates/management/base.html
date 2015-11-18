@@ -52,13 +52,13 @@
           <li class="divider"></li>
 
           <li class="has-dropdown">
-            <a href="{% url "management:requested-transactions" %}">View Transactions</a>
+            <a href="{% url "management:pending-transactions" %}">View Transactions</a>
             <ul class="dropdown">
-              <li><a href="{% url "management:requested-transactions" %}">Requested</a></li>
+              <li><a href="{% url "management:pending-transactions" %}">Pending</a></li>
               <li class="divider"></li>
-              <li><a href="#">Ongoing</a></li>
+              <li><a href="{% url "management:ongoing-transactions" %}">Ongoing</a></li>
               <li class="divider"></li>
-              <li><a href="#">History</a></li>
+              <li><a href="{% url "management:history-transactions" %}">History</a></li>
             </ul>
           </li>
 
