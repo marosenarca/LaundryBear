@@ -277,3 +277,28 @@ class PendingRequestedTransactionsView(ListView):
         queryset = queryset.filter(status=1)
 
         return queryset
+
+class OngoingTransactionsView(ListView):
+    model = Transaction
+    context_object_name = 'ongoing_transaction_list'
+    template_name = 'management/transactions/ongoing_transactions.html'
+    paginate_by = 10
+
+    def get_queryset(self):
+        queryset = super(OngoingTransactionsView, self).get_queryset()
+        queryset = queryset.filter(status=2)
+
+        return queryset
+
+class HistoryTransactionsView(ListView):
+    model = Transaction
+    context_object_name = 'history_transaction_list'
+    template_name = 'management/transactions/history_transactions.html'
+    paginate_by = 10
+
+    def get_queryset(self):
+        queryset = super(HistoryTransactionsView, self).get_queryset()
+        filters = (3,4)
+        queryset = queryset.filter(status__in=filters)
+
+        return queryset
