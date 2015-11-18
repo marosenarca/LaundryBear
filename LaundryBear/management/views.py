@@ -1,6 +1,6 @@
 import json
 
-from database.models import LaundryShop, Price, Service, UserProfile
+from database.models import LaundryShop, Price, Service, UserProfile, Transaction, Order
 
 from django.contrib.auth import authenticate, login, logout
 from django.core.urlresolvers import reverse
@@ -266,5 +266,14 @@ class AddNewServiceView(AdminLoginRequiredMixin, CreateView):
         return reverse('management:list-service')
 
 
-class RequestedTransactionsView(TemplateView):
-    template_name = 'management/transactions/requestedtransactions.html'
+class PendingRequestedTransactionsView(ListView):
+    model = Transaction
+    context_object_name = 'pending_transaction_list'
+    template_name = 'management/transactions/pending_requested_transactions.html'
+    paginate_by = 10
+
+    def get_queryset(self):
+        queryset = super(PendingRequestedTransactionsView, self).get_queryset()
+        queryset = queryset.filter(status=1)
+
+        return queryset
