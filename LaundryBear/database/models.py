@@ -1,5 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
+from datetime import timedelta
+
 
 # Create your models here.
 class UserProfile(models.Model):
@@ -84,10 +87,22 @@ class Rating(models.Model):
         return "{1} paw rating for {0}".format(unicode(self.laundry_shop),self.paws)
 
 class Order (models.Model):
+    price = models.ForeignKey('Price')
+    transaction = models.ForeignKey('Transaction')
+    pieces = models.IntegerField(default=0)
 
+def default_date():
+    return timezone.now()+timedelta(days=3)
 
 class Transaction(models.Model):
-    laundry_shop = models.ForeignKey('LaundryShop')
+    TRANSACTION_STATUS_CHOICES = (
+        (1, 'Pending'),
+        (2, 'Ongoing'),
+        (3, 'Done'),
+        (4, 'Rejected')
+    )
+
     client = models.ForeignKey('UserProfile')
-    is_pending = models.BooleanField()
-    request_date = models.DateField(auto_now_add=True)
+    status = models.IntegerField(choices=TRANSACTION_STATUS_CHOICES, default=1)
+    request_date = models.DateTimeField(auto_now_add=True)
+    delivery_date = models.DateField(default=default_date)
