@@ -20,6 +20,7 @@
                                 <!---partial cookies shizz? i dont really know...-->
                             </tbody>
                         </table>
+                        <br />
                         <div class="row">
                             <div class="large-2 columns"></div>
                             <div class="large-10 large-offset-2 columns">
@@ -41,13 +42,13 @@
                 <a href="#" data-reveal-id="confirmModal" class="button success right">Order</a>
                 <!-- Are you sure? -->
                 <div id="confirmModal" class="reveal-modal" data-reveal aria-labelledby="firstModalTitle" aria-hidden="true" role="dialog">
-                    <h2 id="firstModalTitle">Are You Sure?</h2>
-                    <a href="{% url 'client:menu' %}" data-reveal-id="sendModal" class="button success right">Yes</a>
+                    <h3 id="firstModalTitle">Are You Sure?</h3>
+                    <a href="{% url 'client:menu' %}" data-reveal-id="sendModal" class="button success right"><i class="fi-lock"></i>Confirm</a>
                     <a class="close-reveal-modal" aria-label="Close">&#215;</a>
                 </div>
                 <!--your request has been processed. please wait for futher announcements-->
                 <div id="sendModal" class="reveal-modal" data-reveal aria-labelledby="firstModalTitle" aria-hidden="true" role="dialog">
-                  <h5 id="firstModalTitle">your request has been received. Please wait for the confirmation message</h5>
+                  <h5 id="firstModalTitle">Your request has been received. Please wait for the confirmation message</h5>
                   <a class="close-reveal-modal" aria-label="Close">&#215;</a>
                 </div>
 
