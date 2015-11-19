@@ -100,4 +100,10 @@ $("#table-body").on("click", ".info", function(e) {
 	$("#drop1 li[value=\"" + removed.pk + "\"]").prop("disabled", false);
 	$(e.target).closest("tr").remove();
 	return false;
-})
+});
+
+$(".button.left").click(function() {
+	// clear cookies
+	var services = document.cookie.replace(/(?:(?:^|.*;\s*)selectedServices\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+	document.cookie = "selectedServices=;expires=Thu, 01 Jan 1970 00:00:01 GMT;path=/;";
+});

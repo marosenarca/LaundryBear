@@ -1,25 +1,27 @@
 $("#set-service-button").on("click", function() {
 	var $serviceInput = $("#service-input");
 	var $priceInput = $("#price-input");
+    var $durationInput = $("#duration-input");
 	var servicePk = $serviceInput.val();
 	var price = $priceInput.val();
-
+    var duration = $durationInput.val();
 	// inputs are invalid, do nothing
-	if (isNaN(servicePk) || price.length === 0) {
+	if (isNaN(servicePk) || price.length === 0 || duration.length === 0) {
 		return false;
 	}
 
 	var service = getService(servicePk);
 
-	addServiceRow(service, price);
+	addServiceRow(service, price, duration);
 	var index = getNextIndex();
-	addToServiceFormset(service, price, index);
+	addToServiceFormset(service, price, duration, index);
 	if ($("#price-formset-container").data("edit-pk") == "None") {
 		addEmptyFormset();
 	}
 
 	$("#service-input").val("null");
 	$("#price-input").val("");
+    $("#duration-input").val("");
 	$("#price-formset-container").data("edit-pk", "None");
 
 	return false;
@@ -53,14 +55,14 @@ function getService(pk) {
 	return service;
 }
 
-function addServiceRow(service, price) {
+function addServiceRow(service, price, duration) {
 	// disable from option
 	$("#service-input").find("option[value=\"" + service.pk + "\"]").prop("disabled", true);
 	// grab the template
 	var template = $("#table-row-template").html();
 
 	// compile the template
-	var compiledTemplate = template.replace(/__pk__/g, service.pk).replace(/__service-name__/g, service.name).replace(/__price__/g, price).replace(/__description__/g, service.description);
+	var compiledTemplate = template.replace(/__pk__/g, service.pk).replace(/__service-name__/g, service.name).replace(/__price__/g, price).replace(/__description__/g, service.description).replace(/__duration__/g, duration);
 
 	// add to the table
 	$tableBody = $("#service-table-body");
@@ -79,6 +81,7 @@ function addServiceRow(service, price) {
 		// place service and price in input boxes to edit
 		serviceInput.val($row.data("service-pk"));
 		$("#price-input").val($row.data("service-price"));
+        $("#duration-input").val($row.data("service-duration"));
 
 
 		// set a var that we are editing
@@ -106,9 +109,10 @@ function addServiceRow(service, price) {
 	});
 }
 
-function addToServiceFormset(service, price, index) {
+function addToServiceFormset(service, price, duration, index) {
 	$("#price-formset-container").find("div[data-item=\"" + index + "\"]").data("pk", service.pk);
 	$("#id_price_set-" + index + "-price").val(price);
+    $("#id_price_set-" + index + "-duration").val(duration);
 	$("#id_price_set-" + index + "-service").val(service.pk);
 	$("#id_price_set-" + index + "-DELETE").val(false);
 }
@@ -141,8 +145,9 @@ function loadServiceItems() {
 			return;
 		}
 		var service = getService(pk);
-		var price = $(element).find("input[type=\"number\"]").val();
-		addServiceRow(service, price);
+		var price = $(element).find("input[name*=\"-price\"]").val();
+        var duration = $(element).find("input[name*=\"-duration\"]").val();
+		addServiceRow(service, price, duration);
 	});
 }
 
@@ -180,7 +185,7 @@ function createOption(service) {
 	var template = $("#option-template").html();
 	var compiledTemplate = template.replace(/__value__/g, service.pk).replace(/__optionname__/g, service.name).replace(/__description__/g, service.description);
 	var serviceTemplate = $("#service-list-template").html();
-	var compiledServiceTemplate = serviceTemplate.replace(/__pk__/g, service.pk).replace(/__description__/g, service.description).replace(/__name__/g, service.name);
+	var compiledServiceTemplate = serviceTemplate.replace(/__pk__/g, service.pk).replace(/__description__/g, service.description).replace(/__name__/g, service.name).replace(/__duration__/g, service.duration);
 	$("#service-input").append(compiledTemplate);
 	$("#services-list").append(compiledServiceTemplate);
 
