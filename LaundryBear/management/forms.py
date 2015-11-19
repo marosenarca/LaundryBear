@@ -1,6 +1,5 @@
 from django import forms
-
-from database.models import Rating, Service, Price, LaundryShop
+from database.models import Rating, Service, Price, LaundryShop, Transaction
 from LaundryBear.forms import LoginForm
 
 
@@ -27,8 +26,8 @@ class LaundryShopForm(forms.ModelForm):
     class Meta:
         model = LaundryShop
         fields = ['barangay', 'building', 'city', 'contact_number',
-        'days_open', 'email', 'hours_open', 'name', 'province',
-        'street', 'website']
+                  'days_open', 'email', 'hours_open', 'name', 'province',
+                  'street', 'website']
 
 
 class AdminLoginForm(LoginForm):
@@ -38,3 +37,9 @@ class AdminLoginForm(LoginForm):
 
         if not user.is_staff:
             raise forms.ValidationError('You have no power here.')
+
+
+class TransactionForm(forms.ModelForm):
+    class Meta:
+        model = Transaction
+        fields = '__all__'
