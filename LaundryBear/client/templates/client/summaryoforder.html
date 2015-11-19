@@ -23,7 +23,8 @@
                         <div class="row">
                             <div class="large-2 columns"></div>
                             <div class="large-10 large-offset-2 columns">
-								<strong>Subtotal:</strong> <span id="subtotal">0.00</span>
+                                <br>
+                                <strong>Subtotal:</strong> <span id="subtotal">0.00</span>
                                 <br>
 								<strong>+Delivery fee:</strong> <span id="deliveryfee">{{ delivery_fee }}</span>
                                 <br>
@@ -34,8 +35,29 @@
                         </div>
                 </div>
                 <hr>
-                <strong>Date of delivery: </strong>
-                <span style="background-color:#1df064">"date here"</span>
+
+                <div class="row">
+                    <div class="large-7 columns">
+                        <label><strong>Date of Delivery: </strong>
+                        <select>
+                            <option value="husker">Husker</option>
+                            <option value="starbuck">Starbuck</option>
+                            <option value="hotdog">Hot Dog</option>
+                            <option value="apollo">Apollo</option>
+                        </select>
+                      </label>
+                    </div>
+                    <div class="large-5 columns">
+                        <label><strong>Time of Delivery: </strong>
+                        <select>
+                            <option value="husker">Husker</option>
+                            <option value="starbuck">Starbuck</option>
+                            <option value="hotdog">Hot Dog</option>
+                            <option value="apollo">Apollo</option>
+                        </select>
+                      </label>
+                    </div>
+                </div>
                 <br><br>
                 <a href="javascript:history.go(-1)" class="button left">Back</a>
                 <a href="#" data-reveal-id="confirmModal" class="button success right">Order</a>
@@ -53,7 +75,6 @@
 
             </div>
             <div class="large-2 columns"></div>
-
         </div>
 
 		<template id="row-template">
