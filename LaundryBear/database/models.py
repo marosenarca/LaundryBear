@@ -103,6 +103,9 @@ class Transaction(models.Model):
         (4, 'Rejected')
     )
 
+    def get_choice_name(self):
+        return self.TRANSACTION_STATUS_CHOICES[self.status - 1][1]
+
     client = models.ForeignKey('UserProfile')
     status = models.IntegerField(choices=TRANSACTION_STATUS_CHOICES, default=1)
     request_date = models.DateTimeField(auto_now_add=True)

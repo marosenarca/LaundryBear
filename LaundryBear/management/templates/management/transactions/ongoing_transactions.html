@@ -1,4 +1,5 @@
 {% extends 'management/base.html' %}
+{% load staticfiles %}
 
 {% block title %} Ongoing Transactions | LaundryBear {% endblock %}
 
@@ -31,9 +32,5 @@
 {% endblock %}
 
 {% block javascripts %}
-
-    <script>
-        var done-url = "{% url "update-transaction" %}"
-    </script>
-
+<script src="{% static "management/js/done-transaction.js" %}"></script>
 {% endblock %}
