@@ -105,7 +105,7 @@ class Transaction(models.Model):
 
     client = models.ForeignKey('UserProfile')
     status = models.IntegerField(choices=TRANSACTION_STATUS_CHOICES, default=1)
-    request_date = models.DateTimeField(default=timezone.now)
+    request_date = models.DateTimeField(auto_now_add=True)
     delivery_date = models.DateField(default=default_date)
 
     def __unicode__(self):
