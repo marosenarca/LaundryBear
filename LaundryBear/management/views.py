@@ -302,3 +302,8 @@ class HistoryTransactionsView(ListView):
         queryset = queryset.filter(status__in=filters)
 
         return queryset
+
+class UpdateTransactionView(UpdateView):
+    model = Transaction 
+    context_object_name = 'update_transaction'
+    template_name = 'management/transactions/update_transaction.html'

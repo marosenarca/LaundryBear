@@ -15,6 +15,7 @@
                         <th>Laundry Shop</th>
                         <th>Date Requested</th>
                         <th>Time Requested</th>
+                        <th>Actions</th>
                     </thead>
                     <tbody>
                     {% for transaction in ongoing_transaction_list %}
@@ -26,5 +27,13 @@
         <div class="large-2 columns"></div>
     </div>
 
+
+{% endblock %}
+
+{% block javascripts %}
+
+    <script>
+        var done-url = "{% url "update-transaction" %}"
+    </script>
 
 {% endblock %}
