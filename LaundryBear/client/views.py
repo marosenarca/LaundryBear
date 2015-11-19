@@ -1,5 +1,7 @@
 import json
 
+from datetime import timedelta
+
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
@@ -14,7 +16,7 @@ from django.views.generic import (CreateView, DeleteView, DetailView, FormView, 
 
 from client.forms import ProfileForm, UserForm
 from client.mixins import ClientLoginRequiredMixin
-from database.models import LaundryShop, Price, Service, UserProfile, Transaction, Order
+from database.models import LaundryShop, Price, Service, UserProfile, Transaction, Order, default_date
 
 from LaundryBear.forms import LoginForm
 from LaundryBear.views import LoginView, LogoutView
@@ -149,6 +151,8 @@ class OrderSummaryView(ClientLoginRequiredMixin, DetailView):
         context = super(OrderSummaryView, self).get_context_data(**kwargs)
         context['delivery_fee'] = float(50)
         context['service_charge'] = float(50)
+        context['delivery_date'] = default_date().strftime('%Y-%m-%d')
+        context['delivery_date_max'] = (default_date() + timedelta(days=7)).strftime('%Y-%m-%d')
         return context
 
 
@@ -160,12 +164,8 @@ class CreateTransactionView(ClientLoginRequiredMixin, View):
         if request.is_ajax():
             services = request.POST['selectedServices']
             services = json.loads(services)
-            servicePk = []
-            pieces = []
-            for service in services:
-                servicePk.append(service['pk'])
-                pieces.append(service['pieces'])
-            transaction = Transaction.objects.create(client=request.user.userprofile)
+            print request.POST
+            transaction = Transaction.objects.create(client=request.user.userprofile, delivery_date=request.POST['delivery_date'])
             for service in services:
                 pricePk = service['pk']
                 price = Price.objects.get(pk=pricePk)

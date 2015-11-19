@@ -1,4 +1,4 @@
-from django.forms import ModelForm
+from django.forms import ModelForm, Form
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
@@ -15,3 +15,7 @@ class ProfileForm(ModelForm):
     class Meta:
         model = UserProfile
         exclude = ['client']
+
+
+class DeliveryDateForm(Form):
+    date = forms.DateField()
