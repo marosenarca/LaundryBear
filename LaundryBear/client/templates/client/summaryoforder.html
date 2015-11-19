@@ -4,6 +4,7 @@
 {% block title %} Order: Summary | LaundryBear {% endblock %}
 
     {% block body %}
+	{% csrf_token %}
         <div class="row">
             <div class="large-2 columns"></div>
             <div class="large-8 large-offset-2 columns">
@@ -74,6 +75,7 @@
                     multiple_opened:false
                 }
             });
+			var transactionUrl = "{% url "client:create-transaction" %}";
         </script>
 		<script src="{% static "client/js/summary.js" %}"></script>
     {% endblock %}

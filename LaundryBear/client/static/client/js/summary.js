@@ -32,3 +32,21 @@ function insertRow(service) {
 	var compiledTemplate = template.replace(/__servicename__/, service.name).replace(/__pieces__/g, service.pieces).replace(/__price__/g, service.price).replace(/__pk__/, service.pk);
 	$("#table-body").append(compiledTemplate);
 }
+
+$("#confirm").on("click", function() {
+	var data = collectData();
+	$.post(transactionUrl, data, function(response) {
+		// clear cookies
+		var services = document.cookie.replace(/(?:(?:^|.*;\s*)selectedServices\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+		document.cookie = "selectedServices=;expires=Thu, 01 Jan 1970 00:00:01 GMT;path=/;";
+		document.location.replace(response);
+	});
+	return false;
+});
+
+function collectData() {
+	var csrf = document.cookie.replace(/(?:(?:^|.*;\s*)csrftoken\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+	var services = document.cookie.replace(/(?:(?:^|.*;\s*)selectedServices\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+
+	return {csrfmiddlewaretoken: csrf, selectedServices: services};
+}
