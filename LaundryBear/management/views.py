@@ -307,23 +307,20 @@ class HistoryTransactionsView(AdminLoginRequiredMixin, ListView):
 
         return queryset
 
-class UpdateTransactionView(AdminLoginRequiredMixin, UpdateView):
+class UpdateTransactionDeliveryDateView(AdminLoginRequiredMixin, UpdateView):
     model = Transaction
     context_object_name = 'transaction'
     template_name = 'management/transactions/update_transaction.html'
-    fields = '__all__'
+    fields = ['delivery_date']
 
-    def get_context_data(self, *args, **kwargs):
-        context = super(UpdateTransactionView, self).get_context_data(*args, **kwargs)
-        context['delivery_date_max'] = (self.object.delivery_date + timedelta(days=7)).strftime('%Y-%m-%d')
-        return context
+    def get_success_url(self):
+        return reverse('management:ongoing-transactions')
 
 
 class MarkTransactionDoneView(AdminLoginRequiredMixin, UpdateView):
     model = Transaction
     fields = ['status']
     template_name = ''
-    allowed_methods = ['post']
 
     def get_success_url(self):
         return reverse('management:ongoing-transactions')
