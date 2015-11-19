@@ -14,24 +14,17 @@
         <div class="panel">
             <form method="post">
                 {% csrf_token %}
-                <div class="large-1 columns">
-                </div>
+                <div class="large-1 columns"></div>
                 <div class="large-10  large-offset-1 columns">
                     <div class="row">
-                        <div class="large-6 columns">
+                        <div class="large-12 columns">
+                            <h6 style="text-align: right">Date Requested: {{ transaction.request_date }}</h6>
                         </div>
-                        <div class="large-3 large-offset-6 columns">
-                            Date Requested:
-                        </div>
-                        <div class="large-3 columns">
-                            {{ transaction.request_date }}
-                        </div>
+                        
                     </div>
                     <div class="row">
-                        <div class="large-2 columns"></div>
-                        <div class="large-8 large-offset-2 columns">
-                            <strong>Client Details</strong>
-                            <br>
+                        <div class="large-12 columns">
+                            <h4>Client Details</h4>
                             <strong>Name: </strong> {{ transaction.client.client.get_full_name }}
                             <br>
                             <strong>Address: </strong> {{ transaction.client.location }}
@@ -63,7 +56,6 @@
 								</tfoot>
                             </table>
                         </div>
-                        <div class="large-2 columns"></div>
                     </div>
                 </div>
                 <div class="large-1 columns">
@@ -74,10 +66,20 @@
 
 				<strong>Delivery Date:</strong> [INSERT DATE HERE]
 				<hr>
-                <input type="submit" class="button" value="Approve" />
-                <input type="submit" class="button alert" value="Reject" />
-                <a href="{% url "management:pending-transactions" %}" class="warning button">Back</a>
-            </form>
+                <div class="row">
+                        <div class="large-2 columns"></div>
+                        <div class="large-8 large-offset-2 columns">
+                          <center>
+                          <input type="submit" class="button" value="Approve" />
+                          <a href="{% url "management:pending-transactions" %}" class="button secondary"><u>Back</u></a>
+                          <input type="submit" class="button alert" value="Reject" />
+                          </center>
+                        </div>
+                        <div class="large-2 columns"></div>
+                </div>
+                <div class="large-1 columns"></div>
+                
+             </form>
         </div>
     </div>
     <div class="large-2 columns"></div>
