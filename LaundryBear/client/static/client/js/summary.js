@@ -30,5 +30,7 @@ function updateTotals() {
 function insertRow(service) {
 	var template = $("#row-template").html();
 	var compiledTemplate = template.replace(/__servicename__/, service.name).replace(/__pieces__/g, service.pieces).replace(/__price__/g, service.price).replace(/__pk__/, service.pk);
+
+
 	$("#table-body").append(compiledTemplate);
 }
