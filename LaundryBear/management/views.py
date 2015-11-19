@@ -8,7 +8,7 @@ from django.db.models import Q
 from django.forms.models import inlineformset_factory
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
-from django.views.generic import (CreateView, DeleteView, FormView, ListView,
+from django.views.generic import (CreateView, DeleteView, DetailView, FormView, ListView,
     RedirectView, TemplateView, UpdateView)
 
 from management import forms
@@ -277,3 +277,37 @@ class PendingRequestedTransactionsView(ListView):
         queryset = queryset.filter(status=1)
 
         return queryset
+
+
+
+class OngoingTransactionsView(ListView):
+    model = Transaction
+    context_object_name = 'ongoing_transaction_list'
+    template_name = 'management/transactions/ongoing_transactions.html'
+    paginate_by = 10
+
+    def get_queryset(self):
+        queryset = super(OngoingTransactionsView, self).get_queryset()
+        queryset = queryset.filter(status=2)
+
+        return queryset
+
+class HistoryTransactionsView(ListView):
+    model = Transaction
+    context_object_name = 'history_transaction_list'
+    template_name = 'management/transactions/history_transactions.html'
+    paginate_by = 10
+
+    def get_queryset(self):
+        queryset = super(HistoryTransactionsView, self).get_queryset()
+        filters = (3,4)
+        queryset = queryset.filter(status__in=filters)
+
+        return queryset
+
+
+class TransactionUpdateView(TemplateView):
+    model = Transaction
+    context_object_name = 'transaction'
+    template_name = 'management/transactions/edittransaction.html'
+    form_class = forms.TransactionForm
