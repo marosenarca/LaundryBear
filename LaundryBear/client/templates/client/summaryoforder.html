@@ -36,7 +36,7 @@
                 </div>
                 <hr>
                 <strong>Date of delivery: </strong>
-                <span style="background-color:#1df064">"date here"</span>
+				<input type="date" min="{{ delivery_date }}" style="width: 280px;" value="{{ delivery_date }}" max="{{ delivery_date_max }}" name="delivery_date">
                 <br><br>
                 <a href="javascript:history.go(-1)" class="button left">Back</a>
                 <a href="#" data-reveal-id="confirmModal" class="button success right">Order</a>
