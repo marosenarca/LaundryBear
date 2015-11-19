@@ -228,7 +228,7 @@ class ServicesDeleteView(AdminLoginRequiredMixin, DeleteView):
         return reverse('management:list-service')
 
 
-class ServiceCreateView(CreateView):
+class ServiceCreateView(AdminLoginRequiredMixin, CreateView):
     template_name = 'management/shop/partials/createservice.html'
     model = Service
     form_class = forms.ServiceForm
@@ -266,7 +266,7 @@ class AddNewServiceView(AdminLoginRequiredMixin, CreateView):
         return reverse('management:list-service')
 
 
-class PendingRequestedTransactionsView(ListView):
+class PendingRequestedTransactionsView(AdminLoginRequiredMixin, ListView):
     model = Transaction
     context_object_name = 'pending_transaction_list'
     template_name = 'management/transactions/pending_requested_transactions.html'
@@ -280,7 +280,7 @@ class PendingRequestedTransactionsView(ListView):
 
 
 
-class OngoingTransactionsView(ListView):
+class OngoingTransactionsView(AdminLoginRequiredMixin, ListView):
     model = Transaction
     context_object_name = 'ongoing_transaction_list'
     template_name = 'management/transactions/ongoing_transactions.html'
@@ -292,7 +292,7 @@ class OngoingTransactionsView(ListView):
 
         return queryset
 
-class HistoryTransactionsView(ListView):
+class HistoryTransactionsView(AdminLoginRequiredMixin, ListView):
     model = Transaction
     context_object_name = 'history_transaction_list'
     template_name = 'management/transactions/history_transactions.html'
@@ -306,8 +306,7 @@ class HistoryTransactionsView(ListView):
         return queryset
 
 
-class TransactionUpdateView(TemplateView):
+class TransactionUpdateView(AdminLoginRequiredMixin, TemplateView):
     model = Transaction
     context_object_name = 'transaction'
     template_name = 'management/transactions/edittransaction.html'
-    form_class = forms.TransactionForm
