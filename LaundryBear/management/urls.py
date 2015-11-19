@@ -27,5 +27,8 @@ urlpatterns = [
     url(r'^services/edit/(?P<pk>\d+)$', views.ServiceUpdateView.as_view(),
         name='edit-service'),
     url(r'^service/add$', views.AddNewServiceView.as_view(), name='add-service'),
-    url(r'^transactions/requested$', views.PendingRequestedTransactionsView.as_view(), name='requested-transactions')
+    url(r'^transactions/pending$', views.PendingRequestedTransactionsView.as_view(), name='pending-transactions'),
+    url(r'^transactions/ongoing$', views.OngoingTransactionsView.as_view(), name='ongoing-transactions'),
+    url(r'^transactions/history$', views.HistoryTransactionsView.as_view(), name='history-transactions'),
+    url(r'^transactions/update/(?P<pk>\d+)$', views.UpdateTransactionView.as_view(), name='update-transactions'),
 ]

@@ -1,28 +1,25 @@
 {% extends 'management/base.html' %}
-{% load staticfiles %}
 
-{% block title %} Pending Requested Transactions | LaundryBear {% endblock %}
+{% block title %} Ongoing Transactions | LaundryBear {% endblock %}
 
-{% block stylesheets %}
-<link rel="stylesheet" href="{% static "LaundryBear/css/clickyTable.css" %}">
-{% endblock %}
 
 {% block body %}
 
     <div class="row">
         <div class="large-2 columns"></div>
         <div class="large-8 large-offset-2 columns">
-            <h3 style="text-align:center">Pending Requested Transactions</h3>
-                <table id="clickytable" style="margin:auto">
+            <h3 style="text-align:center">Ongoing Transactions</h3>
+                <table id='clickytable' style="margin:auto">
                     <thead>
                         <th>Name of Client</th>
                         <th>Laundry Shop</th>
                         <th>Date Requested</th>
                         <th>Time Requested</th>
+                        <th>Actions</th>
                     </thead>
                     <tbody>
-                    {% for transaction in pending_transaction_list %}
-                    {% include "management/transactions/partials/pending_transaction_row.html" %}
+                    {% for transaction in ongoing_transaction_list %}
+                    {% include "management/transactions/partials/ongoing_transaction_row.html" %}
                     {% endfor %}
                     </tbody>
                 </table>
@@ -30,5 +27,13 @@
         <div class="large-2 columns"></div>
     </div>
 
+
+{% endblock %}
+
+{% block javascripts %}
+
+    <script>
+        var done-url = "{% url "update-transaction" %}"
+    </script>
 
 {% endblock %}

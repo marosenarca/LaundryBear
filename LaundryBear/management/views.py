@@ -8,7 +8,7 @@ from django.db.models import Q
 from django.forms.models import inlineformset_factory
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
-from django.views.generic import (CreateView, DeleteView, FormView, ListView,
+from django.views.generic import (CreateView, DeleteView, DetailView, FormView, ListView,
     RedirectView, TemplateView, UpdateView)
 
 from management import forms
@@ -38,7 +38,7 @@ class LaundryUpdateView(AdminLoginRequiredMixin, UpdateView):
     def form_valid(self, form):
         response = super(LaundryUpdateView, self).form_valid(form)
         PriceInlineFormSet = inlineformset_factory(
-            LaundryShop, Price, fields=('service', 'price'), extra=1)
+            LaundryShop, Price, fields=('service', 'price', 'duration'), extra=1)
         price_formset = PriceInlineFormSet(
             data=self.request.POST, instance=self.object)
         if price_formset.is_valid():
@@ -51,7 +51,7 @@ class LaundryUpdateView(AdminLoginRequiredMixin, UpdateView):
         context = super(LaundryUpdateView, self).get_context_data(**kwargs)
         context['service_list'] = Service.objects.all().order_by('pk')
         price_formset = inlineformset_factory(
-            LaundryShop, Price, fields=('service', 'price'), extra=1)
+            LaundryShop, Price, fields=('service', 'price', 'duration'), extra=1)
         context['price_formset'] = price_formset(instance=self.object)
         return context
 
@@ -66,7 +66,7 @@ class LaundryCreateView(AdminLoginRequiredMixin, CreateView):
     def form_valid(self, form):
         response = super(LaundryCreateView, self).form_valid(form)
         PriceInlineFormSet = inlineformset_factory(
-            LaundryShop, Price, fields=('service', 'price'), extra=1)
+            LaundryShop, Price, fields=('service', 'price', 'duration'), extra=1)
         price_formset = PriceInlineFormSet(
             data=self.request.POST, instance=self.object)
         if price_formset.is_valid():
@@ -79,7 +79,7 @@ class LaundryCreateView(AdminLoginRequiredMixin, CreateView):
         context = super(LaundryCreateView, self).get_context_data(**kwargs)
         context['service_list'] = Service.objects.all().order_by('pk')
         price_formset = inlineformset_factory(
-            LaundryShop, Price, fields=('service', 'price'), extra=1)
+            LaundryShop, Price, fields=('service', 'price', 'duration'), extra=1)
         context['price_formset'] = price_formset()
         return context
 
@@ -228,7 +228,7 @@ class ServicesDeleteView(AdminLoginRequiredMixin, DeleteView):
         return reverse('management:list-service')
 
 
-class ServiceCreateView(CreateView):
+class ServiceCreateView(AdminLoginRequiredMixin, CreateView):
     template_name = 'management/shop/partials/createservice.html'
     model = Service
     form_class = forms.ServiceForm
@@ -266,7 +266,7 @@ class AddNewServiceView(AdminLoginRequiredMixin, CreateView):
         return reverse('management:list-service')
 
 
-class PendingRequestedTransactionsView(ListView):
+class PendingRequestedTransactionsView(AdminLoginRequiredMixin, ListView):
     model = Transaction
     context_object_name = 'pending_transaction_list'
     template_name = 'management/transactions/pending_requested_transactions.html'
@@ -277,3 +277,35 @@ class PendingRequestedTransactionsView(ListView):
         queryset = queryset.filter(status=1)
 
         return queryset
+
+
+
+class OngoingTransactionsView(AdminLoginRequiredMixin, ListView):
+    model = Transaction
+    context_object_name = 'ongoing_transaction_list'
+    template_name = 'management/transactions/ongoing_transactions.html'
+    paginate_by = 10
+
+    def get_queryset(self):
+        queryset = super(OngoingTransactionsView, self).get_queryset()
+        queryset = queryset.filter(status=2)
+
+        return queryset
+
+class HistoryTransactionsView(AdminLoginRequiredMixin, ListView):
+    model = Transaction
+    context_object_name = 'history_transaction_list'
+    template_name = 'management/transactions/history_transactions.html'
+    paginate_by = 10
+
+    def get_queryset(self):
+        queryset = super(HistoryTransactionsView, self).get_queryset()
+        filters = (3,4)
+        queryset = queryset.filter(status__in=filters)
+
+        return queryset
+
+class UpdateTransactionView(AdminLoginRequiredMixin, UpdateView):
+    model = Transaction 
+    context_object_name = 'update_transaction'
+    template_name = 'management/transactions/update_transaction.html'

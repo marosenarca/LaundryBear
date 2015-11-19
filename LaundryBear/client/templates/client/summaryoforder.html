@@ -18,13 +18,14 @@
                                 <th>Estimated Price</th>
                             </thead>
                             <tbody id="table-body">
-                                <!---partial cookies shizz? i dont really know...-->
+
                             </tbody>
                         </table>
                         <div class="row">
                             <div class="large-2 columns"></div>
                             <div class="large-10 large-offset-2 columns">
-								<strong>Subtotal:</strong> <span id="subtotal">0.00</span>
+                                <br>
+                                <strong>Subtotal:</strong> <span id="subtotal">0.00</span>
                                 <br>
 								<strong>+Delivery fee:</strong> <span id="deliveryfee">{{ delivery_fee }}</span>
                                 <br>
@@ -54,7 +55,6 @@
 
             </div>
             <div class="large-2 columns"></div>
-
         </div>
 
 		<template id="row-template">
@@ -66,6 +66,11 @@
 			<td align="center">__price__</td>
 		</tr>
 		</template>
+
+        <form class="hidden" method="post">
+
+        </form>
+
 
     {% endblock %}
     {% block javascripts %}
