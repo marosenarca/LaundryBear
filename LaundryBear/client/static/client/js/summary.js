@@ -41,7 +41,12 @@ $("#confirm").on("click", function() {
 		// clear cookies
 		var services = document.cookie.replace(/(?:(?:^|.*;\s*)selectedServices\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 		document.cookie = "selectedServices=;expires=Thu, 01 Jan 1970 00:00:01 GMT;path=/;";
-		document.location.replace(response);
+
+		// show modal
+		$("#sendModal").foundation("reveal", "open");
+		setTimeout(function() {
+			document.location.replace(response);
+		}, 5000);
 	});
 	return false;
 });
