@@ -305,7 +305,7 @@ class HistoryTransactionsView(AdminLoginRequiredMixin, ListView):
 
         return queryset
 
-class UpdateTransactionView(AdminLoginRequiredMixin, UpdateView):
+class UpdateTransactionView(AdminLoginRequiredMixin, TemplateView):
     model = Transaction 
     context_object_name = 'update_transaction'
     template_name = 'management/transactions/update_transaction.html'
