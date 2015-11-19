@@ -2,13 +2,59 @@
 {% load staticfiles %}
 
 {% block title %} Dashboard | LaundryBear {% endblock %}
+
 {%block body%}
-    {% if messages %}
-    <ul class="messages">
-    {% for message in messages %}
-    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-    {% endfor %}
-    </ul>
-    {% endif %}
+	
+	<div class="row">
+		<div class="large-2 columns"></div>
+		<div class="large-8 large-offset-2 columns">
+			<div class="panel">
+
+				{% if transaction_list %}
+				<h4 style="text-align:center">My Laundry Requests</h4>
+				<table style="margin:auto">
+					<thead>
+						<th>Date Requested</th>
+						<th>Price</th>
+						<th>Laundry Shop</th>
+						<th>Rating</th>
+						<th>Status</th>
+					</thead>
+					<tbody>
+						{% for transaction in transaction_list %}
+						<tr>
+							<td>{{transaction.request_date}}</td>
+							<td>
+								<!--{% for order in transaction.order_set.all %}
+									i don't how to do this
+								{% endfor %}-->
+								{{transaction.order_set.all}}
+							</td>
+							<td>{{transaction.order_set.first.price.laundry_shop}}</td>
+							<td><div class="paw-container" style="width: {% widthratio shop.average_rating 5 150 %}px;"><img src="{% static "management/icons/star.png" %}" /></div></td>
+							<td>{{ transaction.get_choice_name }}</td>
+
+						{% endfor %}
+					</tbody>
+				</table>
+					
+				
+				{% else %}
+				<h4 style="text-align:center">No Laundry Requests</h4>
+				{% endif %}
+				<center>
+					<a href="{% url "client:view-shops" %}" class="large button">Make a Request</a>	
+				</center>
+			</div>
+		</div>
+		<div class="large-2 columns"></div>
+
+
+	</div>
 
 {% endblock %}
+
+{% block javascripts %}
+
+{% endblock %}
+
