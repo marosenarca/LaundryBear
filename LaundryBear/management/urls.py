@@ -31,3 +31,4 @@ urlpatterns = [
     url(r'^transactions/ongoing$', views.OngoingTransactionsView.as_view(), name='ongoing-transactions'),
     url(r'^transactions/history$', views.HistoryTransactionsView.as_view(), name='history-transactions'),
     url(r'^transactions/update/(?P<pk>\d+)$', views.UpdateTransactionView.as_view(), name='update-transactions'),
+]
