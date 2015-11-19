@@ -301,7 +301,7 @@ class HistoryTransactionsView(AdminLoginRequiredMixin, ListView):
     def get_queryset(self):
         queryset = super(HistoryTransactionsView, self).get_queryset()
         filters = (3,4)
-        queryset = queryset.filter(status__in=filters)
+        queryset = queryset.filter(status__in=filters).order_by('request_date').reverse()
 
         return queryset
 
