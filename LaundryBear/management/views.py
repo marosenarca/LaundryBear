@@ -314,7 +314,17 @@ class UpdateTransactionDeliveryDateView(AdminLoginRequiredMixin, UpdateView):
     fields = ['delivery_date']
 
     def get_success_url(self):
-        return reverse('management:ongoing-transactions')
+        return reverse('management:pending-transactions')
+
+    def post(self, request, *args, **kwargs):
+        response = super(UpdateTransactionDeliveryDateView, self).post(request, *args, **kwargs)
+        if request.POST.get('approve', False):
+            self.object.status = 2
+            self.object.save()
+        else:
+            self.object.status = 4
+            self.object.save()
+        return response
 
 
 class MarkTransactionDoneView(AdminLoginRequiredMixin, UpdateView):
