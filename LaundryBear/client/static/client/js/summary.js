@@ -47,6 +47,7 @@ $("#confirm").on("click", function() {
 function collectData() {
 	var csrf = document.cookie.replace(/(?:(?:^|.*;\s*)csrftoken\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 	var services = document.cookie.replace(/(?:(?:^|.*;\s*)selectedServices\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+	var delivery_date = $("input[name=\"delivery_date\"]").val();
 
-	return {csrfmiddlewaretoken: csrf, selectedServices: services};
+	return {csrfmiddlewaretoken: csrf, selectedServices: services, delivery_date: delivery_date};
 }
