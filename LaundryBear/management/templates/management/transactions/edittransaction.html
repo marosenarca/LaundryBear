@@ -1,0 +1,78 @@
+{% extends 'management/base.html' %} {% block title %} Edit Transaction | LaundryBear {% endblock %} {% block body %}
+<div class="row">
+    <div class="large-2 columns"></div>
+    <div class="large-8 large-offset-2 columns">
+        <div class="panel">
+            <form method="post">
+                {% csrf_token %}
+                <div class="large-1 columns">
+                </div>
+                <div class="large-10  large-offset-1 columns">
+                    <div class="row">
+                        <div class="large-6 columns">
+                        </div>
+                        <div class="large-3 large-offset-6 columns">
+                            Date Requested:
+                        </div>
+                        <div class="large-3 columns">
+                            ["date here"]
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="large-2 columns">
+                        </div>
+                        <div class="large-8 large-offset-2 columns">
+                            <strong>Details sa Client: </strong>
+                            <strong>Name: </strong> [transaction.client.name]
+                            <br>
+                            <strong>Address: </strong> Editable [transaction.client.address?]
+                            <br>
+                            <strong>Contact Number: </strong> [transaction.client.contact_number?]
+                            <br>
+                            <strong>Email: </strong> [transaction.client.email?]
+                            <br>
+                            <h4 style="text-align:center"> Orders </h4>
+                            <table style="margin:auto">
+                                <thead>
+                                    <th>Service</th>
+                                    <th>Price/Kilo</th>
+                                    <th>Pieces</th>
+                                    <th>Total</th>
+                                </thead>
+                                <tbody>
+                                    <!--[do some table shizz stuff here]-->
+
+                                </tbody>
+								<tfoot>
+									<tr>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td id="total">[input total here]</td>
+									</tr>
+								</tfoot>
+                            </table>
+                        </div>
+                        <div class="large-2 columns">
+                        </div>
+                    </div>
+                </div>
+                <div class="large-1 columns">
+                </div>
+                <hr>
+				
+				<strong>Status:</strong> [REMOVE THIS OR DONT MAKE IT DROP & DOWN]
+				<br>
+
+				<strong>Delivery Date:</strong> [INSERT DATE HERE]
+				<hr>
+                <input type="submit" class="button" value="Approve" />
+                <input type="submit" class="button alert" value="Reject" />
+                <a href="{% url "management:pending-transactions" %}" class="warning button">Back</a>
+                
+            </form>
+        </div>
+    </div>
+    <div class="large-2 columns"></div>
+</div>
+{% endblock %}

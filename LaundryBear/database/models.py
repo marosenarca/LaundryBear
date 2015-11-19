@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
+from django.utils.timezone import now
 from datetime import timedelta
 
 
@@ -104,5 +105,8 @@ class Transaction(models.Model):
 
     client = models.ForeignKey('UserProfile')
     status = models.IntegerField(choices=TRANSACTION_STATUS_CHOICES, default=1)
-    request_date = models.DateTimeField(auto_now_add=True)
+    request_date = models.DateTimeField(default=timezone.now)
     delivery_date = models.DateField(default=default_date)
+
+    def __unicode__(self):
+        return "{0}".format(unicode(self.request_date))

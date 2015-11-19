@@ -7,7 +7,7 @@
       <div class="row">
       <div class="large-8 large-offset-2 columns">
         <div class="panel">
-          <h3 align="center">Add Laundry Shop</h3>
+          <h3 align="center">Edit Laundry Shop</h3>
           <!--forms-->
           <form method="post">
               {% csrf_token %}
@@ -275,14 +275,16 @@
 				  {{ price_formset.empty_form.id }}
 				  {{ price_formset.empty_form.service }}
 				  {{ price_formset.empty_form.price }}
+                  {{ price_formset.empty_form.duration }}
 				  {{ price_formset.empty_form.DELETE }}
 			  </div>
 		  </template>
 		  <template id="table-row-template">
-			  <tr data-service-pk="__pk__" data-service-name="__service-name__" data-service-price="__price__" data-service-description="__description__">
+			  <tr data-service-pk="__pk__" data-service-name="__service-name__" data-service-price="__price__" data-service-description="__description__" data-service-duration="__duration__">
 				  <td>__service-name__</td>
 				  <td>__description__</td>
 				  <td>__price__</td>
+                  <td>__duration__</td>
 				  <td><a href="#" class="button secondary tiny edit-service-button">Edit</a> <a href="#" class="button secondary tiny delete-service-button">Delete</a> </td>
 			  </tr>
 		  </template>

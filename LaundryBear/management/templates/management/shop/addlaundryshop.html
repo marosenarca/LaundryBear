@@ -275,14 +275,16 @@
 				  {{ price_formset.empty_form.id }}
 				  {{ price_formset.empty_form.service }}
 				  {{ price_formset.empty_form.price }}
+                  {{ price_formset.empty_form.duration }}
 				  {{ price_formset.empty_form.DELETE }}
 			  </div>
 		  </template>
 		  <template id="table-row-template">
-			  <tr data-service-pk="__pk__" data-service-name="__service-name__" data-service-price="__price__" data-service-description="__description__">
+			  <tr data-service-pk="__pk__" data-service-name="__service-name__" data-service-price="__price__" data-service-description="__description__" data-service-duration="__duration__">
 				  <td>__service-name__</td>
 				  <td>__description__</td>
 				  <td>__price__</td>
+                  <td>__duration__</td>
 				  <td><a href="#" class="button secondary tiny edit-service-button">Edit</a> <a href="#" class="button secondary tiny delete-service-button">Delete</a> </td>
 			  </tr>
 		  </template>
@@ -290,11 +292,11 @@
 			  <option value="__value__" data-service-name="__optionname__" data-service-description="__description__">__optionname__</option>
 		  </template>
 		  <template id="service-list-template">
-		  <i data-pk="__pk__" data-service-description="__description__" data-service-name="__name__"></i>
+		  <i data-pk="__pk__" data-service-description="__description__" data-service-name="__name__" data-service-duration="__duration__"></i>
 		  </template>
 		  <div class="hide" id="services-list">
 			  {% for service in service_list %}
-			  <i data-pk="{{ service.pk }}" data-service-description="{{ service.description }}" data-service-name="{{ service.name }}"></i>
+			  <i data-pk="{{ service.pk }}" data-service-description="{{ service.description }}" data-service-name="{{ service.name }}" data-service-duration="{{service.duration}}"></i>
 			  {% endfor %}
 		  </div>
 
