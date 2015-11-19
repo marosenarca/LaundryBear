@@ -1,4 +1,4 @@
-from django.forms import ModelForm
+from django.forms import ModelForm, Form
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
@@ -20,6 +20,7 @@ class TransactionForm(ModelForm):
     class Meta:
         model = Transaction
         fields = ['client', 'status', 'request_date', 'delivery_date']
+
 
 class OrderForm(ModelForm):
     class Meta:

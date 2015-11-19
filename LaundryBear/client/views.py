@@ -1,17 +1,22 @@
+import json
+
+from datetime import timedelta
+
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.core.urlresolvers import reverse
+from django.http import HttpResponse
 from django.forms.models import inlineformset_factory
 from django.shortcuts import redirect, render, render_to_response
 from django.template import RequestContext
 from django.utils.decorators import method_decorator
 from django.views.generic import (CreateView, DeleteView, DetailView, FormView, ListView,
-                                  RedirectView, TemplateView, UpdateView)
+                                  RedirectView, TemplateView, UpdateView, View)
 
 from client.forms import ProfileForm, UserForm
 from client.mixins import ClientLoginRequiredMixin
-from database.models import LaundryShop, Price, Service, UserProfile
+from database.models import LaundryShop, Price, Service, UserProfile, Transaction, Order, default_date
 
 from LaundryBear.forms import LoginForm
 from LaundryBear.views import LoginView, LogoutView
@@ -146,4 +151,26 @@ class OrderSummaryView(ClientLoginRequiredMixin, DetailView):
         context = super(OrderSummaryView, self).get_context_data(**kwargs)
         context['delivery_fee'] = float(50)
         context['service_charge'] = float(50)
+        context['delivery_date'] = default_date().strftime('%Y-%m-%d')
+        context['delivery_date_max'] = (default_date() + timedelta(days=7)).strftime('%Y-%m-%d')
         return context
+
+
+class CreateTransactionView(ClientLoginRequiredMixin, View):
+    def get(self, request, *args, **kwargs):
+        return HttpResponse(status=400)
+
+    def post(self, request, *args, **kwargs):
+        if request.is_ajax():
+            services = request.POST['selectedServices']
+            services = json.loads(services)
+            print request.POST
+            transaction = Transaction.objects.create(client=request.user.userprofile, delivery_date=request.POST['delivery_date'])
+            for service in services:
+                pricePk = service['pk']
+                price = Price.objects.get(pk=pricePk)
+                Order.objects.create(price=price, pieces=service['pieces'], transaction=transaction)
+
+            return HttpResponse(reverse('client:view-shops'))
+        else:
+            return HttpResponse(status=400)
