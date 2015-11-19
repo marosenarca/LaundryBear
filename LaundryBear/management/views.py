@@ -2,6 +2,8 @@ import json
 
 from database.models import LaundryShop, Price, Service, UserProfile, Transaction, Order
 
+from datetime import timedelta
+
 from django.contrib.auth import authenticate, login, logout
 from django.core.urlresolvers import reverse
 from django.db.models import Q
@@ -309,7 +311,12 @@ class UpdateTransactionView(AdminLoginRequiredMixin, UpdateView):
     model = Transaction
     context_object_name = 'transaction'
     template_name = 'management/transactions/update_transaction.html'
-    form_class = forms.TransactionForm
+    fields = '__all__'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(UpdateTransactionView, self).get_context_data(*args, **kwargs)
+        context['delivery_date_max'] = (self.object.delivery_date + timedelta(days=7)).strftime('%Y-%m-%d')
+        return context
 
 
 class MarkTransactionDoneView(AdminLoginRequiredMixin, UpdateView):
