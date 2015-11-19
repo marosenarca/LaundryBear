@@ -16,12 +16,6 @@ class ProfileForm(ModelForm):
         exclude = ['client']
 
 
-class TransactionForm(ModelForm):
-    class Meta:
-        model = Transaction
-        fields = ['client', 'status', 'request_date', 'delivery_date']
-
-
 class OrderForm(ModelForm):
     class Meta:
         model = Order
