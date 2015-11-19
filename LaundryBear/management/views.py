@@ -310,3 +310,13 @@ class UpdateTransactionView(AdminLoginRequiredMixin, UpdateView):
     context_object_name = 'transaction'
     template_name = 'management/transactions/update_transaction.html'
     form_class = forms.TransactionForm
+
+
+class MarkTransactionDoneView(AdminLoginRequiredMixin, UpdateView):
+    model = Transaction
+    fields = ['status']
+    template_name = ''
+    allowed_methods = ['post']
+
+    def get_success_url(self):
+        return reverse('management:ongoing-transactions')
