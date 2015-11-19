@@ -1,6 +1,15 @@
-<tr><a>
+<tr>
+	<a>
 	<td>{{transaction.client}}</td>
 	<td>{{transaction.order.0.price.laundry_shop}}</td>
 	<td>{{transaction.request_date|date:'F d, o'}}</td>
 	<td>{{transaction.request_date|time:'h:i A'}}</td></a>
+	<td>
+		<a href="#" data-reveal-id="done-modal{{ transaction.pk }}"
+           class="button secondary tiny done-button">Done</a>
+		<div id="done-modal{{ transaction.pk }}" class="reveal-modal" data-reveal
+             aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+		<p style="text-align:center;">Transaction Saved as done</p>	
+		</div>
+	</td>
 </tr>
