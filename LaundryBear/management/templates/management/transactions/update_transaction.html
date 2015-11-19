@@ -90,7 +90,7 @@
 {% block javascripts %} 
 <script src="{% static "LaundryBear/jquery-ui-1.11.4/jquery-ui.min.js" %}"></script>
 <script>
-$("#date").datepicker({dateFormat: "yy-mm-dd", minDate: {{ transaction.delivery_date|date:"o-m-d" }}{{ transaction.order_set.first.price.duration }}, maxDate: {{ transaction.order_set.first.price.duration }} + 7});
+$("#date").datepicker({dateFormat: "yy-mm-dd", minDate: {{ transaction.order_set.first.price.duration }}, maxDate: {{ transaction.order_set.first.price.duration }} + 7});
 </script>
 <script src="{% static "management/js/totals.js" %}"></script>
 {% endblock%}
