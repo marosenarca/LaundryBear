@@ -79,14 +79,13 @@ class SignupView(TemplateView):
         response_kwargs.setdefault('content_type', self.content_type)
         return self.response_class(request=self.request, template=self.template_name, context=context, using=None, **response_kwargs)
 
-class UserSettingsView(TemplateView):
+class UserSettingsView(ClientLoginRequiredMixin, TemplateView):
     template_name = 'client/usersettings.html'
     model = UserProfile
 
-    
-    def get_context_data(self,**kwargs):
-        context = super(UserSettingsView, self).get_context_data(**kwargs)
-        context['userprofile'] = UserProfile.objects.all().order_by('pk')
+    def get(self, request):
+        if request.user.is_authenticated():
+            return render(request, self.template_name, {})
         return redirect('client:usersettings')
 
 class ShopsListView(ClientLoginRequiredMixin, ListView):
