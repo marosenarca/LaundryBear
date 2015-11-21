@@ -16,7 +16,7 @@ from django.views.generic import (CreateView, DeleteView, DetailView, FormView, 
 
 from client.forms import ProfileForm, UserForm
 from client.mixins import ClientLoginRequiredMixin
-from database.models import LaundryShop, Price, Service, UserProfile, Transaction, Order, default_date
+from database.models import LaundryShop, Price, Service, UserProfile, Transaction, Order, default_date, UserProfile
 
 from LaundryBear.forms import LoginForm
 from LaundryBear.views import LoginView, LogoutView
@@ -79,6 +79,15 @@ class SignupView(TemplateView):
         response_kwargs.setdefault('content_type', self.content_type)
         return self.response_class(request=self.request, template=self.template_name, context=context, using=None, **response_kwargs)
 
+class UserSettingsView(View):
+    template_name = 'client/templates/client/usersettings.html'
+    model = UserProfile
+
+    
+    def get_context_data(self,**kwargs):
+        context = super(UserSettingsView, self).get_context_data(**kwargs)
+        context['userprofile'] = UserProfile.objects.all().order_by('pk')
+        return context
 
 class ShopsListView(ClientLoginRequiredMixin, ListView):
     model = LaundryShop
@@ -174,3 +183,6 @@ class CreateTransactionView(ClientLoginRequiredMixin, View):
             return HttpResponse(reverse('client:view-shops'))
         else:
             return HttpResponse(status=400)
+
+
+        

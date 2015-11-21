@@ -1,0 +1,67 @@
+{% extends 'client/base.html' %}   
+{% load staticfiles %}
+
+<link rel="stylesheet" href="{% static "LaundryBear/client/static/css/usersettingscontrol" %}"/>
+
+{% block title %} Settings | LaundryBear{% endblock %}
+
+{%block body%}
+    
+    <section class="contact-footer">
+      <div class="row wide">
+        <div class="medium-6 columns">
+          <div class="row">
+            <div class="small-6 medium-12 columns">
+              <h4 class="location">Bone &amp; Mortar</h4>
+              <p>2738 Drummond Street<br>
+                Parsippany, NJ 07054</p>
+
+              <h4 class="phone">+1 605 475 6972</h4>
+            </div>
+            <div class="small-6 medium-12 columns">
+              <h4 class="email">Email</h4>
+              <p>hello@email.com</p>
+
+              <h4>Social</h4>
+              <div class="social">
+                <ul class="inline-list">
+                  <li><a href="#"><i class="fi-social-twitter"></i></a></li>
+                  <li><a href="#"><i class="fi-social-facebook"></i></a></li>
+                  <li><a href="#"><i class="fi-social-linkedin"></i></a></li>
+                  <li><a href="#"><i class="fi-social-github"></i></a></li>
+                </ul>
+                <ul class="inline-list">
+                  <li><a href="#"><i class="fi-social-pinterest"></i></a></li>
+                  <li><a href="#"><i class="fi-social-youtube"></i></a></li>
+                  <li><a href="#"><i class="fi-social-instagram"></i></a></li>
+                  <li><a href="#"><i class="fi-social-google-plus"></i></a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="medium-6 columns">
+          <p class="form-lead">Let's catch up with some wine and cheese</p>
+          <p class="form-lead-in">and I'll become the story teller for a day</p>
+          <form class="round-inputs">
+            <div class="row">
+              <div class="large-12 columns">
+                <input type="text" placeholder="Name" />
+              </div>
+              <div class="large-12 columns">
+                <input type="email" placeholder="Email" />
+              </div>
+              <div class="large-12 columns">
+                <input type="text" placeholder="Telephone" />
+              </div>
+              <div class="large-12 columns">
+                <textarea placeholder="Say 'what' again. Say 'what' again, I dare you, I double dare you..."></textarea>
+                <a href="#" class="button round">Submit</a>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+{% endblock %}

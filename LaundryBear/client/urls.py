@@ -10,6 +10,7 @@ urlpatterns = [
     url(r'^logout', views.ClientLogoutView.as_view(), name='logout'),
     url(r'^signup', views.SignupView.as_view(), name='signup'),
     url(r'^viewshops', views.ShopsListView.as_view(), name='view-shops'),
+    url(r'^settings', views.UserSettingsView.as_view(), name='settings'),
     url(r'^order/(?P<pk>\d+)$', views.OrderView.as_view(), name='order'),
     url(r'^order/(?P<pk>\d+)/ordersummary$', views.OrderSummaryView.as_view(), name='order-summary'),
     url(r'^order/transaction/create$', views.CreateTransactionView.as_view(), name='create-transaction'),
