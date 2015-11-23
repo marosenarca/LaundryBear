@@ -17,6 +17,13 @@
         </header>
         {%if not user.is_authenticated %}
         <div id="form" class="login">
+            {% if form.non_field_errors %}
+                <div class="row">
+                    <div class="large-12 columns">
+                        <span class="error label">{{ form.non_field_errors | striptags }}</span>
+                    </div>
+                </div>
+            {% endif %}
           <div class="large-3 large-centered columns">
             <div class="login-box">
             <div class="row">
