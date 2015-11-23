@@ -1,7 +1,7 @@
 {% load staticfiles %}
 <tr>
-  <td>
-    <a href="#" data-reveal-id="shopmodal{{ shop.pk }}">{{ shop.name }}</a>
+  <td data-reveal-id="shopmodal{{ shop.pk }}">
+    {{ shop.name }}
     <div id="shopmodal{{ shop.pk }}" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
       <table style="margin:auto">
         <thead>
