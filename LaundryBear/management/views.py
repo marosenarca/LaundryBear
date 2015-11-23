@@ -334,3 +334,19 @@ class MarkTransactionDoneView(AdminLoginRequiredMixin, UpdateView):
 
     def get_success_url(self):
         return reverse('management:ongoing-transactions')
+
+class UserSettingsView(AdminLoginRequiredMixin, TemplateView):
+    template_name = 'management/account/settings.html'
+    
+
+    def get_context_data(self, **kwargs):
+        context = super(UserSettingsView, self).get_context_data(**kwargs)
+        context['userprofile'] = self.request.user.userprofile
+        return context
+
+    def post(self,request,*args,**kwargs):
+        context = self.get_context_data(*args, **kwargs)
+        
+
+        return self.render_to_response(context)
+        
