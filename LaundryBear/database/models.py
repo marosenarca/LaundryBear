@@ -14,7 +14,6 @@ class UserProfile(models.Model):
     barangay = models.CharField(max_length=50, blank=False)
     street = models.CharField(max_length=50, blank=True)
     building = models.CharField(max_length=50, blank=True)
-    contact_number = models.CharField(max_length=30, blank=False)
 
     def __unicode__(self):
         return self.client.get_full_name()
@@ -110,6 +109,19 @@ class Transaction(models.Model):
     status = models.IntegerField(choices=TRANSACTION_STATUS_CHOICES, default=1)
     request_date = models.DateTimeField(auto_now_add=True)
     delivery_date = models.DateField(default=default_date)
+    province = models.CharField(max_length=50, blank=False)
+    city = models.CharField(max_length=50, blank=True)
+    barangay = models.CharField(max_length=50, blank=False)
+    street = models.CharField(max_length=50, blank=True)
+    building = models.CharField(max_length=50, blank=True)
+
+    @property
+    def location(self):
+    	address = [self.building, self.street, self.barangay, self.city,
+    		self.province]
+        while '' in address:
+        	address.remove('')
+        return ', '.join(address)
 
     def __unicode__(self):
         return "{0}".format(unicode(self.request_date))
