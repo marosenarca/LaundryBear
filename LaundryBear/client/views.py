@@ -34,12 +34,19 @@ class ClientLogoutView(LogoutView):
 
 
 class DashView(ClientLoginRequiredMixin, ListView):
-    template_name = "client/success.html"
+    model = Transaction
+    template_name = "client/dash.html"
 
-    def get(self, request):
-        if request.user.is_authenticated():
-            return render(request, self.template_name, {})
-        return redirect('client:login')
+    def get_context_data(self, **kwargs):
+        context = super(DashView, self).get_context_data(**kwargs)
+        context['transaction_list'] = self.get_transactions()
+        return context
+
+
+    def get_transactions(self):
+        queryset = super(DashView, self).get_queryset()
+        queryset = queryset.filter(client=self.request.user.userprofile)
+        return queryset
 
 
 class SignupView(TemplateView):
