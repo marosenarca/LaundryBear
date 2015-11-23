@@ -1,5 +1,6 @@
 {% extends 'client/base.html'%}
 {% load staticfiles %}
+{% load custom_math %}
 
 {% block title %} Dashboard | LaundryBear {% endblock %}
 
@@ -26,9 +27,10 @@
 							<td>{{transaction.request_date}}</td>
 							<td>
 								<!--{% for order in transaction.order_set.all %}
-									i don't how to do this
+									{{ order.price.price|multiply:order.pieces|divide:7 }}
 								{% endfor %}-->
-								{{transaction.order_set.all}}
+								<!--{{transaction.order_set.all}}-->
+								{{transaction.order_set.all|add_all}}
 							</td>
 							<td>{{transaction.order_set.first.price.laundry_shop}}</td>
 							<td><div class="paw-container" style="width: {% widthratio shop.average_rating 5 150 %}px;"><img src="{% static "management/icons/star.png" %}" /></div></td>
