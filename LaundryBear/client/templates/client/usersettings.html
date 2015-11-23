@@ -14,15 +14,14 @@
         <div class="medium-6 columns">
           <div class="row">
             <div class="small-6 medium-12 columns">
-              <h4 class="name">Robert James Waller</h4>
-              <p>Apas, Cebu City<br>
-                Cebu</p>
+              <h4 class="name">{{ userprofile }}</h4>
+              <p>{{ userprofile.location }}</p>
 
-              <h4 class="phone">+63 908 7234 134</h4>
+              <h4 class="phone">{{ userprofile.contact_number }}</h4>
             </div>
             <div class="small-6 medium-12 columns">
               <h4 class="email">Email</h4>
-              <p>rjwaller@email.com</p>
+              <p>{{ userprofile.client.email }}</p>
 
               
             </div>
@@ -30,34 +29,47 @@
         </div>
         <div class="medium-6 columns">
           <span class="info label">Fill any field below to change account information</span></br>
-          <form class="round-inputs">
+          <form class="round-inputs" method="post">
+            {% csrf_token %}
             <div class="row">
              
               <div class="large-12 columns">                
                 <hr>
-                <h6>Address    <span data-tooltip aria-haspopup="true" class="warning label has-tip tip-right radius round" title="All three fields must be filled if you wish to change your address">All fields must be filled</span></h6>
-                <input id="address" type="text" placeholder="Barangay" />
-                <input id="address" type="text" placeholder="City" />
-                <input id="address" type="text" placeholder="Province" />
+                <h6>Address
+                  <span data-tooltip aria-haspopup="true" class="warning label has-tip tip-right radius round"
+                        title="All three fields must be filled if you wish to change your address">
+                    All fields must be filled</span></h6>
+                <label>Barangay {{ userprofileform.barangay }}</label>
+                <label>City {{ userprofileform.city }} </label>
+                <label>Province {{ userprofileform.province }}</label>
                 <hr>
               </div>
               <div class="large-12 columns">
-                <input id="number" type="text" placeholder="Contact Number" />
+                <h6>Name
+                  <span data-tooltip aria-haspopup="true" class="warning label has-tip tip-right radius round"
+                        title="All three fields must be filled if you wish to change your address">
+                    All fields must be filled</span></h6>
+                <label>First Name {{ userform.first_name }}</label>
+                <label>Last Name {{ userform.last_name }}</label>
+                <hr>
               </div>
               <div class="large-12 columns">
-                <input id="emai" type="email" placeholder="Email" />
+                 <label>Contact number {{ userprofileform.contact_number }}</label>
               </div>
               <div class="large-12 columns">
-                <input id="emai" type="text" placeholder="Username" />
+                 <label>Email {{ userform.email }}</label>
               </div>
               <div class="large-12 columns">
-                <input id="pass" type="password" placeholder="Password" />
+                 <label>Username {{ userform.username }}</label>
               </div>
               <div class="large-12 columns">
-                <input id="password" type="password" placeholder="Re-type Password"/>
+                 <label>Password {{ userform.password1 }}</label>
               </div>
               <div class="large-12 columns">
-                <a href="#" type="submit" class="button round">Save</a>
+                <label>Re-type Password {{ userform.password2 }}</label>
+              </div>
+              <div class="large-12 columns">
+                <button type="submit" class="button round">Save</button>
               </div>
             </div>
           </form>
