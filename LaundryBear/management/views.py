@@ -313,6 +313,12 @@ class UpdateTransactionDeliveryDateView(AdminLoginRequiredMixin, UpdateView):
     template_name = 'management/transactions/update_transaction.html'
     fields = ['delivery_date']
 
+    def get_context_data(self, *args, **kwargs):
+        context = super(UpdateTransactionDeliveryDateView, self)\
+            .get_context_data(*args, **kwargs)
+        context['delivery_fee'] = float(50)
+        return context
+
     def get_success_url(self):
         return reverse('management:pending-transactions')
 
@@ -337,7 +343,7 @@ class MarkTransactionDoneView(AdminLoginRequiredMixin, UpdateView):
 
 class UserSettingsView(AdminLoginRequiredMixin, TemplateView):
     template_name = 'management/account/settings.html'
-    
+
 
     def get_context_data(self, **kwargs):
         context = super(UserSettingsView, self).get_context_data(**kwargs)
@@ -346,7 +352,7 @@ class UserSettingsView(AdminLoginRequiredMixin, TemplateView):
 
     def post(self,request,*args,**kwargs):
         context = self.get_context_data(*args, **kwargs)
-        
+
 
         return self.render_to_response(context)
-        
+
