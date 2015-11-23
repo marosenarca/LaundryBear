@@ -1,7 +1,17 @@
 $(document).ready(function() {
 	loadTable();
+	calculateServiceFee();
 	updateTotals();
 });
+
+function calculateServiceFee() {
+	var total = 0;
+	$("#table-body").children().each(function(index, element) {
+		total += +$(element).data("price").valueOf();
+	});
+	var fee = total * 0.1;
+	$("#servicecharge").html(fee.toFixed(2));
+}
 
 function loadTable() {
 	var selectedServices = document.cookie.replace(/(?:(?:^|.*;\s*)selectedServices\s*\=\s*([^;]*).*$)|^.*$/, "$1");
