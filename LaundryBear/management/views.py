@@ -2,6 +2,8 @@ import json
 
 from database.models import LaundryShop, Price, Service, UserProfile, Transaction, Order
 
+from datetime import timedelta
+
 from django.contrib.auth import authenticate, login, logout
 from django.core.urlresolvers import reverse
 from django.db.models import Q
@@ -144,7 +146,6 @@ class AdminLogoutView(LogoutView):
     login_view_name = 'management:login-admin'
 
 
-
 class ClientListView(AdminLoginRequiredMixin, ListView):
     model = UserProfile
     paginate_by = 10
@@ -279,7 +280,6 @@ class PendingRequestedTransactionsView(AdminLoginRequiredMixin, ListView):
         return queryset
 
 
-
 class OngoingTransactionsView(AdminLoginRequiredMixin, ListView):
     model = Transaction
     context_object_name = 'ongoing_transaction_list'
@@ -291,6 +291,7 @@ class OngoingTransactionsView(AdminLoginRequiredMixin, ListView):
         queryset = queryset.filter(status=2)
 
         return queryset
+
 
 class HistoryTransactionsView(AdminLoginRequiredMixin, ListView):
     model = Transaction
@@ -305,18 +306,47 @@ class HistoryTransactionsView(AdminLoginRequiredMixin, ListView):
 
         return queryset
 
-class UpdateTransactionView(AdminLoginRequiredMixin, UpdateView):
+
+class UpdateTransactionDeliveryDateView(AdminLoginRequiredMixin, UpdateView):
     model = Transaction
     context_object_name = 'transaction'
     template_name = 'management/transactions/update_transaction.html'
-    form_class = forms.TransactionForm
+    fields = ['delivery_date']
+
+    def get_success_url(self):
+        return reverse('management:pending-transactions')
+
+    def post(self, request, *args, **kwargs):
+        response = super(UpdateTransactionDeliveryDateView, self).post(request, *args, **kwargs)
+        if request.POST.get('approve', False):
+            self.object.status = 2
+            self.object.save()
+        else:
+            self.object.status = 4
+            self.object.save()
+        return response
 
 
 class MarkTransactionDoneView(AdminLoginRequiredMixin, UpdateView):
     model = Transaction
     fields = ['status']
     template_name = ''
-    allowed_methods = ['post']
 
     def get_success_url(self):
         return reverse('management:ongoing-transactions')
+
+class UserSettingsView(AdminLoginRequiredMixin, TemplateView):
+    template_name = 'management/account/settings.html'
+    
+
+    def get_context_data(self, **kwargs):
+        context = super(UserSettingsView, self).get_context_data(**kwargs)
+        context['userprofile'] = self.request.user.userprofile
+        return context
+
+    def post(self,request,*args,**kwargs):
+        context = self.get_context_data(*args, **kwargs)
+        
+
+        return self.render_to_response(context)
+        

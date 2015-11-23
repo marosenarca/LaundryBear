@@ -20,3 +20,17 @@ class OrderForm(ModelForm):
     class Meta:
         model = Order
         fields = ['price', 'transaction', 'pieces']
+
+
+class AddressForm(Form):
+    province = forms.CharField(max_length=50)
+    city = forms.CharField(max_length=50, required=True)
+    barangay = forms.CharField(max_length=50)
+    street = forms.CharField(max_length=50, required=True)
+    building = forms.CharField(max_length=50, required=True)
+
+
+class TransactionForm(ModelForm):
+    class Meta:
+        model = Transaction
+        exclude = ['client', 'request_date', 'status']

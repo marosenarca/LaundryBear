@@ -10,13 +10,14 @@ from django.http import HttpResponse
 from django.forms.models import inlineformset_factory
 from django.shortcuts import redirect, render, render_to_response
 from django.template import RequestContext
+from django.forms.models import model_to_dict
 from django.utils.decorators import method_decorator
 from django.views.generic import (CreateView, DeleteView, DetailView, FormView, ListView,
                                   RedirectView, TemplateView, UpdateView, View)
 
-from client.forms import ProfileForm, UserForm
+from client.forms import ProfileForm, UserForm, AddressForm, TransactionForm
 from client.mixins import ClientLoginRequiredMixin
-from database.models import LaundryShop, Price, Service, UserProfile, Transaction, Order, default_date
+from database.models import LaundryShop, Price, Service, UserProfile, Transaction, Order, default_date, UserProfile
 
 from LaundryBear.forms import LoginForm
 from LaundryBear.views import LoginView, LogoutView
@@ -34,12 +35,19 @@ class ClientLogoutView(LogoutView):
 
 
 class DashView(ClientLoginRequiredMixin, ListView):
-    template_name = "client/success.html"
+    model = Transaction
+    template_name = "client/dash.html"
 
-    def get(self, request):
-        if request.user.is_authenticated():
-            return render(request, self.template_name, {})
-        return redirect('client:login')
+    def get_context_data(self, **kwargs):
+        context = super(DashView, self).get_context_data(**kwargs)
+        context['transaction_list'] = self.get_transactions()
+        return context
+
+
+    def get_transactions(self):
+        queryset = super(DashView, self).get_queryset()
+        queryset = queryset.filter(client=self.request.user.userprofile)
+        return queryset
 
 
 class SignupView(TemplateView):
@@ -78,6 +86,30 @@ class SignupView(TemplateView):
     def render_to_response(self, context, **response_kwargs):
         response_kwargs.setdefault('content_type', self.content_type)
         return self.response_class(request=self.request, template=self.template_name, context=context, using=None, **response_kwargs)
+
+class UserSettingsView(ClientLoginRequiredMixin, TemplateView):
+    template_name = 'client/usersettings.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(UserSettingsView, self).get_context_data(**kwargs)
+        context['userprofile'] = self.request.user.userprofile
+        context['userform'] = UserForm(data=self.request.POST or None, instance=self.request.user)
+        context['userprofileform'] = ProfileForm(data=self.request.POST or None, instance=self.request.user.userprofile)
+        return context
+
+    def post(self,request,*args,**kwargs):
+        context = self.get_context_data(*args, **kwargs)
+        userform = context['userform']
+        userprofileform = context['userprofileform']
+
+        if (userform.is_valid() and userprofileform.is_valid()):
+            userform.save()
+            userprofileform.save()
+        else:
+            print userform.errors
+            print userprofileform.errors
+
+        return self.render_to_response(context)
 
 
 class ShopsListView(ClientLoginRequiredMixin, ListView):
@@ -153,6 +185,8 @@ class OrderSummaryView(ClientLoginRequiredMixin, DetailView):
         context['service_charge'] = float(50)
         context['delivery_date'] = default_date().strftime('%Y-%m-%d')
         context['delivery_date_max'] = (default_date() + timedelta(days=7)).strftime('%Y-%m-%d')
+        context['address_form'] = AddressForm(
+            initial=model_to_dict(self.request.user.userprofile))
         return context
 
 
@@ -164,8 +198,13 @@ class CreateTransactionView(ClientLoginRequiredMixin, View):
         if request.is_ajax():
             services = request.POST['selectedServices']
             services = json.loads(services)
-            print request.POST
-            transaction = Transaction.objects.create(client=request.user.userprofile, delivery_date=request.POST['delivery_date'])
+            transaction_form = TransactionForm(request.POST)
+            if transaction_form.is_valid():
+                transaction = transaction_form.save(commit=False)
+                transaction.client = request.user.userprofile
+                transaction.save()
+            else:
+                print transaction_form.errors
             for service in services:
                 pricePk = service['pk']
                 price = Price.objects.get(pk=pricePk)
@@ -174,3 +213,6 @@ class CreateTransactionView(ClientLoginRequiredMixin, View):
             return HttpResponse(reverse('client:view-shops'))
         else:
             return HttpResponse(status=400)
+
+
+
