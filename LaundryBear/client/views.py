@@ -182,7 +182,6 @@ class OrderSummaryView(ClientLoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super(OrderSummaryView, self).get_context_data(**kwargs)
         context['delivery_fee'] = float(50)
-        context['service_charge'] = float(50)
         context['delivery_date'] = default_date().strftime('%Y-%m-%d')
         context['delivery_date_max'] = (default_date() + timedelta(days=7)).strftime('%Y-%m-%d')
         context['address_form'] = AddressForm(
