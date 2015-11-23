@@ -88,12 +88,28 @@ class SignupView(TemplateView):
 
 class UserSettingsView(ClientLoginRequiredMixin, TemplateView):
     template_name = 'client/usersettings.html'
-    model = UserProfile
 
-    def get(self, request):
-        if request.user.is_authenticated():
-            return render(request, self.template_name, {})
-        return redirect('client:usersettings')
+    def get_context_data(self, **kwargs):
+        context = super(UserSettingsView, self).get_context_data(**kwargs)
+        context['userprofile'] = self.request.user.userprofile
+        context['userform'] = UserForm(data=self.request.POST or None, instance=self.request.user)
+        context['userprofileform'] = ProfileForm(data=self.request.POST or None, instance=self.request.user.userprofile)
+        return context
+
+    def post(self,request,*args,**kwargs):
+        context = self.get_context_data(*args, **kwargs)
+        userform = context['userform']
+        userprofileform = context['userprofileform']
+
+        if (userform.is_valid() and userprofileform.is_valid()):
+            userform.save()
+            userprofileform.save()
+        else:
+            print userform.errors
+            print userprofileform.errors
+
+        return self.render_to_response(context)
+
 
 class ShopsListView(ClientLoginRequiredMixin, ListView):
     model = LaundryShop
