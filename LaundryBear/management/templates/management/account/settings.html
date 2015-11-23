@@ -4,20 +4,44 @@
 {% block title %} Profile | LaundryBear {% endblock %}
 
 {%block body%}
-<div><H5 align="right">Edit Profile</H5></div>
-<div class="large-3 large-centered columns">
-            <div class="login-box">
+<div class="large-6 large-centered columns">
+  <div><H5 align="right">Edit Profile</H5></div>
+  <h3><b>{{user.username}}</h3>
+<ul class="accordion" data-accordion>
+ 
+  <li class="accordion-navigation">
+    <a href="#panel2a">Edit Username</a>
+    <div id="panel2a" class="content">
+      <div class="login-box">
             <div class="row">
             <div class="large-12 columns">
                <form method="post">
                    {% csrf_token %}
                     <div class="row">
                       <div class="large-12 columns">
-                        <h3><b>{{user.username}}</h3>
                         <label class="title"><b>Edit Username</b></label>
-                        <input type="text" name="username" placeholder="Type your new username here."/>{{ userprofile.client.username }}
+                        <input type="text" name="username" placeholder="Type your new username here."/>
                       </div>
-                    </div><br>
+                    </div>
+                    <div class="row">
+                      <div class="large-12 large-centered columns">
+                        <input type="submit" class="radius success button left" value="Save New Username" />
+                      </div>
+                    </div>
+                  </form>
+            </div>
+          </div>
+    </div>
+    </div>
+  </li>
+  <li class="accordion-navigation">
+    <a href="#panel3a">Change Password</a>
+    <div id="panel3a" class="content">
+     <div class="login-box">
+            <div class="row">
+            <div class="large-12 columns">
+               <form method="post">
+                   {% csrf_token %}
                     <div class="row">
                       <div class="large-12 columns">
                         <label class="title"><b>Change Password</b></label>
@@ -28,10 +52,43 @@
                     </div>
                     <div class="row">
                       <div class="large-12 large-centered columns">
-                        <input type="submit" class="success button expand" value="Save Changes" />
+                        <input type="submit" class="radius success button" value="Save New Password" />
                       </div>
                     </div>
                   </form>
             </div>
           </div>
+    </div>
+    </div>
+  </li>
+  <li class="accordion-navigation">
+    <a href="#panel4a">Change Service Rates</a>
+    <div id="panel4a" class="content">
+     <div class="login-box">
+            <div class="row">
+            <div class="large-12 columns">
+               <form method="post">
+                   {% csrf_token %}
+                    <div class="row">
+                      <div class="large-12 columns">
+                        <label class="title"><b>Delivery Fee:</b></label>
+                        <input type="number" name="rate" placeholder="Enter new rate"/>
+                        <label class="title"><b>Service Charge:</b></label>
+                        <input type="number" name="rate" placeholder="Enter new rate" />
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="large-12 large-centered columns">
+                        <input type="submit" class="radius success button" value="Save New Rate" />
+                      </div>
+                    </div>
+                  </form>
+            </div>
+          </div>
+    </div>
+    </div>
+  </li>
+</ul>
+</div>
+
 {% endblock %}
