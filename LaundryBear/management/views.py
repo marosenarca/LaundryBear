@@ -146,7 +146,6 @@ class AdminLogoutView(LogoutView):
     login_view_name = 'management:login-admin'
 
 
-
 class ClientListView(AdminLoginRequiredMixin, ListView):
     model = UserProfile
     paginate_by = 10
@@ -281,7 +280,6 @@ class PendingRequestedTransactionsView(AdminLoginRequiredMixin, ListView):
         return queryset
 
 
-
 class OngoingTransactionsView(AdminLoginRequiredMixin, ListView):
     model = Transaction
     context_object_name = 'ongoing_transaction_list'
@@ -293,6 +291,7 @@ class OngoingTransactionsView(AdminLoginRequiredMixin, ListView):
         queryset = queryset.filter(status=2)
 
         return queryset
+
 
 class HistoryTransactionsView(AdminLoginRequiredMixin, ListView):
     model = Transaction
@@ -306,6 +305,7 @@ class HistoryTransactionsView(AdminLoginRequiredMixin, ListView):
         queryset = queryset.filter(status__in=filters).order_by('request_date').reverse()
 
         return queryset
+
 
 class UpdateTransactionDeliveryDateView(AdminLoginRequiredMixin, UpdateView):
     model = Transaction
