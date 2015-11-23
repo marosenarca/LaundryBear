@@ -35,13 +35,14 @@ $("#open-time, #close-time").on("change", function() {
 	var openTime = $("#open-time").val();
 	var closeTime = $("#close-time").val();
 
-	if (openTime == 'null' || closeTime == 'null') {
+	if (openTime === "null" || closeTime === "null" || openTime === null || closeTime === null) {
 		$("#id_hours_open").val('');
 	}
-
+  else{
 	var timeString = openTime + ' - ' + closeTime;
 
 	$("#id_hours_open").val(timeString);
+}
 });
 
 $("#days-container input").on("change", function() {
