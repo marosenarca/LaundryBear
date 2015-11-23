@@ -1,0 +1,37 @@
+{% extends 'management/base.html' %}
+{% load staticfiles %}
+
+{% block title %} Profile | LaundryBear {% endblock %}
+
+{%block body%}
+<div><H5 align="right">Edit Profile</H5></div>
+<div class="large-3 large-centered columns">
+            <div class="login-box">
+            <div class="row">
+            <div class="large-12 columns">
+               <form method="post">
+                   {% csrf_token %}
+                    <div class="row">
+                      <div class="large-12 columns">
+                        <h3><b>{{user.username}}</h3>
+                        <label class="title"><b>Edit Username</b></label>
+                        <input type="text" name="username" placeholder="Type your new username here."/>{{ userprofile.client.username }}
+                      </div>
+                    </div><br>
+                    <div class="row">
+                      <div class="large-12 columns">
+                        <label class="title"><b>Change Password</b></label>
+                        <input type="password" name="password" placeholder="Enter your password"/>
+                        <input type="password" name="password" placeholder="Enter new password" />
+                        <input type="password" name="password" placeholder="Retype new password"/>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="large-12 large-centered columns">
+                        <input type="submit" class="success button expand" value="Save Changes" />
+                      </div>
+                    </div>
+                  </form>
+            </div>
+          </div>
+{% endblock %}
