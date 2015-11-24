@@ -14,9 +14,9 @@ function updateColumnTotals() {
 	$.each(cols, function(index, column) {
 		total += +$(column).html();
 	});
-	total += +$("#deliveryfee").html();
 	$("#subtotal").html(total.toFixed(2));
 	updateServiceFee(total);
+	total += +$("#deliveryfee").html();
 	var footer = $("tfoot tr td:last-child");
 	total = 0;
 	$.each(footer, function(index, value) {
