@@ -49,11 +49,12 @@ class DashView(ClientLoginRequiredMixin, ListView):
         return queryset
 
     def post(self, request, *args, **kwargs):
-        response = super(DashView, self).post(request, *args, **kwargs)
-        print 'pooooooooooooosssssssttttttteeeeeeeedddd'
-        print response
-
-
+        print '===============request============'
+        print request
+        print '===============args============'
+        print args
+        print '===============args============'
+        print kwargs
 
 
 class SignupView(TemplateView):

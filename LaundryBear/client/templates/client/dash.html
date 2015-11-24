@@ -34,8 +34,13 @@
                             {% if transaction.paws %}
                                 {{ transaction.paws }}
                             {% else %}
+                            <form method="post">
+                            {% csrf_token %}
                                 <div id="paws"><a class="raty-click"
-                                id="{{ transaction.order_set.first.price.laundry_shop.id }}">rate this {{ transaction.order_set.first.price.laundry_shop.id }} shizz</a></div>
+                                id="{{ transaction.order_set.first.price.laundry_shop.id }}">rate this shizz</a></div>
+                            <!--<input type="hidden" id="{{ transaction.order_set.first.price.laundry_shop.id }}" data-value=""/>
+                            <input type="submit" class="tiny secondary button" value="Submit"/>-->
+                            </form>
                             {% endif %}
 
                         </td>
@@ -69,28 +74,18 @@ $('.raty-click').click(function() {
         var _id = $(this).attr('id');
         $(this).parent('#paws').replaceWith(
 
-            '<div class="raty">' + '</div>'
+            '<div class="raty">' + '</div>'+
+            '<input type="hidden" class="inputnum" data-value=""/>'+
+                            '<input type="submit" class="tiny secondary button" value="Submit"/>'
         );
 
+        $('.inputnum').attr('id',_id);
         $('.raty').attr('id', _id);
         $('div.raty').raty({
             click: function(score, evt) {
                 alert('ID: ' + _id + "\nscore: " + score + "\nevent: " + evt);
 
-                $.ajax({
-                    url: '{% url 'client:menu' %}',
-                    type: 'POST',
-                    data: {"id": _id, "score": score},
-                })
-                .done(function() {
-                    console.log("success");
-                })
-                .fail(function() {
-                    console.log("error");
-                })
-                .always(function() {
-                    console.log("complete");
-                });
+                $('.inputnum').attr('data-value',score);
                 
             }
         });
