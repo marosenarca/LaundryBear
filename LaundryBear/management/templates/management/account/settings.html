@@ -5,8 +5,8 @@
 
 {%block body%}
 <div class="large-6 large-centered columns">
-  <div><H5 align="right">Edit Profile</H5></div>
-  <h3><b>{{user.username}}</h3>
+  <div><H5 align="right">Administration Settings</H5></div>
+  <h3><b>Administrator: {{user.username}}</h3>
 <ul class="accordion" data-accordion>
  
   <li class="accordion-navigation">
@@ -14,26 +14,28 @@
     <div id="panel2a" class="content">
       <div class="login-box">
             <div class="row">
-            <div class="large-12 columns">
-               <form method="post">
-                   {% csrf_token %}
-                    <div class="row">
-                      <div class="large-12 columns">
-                        <label class="title"><b>Edit Username</b></label>
-                        <input type="text" name="username" placeholder="Type your new username here."/>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="large-12 large-centered columns">
-                        <input type="submit" class="radius success button left" value="Save New Username" />
-                      </div>
-                    </div>
-                  </form>
+                <div class="large-12 columns">
+                   <form method="post">
+                       {% csrf_token %}
+                        <div class="row">
+                          <div class="large-12 columns">
+                            <label class="title"><b>Edit Username</b></label>
+                            <label>{{ usernameform.username }}</label>
+                          </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="large-12 large-centered columns">
+                            <button type="submit" class="success button round">Change Username</button>
+                          </div>
+                        </div>
+                      </form>
+                </div>
             </div>
-          </div>
-    </div>
+      </div>
     </div>
   </li>
+
   <li class="accordion-navigation">
     <a href="#panel3a">Change Password</a>
     <div id="panel3a" class="content">
@@ -44,15 +46,14 @@
                    {% csrf_token %}
                     <div class="row">
                       <div class="large-12 columns">
-                        <label class="title"><b>Change Password</b></label>
-                        <input type="password" name="password" placeholder="Enter your password"/>
-                        <input type="password" name="password" placeholder="Enter new password" />
-                        <input type="password" name="password" placeholder="Retype new password"/>
+                        <label><b>Old Password</b> {{ passwordform.old_password }}</label>
+                        <label><b>New Password</b> {{ passwordform.new_password1 }}</label>
+                        <label><b>Re-type New Password</b> {{ passwordform.new_password2 }}</label>
                       </div>
                     </div>
                     <div class="row">
                       <div class="large-12 large-centered columns">
-                        <input type="submit" class="radius success button" value="Save New Password" />
+                          <button type="submit" class="success button round">Change Password</button>
                       </div>
                     </div>
                   </form>
