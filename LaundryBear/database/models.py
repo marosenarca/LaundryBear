@@ -125,7 +125,3 @@ class Transaction(models.Model):
 
     def __unicode__(self):
         return "{0}".format(unicode(self.request_date))
-
-class SiteSettings(models.Model):
-    delivery_fee = models.IntegerField(default=50)
-    service_charge = models.IntegerField(default=10)
