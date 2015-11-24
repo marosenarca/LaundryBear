@@ -6,7 +6,6 @@
     {% block body %}
 	{% csrf_token %}
         <div class="row">
-            <div class="large-2 columns"></div>
             <div class="large-8 large-offset-2 columns">
                 <div class="panel small-centered">
                     <h3 style="text-align:center">Summary</h3>
@@ -29,16 +28,30 @@
                                 <br>
 								<strong>+Delivery fee:</strong> <span id="deliveryfee">{{ delivery_fee }}</span>
                                 <br>
-								<strong>+Service charge:</strong> <span id="servicecharge">{{ service_charge }}</span>
+								<strong>+Service charge:</strong> <span id="servicecharge">0.00</span>
                                 <hr>
 								<strong>GRAND TOTAL: <span id="total">0.00</span></strong>
                             </div>
                         </div>
                 </div>
                 <hr>
-                <strong>Date of delivery: </strong>
-				<input type="date" min="{{ delivery_date }}" style="width: 280px;" value="{{ delivery_date }}" max="{{ delivery_date_max }}" name="delivery_date">
-                <br><br>
+				<div class="row">
+					<div class="small-4">
+						<h4>Date of delivery: </h4>
+						<input type="date" min="{{ delivery_date }}" style="width: 280px;" value="{{ delivery_date }}" max="{{ delivery_date_max }}" name="delivery_date">
+					</div>
+				</div>
+				<hr>
+				<div class="row">
+					<h4>Delivery Address</h4>
+					<div class="small-6">
+						<label>{{ address_form.building.label }}:{{ address_form.building }}</label>
+						<label>{{ address_form.street.label }}:{{ address_form.street }}</label>
+						<label>{{ address_form.barangay.label }}:{{ address_form.barangay }}</label>
+						<label>{{ address_form.city.label }}:{{ address_form.city }}</label>
+						<label>{{ address_form.province.label }}:{{ address_form.province }}</label>
+					</div>
+				</div>
                 <a href="javascript:history.go(-1)" class="button left">Back</a>
                 <a href="#" data-reveal-id="confirmModal" class="button success right">Order</a>
                 <!-- Are you sure? -->

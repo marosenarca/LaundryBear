@@ -28,7 +28,7 @@
                             <h4>Client Details</h4>
                             <strong>Name: </strong> {{ transaction.client.client.get_full_name }}
                             <br>
-                            <strong>Address: </strong> {{ transaction.client.location }}
+                            <strong>Address: </strong> {{ transaction.location }}
                             <br>
                             <strong>Contact Number: </strong> {{ transaction.client.contact_number }}
                             <br>
@@ -51,7 +51,19 @@
 									<tr>
 										<td></td>
 										<td></td>
+										<td>+ Service Charge</td>
+										<td id="servicecharge">0.00</td>
+									</tr>
+									<tr>
 										<td></td>
+										<td></td>
+										<td>+ Delivery Fee</td>
+										<td id="deliveryfee">{{ delivery_fee }}</td>
+									</tr>
+									<tr>
+										<td></td>
+										<td></td>
+										<td>Total</td>
 										<td id="total">0.00</td>
 									</tr>
 								</tfoot>

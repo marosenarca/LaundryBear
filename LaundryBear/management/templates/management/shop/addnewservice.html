@@ -12,9 +12,9 @@
           <form method="post">
               {% csrf_token %}
               <div class="row">
-                <div class="large-8 columns">
+                <div style="text-align:center;">
                   <label>Name
-                  <div>
+                  <div style="display:inline-block;">
                     <span id="required" class="warning label">Required field</span>
                     {{ form.name }}
                     {{ form.name.errors }}
@@ -24,9 +24,9 @@
               </div>
 
               <div class="row">
-                <div class="large-8 columns">
+                <div style="text-align:center;">
                   <label>Description
-                  <div>
+                  <div style="display:inline-block;">
                     <span id="required" class="warning label">Required field</span>
                     {{ form.description }}
                     {{ form.description.errors }}
@@ -34,8 +34,10 @@
                   </label>
                 </div>
               </div>
-              <button type="submit" class="button small" id="save-button">Save</button>
-              <a href="javascript:history.go(-1);" class="warning button small">Cancel</a>
+              <div style="display:inline-block;">
+                <button type="submit" class="button small" id="save-button">Save</button>
+                <a href="javascript:history.go(-1);" class="warning button small">Cancel</a>
+              </div>
           </form>
         </div>
       </div>

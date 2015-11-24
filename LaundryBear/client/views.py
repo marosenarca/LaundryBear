@@ -10,11 +10,13 @@ from django.http import HttpResponse
 from django.forms.models import inlineformset_factory
 from django.shortcuts import redirect, render, render_to_response
 from django.template import RequestContext
+from django.forms.models import model_to_dict
 from django.utils.decorators import method_decorator
 from django.views.generic import (CreateView, DeleteView, DetailView, FormView, ListView,
                                   RedirectView, TemplateView, UpdateView, View)
 
 from client.forms import ProfileForm, UserForm, TransactionForm
+from client.forms import ProfileForm, UserForm, AddressForm, TransactionForm
 from client.mixins import ClientLoginRequiredMixin
 from database.models import LaundryShop, Price, Service, UserProfile, Transaction, Order, default_date, UserProfile
 
@@ -191,9 +193,10 @@ class OrderSummaryView(ClientLoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super(OrderSummaryView, self).get_context_data(**kwargs)
         context['delivery_fee'] = float(50)
-        context['service_charge'] = float(50)
         context['delivery_date'] = default_date().strftime('%Y-%m-%d')
         context['delivery_date_max'] = (default_date() + timedelta(days=7)).strftime('%Y-%m-%d')
+        context['address_form'] = AddressForm(
+            initial=model_to_dict(self.request.user.userprofile))
         return context
 
 
@@ -205,8 +208,13 @@ class CreateTransactionView(ClientLoginRequiredMixin, View):
         if request.is_ajax():
             services = request.POST['selectedServices']
             services = json.loads(services)
-            print request.POST
-            transaction = Transaction.objects.create(client=request.user.userprofile, delivery_date=request.POST['delivery_date'])
+            transaction_form = TransactionForm(request.POST)
+            if transaction_form.is_valid():
+                transaction = transaction_form.save(commit=False)
+                transaction.client = request.user.userprofile
+                transaction.save()
+            else:
+                print transaction_form.errors
             for service in services:
                 pricePk = service['pk']
                 price = Price.objects.get(pk=pricePk)
@@ -217,4 +225,4 @@ class CreateTransactionView(ClientLoginRequiredMixin, View):
             return HttpResponse(status=400)
 
 
-        
+

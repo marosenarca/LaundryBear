@@ -17,6 +17,7 @@ from management import forms
 from management.mixins import AdminLoginRequiredMixin
 
 from LaundryBear.views import LoginView, LogoutView
+from django.contrib.auth.forms import PasswordChangeForm
 
 
 class LaundryMenuView(AdminLoginRequiredMixin, TemplateView):
@@ -144,7 +145,6 @@ class AdminLoginView(LoginView):
 
 class AdminLogoutView(LogoutView):
     login_view_name = 'management:login-admin'
-
 
 
 class ClientListView(AdminLoginRequiredMixin, ListView):
@@ -281,7 +281,6 @@ class PendingRequestedTransactionsView(AdminLoginRequiredMixin, ListView):
         return queryset
 
 
-
 class OngoingTransactionsView(AdminLoginRequiredMixin, ListView):
     model = Transaction
     context_object_name = 'ongoing_transaction_list'
@@ -293,6 +292,7 @@ class OngoingTransactionsView(AdminLoginRequiredMixin, ListView):
         queryset = queryset.filter(status=2)
 
         return queryset
+
 
 class HistoryTransactionsView(AdminLoginRequiredMixin, ListView):
     model = Transaction
@@ -307,11 +307,18 @@ class HistoryTransactionsView(AdminLoginRequiredMixin, ListView):
 
         return queryset
 
+
 class UpdateTransactionDeliveryDateView(AdminLoginRequiredMixin, UpdateView):
     model = Transaction
     context_object_name = 'transaction'
     template_name = 'management/transactions/update_transaction.html'
     fields = ['delivery_date']
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(UpdateTransactionDeliveryDateView, self)\
+            .get_context_data(*args, **kwargs)
+        context['delivery_fee'] = float(50)
+        return context
 
     def get_success_url(self):
         return reverse('management:pending-transactions')
@@ -334,3 +341,30 @@ class MarkTransactionDoneView(AdminLoginRequiredMixin, UpdateView):
 
     def get_success_url(self):
         return reverse('management:ongoing-transactions')
+
+class AdminSettingsView(AdminLoginRequiredMixin, TemplateView):
+    template_name = 'management/account/settings.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(AdminSettingsView, self).get_context_data(**kwargs)
+        context['usernameform'] = forms.ChangeUsernameForm(data=self.request.POST or None, instance=self.request.user)
+        context['passwordform'] = PasswordChangeForm(data=self.request.POST or None, user=self.request.user)
+        return context
+
+    def post(self,request,*args,**kwargs):
+        context = self.get_context_data(*args, **kwargs)
+        usernameform = context['usernameform']
+        passwordform = context['passwordform']
+
+        if (usernameform.is_valid()):
+            usernameform.save()
+        else:
+            print usernameform.errors
+
+        if passwordform.is_valid():
+            passwordform.save()
+        else:
+            print passwordform.error_messages
+
+        return self.render_to_response(context)
+

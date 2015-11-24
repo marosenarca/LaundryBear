@@ -18,6 +18,7 @@ urlpatterns = [
     url(r'^login$', views.AdminLoginView.as_view(), name='login-admin'),
     url(r'^logout$', views.AdminLogoutView.as_view(), name='logout-admin'),
     url(r'^clients/list$', views.ClientListView.as_view(), name='list-client'),
+    url(r'^settings$', views.AdminSettingsView.as_view(), name='settings'),
     url(r'^services/list$', views.ServicesListView.as_view(),
         name='list-service'),
     url(r'^services/delete/(?P<pk>\d+)$', views.ServicesDeleteView.as_view(),
@@ -32,4 +33,5 @@ urlpatterns = [
     url(r'^transactions/history$', views.HistoryTransactionsView.as_view(), name='history-transactions'),
     url(r'^transactions/update/(?P<pk>\d+)$', views.UpdateTransactionDeliveryDateView.as_view(), name='update-transaction'),
     url(r'^transactions/ongoing/(?P<pk>\d+)/done$', views.MarkTransactionDoneView.as_view(), name='mark-transaction-done')
+
 ]
