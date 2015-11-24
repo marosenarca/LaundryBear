@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="{% static "client/css/app.css" %}"/>
     <link rel="stylesheet" href="{% static "client/css/control.css" %}"/>
 
-
     
 	<link rel="stylesheet" href="{% static "LaundryBear/foundation-icons/foundation-icons.css" %}" />
     {%block stylesheets%} {% endblock %}
@@ -75,6 +74,11 @@
     <script src="{%static "LaundryBear/js/vendor/fastclick.js"%}"></script>
     <script src="{%static "LaundryBear/js/foundation.min.js"%}"></script>
     <script src="{%static "client/js/app.js"%}"></script>
+    <script src="{% static "LaundryBear/js/jquery.raty.js" %}"></script>
+    <script src="{% static "LaundryBear/js/labs.js" %}"></script>
+    <script>
+        $.fn.raty.defaults.path = "{% static "LaundryBear/images" %}";
+    </script>
     {%block javascripts%} {% endblock %}
   </body>
 </html>

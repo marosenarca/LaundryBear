@@ -33,7 +33,15 @@
 								{{transaction.order_set.all|add_all}}
 							</td>
 							<td>{{transaction.order_set.first.price.laundry_shop}}</td>
-							<td><div class="paw-container" style="width: {% widthratio shop.average_rating 5 150 %}px;"><img src="{% static "management/icons/star.png" %}" /></div></td>
+							<td>{% if transaction.order_set.first.price.laundry_shop.average_rating %}
+							<div class="raty-rating" data-value="{{ transaction.order_set.first.price.laundry_shop.average_rating }}" id="{{ transaction.order_set.first.price.laundry_shop.id }}">
+							{% else %}
+							 <center>
+							 <div id="paws">Not yet pawed.<br><a id="{{ transaction.order_set.first.price.laundry_shop.id }}" class="raty-click"
+							 >paw this shop now!</a><div></center>
+							 {% endif %}
+							</div>
+							</td>
 							<td>{{ transaction.get_choice_name }}</td>
 
 						{% endfor %}
@@ -50,13 +58,49 @@
 			</div>
 		</div>
 		<div class="large-2 columns"></div>
-
+		
 
 	</div>
 
 {% endblock %}
 
 {% block javascripts %}
+<script>
 
+	$('.raty-rating').raty(
+	{
+		half: true,
+		readOnly: true,
+		score: function(){
+			return $(this).attr('data-value');
+		}
+	}
+		);
+
+
+	$('.raty-click').click(function(){
+		var _id = $(this).attr('id');
+
+		$(this).parent('#paws').replaceWith(
+			
+			'<div class="raty">'+'</div>'
+			);
+
+		$('.raty').attr('id', _id);
+		$('div.raty').raty(
+{
+		click: function(score, evt) {
+    	alert('ID: ' + this.id + "\nscore: " + score + "\nevent: " + evt);
+  		}
+	}
+			);
+	}
+
+
+		);
+
+
+
+</script>
 {% endblock %}
 
