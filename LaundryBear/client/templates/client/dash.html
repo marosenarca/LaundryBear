@@ -1,106 +1,82 @@
-{% extends 'client/base.html'%}
-{% load staticfiles %}
-{% load custom_math %}
-
-{% block title %} Dashboard | LaundryBear {% endblock %}
-
-{%block body%}
-	
-	<div class="row">
-		<div class="large-2 columns"></div>
-		<div class="large-8 large-offset-2 columns">
-			<div class="panel">
-
-				{% if transaction_list %}
-				<h4 style="text-align:center">My Laundry Requests</h4>
-				<table style="margin:auto">
-					<thead>
-						<th>Date Requested</th>
-						<th>Price</th>
-						<th>Laundry Shop</th>
-						<th>Rating</th>
-						<th>Status</th>
-					</thead>
-					<tbody>
-						{% for transaction in transaction_list %}
-						<tr>
-							<td>{{transaction.request_date}}</td>
-							<td>
-								<!--{% for order in transaction.order_set.all %}
+{% extends 'client/base.html'%} {% load staticfiles %} {% load custom_math %} {% block title %} Dashboard | LaundryBear {% endblock %} {%block body%}
+<div class="row">
+    <div class="large-2 columns"></div>
+    <div class="large-8 large-offset-2 columns">
+        <div class="panel">
+            {% if transaction_list %}
+            <h4 style="text-align:center">My Laundry Requests</h4>
+            <table style="margin:auto">
+                <thead>
+                    <th>Date Requested</th>
+                    <th>Price</th>
+                    <th>Laundry Shop</th>
+                    <th>Rating</th>
+                    <th>Status</th>
+                </thead>
+                <tbody>
+                    {% for transaction in transaction_list %}
+                    <tr>
+                        <td>{{transaction.request_date}}</td>
+                        <td>
+                            <!--{% for order in transaction.order_set.all %}
 									{{ order.price.price|multiply:order.pieces|divide:7 }}
 								{% endfor %}-->
-								<!--{{transaction.order_set.all}}-->
-								{{transaction.order_set.all|add_all}}
-							</td>
-							<td>{{transaction.order_set.first.price.laundry_shop}}</td>
-							<td>{% if transaction.order_set.first.price.laundry_shop.average_rating %}
-							<div class="raty-rating" data-value="{{ transaction.order_set.first.price.laundry_shop.average_rating }}" id="{{ transaction.order_set.first.price.laundry_shop.id }}">
-							{% else %}
-							 <center>
-							 <div id="paws">Not yet pawed.<br><a id="{{ transaction.order_set.first.price.laundry_shop.id }}" class="raty-click"
-							 >paw this shop now!</a><div></center>
-							 {% endif %}
-							</div>
-							</td>
-							<td>{{ transaction.get_choice_name }}</td>
-
-						{% endfor %}
-					</tbody>
-				</table>
-					
-				
-				{% else %}
-				<h4 style="text-align:center">No Laundry Requests</h4>
-				{% endif %}
-				<center>
-					<a href="{% url "client:view-shops" %}" class="large button">Make a Request</a>	
-				</center>
-			</div>
-		</div>
-		<div class="large-2 columns"></div>
-		
-
-	</div>
-
-{% endblock %}
-
-{% block javascripts %}
-<script>
-
-	$('.raty-rating').raty(
-	{
-		half: true,
-		readOnly: true,
-		score: function(){
-			return $(this).attr('data-value');
-		}
-	}
-		);
+                            <!--{{transaction.order_set.all}}-->
+                            {{transaction.order_set.all|add_all}}
+                        </td>
+                        <td>{{transaction.order_set.first.price.laundry_shop}}</td>
+                        <td>{% if transaction.order_set.first.price.laundry_shop.average_rating %}
+                            <div class="raty-rating" data-value="{{ transaction.order_set.first.price.laundry_shop.average_rating }}" id="{{ transaction.order_set.first.price.laundry_shop.id }}">
+                                {% else %}
+                                <center>
+                                    <div id="paws">Not yet pawed.
+                                        <br><a id="{{ transaction.order_set.first.price.laundry_shop.id }}" class="raty-click">paw this shop now!</a>
+                                        <div>
+                                </center>
+                                {% endif %}
+                                </div>
+                        </td>
+                        <td>{{ transaction.get_choice_name }}</td>
+                        {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <h4 style="text-align:center">No Laundry Requests</h4> {% endif %}
+            <center>
+                <a href="{% url "client:view-shops" %}" class="large button">Make a Request</a>
+            </center>
+            </div>
+            </div>
+            <div class="large-2 columns"></div>
+        </div>
+        {% endblock %} {% block javascripts %}
+        <script>
+        $('.raty-rating').raty({
+            half: true,
+            readOnly: true,
+            score: function() {
+                return $(this).attr('data-value');
+            }
+        });
 
 
-	$('.raty-click').click(function(){
-		var _id = $(this).attr('id');
+        $('.raty-click').click(function() {
+                var _id = $(this).attr('id');
 
-		$(this).parent('#paws').replaceWith(
-			
-			'<div class="raty">'+'</div>'
-			);
+                $(this).parent('#paws').replaceWith(
 
-		$('.raty').attr('id', _id);
-		$('div.raty').raty(
-{
-		click: function(score, evt) {
-    	alert('ID: ' + this.id + "\nscore: " + score + "\nevent: " + evt);
-  		}
-	}
-			);
-	}
+                    '<div class="raty">' + '</div>'
+                );
+
+                $('.raty').attr('id', _id);
+                $('div.raty').raty({
+                    click: function(score, evt) {
+                        alert('ID: ' + this.id + "\nscore: " + score + "\nevent: " + evt);
+                    }
+                });
+            }
 
 
-		);
-
-
-
-</script>
-{% endblock %}
-
+        );
+        </script>
+        {% endblock %}

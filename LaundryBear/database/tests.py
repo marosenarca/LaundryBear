@@ -1,8 +1,8 @@
 from django.test import TestCase
-
+from django.contrib.auth.models import User
 from django.utils import timezone
 from datetime import timedelta
-from database.models import LaundryShop, Rating, Transaction, default_date
+from database.models import LaundryShop, Transaction, default_date, UserProfile
 
 # Create your tests here.
 class ModelTestCase(TestCase):
@@ -22,11 +22,21 @@ class ModelTestCase(TestCase):
         self.assertEquals(shop.location, expected)
 
     def test_average_rating(self):
+        date_today = timezone.now().date()
+        expected = date_today + timedelta(days=3)
         shop = LaundryShop.objects.create(name='ls1', province='province1',
             barangay='barangay1', contact_number='12345',
             hours_open='24 hours', days_open='mon - sat')
-        Rating.objects.create(laundry_shop=shop, paws=4)
-        Rating.objects.create(laundry_shop=shop, paws=5)
+        client = User.objects.create_user(username='mychelsea', password='mychelsea')
+        user_profile = UserProfile.objects.create(client=client,province='province1',
+         city='city1', barangay='barangay1', street='street1',
+            building='building1', contact_number='123123')
+        Transaction.objects.create(client=user_profile, paws=4, status=3,
+            request_date=timezone.now(), 
+            delivery_date=timezone.now())
+        Transaction.objects.create(client=user_profile, paws=5, status=3,
+            request_date=timezone.now(), 
+            delivery_date=timezone.now())
         expected = (4 + 5) / 2.0
         self.assertEquals(shop.average_rating, expected)
 

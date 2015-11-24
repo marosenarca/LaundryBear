@@ -8,7 +8,6 @@ from datetime import timedelta
 # Create your models here.
 class UserProfile(models.Model):
     client = models.OneToOneField(User)
-    contact_number = models.CharField(max_length=30, blank=False)
     province = models.CharField(max_length=50, blank=False)
     city = models.CharField(max_length=50, blank=True)
     barangay = models.CharField(max_length=50, blank=False)
@@ -53,13 +52,11 @@ class LaundryShop(models.Model):
 
     @property
     def average_rating(self):
-        ratings = self.ratings.all()
-        if not ratings:
-            return 0
-        sum_ratings = 0.0
-        for rating in ratings:
-            sum_ratings += rating.paws
-        return sum_ratings / len(ratings)
+        average = 0
+        for shops in self.price_set.order_set.transaction_set.distinct():
+            for order in shops..all():
+                average += order.transaction.paws
+        return average/2
 
     def __unicode__(self):
         return self.name
@@ -80,12 +77,6 @@ class Price(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2, blank=False)
     duration = models.IntegerField()
 
-class Rating(models.Model):
-    laundry_shop = models.ForeignKey('LaundryShop', related_name='ratings')
-    paws = models.IntegerField(blank=False)
-
-    def __unicode__(self):
-        return "{1} paw rating for {0}".format(unicode(self.laundry_shop),self.paws)
 
 class Order (models.Model):
     price = models.ForeignKey('Price')
@@ -107,6 +98,7 @@ class Transaction(models.Model):
         return self.TRANSACTION_STATUS_CHOICES[self.status - 1][1]
 
     client = models.ForeignKey('UserProfile')
+    paws = models.IntegerField(blank=False)
     status = models.IntegerField(choices=TRANSACTION_STATUS_CHOICES, default=1)
     request_date = models.DateTimeField(auto_now_add=True)
     delivery_date = models.DateField(default=default_date)
