@@ -52,11 +52,19 @@ class LaundryShop(models.Model):
 
     @property
     def average_rating(self):
-        average = 0
-        for shops in self.price_set.order_set.transaction_set.distinct():
-            for order in shops..all():
-                average += order.transaction.paws
-        return average/2
+        average = 0.0
+        price_pk = [price.pk for price in self.price_set.all()]
+        orders = Order.objects.filter(price__pk__in=price_pk)
+        total = 0
+        order_pk = [order.pk for order in orders]
+        transactions = Transaction.objects.filter(order__pk__in=order_pk).distinct()
+        for transaction in transactions:
+            if transaction.paws:
+                average += transaction.paws
+                total += 1
+        if not total:
+            return 0
+        return average/total
 
     def __unicode__(self):
         return self.name
@@ -98,7 +106,7 @@ class Transaction(models.Model):
         return self.TRANSACTION_STATUS_CHOICES[self.status - 1][1]
 
     client = models.ForeignKey('UserProfile')
-    paws = models.IntegerField(blank=False)
+    paws = models.IntegerField(blank=True, null=True)
     status = models.IntegerField(choices=TRANSACTION_STATUS_CHOICES, default=1)
     request_date = models.DateTimeField(auto_now_add=True)
     delivery_date = models.DateField(default=default_date)
