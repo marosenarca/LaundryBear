@@ -1,58 +1,59 @@
-{% extends 'client/base.html'%}
-{% load staticfiles %}
-{% load custom_math %}
+{% extends 'client/base.html'%} 
+{% load staticfiles %} 
+{% load custom_math %} 
+{% block title %} Dashboard | LaundryBear {% endblock %} {%block body%}
+<div class="row">
+    <div class="large-1 columns"></div>
+    <div class="large-9 large-offset-1 columns">
+        <div class="panel">
+            {% if transaction_list %}
+            <h4 style="text-align:center">My Laundry Requests</h4>
+            <table style="margin:auto">
+                <thead>
+                    <th>Date Requested</th>
+                    <th>Price</th>
+                    <th>Laundry Shop</th>
+                    <th>Rating</th>
+                    <th>Status</th>
+                    <th>Your Rating</th>    
+                </thead>
+                <tbody>
+                    {% for transaction in transaction_list %}
+                    <tr>
+                        <td>{{transaction.request_date}}</td>
+                        <td>
+                            {{transaction.order_set.all|add_all}}
+                        </td>
+                        <td>{{transaction.order_set.first.price.laundry_shop}}</td>
+                        <td>
+                            <div class="raty-rating" data-value="{{ transaction.order_set.first.price.laundry_shop.average_rating }}" id="{{ transaction.id }}">
+                            </div>
+                        </td>
+                        <td>{{ transaction.get_choice_name }}</td>
+                        <td>
+                            {% if transaction.paws %}
+                                {{ transaction.paws }}
+                            {% else %}
+                            <form action="{% url "client:rate" transaction.pk %}" method="post" charset="UTF-8">
+                            {% csrf_token %}
+                                <div id="paws"><a class="raty-click"
+                                id="{{ transaction.id }}">rate this {{ transaction.id }} shizz</a></div>
+                            <!--<input type="hidden" id="{{ transaction.order_set.first.price.laundry_shop.id }}" data-value=""/>
+                            <input type="submit" class="tiny secondary button" value="Submit"/>-->
+                            </form>
+                            {% endif %}
 
-{% block title %} Dashboard | LaundryBear {% endblock %}
-
-{%block body%}
-	
-	<div class="row">
-		<div class="large-2 columns"></div>
-		<div class="large-8 large-offset-2 columns">
-			<div class="panel">
-
-				{% if transaction_list %}
-				<h4 style="text-align:center">My Laundry Requests</h4>
-				<table style="margin:auto">
-					<thead>
-						<th>Date Requested</th>
-						<th>Price</th>
-						<th>Laundry Shop</th>
-						<th>Rating</th>
-						<th>Status</th>
-					</thead>
-					<tbody>
-						{% for transaction in transaction_list %}
-						<tr>
-							<td>{{transaction.request_date}}</td>
-							<td>
-								{{transaction.order_set.all|add_all}}
-							</td>
-							<td>{{transaction.order_set.first.price.laundry_shop}}</td>
-							<td><div class="paw-container" style="width: {% widthratio shop.average_rating 5 150 %}px;"><img src="{% static "management/icons/star.png" %}" /></div></td>
-							<td>{{ transaction.get_choice_name }}</td>
-
-						{% endfor %}
-					</tbody>
-				</table>
-					
-				
-				{% else %}
-				<h4 style="text-align:center">No Laundry Requests</h4>
-				{% endif %}
-				<center>
-					<a href="{% url "client:view-shops" %}" class="large button">Make a Request</a>	
-				</center>
-			</div>
-		</div>
-		<div class="large-2 columns"></div>
-
-
-	</div>
-
+                        </td>
+                        {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <h4 style="text-align:center">No Laundry Requests</h4> {% endif %}
+            <center>
+                <a href="{% url "client:view-shops" %}" class="large button">Make a Request</a>
+            </center>
+        </div>
+    </div>
+    <div class="large-1 columns"></div>
+</div>
 {% endblock %}
-
-{% block javascripts %}
-
-{% endblock %}
-

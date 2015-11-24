@@ -2,7 +2,7 @@ from django.forms import ModelForm, Form
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from database.models import UserProfile, Price, Rating, Order, Transaction
+from database.models import UserProfile, Price, Order, Transaction
 
 class UserForm(UserCreationForm):
     class Meta:
@@ -21,6 +21,11 @@ class OrderForm(ModelForm):
         model = Order
         fields = ['price', 'transaction', 'pieces']
 
+class TransactionForm(ModelForm):
+    class Meta:
+        model = Transaction
+        fields = ['paws']
+
 
 class AddressForm(Form):
     province = forms.CharField(max_length=50)
@@ -28,9 +33,3 @@ class AddressForm(Form):
     barangay = forms.CharField(max_length=50)
     street = forms.CharField(max_length=50, required=True)
     building = forms.CharField(max_length=50, required=True)
-
-
-class TransactionForm(ModelForm):
-    class Meta:
-        model = Transaction
-        exclude = ['client', 'request_date', 'status']

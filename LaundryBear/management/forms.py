@@ -1,5 +1,5 @@
 from django import forms
-from database.models import Rating, Service, Price, LaundryShop, Transaction, User, UserProfile, Fees
+from database.models import Service, Price, LaundryShop, Transaction, User, UserProfile
 from LaundryBear.forms import LoginForm
 from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm
@@ -10,12 +10,6 @@ class ServiceForm(forms.ModelForm):
         model = Service
         fields = ['name', 'description']
         widgets = {'description': forms.Textarea(attrs={'rows': 5})}
-
-
-class RatingForm(forms.ModelForm):
-    class Meta:
-        model = Rating
-        fields = ['laundry_shop', 'paws']
 
 
 class PriceForm(forms.ModelForm):

@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="{% static "client/css/app.css" %}"/>
     <link rel="stylesheet" href="{% static "client/css/control.css" %}"/>
 
-
     
 	<link rel="stylesheet" href="{% static "LaundryBear/foundation-icons/foundation-icons.css" %}" />
     {%block stylesheets%} {% endblock %}
@@ -57,14 +56,6 @@
         <hr>
         <div class="large-12 columns">
                 <p>Laundry Bear 2015</p>
-            <!--<div class="large-6 small-12 columns">
-                <ul class="inline-list right">
-                  <li><a href="#">Link 1</a></li>
-                  <li><a href="#">Link 2</a></li>
-                  <li><a href="#">Link 3</a></li>
-                  <li><a href="#">Link 4</a></li>
-                </ul>
-            </div>-->
       </div>
     </div>
 
@@ -74,6 +65,12 @@
     <script src="{%static "LaundryBear/js/vendor/fastclick.js"%}"></script>
     <script src="{%static "LaundryBear/js/foundation.min.js"%}"></script>
     <script src="{%static "client/js/app.js"%}"></script>
+    <script src="{% static "LaundryBear/js/jquery.raty.js" %}"></script>
+    <script src="{% static "LaundryBear/js/labs.js" %}"></script>
+    <script>
+        $.fn.raty.defaults.path = "{% static "LaundryBear/images" %}";
+    </script>
+    <script src="{% static "client/js/ratings.js" %}"></script>
     {%block javascripts%} {% endblock %}
   </body>
 </html>
