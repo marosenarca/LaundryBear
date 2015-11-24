@@ -1,5 +1,6 @@
 {% extends 'management/base.html' %}
 {% load staticfiles %}
+{% load custom_math %}
 
 {% block title %} Edit Transaction | LaundryBear {% endblock %}
 
@@ -51,14 +52,20 @@
 									<tr>
 										<td></td>
 										<td></td>
-										<td>+ Service Charge</td>
+										<td>Subtotal</td>
+										<td id="subtotal">0.00</td>
+									</tr>
+									<tr>
+										<td></td>
+										<td></td>
+										<td>+ {{ fees.service_charge|multiply:100|floatformat:"-2" }}%<br>Service Charge</td>
 										<td id="servicecharge">0.00</td>
 									</tr>
 									<tr>
 										<td></td>
 										<td></td>
 										<td>+ Delivery Fee</td>
-										<td id="deliveryfee">{{ delivery_fee }}</td>
+										<td id="deliveryfee">{{ fees.delivery_fee }}</td>
 									</tr>
 									<tr>
 										<td></td>
@@ -103,6 +110,7 @@
 <script src="{% static "LaundryBear/jquery-ui-1.11.4/jquery-ui.min.js" %}"></script>
 <script>
 $("#date").datepicker({dateFormat: "yy-mm-dd", minDate: {{ transaction.order_set.first.price.duration }}, maxDate: {{ transaction.order_set.first.price.duration }} + 7});
+var serviceRate = {{ fees.service_charge }};
 </script>
 <script src="{% static "management/js/totals.js" %}"></script>
 {% endblock%}

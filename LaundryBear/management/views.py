@@ -318,7 +318,7 @@ class UpdateTransactionDeliveryDateView(AdminLoginRequiredMixin, UpdateView):
     def get_context_data(self, *args, **kwargs):
         context = super(UpdateTransactionDeliveryDateView, self)\
             .get_context_data(*args, **kwargs)
-        context['delivery_fee'] = Site.objects.get_current().fees.delivery_fee
+        context['fees'] = Site.objects.get_current().fees
         return context
 
     def get_success_url(self):

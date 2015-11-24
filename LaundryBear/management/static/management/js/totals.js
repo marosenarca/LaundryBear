@@ -3,7 +3,7 @@ $(document).ready(function() {
 });
 
 function updateServiceFee(total) {
-	var fee = total * 0.1;
+	var fee = total * serviceRate;
 	$("#servicecharge").html(fee.toFixed(2));
 	return fee;
 }
@@ -14,9 +14,14 @@ function updateColumnTotals() {
 	$.each(cols, function(index, column) {
 		total += +$(column).html();
 	});
-	var fee = updateServiceFee(total);
-	total += fee;
 	total += +$("#deliveryfee").html();
+	$("#subtotal").html(total.toFixed(2));
+	updateServiceFee(total);
+	var footer = $("tfoot tr td:last-child");
+	total = 0;
+	$.each(footer, function(index, value) {
+		total += +value.innerHTML;
+	});
 	$("#total").html(total.toFixed(2));
 }
 
