@@ -17,6 +17,7 @@ from management import forms
 from management.mixins import AdminLoginRequiredMixin
 
 from LaundryBear.views import LoginView, LogoutView
+from django.contrib.auth.forms import PasswordChangeForm
 
 
 class LaundryMenuView(AdminLoginRequiredMixin, TemplateView):
@@ -341,18 +342,29 @@ class MarkTransactionDoneView(AdminLoginRequiredMixin, UpdateView):
     def get_success_url(self):
         return reverse('management:ongoing-transactions')
 
-class UserSettingsView(AdminLoginRequiredMixin, TemplateView):
+class AdminSettingsView(AdminLoginRequiredMixin, TemplateView):
     template_name = 'management/account/settings.html'
 
-
     def get_context_data(self, **kwargs):
-        context = super(UserSettingsView, self).get_context_data(**kwargs)
-        context['userprofile'] = self.request.user.userprofile
+        context = super(AdminSettingsView, self).get_context_data(**kwargs)
+        context['usernameform'] = forms.ChangeUsernameForm(data=self.request.POST or None, instance=self.request.user)
+        context['passwordform'] = PasswordChangeForm(data=self.request.POST or None, user=self.request.user)
         return context
 
     def post(self,request,*args,**kwargs):
         context = self.get_context_data(*args, **kwargs)
+        usernameform = context['usernameform']
+        passwordform = context['passwordform']
 
+        if (usernameform.is_valid()):
+            usernameform.save()
+        else:
+            print usernameform.errors
+
+        if passwordform.is_valid():
+            passwordform.save()
+        else:
+            print passwordform.error_messages
 
         return self.render_to_response(context)
 

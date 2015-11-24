@@ -1,7 +1,9 @@
 from django import forms
-from database.models import Rating, Service, Price, LaundryShop, Transaction
+from database.models import Rating, Service, Price, LaundryShop, Transaction, User, UserProfile
 from LaundryBear.forms import LoginForm
-
+from django.forms import ModelForm
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 
 class ServiceForm(forms.ModelForm):
     class Meta:
@@ -43,3 +45,21 @@ class TransactionForm(forms.ModelForm):
     class Meta:
         model = Transaction
         exclude = ['request_date']
+
+
+class UserForm(UserCreationForm):
+    class Meta:
+        model = User
+        fields = ['last_name', 'first_name', 'email', 'username', 'password1', 'password2']
+
+
+class ProfileForm(ModelForm):
+    class Meta:
+        model = UserProfile
+        exclude = ['client']
+
+
+class ChangeUsernameForm(ModelForm):
+    class Meta:
+        model = User
+        fields = ['username']

@@ -18,7 +18,7 @@ urlpatterns = [
     url(r'^login$', views.AdminLoginView.as_view(), name='login-admin'),
     url(r'^logout$', views.AdminLogoutView.as_view(), name='logout-admin'),
     url(r'^clients/list$', views.ClientListView.as_view(), name='list-client'),
-    url(r'^settings$', views.UserSettingsView.as_view(), name='settings'),
+    url(r'^settings$', views.AdminSettingsView.as_view(), name='settings'),
     url(r'^services/list$', views.ServicesListView.as_view(),
         name='list-service'),
     url(r'^services/delete/(?P<pk>\d+)$', views.ServicesDeleteView.as_view(),
