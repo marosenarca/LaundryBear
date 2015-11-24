@@ -26,7 +26,7 @@
                         </td>
                         <td>{{transaction.order_set.first.price.laundry_shop}}</td>
                         <td>
-                            <div class="raty-rating" data-value="{{ transaction.order_set.first.price.laundry_shop.average_rating }}" id="{{ transaction.order_set.first.price.laundry_shop.id }}">
+                            <div class="raty-rating" data-value="{{ transaction.order_set.first.price.laundry_shop.average_rating }}" id="{{ transaction.id }}">
                             </div>
                         </td>
                         <td>{{ transaction.get_choice_name }}</td>
@@ -34,10 +34,10 @@
                             {% if transaction.paws %}
                                 {{ transaction.paws }}
                             {% else %}
-                            <form method="post">
+                            <form action="{% url "client:rate" transaction.pk %}" method="post" charset="UTF-8">
                             {% csrf_token %}
                                 <div id="paws"><a class="raty-click"
-                                id="{{ transaction.order_set.first.price.laundry_shop.id }}">rate this shizz</a></div>
+                                id="{{ transaction.id }}">rate this {{ transaction.id }} shizz</a></div>
                             <!--<input type="hidden" id="{{ transaction.order_set.first.price.laundry_shop.id }}" data-value=""/>
                             <input type="submit" class="tiny secondary button" value="Submit"/>-->
                             </form>
@@ -56,42 +56,4 @@
     </div>
     <div class="large-1 columns"></div>
 </div>
-{% endblock %}
-
-{% block javascripts %}
-<script>
-$('.raty-rating').raty({
-    half: true,
-    readOnly: true,
-    score: function() {
-        return $(this).attr('data-value');
-    }
-});
-
-
-$('.raty-click').click(function() {
-
-        var _id = $(this).attr('id');
-        $(this).parent('#paws').replaceWith(
-
-            '<div class="raty">' + '</div>'+
-            '<input type="hidden" class="inputnum" data-value=""/>'+
-                            '<input type="submit" class="tiny secondary button" value="Submit"/>'
-        );
-
-        $('.inputnum').attr('id',_id);
-        $('.raty').attr('id', _id);
-        $('div.raty').raty({
-            click: function(score, evt) {
-                alert('ID: ' + _id + "\nscore: " + score + "\nevent: " + evt);
-
-                $('.inputnum').attr('data-value',score);
-                
-            }
-        });
-    }
-
-
-);
-</script>
 {% endblock %}

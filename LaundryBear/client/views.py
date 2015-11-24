@@ -14,7 +14,7 @@ from django.utils.decorators import method_decorator
 from django.views.generic import (CreateView, DeleteView, DetailView, FormView, ListView,
                                   RedirectView, TemplateView, UpdateView, View)
 
-from client.forms import ProfileForm, UserForm
+from client.forms import ProfileForm, UserForm, TransactionForm
 from client.mixins import ClientLoginRequiredMixin
 from database.models import LaundryShop, Price, Service, UserProfile, Transaction, Order, default_date, UserProfile
 
@@ -48,13 +48,15 @@ class DashView(ClientLoginRequiredMixin, ListView):
         queryset = queryset.filter(client=self.request.user.userprofile)
         return queryset
 
-    def post(self, request, *args, **kwargs):
-        print '===============request============'
-        print request
-        print '===============args============'
-        print args
-        print '===============args============'
-        print kwargs
+    def post(self, request):
+        the_post = request.POST
+        print the_post['id']
+        print the_post['score']
+        transaction = Transaction.objects.get(pk=the_post['id'])
+        print transaction
+        transaction.paws = the_post['score']
+        transaction.save()
+        return redirect('client:menu')
 
 
 class SignupView(TemplateView):

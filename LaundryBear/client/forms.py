@@ -20,3 +20,8 @@ class OrderForm(ModelForm):
     class Meta:
         model = Order
         fields = ['price', 'transaction', 'pieces']
+
+class TransactionForm(ModelForm):
+    class Meta:
+        model = Transaction
+        fields = ['paws']

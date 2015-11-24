@@ -15,4 +15,5 @@ urlpatterns = [
     url(r'^order/(?P<pk>\d+)/ordersummary$', views.OrderSummaryView.as_view(), name='order-summary'),
     url(r'^order/transaction/create$', views.CreateTransactionView.as_view(), name='create-transaction'),
     url(r'', views.DashView.as_view(), name='menu'),
+    url(r'^ratings/(?P<pk>\d+)$', views.DashView.as_view(), name='rate')
 ]
