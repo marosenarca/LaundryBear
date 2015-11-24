@@ -9,12 +9,13 @@ def create_fees(apps, schema_editor):
     Site = apps.get_model('sites', 'Site')
     Fees.objects.create(site=Site.objects.get_current())
 
+
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('database', '0001_initial'),
+        ('database', '0002_create_admin_user'),
     ]
 
     operations = [
-        migrations.RunPython(create_fees)
+        migrations.RunPython(create_fees),
     ]
