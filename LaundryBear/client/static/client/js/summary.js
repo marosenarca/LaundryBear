@@ -9,7 +9,7 @@ function calculateServiceFee() {
 	$("#table-body").children().each(function(index, element) {
 		total += +$(element).data("price").valueOf();
 	});
-	var fee = total * 0.1;
+	var fee = total * serviceRate;
 	$("#servicecharge").html(fee.toFixed(2));
 }
 

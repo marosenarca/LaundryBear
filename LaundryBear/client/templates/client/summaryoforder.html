@@ -1,5 +1,6 @@
 {% extends 'client/base.html' %}
 {% load staticfiles %}
+{% load custom_math %}
 
 {% block title %} Order: Summary | LaundryBear {% endblock %}
 
@@ -26,9 +27,9 @@
                                 <br>
                                 <strong>Subtotal:</strong> <span id="subtotal">0.00</span>
                                 <br>
-								<strong>+Delivery fee:</strong> <span id="deliveryfee">{{ delivery_fee }}</span>
+								<strong>+ {{ fees.service_charge|multiply:100|floatformat:"-2" }}% Service charge:</strong> <span id="servicecharge">0.00</span>
                                 <br>
-								<strong>+Service charge:</strong> <span id="servicecharge">0.00</span>
+								<strong>+ Delivery fee:</strong> <span id="deliveryfee">{{ fees.delivery_fee }}</span>
                                 <hr>
 								<strong>GRAND TOTAL: <span id="total">0.00</span></strong>
                             </div>
@@ -93,6 +94,8 @@
                 }
             });
 			var transactionUrl = "{% url "client:create-transaction" %}";
+			var serviceRate = {{ fees.service_charge }};
         </script>
 		<script src="{% static "client/js/summary.js" %}"></script>
     {% endblock %}
+

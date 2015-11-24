@@ -12,6 +12,7 @@ from django.shortcuts import redirect, render, render_to_response
 from django.template import RequestContext
 from django.forms.models import model_to_dict
 from django.utils.decorators import method_decorator
+from django.contrib.sites.models import Site
 from django.views.generic import (CreateView, DeleteView, DetailView, FormView, ListView,
                                   RedirectView, TemplateView, UpdateView, View)
 
@@ -181,7 +182,7 @@ class OrderSummaryView(ClientLoginRequiredMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(OrderSummaryView, self).get_context_data(**kwargs)
-        context['delivery_fee'] = float(50)
+        context['fees'] = Site.objects.get_current().fees
         context['delivery_date'] = default_date().strftime('%Y-%m-%d')
         context['delivery_date_max'] = (default_date() + timedelta(days=7)).strftime('%Y-%m-%d')
         context['address_form'] = AddressForm(
