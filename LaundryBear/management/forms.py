@@ -68,7 +68,7 @@ class ChangeUsernameForm(ModelForm):
 class FeesForm(forms.ModelForm):
     class Meta:
         model = Fees
-        fields = '__all__'
+        fields = ['delivery_fee', 'service_charge']
         widgets = {
             'delivery_fee': forms.NumberInput(attrs={'min': 1, 'step': '0.25'}),
             'service_charge': forms.NumberInput(attrs={'max': 1, 'min': 0.01})

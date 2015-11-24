@@ -318,7 +318,7 @@ class UpdateTransactionDeliveryDateView(AdminLoginRequiredMixin, UpdateView):
     def get_context_data(self, *args, **kwargs):
         context = super(UpdateTransactionDeliveryDateView, self)\
             .get_context_data(*args, **kwargs)
-        context['delivery_fee'] = float(50)
+        context['delivery_fee'] = Site.objects.get_current().fees.delivery_fee
         return context
 
     def get_success_url(self):
@@ -352,14 +352,8 @@ class AdminSettingsView(AdminLoginRequiredMixin, TemplateView):
         context['passwordform'] = PasswordChangeForm(data=self.request.POST or None, user=self.request.user)
         context['userprofile'] = self.request.user.userprofile
         site = Site.objects.get_current()
-        try:
-            fees = site.fees
-        except Exception:
-            site.fees = Fees.objects.create(site=site)
-            site.save()
-            fees = site.fees
         context['fees_form'] = forms.FeesForm(data=self.request.POST or None,
-            instance=fees)
+            instance=site.fees)
         return context
 
     def post(self,request,*args,**kwargs):
