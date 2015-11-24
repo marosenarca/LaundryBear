@@ -1,7 +1,10 @@
-{% extends 'client/base.html'%} {% load staticfiles %} {% load custom_math %} {% block title %} Dashboard | LaundryBear {% endblock %} {%block body%}
+{% extends 'client/base.html'%} 
+{% load staticfiles %} 
+{% load custom_math %} 
+{% block title %} Dashboard | LaundryBear {% endblock %} {%block body%}
 <div class="row">
-    <div class="large-2 columns"></div>
-    <div class="large-8 large-offset-2 columns">
+    <div class="large-1 columns"></div>
+    <div class="large-9 large-offset-1 columns">
         <div class="panel">
             {% if transaction_list %}
             <h4 style="text-align:center">My Laundry Requests</h4>
@@ -12,6 +15,7 @@
                     <th>Laundry Shop</th>
                     <th>Rating</th>
                     <th>Status</th>
+                    <th>Your Rating</th>    
                 </thead>
                 <tbody>
                     {% for transaction in transaction_list %}
@@ -21,18 +25,20 @@
                             {{transaction.order_set.all|add_all}}
                         </td>
                         <td>{{transaction.order_set.first.price.laundry_shop}}</td>
-                        <td>{% if transaction.order_set.first.price.laundry_shop.average_rating %}
+                        <td>
                             <div class="raty-rating" data-value="{{ transaction.order_set.first.price.laundry_shop.average_rating }}" id="{{ transaction.order_set.first.price.laundry_shop.id }}">
-                                {% else %}
-                                <center>
-                                    <div id="paws">Not yet pawed.
-                                        <br><a id="{{ transaction.order_set.first.price.laundry_shop.id }}" class="raty-click">paw this shop now!</a>
-                                        <div>
-                                </center>
-                                {% endif %}
-                                </div>
+                            </div>
                         </td>
                         <td>{{ transaction.get_choice_name }}</td>
+                        <td>
+                            {% if transaction.paws %}
+                                {{ transaction.paws }}
+                            {% else %}
+                                <div id="paws"><a class="raty-click"
+                                id="{{ transaction.order_set.first.price.laundry_shop.id }}">rate this {{ transaction.order_set.first.price.laundry_shop.id }} shizz</a></div>
+                            {% endif %}
+
+                        </td>
                         {% endfor %}
                 </tbody>
             </table>
@@ -41,38 +47,56 @@
             <center>
                 <a href="{% url "client:view-shops" %}" class="large button">Make a Request</a>
             </center>
-            </div>
-            </div>
-            <div class="large-2 columns"></div>
         </div>
-        {% endblock %} {% block javascripts %}
-        <script>
-        $('.raty-rating').raty({
-            half: true,
-            readOnly: true,
-            score: function() {
-                return $(this).attr('data-value');
+    </div>
+    <div class="large-1 columns"></div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+<script>
+$('.raty-rating').raty({
+    half: true,
+    readOnly: true,
+    score: function() {
+        return $(this).attr('data-value');
+    }
+});
+
+
+$('.raty-click').click(function() {
+
+        var _id = $(this).attr('id');
+        $(this).parent('#paws').replaceWith(
+
+            '<div class="raty">' + '</div>'
+        );
+
+        $('.raty').attr('id', _id);
+        $('div.raty').raty({
+            click: function(score, evt) {
+                alert('ID: ' + _id + "\nscore: " + score + "\nevent: " + evt);
+
+                $.ajax({
+                    url: '{% url 'client:menu' %}',
+                    type: 'POST',
+                    data: {"id": _id, "score": score},
+                })
+                .done(function() {
+                    console.log("success");
+                })
+                .fail(function() {
+                    console.log("error");
+                })
+                .always(function() {
+                    console.log("complete");
+                });
+                
             }
         });
+    }
 
 
-        $('.raty-click').click(function() {
-                var _id = $(this).attr('id');
-
-                $(this).parent('#paws').replaceWith(
-
-                    '<div class="raty">' + '</div>'
-                );
-
-                $('.raty').attr('id', _id);
-                $('div.raty').raty({
-                    click: function(score, evt) {
-                        alert('ID: ' + this.id + "\nscore: " + score + "\nevent: " + evt);
-                    }
-                });
-            }
-
-
-        );
-        </script>
-        {% endblock %}
+);
+</script>
+{% endblock %}

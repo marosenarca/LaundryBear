@@ -48,6 +48,13 @@ class DashView(ClientLoginRequiredMixin, ListView):
         queryset = queryset.filter(client=self.request.user.userprofile)
         return queryset
 
+    def post(self, request, *args, **kwargs):
+        response = super(DashView, self).post(request, *args, **kwargs)
+        print 'pooooooooooooosssssssttttttteeeeeeeedddd'
+        print response
+
+
+
 
 class SignupView(TemplateView):
     template_name = "client/signup.html"
