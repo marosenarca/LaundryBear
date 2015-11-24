@@ -1,5 +1,5 @@
 from django import forms
-from database.models import Rating, Service, Price, LaundryShop, Transaction, User, UserProfile
+from database.models import Rating, Service, Price, LaundryShop, Transaction, User, UserProfile, Fees
 from LaundryBear.forms import LoginForm
 from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm
@@ -63,3 +63,13 @@ class ChangeUsernameForm(ModelForm):
     class Meta:
         model = User
         fields = ['username']
+
+
+class FeesForm(forms.ModelForm):
+    class Meta:
+        model = Fees
+        fields = '__all__'
+        widgets = {
+            'delivery_fee': forms.NumberInput(attrs={'min': 1, 'step': '0.25'}),
+            'service_charge': forms.NumberInput(attrs={'max': 1, 'min': 0.01})
+        }

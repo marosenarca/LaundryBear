@@ -1,10 +1,11 @@
 import json
 
-from database.models import LaundryShop, Price, Service, UserProfile, Transaction, Order
+from database.models import LaundryShop, Price, Service, UserProfile, Transaction, Order, Fees
 
 from datetime import timedelta
 
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
 from django.db.models import Q
 from django.forms.models import inlineformset_factory
@@ -349,6 +350,16 @@ class AdminSettingsView(AdminLoginRequiredMixin, TemplateView):
         context = super(AdminSettingsView, self).get_context_data(**kwargs)
         context['usernameform'] = forms.ChangeUsernameForm(data=self.request.POST or None, instance=self.request.user)
         context['passwordform'] = PasswordChangeForm(data=self.request.POST or None, user=self.request.user)
+        context['userprofile'] = self.request.user.userprofile
+        site = Site.objects.get_current()
+        try:
+            fees = site.fees
+        except Exception:
+            site.fees = Fees.objects.create(site=site)
+            site.save()
+            fees = site.fees
+        context['fees_form'] = forms.FeesForm(data=self.request.POST or None,
+            instance=fees)
         return context
 
     def post(self,request,*args,**kwargs):
@@ -366,5 +377,8 @@ class AdminSettingsView(AdminLoginRequiredMixin, TemplateView):
         else:
             print passwordform.error_messages
 
+        fees_form = context['fees_form']
+        if fees_form.is_valid():
+            fees_form.save()
         return self.render_to_response(context)
 

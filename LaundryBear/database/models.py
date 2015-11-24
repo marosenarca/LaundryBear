@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
 from django.utils.timezone import now
+from django.contrib.sites.models import Site
 from datetime import timedelta
 
 
@@ -125,3 +126,11 @@ class Transaction(models.Model):
 
     def __unicode__(self):
         return "{0}".format(unicode(self.request_date))
+
+
+class Fees(models.Model):
+    delivery_fee = models.DecimalField(default=50, decimal_places=2,
+        max_digits=4)
+    service_charge = models.DecimalField(default=0.1, decimal_places=2,
+        max_digits=3)
+    site = models.OneToOneField(Site)
