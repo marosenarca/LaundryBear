@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from database.models import LaundryShop, Price, Service, UserProfile, Transaction, Order
+from database.models import LaundryShop, Price, Service, UserProfile, Transaction, Order, Fees
 
 
 class PricesInline(admin.TabularInline):
