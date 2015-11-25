@@ -16,10 +16,11 @@
                         <th>Laundry Shop</th>
                         <th>Date Requested</th>
                         <th>Time Requested</th>
+                        <th>Amount Payable</th>
                         <th>Actions</th>
                     </thead>
                     <tbody>
-                    {% for transaction in ongoing_transaction_list %}
+                    {% for transaction, form in transaction_list %}
                     {% include "management/transactions/partials/ongoing_transaction_row.html" %}
                     {% endfor %}
                     </tbody>

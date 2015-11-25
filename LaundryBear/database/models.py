@@ -45,10 +45,11 @@ class LaundryShop(models.Model):
 
     @property
     def location(self):
-    	address = [self.building, self.street, self.barangay, self.city,
+        address = [self.building, self.street, self.barangay, self.city,
     		self.province]
         while '' in address:
-        	address.remove('')
+            address.remove('')
+
         return ', '.join(address)
 
     @property

@@ -32,6 +32,7 @@ urlpatterns = [
     url(r'^transactions/ongoing$', views.OngoingTransactionsView.as_view(), name='ongoing-transactions'),
     url(r'^transactions/history$', views.HistoryTransactionsView.as_view(), name='history-transactions'),
     url(r'^transactions/update/(?P<pk>\d+)$', views.UpdateTransactionDeliveryDateView.as_view(), name='update-transaction'),
-    url(r'^transactions/ongoing/(?P<pk>\d+)/done$', views.MarkTransactionDoneView.as_view(), name='mark-transaction-done')
+    url(r'^transactions/ongoing/(?P<pk>\d+)/done$', views.MarkTransactionDoneView.as_view(), name='mark-transaction-done'),
+
 
 ]
