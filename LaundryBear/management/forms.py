@@ -1,5 +1,5 @@
 from django import forms
-from database.models import Service, Price, LaundryShop, Transaction, User, UserProfile
+from database.models import Service, Price, LaundryShop, Transaction, User, UserProfile, Fees
 from LaundryBear.forms import LoginForm
 from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm
