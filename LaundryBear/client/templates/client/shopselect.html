@@ -4,16 +4,16 @@
 <link rel="stylesheet" href="{% static "LaundryBear/css/normalize.css" %}" />
 <link rel="stylesheet" href="{% static "LaundryBear/reveal/reveal.css" %}" /> {% endblock %} {% block title %}Laundry Bear | Request {% endblock %} {% block body %}
 <section class="services">
-    <div class="row">
+    <div class="row" style="margin: auto; align: center;">
         <div class="small-12 large-10 columns small-centered">
             <h2 style="text-align:center"> {{ shop.name }} </h2>
-            <br>
-            <div class="panel">
-                <div class="row">
-                    <div class="small-12 large-10 columns small-centered">
-                        <div class="paw-container" style="width: {% widthratio shop.average_rating 5 150 %}px;"><img src="{% static "management/icons/star.png" %}" /></div>
-                    </div>
+            <div class="row" style="margin: auto;">
+                <div class="small-12 large-10 columns small-centered" style="margin: auto;">
+                    <div class="paw-container" style="width: {% widthratio shop.average_rating 5 150 %}px; margin: auto;" ><img src="{% static "management/icons/star.png" %}" /></div>
                 </div>
+            </div>
+            <br><br>
+            <div class="small-centered small-6" style="margin:auto;">
                 <p><strong>Location:</strong> {{ shop.location }} </p>
                 <p><strong>Contact number: </strong> {{ shop.contact_number}}</p>
                 <p><strong>Days Open:</strong> {{shop.days_open}}, {{ shop.hours_open }}</p>
@@ -43,7 +43,7 @@
                                 <p>Price: {{ service.price }} pesos per kilo </p>
                                 <p>Description: {{ service.service.description}} </p>
                                 Input number of clothes: <input type="number" min="1" />
-								<a data-servicename="{{ service.service.name }}" data-price-per-kilo="{{ service.price }}" data-pk="{{ service.pk }}" class="button right add-to-basket"> Add to Basket </a>
+                                <a data-servicename="{{ service.service.name }}" data-price-per-kilo="{{ service.price }}" data-pk="{{ service.pk }}" class="button right add-to-basket"> Add to Basket </a>
                                 <a class="close-reveal-modal" aria-label="Close">&#215;</a>
                             </div>
                             <!--yeeaaahh-->
@@ -60,32 +60,32 @@
 <h3 style="text-align:center"> My Laundry Basket </h3>
 <table align="center">
     <thead>
-        <tr>
-            <th width="200">Service</th>
-            <th>Number of Items</th>
-            <th>Estimated Price</th>
-            <th width="275" align="center">Actions</th>
-        </tr>
+    <tr>
+        <th width="200">Service</th>
+        <th>Number of Items</th>
+        <th>Estimated Price</th>
+        <th width="275" align="center">Actions</th>
+    </tr>
     </thead>
     <tbody id="table-body">
     </tbody>
 </table>
 <template id="row-template">
-	<tr data-price="__price__">
-		<td>__servicename__</td>
-		<td>
-			__pieces__
-		</td>
-		<td align="center">
+    <tr data-price="__price__">
+        <td>__servicename__</td>
+        <td>
+            __pieces__
+        </td>
+        <td align="center">
             __price__ <span data-tooltip aria-haspopup="true" class="warning label has-tip tip-top radius round" title="Estimated price may vary upon actual weighing.">May vary</span>
         </td>
-		<td>
-			<ul class="button-group round">
-				<li><a href="#" class="button info" data-reveal-id="servicemodal__pk__" data-pieces="__pieces__">Edit</a></li>
-				<li><a href="#" class="button alert">Delete</a></li>
-			</ul>
-		</td>
-	</tr>
+        <td>
+            <ul class="button-group round">
+                <li><a href="#" class="button info" data-reveal-id="servicemodal__pk__" data-pieces="__pieces__">Edit</a></li>
+                <li><a href="#" class="button alert">Delete</a></li>
+            </ul>
+        </td>
+    </tr>
 </template>
 <div class="row" align="center">
     <div class="large-2 small-12 columns expand" align="left">
@@ -96,7 +96,7 @@
     </div>
     <div class="large-12 small-2 columns expand">
         <a href="{% url "client:view-shops" %}" class="button left">Back</a>
-		<a href="{% url "client:order-summary" shop.pk %}" class="button success right">Request</a>
+        <a href="{% url "client:order-summary" shop.pk %}" class="button success right">Request</a>
     </div>
 </div>
 {% endblock %}
