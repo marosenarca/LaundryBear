@@ -16,7 +16,6 @@ from django.contrib.sites.models import Site
 from django.views.generic import (CreateView, DeleteView, DetailView, FormView, ListView,
                                   RedirectView, TemplateView, UpdateView, View)
 
-from client.forms import ProfileForm, UserForm, TransactionForm
 from client.forms import ProfileForm, UserForm, AddressForm, TransactionForm
 from client.mixins import ClientLoginRequiredMixin
 from database.models import LaundryShop, Price, Service, UserProfile, Transaction, Order, default_date, UserProfile
@@ -54,10 +53,7 @@ class DashView(ClientLoginRequiredMixin, ListView):
 
     def post(self, request):
         the_post = request.POST
-        print the_post['id']
-        print the_post['score']
         transaction = Transaction.objects.get(pk=the_post['id'])
-        print transaction
         transaction.paws = the_post['score']
         transaction.save()
         return redirect('client:menu')

@@ -22,7 +22,7 @@
                     <tr>
                         <td>{{transaction.request_date}}</td>
                         <td>
-                            {{transaction.order_set.all|add_all}}
+							{{ transaction.price }}
                         </td>
                         <td>{{transaction.order_set.first.price.laundry_shop}}</td>
                         <td>

@@ -34,6 +34,7 @@ function updateTotals() {
 	$("#subtotal").html(total.toFixed(2));
 	total += +$("#deliveryfee").html();
     total += +$("#servicecharge").html();
+	$("#price_field").val(total.toFixed(2));
 	$("#total").html(total.toFixed(2));
 }
 
@@ -70,6 +71,7 @@ function collectData() {
 	var barangay = $("#id_barangay").val();
 	var city = $("#id_city").val();
 	var province = $("#id_province").val();
+	var price = $("#price_field").val();
 
-	return {csrfmiddlewaretoken: csrf, selectedServices: services, delivery_date: delivery_date, building: building, street: street, barangay: barangay, city: city, province: province};
+	return {csrfmiddlewaretoken: csrf, selectedServices: services, delivery_date: delivery_date, building: building, street: street, barangay: barangay, city: city, province: province, price: price};
 }

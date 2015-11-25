@@ -24,7 +24,7 @@ class OrderForm(ModelForm):
 class TransactionForm(ModelForm):
     class Meta:
         model = Transaction
-        fields = ['paws']
+        exclude = ['status', 'client', 'request_date', 'paws']
 
 
 class AddressForm(Form):
