@@ -14,6 +14,7 @@ class UserProfile(models.Model):
     barangay = models.CharField(max_length=50, blank=False)
     street = models.CharField(max_length=50, blank=True)
     building = models.CharField(max_length=50, blank=True)
+    contact_number = models.CharField(max_length=30, blank=False)
 
     def __unicode__(self):
         return self.client.get_full_name()
