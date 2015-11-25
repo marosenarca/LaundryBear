@@ -2,18 +2,18 @@
 {% load staticfiles %} 
 {% load custom_math %} 
 {% block title %} Dashboard | LaundryBear {% endblock %} {%block body%}
-<div class="row">
+<div class="row" xmlns:client="http://www.w3.org/1999/xhtml">
     <div class="large-1 columns"></div>
     <div class="large-9 large-offset-1 columns">
         <div class="panel">
             {% if transaction_list %}
-            <h4 style="text-align:center">My Laundry Requests</h4>
+            <h4 style="text-align:center"><b>My Laundry Requests</b></h4><br>
             <table style="margin:auto">
                 <thead>
                     <th>Date Requested</th>
                     <th>Price</th>
                     <th>Laundry Shop</th>
-                    <th>Rating</th>
+                    <th>Average Rating</th>
                     <th>Status</th>
                     <th>Your Rating</th>    
                 </thead>
@@ -48,6 +48,7 @@
             {% else %}
             <h4 style="text-align:center">No Laundry Requests</h4> {% endif %}
             <center>
+                <br>
                 <a href="{% url "client:view-shops" %}" class="large button">Make a Request</a>
             </center>
         </div>
