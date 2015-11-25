@@ -22,4 +22,8 @@
       height: 45px;
       margin-top:25px; 
     }
+    body{
+        background: url("/static/client/icons/header3.jpg") no-repeat center;
+
+    }
 
