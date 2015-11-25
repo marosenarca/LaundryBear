@@ -37,9 +37,7 @@
                             <form action="{% url "client:rate" transaction.pk %}" method="post" charset="UTF-8">
                             {% csrf_token %}
                                 <div id="paws"><a class="raty-click"
-                                id="{{ transaction.id }}">rate this {{ transaction.id }} shizz</a></div>
-                            <!--<input type="hidden" id="{{ transaction.order_set.first.price.laundry_shop.id }}" data-value=""/>
-                            <input type="submit" class="tiny secondary button" value="Submit"/>-->
+                                id="{{ transaction.id }}">Imprint this Laundry Shop</a></div>
                             </form>
                             {% endif %}
 
