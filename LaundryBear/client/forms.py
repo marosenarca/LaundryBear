@@ -24,7 +24,7 @@ class OrderForm(ModelForm):
 class TransactionForm(ModelForm):
     class Meta:
         model = Transaction
-        fields = ['paws']
+        fields = ['paws', 'price']
 
 
 class AddressForm(Form):
