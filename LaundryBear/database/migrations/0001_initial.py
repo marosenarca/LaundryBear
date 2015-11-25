@@ -94,6 +94,7 @@ class Migration(migrations.Migration):
                 ('barangay', models.CharField(max_length=50)),
                 ('street', models.CharField(max_length=50, blank=True)),
                 ('building', models.CharField(max_length=50, blank=True)),
+                ('contact_number', models.CharField(max_length=30)),
                 ('client', models.OneToOneField(to=settings.AUTH_USER_MODEL)),
             ],
         ),
