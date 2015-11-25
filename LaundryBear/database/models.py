@@ -116,7 +116,8 @@ class Transaction(models.Model):
     barangay = models.CharField(max_length=50, blank=False)
     street = models.CharField(max_length=50, blank=True)
     building = models.CharField(max_length=50, blank=True)
-    price = models.IntegerField(blank=False, default=0)
+    price = models.DecimalField(blank=False, default=0, max_digits=8,
+        decimal_places=2)
 
     @property
     def location(self):

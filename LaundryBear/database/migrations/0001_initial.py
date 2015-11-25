@@ -82,7 +82,7 @@ class Migration(migrations.Migration):
                 ('barangay', models.CharField(max_length=50)),
                 ('street', models.CharField(max_length=50, blank=True)),
                 ('building', models.CharField(max_length=50, blank=True)),
-                ('price', models.IntegerField(default=0)),
+                ('price', models.DecimalField(default=0, max_digits=8, decimal_places=2)),
             ],
         ),
         migrations.CreateModel(

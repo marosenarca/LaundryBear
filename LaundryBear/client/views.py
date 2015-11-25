@@ -16,7 +16,6 @@ from django.contrib.sites.models import Site
 from django.views.generic import (CreateView, DeleteView, DetailView, FormView, ListView,
                                   RedirectView, TemplateView, UpdateView, View)
 
-from client.forms import ProfileForm, UserForm, TransactionForm
 from client.forms import ProfileForm, UserForm, AddressForm, TransactionForm
 from client.mixins import ClientLoginRequiredMixin
 from database.models import LaundryShop, Price, Service, UserProfile, Transaction, Order, default_date, UserProfile
