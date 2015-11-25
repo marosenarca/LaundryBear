@@ -370,7 +370,6 @@ class AdminSettingsView(AdminLoginRequiredMixin, TemplateView):
         context = super(AdminSettingsView, self).get_context_data(**kwargs)
         context['usernameform'] = forms.ChangeUsernameForm(data=self.request.POST or None, instance=self.request.user)
         context['passwordform'] = PasswordChangeForm(data=self.request.POST or None, user=self.request.user)
-        context['userprofile'] = self.request.user.userprofile
         site = Site.objects.get_current()
         context['fees_form'] = forms.FeesForm(data=self.request.POST or None,
             instance=site.fees)
