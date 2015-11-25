@@ -41,6 +41,12 @@ class TransactionForm(forms.ModelForm):
         exclude = ['request_date']
 
 
+class TransactionPriceForm(forms.ModelForm):
+    class Meta:
+        model = Transaction
+        fields = ['price']
+
+
 class UserForm(UserCreationForm):
     class Meta:
         model = User

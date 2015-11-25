@@ -288,6 +288,26 @@ class OngoingTransactionsView(AdminLoginRequiredMixin, ListView):
     template_name = 'management/transactions/ongoing_transactions.html'
     paginate_by = 10
 
+    def get_context_data(self, **kwargs):
+        context = super(OngoingTransactionsView,self).get_context_data(**kwargs)
+        form_list = []
+        for transaction in self.object_list:
+            form_list.append(forms.TransactionPriceForm(prefix=transaction.pk, data=self.request.POST or None, instance=transaction))
+
+        context['transaction_list'] = zip(self.object_list, form_list)
+        return context
+
+    def post(self, request, *args, **kwargs):
+        self.object_list = self.get_queryset()
+        context = self.get_context_data(**kwargs)
+        form_list = context['transaction_list']
+        for transaction, form in form_list:
+            if form.is_valid():
+                form.save()
+
+        return redirect('management:ongoing-transactions')
+
+
     def get_queryset(self):
         queryset = super(OngoingTransactionsView, self).get_queryset()
         queryset = queryset.filter(status=2)
