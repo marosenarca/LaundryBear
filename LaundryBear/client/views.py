@@ -16,7 +16,9 @@ from django.contrib.sites.models import Site
 from django.views.generic import (CreateView, DeleteView, DetailView, FormView, ListView,
                                   RedirectView, TemplateView, UpdateView, View)
 
-from client.forms import ProfileForm, UserForm, AddressForm, TransactionForm
+from client.forms import ProfileForm, UserForm, AddressForm, TransactionForm, ChangeUsernameForm
+
+from django.contrib.auth.forms import PasswordChangeForm
 from client.mixins import ClientLoginRequiredMixin
 from database.models import LaundryShop, Price, Service, UserProfile, Transaction, Order, default_date, UserProfile
 
@@ -104,22 +106,44 @@ class UserSettingsView(ClientLoginRequiredMixin, TemplateView):
         context['userprofile'] = self.request.user.userprofile
         context['userform'] = UserForm(data=self.request.POST or None, instance=self.request.user)
         context['userprofileform'] = ProfileForm(data=self.request.POST or None, instance=self.request.user.userprofile)
+        context['usernameform'] = ChangeUsernameForm(data=self.request.POST or None, instance=self.request.user)
+        context['passwordform'] = PasswordChangeForm(data=self.request.POST or None, user=self.request.user)
         return context
 
     def post(self,request,*args,**kwargs):
         context = self.get_context_data(*args, **kwargs)
         userform = context['userform']
         userprofileform = context['userprofileform']
+        usernameform = context['usernameform']
+        passwordform = context['passwordform']
 
-        if (userform.is_valid() and userprofileform.is_valid()):
+        if userform.is_valid():
             userform.save()
-            userprofileform.save()
         else:
             print userform.errors
+
+
+        if userprofileform.is_valid():
+            userprofileform.save()
+        else:
             print userprofileform.errors
 
-        return self.render_to_response(context)
 
+
+        if (usernameform.is_valid()):
+            usernameform.save()
+        else:
+            print usernameform.errors
+
+
+        if passwordform.is_valid():
+            passwordform.save()
+            return redirect('client:menu')
+        else:
+            print passwordform.error_messages
+
+
+        return self.render_to_response(context)
 
 class ShopsListView(ClientLoginRequiredMixin, ListView):
     model = LaundryShop

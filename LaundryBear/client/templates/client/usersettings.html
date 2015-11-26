@@ -60,13 +60,16 @@
                  <label>Email {{ userform.email }}</label>
               </div>
               <div class="large-12 columns">
-                 <label>Username {{ userform.username }}</label>
+                 <label>Username {{ usernameform.username }}</label>
               </div>
               <div class="large-12 columns">
-                 <label>Password {{ userform.password1 }}</label>
+                 <label>Type Old Password {{ passwordform.old_password }}</label>
               </div>
               <div class="large-12 columns">
-                <label>Re-type Password {{ userform.password2 }}</label>
+                 <label>Password {{ passwordform.new_password1 }}</label>
+              </div>
+              <div class="large-12 columns">
+                <label>Re-type Password {{ passwordform.new_password2 }}</label>
               </div>
               <div class="large-12 columns">
                 <button type="submit" class="success button round">Save Changes</button>
