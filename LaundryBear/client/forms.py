@@ -33,3 +33,10 @@ class AddressForm(Form):
     barangay = forms.CharField(max_length=50)
     street = forms.CharField(max_length=50, required=True)
     building = forms.CharField(max_length=50, required=True)
+
+class ChangeUsernameForm(ModelForm):
+    class Meta:
+        model = User
+        fields = ['username']
+
+
