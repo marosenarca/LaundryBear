@@ -9,8 +9,8 @@
 <title>Laundry Bear | Sign Up</title>
 </head>
 <body>
-<div class="row">
-    <div id="form" class="large-6 columns">
+  <div class="row">
+    <div id="form" class="large-12 columns">
       <div id="insideform" class="signup-panel">
         <p class="welcome"><a href="usersignin.html"><img src="{% static "management/icons/logologin.png"%}" /></a></p>
         <form action="{%url 'client:signup'%}"method="post">
@@ -18,32 +18,32 @@
         <hr>
         <div>
           <div class="large-12 columns">
-            <label class="title"><b>First Name</b><span id="required" class="warning label" style="margin-left: 280px;height: 24px;">Required field</span></label>
+            <label class="title"><b>First Name</b><span id="required" class="warning label">Required field</span></label>
             {{ userform.first_name }}
             {{ userform.first_name.errors }}
           </div>
           <div class="large-12 columns">
-            <label class="title"><b>Last Name</b><span id="required" class="warning label" style="margin-left: 280px;height: 24px;">Required field</span></label>
+            <label class="title"><b>Last Name</b><span id="required" class="warning label" style="margin-left: 253px;">Required field</span></label>
             {{ userform.last_name }}
             {{ userform.last_name.errors }}
           </div>
           <div class="large-12 columns">
-            <label class="title"><b>Username</b><span id="required" class="warning label" style="margin-left: 353px;height: 24px;">Required field</span></label>
+            <label class="title"><b>Username</b><span id="required" class="warning label" style="margin-left: 255px;">Required field</span></label>
             {{ userform.username }}
             {{ userform.username.errors }}
           </div>
           <div class="large-12 columns">
-            <label class="title"><b>Email</b><span id="required" class="warning label" style="margin-left: 315px;height: 24px;">Required field</span></label>
+            <label class="title"><b>Email</b><span id="required" class="warning label" style="margin-left: 325px;">Required field</span></label>
             {{ userform.email }}
             {{ userform.email.errors }}
           </div>
           <div class="large-6 columns">
-            <label class="title"><b>Password</b><span id="required" class="warning label" style="margin-left: 120px;height: 24px;">Required field</span></label>
+            <label class="title"><b>Password</b><span id="pass1" class="warning label">Required field</span></label>
               {{ userform.password1 }}
               {{ userform.password1.errors }}
           </div>
           <div class="large-6 columns">
-            <label class="title"><b>Confirm Password</b><span id="required" class="warning label" style="margin-left: 120px;height: 24px;">Required field</span></label>
+            <label class="title"><b>Confirm Password</b><span id="pass2" class="warning label">Required field</span></label>
               {{ userform.password2 }}
               {{ userform.password2.errors }}
           </div>
@@ -58,7 +58,7 @@
           {{ userprofileform.street }}
         </div>
         <div class="large-12 columns">
-          <label class="title"><b>Barangay</b><span id="required" class="warning label" style="margin-left: 288px;height: 24px;">Required field</span></label>
+          <label class="title"><b>Barangay</b><span id="required" class="warning label" style="margin-left: 260px;">Required field</span></label>
           {{ userprofileform.barangay }}
           {{ userprofileform.barangay.errors }}
         </div>
@@ -67,12 +67,12 @@
           {{ userprofileform.city }}
         </div>
         <div class="large-12 columns">
-          <label class="title"><b>Province</b><span id="required" class="warning label" style="margin-left: 293px;height: 24px;">Required field</span></label>
+          <label class="title"><b>Province</b><span id="required" class="warning label" style="margin-left: 262px;">Required field</span></label>
           {{ userprofileform.province }}
           {{ userprofileform.province.errors }}
         </div>
         <div class="large-12 columns">
-          <label class="title"><b>Contact Number</b><span id="required" class="warning label" style="margin-left: 353px;height: 24px;">Required field</span></label>
+          <label class="title"><b>Contact Number</b><span id="required" class="warning label" style="margin-left: 212px;">Required field</span></label>
           {{ userprofileform.contact_number }}
           {{ userprofileform.contact_number.errors }}
         </div>
