@@ -1,7 +1,7 @@
 @import "compass/css3";
 
 body {
-	background-color: #0CF;
+	background-color: #5EB1E7;
 	background-position: center;
 }
 img#logo {
@@ -14,7 +14,7 @@ img#logo {
 	margin-bottom: 5%;
 }
 .login-box {
-  background-color: #0CF;
+  background-color: #5EB1E7;
   border: 2px solid transparent;
   margin-top: 5%;
   padding: 40px 20px 0 20px;

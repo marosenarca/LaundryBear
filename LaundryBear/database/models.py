@@ -4,6 +4,10 @@ from django.utils import timezone
 from django.utils.timezone import now
 from django.contrib.sites.models import Site
 from datetime import timedelta
+from django.core.validators import RegexValidator
+
+
+contactNumberValidator = RegexValidator(r'^\+?([\d][\s-]?){10,13}$', 'Invalid input!')
 
 
 # Create your models here.
@@ -14,7 +18,7 @@ class UserProfile(models.Model):
     barangay = models.CharField(max_length=50, blank=False)
     street = models.CharField(max_length=50, blank=True)
     building = models.CharField(max_length=50, blank=True)
-    contact_number = models.CharField(max_length=30, blank=False)
+    contact_number = models.CharField(max_length=30, blank=False,  validators=[contactNumberValidator])
 
     def __unicode__(self):
         return self.client.get_full_name()
@@ -36,7 +40,7 @@ class LaundryShop(models.Model):
     barangay = models.CharField(max_length=50, blank=False)
     street = models.CharField(max_length=50, blank=True)
     building = models.CharField(max_length=50, blank=True)
-    contact_number = models.CharField(max_length=30, blank=False)
+    contact_number = models.CharField(max_length=30, blank=False, validators=[contactNumberValidator])
     email = models.EmailField(blank=True)
     website = models.URLField(blank=True)
     hours_open = models.CharField(max_length=100, blank=False)
