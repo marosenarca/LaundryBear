@@ -54,12 +54,13 @@
 						<label>{{ address_form.province.label }}:{{ address_form.province }}</label>
 					</div>
 				</div>
-                <a href="javascript:history.go(-1)" class="button left">Back</a>
-                <a href="#" data-reveal-id="confirmModal" class="button success right">Order</a>
+                <br>
+                <a href="javascript:history.go(-1)" style="margin-right:10px; margin-left:-15px;" class="button left">Back</a>
+                <a href="#" data-reveal-id="confirmModal" class="button success left">Order</a>
                 <!-- Are you sure? -->
-                <div id="confirmModal" class="reveal-modal" data-reveal aria-labelledby="firstModalTitle" aria-hidden="true" role="dialog">
-                    <h2 id="firstModalTitle">Are You Sure?</h2>
-                    <a href="#" id="confirm" data-reveal-id="sendModal" class="button success right">Yes</a>
+                <div id="confirmModal" class="reveal-modal tiny" data-reveal aria-labelledby="firstModalTitle" aria-hidden="true" role="dialog">
+                    <h4 id="firstModalTitle" style="text-align:center;">Are you sure?</h4>
+                    <a href="#" id="confirm" style="postion:relative; left:38%" data-reveal-id="sendModal" class="button success small">Yes</a>
                     <a class="close-reveal-modal" aria-label="Close">&#215;</a>
                 </div>
                 <!--your request has been processed. please wait for futher announcements-->
