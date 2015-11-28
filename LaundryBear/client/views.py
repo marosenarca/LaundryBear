@@ -53,7 +53,7 @@ class DashView(ClientLoginRequiredMixin, ListView):
         queryset = queryset.filter(client=self.request.user.userprofile)
         return queryset
 
-    def post(self, request):
+    def post(self, request, *args, **kwargs):
         the_post = request.POST
         transaction = Transaction.objects.get(pk=the_post['id'])
         transaction.paws = the_post['score']
