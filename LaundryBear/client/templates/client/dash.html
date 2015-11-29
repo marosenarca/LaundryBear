@@ -46,7 +46,9 @@
                 </tbody>
             </table>
             {% else %}
-            <h4 style="text-align:center">No Laundry Requests</h4> {% endif %}
+            <h3 style="text-align:center">Welcome, <b>{{ userprofile.client.username }}!</b></h3>
+            <h6 style="text-align:center">You have no existing laundry requests</h6>
+            {% endif %}
             <center>
                 <br>
                 <a href="{% url "client:view-shops" %}" class="large button">Make a Request</a>

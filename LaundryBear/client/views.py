@@ -43,6 +43,7 @@ class DashView(ClientLoginRequiredMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = super(DashView, self).get_context_data(**kwargs)
+        context['userprofile'] = self.request.user.userprofile
         context['transaction_list'] = self.get_transactions()
         context['fees'] = Site.objects.get_current().fees
         return context

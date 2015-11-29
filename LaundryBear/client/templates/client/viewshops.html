@@ -62,16 +62,20 @@
     </tbody>
 </table>
 {% else %}
+
 <div style="text-align:center;">
-    <h2>Unfortunately, we don't have that yet.</h2>
-    <h5>No laundry shops were found with your search. Please try again. </h5>
+    <h1>OOPS!</h1>
+    <h5>Unfortunately, your search did not match any laundry shop.</h5>
+    <h6>Try searching other laundry shops.</h6>
 </div>
+
 {% endif %}
 <br>
+{% if query_type != "browse" %}
 <div style="text-align:center;">
-    <h6>Didn't find what you were looking for?</h6>
-    <a href="{% url 'client:view-shops' %}?browse=all" style="text-decoration: underline; color:#FFDA70;">Browse all available laundry shops</a>
+    <a href="{% url 'client:view-shops' %}?browse=all" style="text-decoration: underline; color:#FFDA70;">Browse all available laundry shops here</a>
 </div>
+{% endif %}
 <div class="row">
     <div class="small-6 small-centered columns">
         {% if page_obj.has_next %}
