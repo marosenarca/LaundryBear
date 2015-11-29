@@ -1,7 +1,7 @@
 @import "compass/css3";
 
 body{
-	background-color: #FFFFFF;	
+	background-color: #5EB1E7;	
 }
 
 div#form {
@@ -9,7 +9,7 @@ div#form {
      width:500px;
      height:200px;
      z-index:15;
-     top:15%;
+     top:20%;
      left:50%;
      margin:-100px 0 0 -240px;	
 }
@@ -17,10 +17,9 @@ div#form {
 
 .signup-panel {
   border-radius: 5px;
-  border: 1px solid #000;
   padding: 15px;
-  margin-top: 50px;
-  background-color: #5EB1E7;
+  margin-top: 120px;
+  background-color: transparent;
 }
 .signup-panel i {
   font-size: 30px;
@@ -34,10 +33,23 @@ div#form {
   text-align: center;
   margin-left: 0;
 }
+  
 img{
-	width: 12%;
-	height: 35%;
+ display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 3%;
+     width:50px;
+     height:70px;
+      
 }
+
+#tag{
+display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .signup-panel p {
   font-size: 13px;
   font-weight: 200;
@@ -59,7 +71,7 @@ a {
 
 #pass1{
   height: 20px;
-  margin-left: 63%;
+  margin-left: 0;
 }
 
 #pass2{

@@ -6,13 +6,15 @@
 {%block body%}
       <div class="row">
       <div class="large-8 large-offset-2 columns">
-        <div class="panel">
-          <h3 align="center">Add Laundry Shop</h3>
+        <div id="panel" class="large-12 columns">
+          <h3 align="center"><strong>Add Laundry Shop</strong></h3>
           <!--forms-->
           <form method="post">
               {% csrf_token %}
+              <div id="contain" class="large-8 columns">
+                <div id="contained" class="large-12 columns">
               <div class="row">
-                <div class="large-8 columns">
+                <div class="large-12 columns">
                   <label>Name
                   	<div>
                     <span id="required" class="warning label">Required field</span>
@@ -24,7 +26,7 @@
               </div>
 
               <div class="row">
-                <div class="large-8 columns">
+                <div class="large-12 columns">
                   <label>Province
                   	<div>
                     <span id="required" class="warning label">Required field</span>
@@ -36,7 +38,7 @@
               </div>
 
               <div class="row">
-                <div class="large-8 columns">
+                <div class="large-12 columns">
                   <label>City
                   	<div>
                     {{ form.city }}
@@ -47,7 +49,7 @@
               </div>
 
               <div class="row">
-                <div class="large-8 columns">
+                <div class="large-12 columns">
                   <label>Barangay
                   	<div>
                     <span id="required" class="warning label">Required field</span>
@@ -59,7 +61,7 @@
               </div>
 
               <div class="row">
-                <div class="large-8 columns">
+                <div class="large-12 columns">
                   <label>Street
                   	<div>
                     {{ form.street }}
@@ -70,7 +72,7 @@
               </div>
 
               <div class="row">
-                <div class="large-8 columns">
+                <div class="large-12 columns">
                   <label>Building
                   	<div>
                     {{ form.building }}
@@ -81,7 +83,7 @@
               </div>
 
               <div class="row">
-                <div class="large-8 columns">
+                <div class="large-12 columns">
                   <label>Contact number
                   	<div>
                     <span id="required" class="warning label">Required field</span>
@@ -93,7 +95,7 @@
               </div>
 
               <div class="row">
-                <div class="large-8 columns">
+                <div class="large-12 columns">
                   <label>Email
                   	<div>
                     {{ form.email }}
@@ -104,7 +106,7 @@
               </div>
 
               <div class="row">
-                <div class="large-8 columns">
+                <div class="large-12 columns">
                   <label>Website
                     {{ form.website }}
                     {{ form.website.errors }}
@@ -112,8 +114,9 @@
                 </div>
               </div>
 
+
               <div class="row">
-                <div class="large-8 columns">
+                <div class="large-12 columns">
 					{{ form.hours_open.errors }}
 					<div class="hide">
 						{{ form.hours_open }}
@@ -188,7 +191,7 @@
               </div>
 
               <div class="row">
-                <div class="large-8 columns">
+                <div class="large-12 columns">
                 <span id="required" class="warning label">Required field</span>
                   <label><h5>Days Open</h5>
 					  {{ form.days_open.errors }}
@@ -243,8 +246,8 @@
   					  </div>
   				  </div>
 			  </div>
-			  <div class="medium-12 columns">
-              <table style="width: 100%">
+			  <div class="medium-8 columns">
+              <table align="center">
                 <thead>
                   <tr>
                     <th>Service Name</th>
@@ -299,6 +302,8 @@
 			  <i data-pk="{{ service.pk }}" data-service-description="{{ service.description }}" data-service-name="{{ service.name }}" data-service-duration="{{service.duration}}"></i>
 			  {% endfor %}
 		  </div>
+      </div>
+    </div>  
 
               <hr/>
               <button type="submit" class="button small" id="save-button">Save</button>
