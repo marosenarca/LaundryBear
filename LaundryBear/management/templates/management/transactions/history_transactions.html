@@ -5,27 +5,27 @@
 
 {% block body %}
 
-    <div class="row">
-        <div class="large-2 columns"></div>
-        <div class="large-8 large-offset-2 columns">
-            <h3 style="text-align:center">History of Transactions</h3>
-                <table id='clickytable' style="margin:auto">
-                    <thead>
-                        <th>Name of Client</th>
-                        <th>Laundry Shop</th>
-                        <th>Date Requested</th>
-                        <th>Time Requested</th>
-                        <th>Status</th>
-                    </thead>
-                    <tbody>
-                    {% for transaction in history_transaction_list %}
-                    {% include "management/transactions/partials/history_transaction_row.html" %}
-                    {% endfor %}
-                    </tbody>
-                </table>
-        </div>
-        <div class="large-2 columns"></div>
+<div class="row">
+    <div class="large-2 columns"></div>
+    <div class="large-8 large-offset-2 columns">
+        <h3 style="text-align:center">History of Transactions</h3>
+        <table id='clickytable' style="margin:auto">
+            <thead>
+            <th>Name of Client</th>
+            <th>Laundry Shop</th>
+            <th>Date Requested</th>
+            <th>Time Requested</th>
+            <th>Status</th>
+            </thead>
+            <tbody>
+            {% for transaction in history_transaction_list %}
+            {% include "management/transactions/partials/history_transaction_row.html" %}
+            {% endfor %}
+            </tbody>
+        </table>
     </div>
+    <div class="large-2 columns"></div>
+</div>
 
 
 {% endblock %}

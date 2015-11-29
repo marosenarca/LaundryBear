@@ -1,19 +1,19 @@
 {% load staticfiles %}
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="{% static "LaundryBear/css/foundation.css"%}" />
-<link rel="stylesheet" href="{% static "client/css/signupcontrol.css" %}"/>
-<link rel="stylesheet" href="{% static "LaundryBear/foundation-icons/foundation-icons.css"%}" />
-<title>Laundry Bear | Sign Up</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static "LaundryBear/css/foundation.css"%}" />
+  <link rel="stylesheet" href="{% static "client/css/signupcontrol.css" %}"/>
+  <link rel="stylesheet" href="{% static "LaundryBear/foundation-icons/foundation-icons.css"%}" />
+  <title>Laundry Bear | Sign Up</title>
 </head>
 <body>
-  <div class="row">
-    <div id="form" class="large-12 columns">
-      <div id="insideform" class="signup-panel">
-        <p class="welcome"><a href="usersignin.html"><img src="{% static "management/icons/logologin.png"%}" /></a></p>
-        <form action="{%url 'client:signup'%}"method="post">
+<div class="row">
+  <div id="form" class="large-12 columns">
+    <div id="insideform" class="signup-panel">
+      <p class="welcome"><a href="usersignin.html"><img src="{% static "management/icons/logologin.png"%}" /></a></p>
+      <form action="{%url 'client:signup'%}"method="post">
         {% csrf_token %}
         <hr>
         <div>
@@ -39,13 +39,13 @@
           </div>
           <div class="large-6 columns">
             <label class="title"><b>Password</b><span id="pass1" class="warning label">Required field</span></label>
-              {{ userform.password1 }}
-              {{ userform.password1.errors }}
+            {{ userform.password1 }}
+            {{ userform.password1.errors }}
           </div>
           <div class="large-6 columns">
             <label class="title"><b>Confirm Password</b><span id="pass2" class="warning label">Required field</span></label>
-              {{ userform.password2 }}
-              {{ userform.password2.errors }}
+            {{ userform.password2 }}
+            {{ userform.password2.errors }}
           </div>
         </div>
         <hr>
@@ -78,15 +78,15 @@
         </div>
         <hr>
         <input type="submit" class="button" value="Sign Up"/>
-        </form>
-         <p>Already have an account? <a href="{%url 'client:login'%}">Login here </a></p>
-      </div>
+      </form>
+      <p>Already have an account? <a href="{%url 'client:login'%}">Login here </a></p>
     </div>
-   </div>
-   <script src="{%static "LaundryBear/js/vendor/modernizr.js"%}"></script>
+  </div>
+</div>
+<script src="{%static "LaundryBear/js/vendor/modernizr.js"%}"></script>
    <script src="{%static "LaundryBear/js/vendor/jquery.js"%}"></script>
-   <script src="{%static "LaundryBear/js/vendor/fastclick.js"%}"></script>
+<script src="{%static "LaundryBear/js/vendor/fastclick.js"%}"></script>
    <script src="{%static "LaundryBear/js/foundation.min.js"%}"></script>
-   <script src="{%static "management/js/app.js"%}"></script>
+<script src="{%static "management/js/app.js"%}"></script>
 </body>
 </html>
