@@ -1,48 +1,48 @@
 {%extends 'management/base.html'%}
 {% load staticfiles %}
 
-    {% block title %}Edit Service | LaundryBear{% endblock %}
+{% block title %}Edit Service | LaundryBear{% endblock %}
 
 {%block body%}
-      <div class="row">
-      <div class="large-8 large-offset-2 columns">
+<div class="row">
+    <div class="large-8 large-offset-2 columns">
         <div class="panel">
-          <h3 align="center">Edit Service</h3>
-          <!--forms-->
-          <form method="post">
-              {% csrf_token %}
-              <div class="row">
-                <div class="large-8 columns">
-                  <label>Name
-                  <div>
-                    <span id="required" class="warning label">Required field</span>
-                    {{ form.name }}
-                    {{ form.name.errors }}
-                  </div>
-                  </label>
+            <h3 align="center">Edit Service</h3>
+            <!--forms-->
+            <form method="post">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="large-8 columns">
+                        <label>Name
+                            <div>
+                                <span id="required" class="warning label">Required field</span>
+                                {{ form.name }}
+                                {{ form.name.errors }}
+                            </div>
+                        </label>
+                    </div>
                 </div>
-              </div>
 
-              <div class="row">
-                <div class="large-8 columns">
-                  <label>Description
-                  <div>
-                    <span id="required" class="warning label">Required field</span>
-                    {{ form.description }}
-                    {{ form.description.errors }}
-                  </div>
-                  </label>
+                <div class="row">
+                    <div class="large-8 columns">
+                        <label>Description
+                            <div>
+                                <span id="required" class="warning label">Required field</span>
+                                {{ form.description }}
+                                {{ form.description.errors }}
+                            </div>
+                        </label>
+                    </div>
                 </div>
-              </div>
-              <button type="submit" class="button small" id="save-button">Save</button>
-              <a href="javascript:history.go(-1);" class="warning button small">Cancel</a>
-          </form>
+                <button type="submit" class="button small" id="save-button">Save</button>
+                <a href="javascript:history.go(-1);" class="warning button small">Cancel</a>
+            </form>
         </div>
-      </div>
     </div>
+</div>
 
-  {% endblock %}
+{% endblock %}
 
-  {% block javascripts %}
-  <script src="{% static "management/js/services.js" %}"></script>
+{% block javascripts %}
+<script src="{% static "management/js/services.js" %}"></script>
   {% endblock %}

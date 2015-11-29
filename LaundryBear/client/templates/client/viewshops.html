@@ -11,14 +11,11 @@
 
 <form method="get">
     {% csrf_token %}
-    <div class="large-12 columns">
+    <div class="large-11 columns">
         <div class="row">
-
-            <div class="small-3 columns"></div>
-            <div class="small-6 small-offset-3 columns">
-                <dl class="sub-nav">
-
-                    <dt>Filter:</dt>
+            <div class="small-7 small-offset-3 columns">
+                <dl class="sub-nav" style="margin-left:4%;">
+                    <dt style="color:#FFDA70;"><b>Search Shops by:</b></dt>
                     <dd {% if query_type == "name" %} class="active"{% endif %}><a href="#">Name</a></dd>
                     <dd {% if query_type == "city" %} class="active"{% endif %}><a href="#">City</a></dd>
                     <dd {% if query_type == "barangay" %} class="active"{% endif %}><a href="#">Barangay</a></dd>
@@ -26,7 +23,6 @@
 
                 </dl>
             </div>
-            <div class="small-3 columns"></div>
         </div>
     </div>
 
@@ -71,6 +67,11 @@
     <h5>No laundry shops were found with your search. Please try again. </h5>
 </div>
 {% endif %}
+<br>
+<div style="text-align:center;">
+    <h6>Didn't find what you were looking for?</h6>
+    <a href="{% url 'client:view-shops' %}?browse=all" style="text-decoration: underline; color:#FFDA70;">Browse all available laundry shops</a>
+</div>
 <div class="row">
     <div class="small-6 small-centered columns">
         {% if page_obj.has_next %}
