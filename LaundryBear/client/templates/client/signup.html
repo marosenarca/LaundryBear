@@ -9,7 +9,7 @@
   <title>Laundry Bear | Sign Up</title>
 </head>
 <body>
-  <p class="welcome"><a href="usersignin.html"><img src="{% static "management/icons/logologin.png"%}" /></a></p>
+  <p class="welcome"><a href="{% url 'client:login' %}"><img src="{% static "management/icons/logologin.png"%}" /></a></p>
   <center><strong><h3 id="tag">Something Clean is Coming Your Way</h3></strong></center><hr>
   <div class="row">
     <div id="form" class="large-12 columns">
@@ -23,37 +23,51 @@
           <div class="large-12 columns">
             <label class="title"><b>First Name</b><strong><font color="red" size="3">*</font></strong></label>
             {{ userform.first_name }}
-            {{ userform.first_name.errors }}
+            {% if userform.first_name.errors %}
+            <span class="error label">{{ userform.first_name.errors | striptags }}</span>
+            {% endif %}
           </div>
           <div class="large-12 columns">
             <label class="title"><b>Last Name</b><strong><font color="red" size="3">*</font></strong></label>
             {{ userform.last_name }}
-            {{ userform.last_name.errors }}
+            {% if userform.last_name.errors %}
+            <span class="error label">{{ userform.last_name.errors | striptags }}</span>
+            {% endif %}
           </div>
           <div class="large-12 columns">
             <label class="title"><b>Cellphone Number</b><strong><font color="red" size="3">*</font></strong></label>
             {{ userprofileform.contact_number }}
-            {{ userprofileform.contact_number.errors }}
+            {% if userprofileform.contact_number.errors %}
+            <span class="error label">{{ userprofileform.contact_number.errors | striptags }}</span>
+            {% endif %}
           </div>
           <div class="large-12 columns">
             <label class="title"><b>Email</b><strong><font color="red" size="3">*</font></strong></label>
             {{ userform.email }}
-            {{ userform.email.errors }}
+            {% if userform.email.errors %}
+            <span class="error label">{{ userform.email.errors | striptags }}</span>
+            {% endif %}
           </div><hr>
           <div class="large-12 columns">
             <label class="title"><b>Username</b><strong><font color="red" size="3">*</font></strong></label>
             {{ userform.username }}
-            {{ userform.username.errors }}
+            {% if userform.username.errors %}
+            <span class="error label">{{ userform.username.errors | striptags }}</span>
+            {% endif %}
           </div>
           <div class="large-12 columns">
             <label class="title"><b>Password</b><strong><font color="red" size="3">*</font></strong></label>
               {{ userform.password1 }}
-              {{ userform.password1.errors }}
+              {% if userform.password1.errors %}
+              <span class="error label">{{ userform.password1.errors | striptags }}</span>
+              {% endif %}
           </div>
           <div class="large-12 columns">
             <label class="title"><b>Confirm Password</b><strong><font color="red" size="3">*</font></strong></strong></label>
               {{ userform.password2 }}
-              {{ userform.password2.errors }}
+              {% if userform.password2.errors %}
+              <span class="error label">{{ userform.password2.errors | striptags }}</span>
+              {% endif %}
           </div>
         <hr>
         <div class="large-12 columns">
@@ -67,7 +81,9 @@
         <div class="large-12 columns">
           <label class="title"><b>Barangay</b><strong><font color="red" size="3">*</font></strong></label>
           {{ userprofileform.barangay }}
-          {{ userprofileform.barangay.errors }}
+          {% if userprofileform.barangay.errors %}
+          <span class="error label">{{ userprofileform.barangay.errors | striptags }}</span>
+          {% endif %}
         </div>
         <div class="large-12 columns">
           <label class="title"><b>City</b></label>
@@ -76,7 +92,9 @@
         <div class="large-12 columns">
           <label class="title"><b>Province</b><strong><font color="red" size="3">*</font></strong></label>
           {{ userprofileform.province }}
-          {{ userprofileform.province.errors }}
+          {% if userprofileform.province.errors %}
+          <span class="error label">{{ userprofileform.province.errors | striptags }}</span>
+          {% endif %}
         </div>
         <hr>
         <input type="submit" class="button" value="Sign Up"/>
