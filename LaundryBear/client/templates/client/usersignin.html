@@ -1,14 +1,23 @@
 {% load staticfiles %}
+<!DOCTYPE html>
 <html>
 <head>
     <meta content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="{% static "LaundryBear/css/foundation.css"%}" />
-    <link rel="stylesheet" href="{% static "client/css/signincontrol.css" %}"/>
+    <link rel="stylesheet" href="{% static "client/css/signincontrol.css"%}"/>
+    <link rel="stylesheet" href="{% static "client/slick/slick.css"%}"/>
+    <link rel="stylesheet" href="{% static "client/slick/slick-theme.css"%}"/>
     <title>Welcome to LaundryBear</title>
 </head>
 <body>
 <header class="header">
-    <h3 class="main-header">Something clean is coming your way.</h3>
+    <div class="slider">
+        <div><img src={% static "client/icons/header3.jpg"%}></div>
+        <div><img src={% static "client/icons/locate.jpg"%}></div>
+        <div><img src={% static "client/icons/request.jpg"%}></div>
+        <div><img src={% static "client/icons/pay.jpg"%}></div>
+        <div><img src={% static "client/icons/receive.jpg"%}></div>
+    </div>
     <ul class="header-subnav">
         <li><a href="#" class="is-active">Home</a></li>
         <li><a href="{% url 'client:signup' %}" class="is-active">Sign Up</a></li>
@@ -16,42 +25,44 @@
     </ul>
 </header>
 {%if not user.is_authenticated %}
-<div id="form" class="login">
-    {% if form.non_field_errors %}
-    <div class="row">
-        <div class="large-12 columns">
-            <span class="error label">{{ form.non_field_errors | striptags }}</span>
+<div class="row">
+    <div id="form" class="login">
+        {% if form.non_field_errors %}
+        <div class="row">
+            <div class="large-12 columns">
+                <span class="error label">{{ form.non_field_errors | striptags }}</span>
+            </div>
         </div>
-    </div>
-    {% endif %}
-    <div class="large-3 large-centered columns">
-        <div class="login-box">
-            <div class="row">
-                <h3 id="adminlogin"align="center"><img id="logo"src="{% static "management/icons/logologin.png"%}" /></h3>
-                <br>
-                <div class="large-12 columns">
-                    <form method="post">
-                        {% csrf_token %}
-                        <div class="row">
-                            <div class="large-12 columns">
-                                <label class="title"><b>Username</b></label>
-                                <input type="text" name="username" placeholder="Enter your username" required autocomplete="on" />
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="large-12 columns">
-                                <label class="title"><b>Password</b></label>
-                                <input type="password" name="password" placeholder="Enter your password" required />
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="large-12 large-centered columns">
-                                <input type="submit" class="button expand" value="Sign In" />
-                            </div>
-                        </div>
-                    </form>
+        {% endif %}
+        <div class="medium-3 columns">
+            <div class="login-box">
+                <div class="row">
+                    <h3 id="adminlogin"align="center"><img id="logo"src="{% static "management/icons/logologin.png"%}" /></h3>
+                    <br>
                 </div>
             </div>
+        </div>
+        <div class="medium-6 columns center">
+            <form method="post">
+                {% csrf_token %}
+                <div id="info" class="row">
+                    <div class="large-7 columns">
+                        <label class="title"><b>Username</b></label>
+                        <input type="text" name="username" placeholder="Enter your username" required autocomplete="on" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="large-7 columns">
+                        <label class="title"><b>Password</b></label>
+                        <input type="password" name="password" placeholder="Enter your password" required />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="large-7 columns">
+                        <input type="submit" class="button expand" value="Sign In" />
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -63,11 +74,38 @@
     <a href="http://www.facebook.com"><img src="{% static "management/icons/kNPKJ.gif"%}" alt="" id="logo"  align="right"/></a>
 </div>
 
-<script src="{%static "LaundryBear/js/vendor/jquery.js"%}"></script>
-<script src="{%static "LaundryBear/js/foundation.js"%}"></script>
-<script src="{%static "LaundryBear/js/foundation/foundation.orbit.js"%}"></script>
-<script src="{%static "LaundryBear/js/vendor/modernizr.js"%}"></script>
-<script src="{%static "LaundryBear/js/vendor/fastclick.js"%}"></script>
-<script src="{%static "management/js/app.js"%}"></script>
+
+
+    <script src="{%static "LaundryBear/js/vendor/jquery.js"%}"></script>
+    <script src="{%static "LaundryBear/js/foundation.js"%}"></script>
+
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script src="{%static "client/slick/slick.min.js"%}"></script>
+    <script src="{%static "LaundryBear/js/vendor/modernizr.js"%}"></script>
+    <script src="{%static "LaundryBear/js/vendor/fastclick.js"%}"></script>
+    <script src="{%static "management/js/app.js"%}"></script>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+      $('.slider').slick({
+        infinite: true,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        adaptiveHeight: true,
+        autoplay: true,
+        autoplayspeed: 8000,
+        dots: true,
+        arrows: false,
+        fade: false,
+        mobileFirst: true,
+        pauseOnHover: true,
+        speed: 800,
+        swipeToSlide: true,
+
+     });
+    });
+  </script>
+
     </body>
 </html>
