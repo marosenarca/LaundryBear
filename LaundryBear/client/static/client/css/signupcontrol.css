@@ -66,10 +66,15 @@ a {
 
 #required{
   height: 20px;
-  margin-left: 250px;
+  margin-left: 325px;
 }
 
 #pass1{
   height: 20px;
   margin-left: 0;
+}
+
+#legend{
+  height: 20px;
+  margin-left: 310px;
 }

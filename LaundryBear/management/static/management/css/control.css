@@ -28,13 +28,8 @@ h3#adminlogin {
 img#logo {
 	width: 4%;
 	height: 3%;
-	position:absolute;
-     width:500px;
-     height:200px;
-     z-index:15;
-     top:15%;
-     left:50%;
-     margin: 60px 0 0 -240px;  
+	margin-left: -12px;
+	margin-top: -3px;
 }
 img#writtenlogo {
 	width: 15%;
@@ -102,9 +97,9 @@ div#contain{
      width:500px;
      height:200px;
      z-index:15;
-     top:15%;
+     top:5%;
      left:50%;
-     margin: 60px 0 0 -240px;  
+     margin: 50px 0 0 -240px;  
 }
 
 div#contained{

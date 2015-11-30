@@ -15,40 +15,43 @@
     <div id="form" class="large-12 columns">
       <div id="insideform" class="signup-panel">
         <form action="{%url 'client:signup'%}"method="post">
+          <div class="large-12 columns">
+            <span id="legend" class="warning label" align="right">Required Field (*)</span>
+          </div>
         {% csrf_token %}
         <div>
           <div class="large-12 columns">
-            <label class="title"><b>First Name</b><span id="required" class="warning label">Required field</span></label>
+            <label class="title"><b>First Name</b><strong id="required">*</strong></label>
             {{ userform.first_name }}
             {{ userform.first_name.errors }}
           </div>
           <div class="large-12 columns">
-            <label class="title"><b>Last Name</b><span id="required" class="warning label" style="margin-left: 253px;">Required field</span></label>
+            <label class="title"><b>Last Name</b><strong id="required" style="margin-left: 325px;">*</strong></label>
             {{ userform.last_name }}
             {{ userform.last_name.errors }}
           </div>
           <div class="large-12 columns">
-            <label class="title"><b>Contact Number</b><span id="required" class="warning label" style="margin-left: 212px;">Required field</span></label>
+            <label class="title"><b>Cellphone Number</b><strong id="required" style="margin-left: 270px;">*</strong></label>
             {{ userprofileform.contact_number }}
             {{ userprofileform.contact_number.errors }}
           </div>
           <div class="large-12 columns">
-            <label class="title"><b>Email</b><span id="required" class="warning label" style="margin-left: 325px;">Required field</span></label>
+            <label class="title"><b>Email</b><strong id="required" style="margin-left: 362px;">*</strong></label>
             {{ userform.email }}
             {{ userform.email.errors }}
           </div><hr>
           <div class="large-12 columns">
-            <label class="title"><b>Username</b><span id="required" class="warning label" style="margin-left: 255px;">Required field</span></label>
+            <label class="title"><b>Username</b><strong id="required" style="margin-left: 330px;">*</strong></label>
             {{ userform.username }}
             {{ userform.username.errors }}
           </div>
           <div class="large-12 columns">
-            <label class="title"><b>Password</b><span id="required" class="warning label" style="margin-left: 257px;">Required field</span></label>
+            <label class="title"><b>Password</b><strong id="required" style="margin-left: 330px;">*</strong></label>
               {{ userform.password1 }}
               {{ userform.password1.errors }}
           </div>
           <div class="large-12 columns">
-            <label class="title"><b>Confirm Password</b><span id="required" class="warning label" style="margin-left: 198px;">Required field</span></label>
+            <label class="title"><b>Confirm Password</b><strong id="required" style="margin-left: 270px;">*</strong></label>
               {{ userform.password2 }}
               {{ userform.password2.errors }}
           </div>
@@ -62,7 +65,7 @@
           {{ userprofileform.street }}
         </div>
         <div class="large-12 columns">
-          <label class="title"><b>Barangay</b><span id="required" class="warning label" style="margin-left: 260px;">Required field</span></label>
+          <label class="title"><b>Barangay</b><strong id="required" style="margin-left: 333px;">*</strong></label>
           {{ userprofileform.barangay }}
           {{ userprofileform.barangay.errors }}
         </div>
@@ -71,7 +74,7 @@
           {{ userprofileform.city }}
         </div>
         <div class="large-12 columns">
-          <label class="title"><b>Province</b><span id="required" class="warning label" style="margin-left: 262px;">Required field</span></label>
+          <label class="title"><b>Province</b><strong id="required" style="margin-left: 335px;">*</strong></label>
           {{ userprofileform.province }}
           {{ userprofileform.province.errors }}
         </div>
