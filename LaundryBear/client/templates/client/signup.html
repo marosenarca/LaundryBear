@@ -23,37 +23,51 @@
           <div class="large-12 columns">
             <label class="title"><b>First Name</b><strong id="required">*</strong></label>
             {{ userform.first_name }}
-            {{ userform.first_name.errors }}
+            {% if userform.first_name.errors %}
+            <span class="error label">{{ userform.first_name.errors }}</span>
+            {% endif %}
           </div>
           <div class="large-12 columns">
             <label class="title"><b>Last Name</b><strong id="required" style="margin-left: 325px;">*</strong></label>
             {{ userform.last_name }}
-            {{ userform.last_name.errors }}
+            {% if userform.last_name.errors %}
+            <span class="error label">{{ userform.last_name.errors }}</span>
+            {% endif %}
           </div>
           <div class="large-12 columns">
             <label class="title"><b>Cellphone Number</b><strong id="required" style="margin-left: 270px;">*</strong></label>
             {{ userprofileform.contact_number }}
-            {{ userprofileform.contact_number.errors }}
+            {% if userprofileform.contact_number.errors %}
+            <span class="error label">{{ userprofileform.contact_number.errors }}</span>
+            {% endif %}
           </div>
           <div class="large-12 columns">
             <label class="title"><b>Email</b><strong id="required" style="margin-left: 362px;">*</strong></label>
             {{ userform.email }}
-            {{ userform.email.errors }}
+            {% if userform.email.errors %}
+            <span class="error label">{{ userform.email.errors }}</span>
+            {% endif %}
           </div><hr>
           <div class="large-12 columns">
             <label class="title"><b>Username</b><strong id="required" style="margin-left: 330px;">*</strong></label>
             {{ userform.username }}
-            {{ userform.username.errors }}
+            {% if userform.username.errors %}
+            <span class="error label">{{ userform.username.errors }}</span>
+            {% endif %}
           </div>
           <div class="large-12 columns">
             <label class="title"><b>Password</b><strong id="required" style="margin-left: 330px;">*</strong></label>
               {{ userform.password1 }}
-              {{ userform.password1.errors }}
+              {% if userform.password1.errors %}
+              <span class="error label">{{ userform.password1.errors }}</span>
+              {% endif %}
           </div>
           <div class="large-12 columns">
             <label class="title"><b>Confirm Password</b><strong id="required" style="margin-left: 270px;">*</strong></label>
               {{ userform.password2 }}
-              {{ userform.password2.errors }}
+              {% if userform.password2.errors %}
+              <span class="error label">{{ userform.password2.errors }}</span>
+              {% endif %}
           </div>
         <hr>
         <div class="large-12 columns">
@@ -67,7 +81,9 @@
         <div class="large-12 columns">
           <label class="title"><b>Barangay</b><strong id="required" style="margin-left: 333px;">*</strong></label>
           {{ userprofileform.barangay }}
-          {{ userprofileform.barangay.errors }}
+          {% if userprofileform.barangay.errors %}
+          <span class="error label">{{ userprofileform.barangay.errors }}</span>
+          {% endif %}
         </div>
         <div class="large-12 columns">
           <label class="title"><b>City</b></label>
@@ -76,7 +92,9 @@
         <div class="large-12 columns">
           <label class="title"><b>Province</b><strong id="required" style="margin-left: 335px;">*</strong></label>
           {{ userprofileform.province }}
-          {{ userprofileform.province.errors }}
+          {% if userprofileform.province.errors %}
+          <span class="error label">{{ userprofileform.province.errors }}</span>
+          {% endif %}
         </div>
         <hr>
         <input type="submit" class="button" value="Sign Up"/>
