@@ -9,20 +9,12 @@
   <title>Laundry Bear | Sign Up</title>
 </head>
 <body>
-<<<<<<< HEAD
   <p class="welcome"><a href="usersignin.html"><img src="{% static "management/icons/logologin.png"%}" /></a></p>
   <center><strong><h3 id="tag">Something Clean is Coming Your Way</h3></strong></center><hr>
   <div class="row">
     <div id="form" class="large-12 columns">
       <div id="insideform" class="signup-panel">
         <form action="{%url 'client:signup'%}"method="post">
-=======
-<div class="row">
-  <div id="form" class="large-12 columns">
-    <div id="insideform" class="signup-panel">
-      <p class="welcome"><a href="usersignin.html"><img src="{% static "management/icons/logologin.png"%}" /></a></p>
-      <form action="{%url 'client:signup'%}"method="post">
->>>>>>> origin/master
         {% csrf_token %}
         <div>
           <div class="large-12 columns">
@@ -50,7 +42,6 @@
             {{ userform.username }}
             {{ userform.username.errors }}
           </div>
-<<<<<<< HEAD
           <div class="large-12 columns">
             <label class="title"><b>Password</b><span id="required" class="warning label" style="margin-left: 257px;">Required field</span></label>
               {{ userform.password1 }}
@@ -60,19 +51,7 @@
             <label class="title"><b>Confirm Password</b><span id="required" class="warning label" style="margin-left: 198px;">Required field</span></label>
               {{ userform.password2 }}
               {{ userform.password2.errors }}
-=======
-          <div class="large-6 columns">
-            <label class="title"><b>Password</b><span id="pass1" class="warning label">Required field</span></label>
-            {{ userform.password1 }}
-            {{ userform.password1.errors }}
           </div>
-          <div class="large-6 columns">
-            <label class="title"><b>Confirm Password</b><span id="pass2" class="warning label">Required field</span></label>
-            {{ userform.password2 }}
-            {{ userform.password2.errors }}
->>>>>>> origin/master
-          </div>
-        </div>
         <hr>
         <div class="large-12 columns">
           <label class="title"><b>Building</b></label>

@@ -11,7 +11,7 @@ div#form {
      z-index:15;
      top:20%;
      left:50%;
-     margin:-100px 0 0 -240px;	
+     margin:-50px 0 0 -240px;	
 }
 
 
@@ -72,9 +72,4 @@ a {
 #pass1{
   height: 20px;
   margin-left: 0;
-}
-
-#pass2{
-  height: 20px;
-  margin-left: 48%;
 }
