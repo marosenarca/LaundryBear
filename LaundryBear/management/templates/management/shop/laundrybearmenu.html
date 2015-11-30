@@ -2,107 +2,107 @@
 {% load staticfiles %}
 {%block title%} Menu | LaundryBear {%endblock%}
 {%block body%}
-        <div class="row">
+<div class="row">
+  <div class="row">
+    <div class="large-12 columns show-for-small">
+      <img src="http://placehold.it/1200x700&text=Mobile Header">
+    </div>
+  </div><br>
+
+  <div class="row"></div>
+
+  <div class="row">
+    <div class="large-12 columns">
+      <div class="row">
+
+        <div class="large-4 small-6 columns">
+          <h3>Recently Added Shops</h3>
+          <hr />
+
+          {% if recent_shops %}
+          {% with recent_shops.0 as shop %}
+          {% include "management/shop/partials/recent_shop_row.html" %}
+          {% endwith %}
+
+          <hr />
+          <div class="hide-for-small">
+            {% for shop in recent_shops|slice:"1:"%}
+            {% include "management/shop/partials/recent_shop_row.html" %}
+            {% endfor %}
+          </div>
+          {% else %}
+          No shops available.
+          {% endif %}
+          <br />
+          <div class="row">
+            <div class="large-1 column">
+            </div>
+
+            <div class="panel callout radius">
+              <h6>Most Requested Shop:</h6>
+              <p>Mang Laba</p>
+              <p>Rating: <img src="{% static "management/icons/star.png" %}" /></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="large-4 small-12 columns">
+
+          <h2 id="requests">Requests</h2><hr>
+          <div id="subheader" class="panel callout radius">
+            <h5><a href="#">Feed</a></h5>
+
             <div class="row">
-              <div class="large-12 columns show-for-small">
-                <img src="http://placehold.it/1200x700&text=Mobile Header">
-              </div>
-            </div><br>
+              <div class="small-9 columns small-centered">
+                <article class="event">
 
-            <div class="row"></div>
-
-            <div class="row">
-              <div class="large-12 columns">
-                <div class="row">
-
-                  <div class="large-4 small-6 columns">
-                    <h3>Recently Added Shops</h3>
-					<hr />
-
-					{% if recent_shops %}
-					{% with recent_shops.0 as shop %}
-					{% include "management/shop/partials/recent_shop_row.html" %}
-					{% endwith %}
-
-					<hr />
-                    <div class="hide-for-small">
-						{% for shop in recent_shops|slice:"1:"%}
-						{% include "management/shop/partials/recent_shop_row.html" %}
-						{% endfor %}
-                      </div>
-					  {% else %}
-					  No shops available.
-					  {% endif %}
-					  <br />
-                      <div class="row">
-                        <div class="large-1 column">
-                        </div>
-
-                        <div class="panel callout radius">
-                          <h6>Most Requested Shop:</h6>
-                          <p>Mang Laba</p>
-						  <p>Rating: <img src="{% static "management/icons/star.png" %}" /></p>
-                        </div>
-                      </div>
-                    </div>
-
-                  <div class="large-4 small-12 columns">
-
-                    <h2 id="requests">Requests</h2><hr>
-                    <div id="subheader" class="panel callout radius">
-                      <h5><a href="#">Feed</a></h5>
-
-                      <div class="row">
-                          <div class="small-9 columns small-centered">
-                            <article class="event">
-
-                                <div class="event-date">
-                                  <p class="event-month">Oct</p>
-                                  <p class="event-day">24</p>
-                                </div>
-
-                                <div class="event-desc">
-                                  <h5 class="event-desc-header">Adriana Lima</h5>
-                                  <p class="event-desc-detail"><span class="event-desc-time"></span>From IT Park: Mang Laba</p>
-                                  <a href="#" class="button radius button small">Details</a>
-                                </div>
-
-                              </article>
-
-                              <hr>
-
-                              <article class="event">
-
-                                <div class="event-date">
-                                  <p class="event-month">Oct</p>
-                                  <p class="event-day">24</p>
-                                </div>
-
-                                <div class="event-desc">
-                                  <h5 class="event-desc-header">Donald John</h5>
-                                  <p class="event-desc-detail"><span class="event-desc-time"></span>From Lahug: Kosh Kosh</p>
-                                  <a href="#" class="button radius button small">Details</a>
-                                </div>
-
-                              </article>
-                          </div>
-                        </div>
-
-
-                    <div class="small-5 hide-for-small">
-                      <h5><a href="#">Unfulfilled Requests »</a></h5>
-                    </div><hr>
-
-                    <div align="center">
-                      <a href="#" class="button round">View Transactions</a>
-                    </div>
-
+                  <div class="event-date">
+                    <p class="event-month">Oct</p>
+                    <p class="event-day">24</p>
                   </div>
 
-                </div>
+                  <div class="event-desc">
+                    <h5 class="event-desc-header">Adriana Lima</h5>
+                    <p class="event-desc-detail"><span class="event-desc-time"></span>From IT Park: Mang Laba</p>
+                    <a href="#" class="button radius button small">Details</a>
+                  </div>
+
+                </article>
+
+                <hr>
+
+                <article class="event">
+
+                  <div class="event-date">
+                    <p class="event-month">Oct</p>
+                    <p class="event-day">24</p>
+                  </div>
+
+                  <div class="event-desc">
+                    <h5 class="event-desc-header">Donald John</h5>
+                    <p class="event-desc-detail"><span class="event-desc-time"></span>From Lahug: Kosh Kosh</p>
+                    <a href="#" class="button radius button small">Details</a>
+                  </div>
+
+                </article>
               </div>
             </div>
 
+
+            <div class="small-5 hide-for-small">
+              <h5><a href="#">Unfulfilled Requests »</a></h5>
+            </div><hr>
+
+            <div align="center">
+              <a href="#" class="button round">View Transactions</a>
+            </div>
+
           </div>
+
         </div>
+      </div>
+    </div>
+
+  </div>
+</div>
 {%endblock%}

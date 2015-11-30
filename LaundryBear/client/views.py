@@ -43,6 +43,7 @@ class DashView(ClientLoginRequiredMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = super(DashView, self).get_context_data(**kwargs)
+        context['userprofile'] = self.request.user.userprofile
         context['transaction_list'] = self.get_transactions()
         context['fees'] = Site.objects.get_current().fees
         return context
@@ -157,6 +158,12 @@ class ShopsListView(ClientLoginRequiredMixin, ListView):
 
         query_type = ''
 
+        none_query = self.request.GET.get('browse', False)
+        if none_query:
+            shops = self.get_all_shops()
+            shops.order_by('-barangay', 'rating')
+            query_type = 'browse'
+
         name_query = self.request.GET.get('name', False)
         if name_query:
             shops = self.get_shops_by_name(name_query)
@@ -193,6 +200,9 @@ class ShopsListView(ClientLoginRequiredMixin, ListView):
 
     def get_shops_by_barangay(self, barangay_query):
         return LaundryShop.objects.filter(barangay__icontains=barangay_query)
+
+    def get_all_shops(self):
+        return LaundryShop.objects.all()
 
 
 class OrderView(ClientLoginRequiredMixin, DetailView):

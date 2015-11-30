@@ -5,97 +5,91 @@
 
 {%block body%}
 <div class="large-6 large-centered columns">
-<<<<<<< HEAD
-  <div><H5 align="right">Administration Settings</H5></div>
-  <h3><b>Administrator: {{user.username}}</h3>
-<ul class="accordion" data-accordion>
-=======
-  <div><H5 align="right">Edit Profile</H5></div>
-  <h3><b>{{user.username}}</h3>
-  <ul class="accordion" data-accordion>
->>>>>>> 7f7e5e68577d77a29516ef08b7077c0147c82212
- 
-    <li class="accordion-navigation">
-    <a href="#panel2a">Edit Username</a>
-    <div id="panel2a" class="content">
-      <div class="login-box">
-            <div class="row">
-                <div class="large-12 columns">
-                   <form method="post">
-                       {% csrf_token %}
-                        <div class="row">
-                          <div class="large-12 columns">
-                            <label class="title"><b>Edit Username</b></label>
-                            <label>{{ usernameform.username }}</label>
-                          </div>
-                        </div>
+    <div><H5 align="right">Administration Settings</H5></div>
+    <h3><b>Administrator: {{user.username}}</h3>
+    <ul class="accordion" data-accordion>
 
-                        <div class="row">
-                          <div class="large-12 large-centered columns">
-                            <button type="submit" class="success button round">Change Username</button>
-                          </div>
+        <li class="accordion-navigation">
+            <a href="#panel2a">Edit Username</a>
+            <div id="panel2a" class="content">
+                <div class="login-box">
+                    <div class="row">
+                        <div class="large-12 columns">
+                            <form method="post">
+                                {% csrf_token %}
+                                <div class="row">
+                                    <div class="large-12 columns">
+                                        <label class="title"><b>Edit Username</b></label>
+                                        <label>{{ usernameform.username }}</label>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="large-12 large-centered columns">
+                                        <button type="submit" class="success button round">Change Username</button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
-                      </form>
+                    </div>
                 </div>
             </div>
-      </div>
-    </div>
-  </li>
+        </li>
 
-  <li class="accordion-navigation">
-    <a href="#panel3a">Change Password</a>
-    <div id="panel3a" class="content">
-     <div class="login-box">
-            <div class="row">
-            <div class="large-12 columns">
-               <form method="post">
-                   {% csrf_token %}
+        <li class="accordion-navigation">
+            <a href="#panel3a">Change Password</a>
+            <div id="panel3a" class="content">
+                <div class="login-box">
                     <div class="row">
-                      <div class="large-12 columns">
-                        <label><b>Old Password</b> {{ passwordform.old_password }}</label>
-                        <label><b>New Password</b> {{ passwordform.new_password1 }}</label>
-                        <label><b>Re-type New Password</b> {{ passwordform.new_password2 }}</label>
-                      </div>
+                        <div class="large-12 columns">
+                            <form method="post">
+                                {% csrf_token %}
+                                <div class="row">
+                                    <div class="large-12 columns">
+                                        <label><b>Old Password</b> {{ passwordform.old_password }}</label>
+                                        <label><b>New Password</b> {{ passwordform.new_password1 }}</label>
+                                        <label><b>Re-type New Password</b> {{ passwordform.new_password2 }}</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="large-12 large-centered columns">
+                                        <button type="submit" class="success button round">Change Password</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                    <div class="row">
-                      <div class="large-12 large-centered columns">
-                          <button type="submit" class="success button round">Change Password</button>
-                      </div>
-                    </div>
-                  </form>
+                </div>
             </div>
-          </div>
-    </div>
-    </div>
-  </li>
-  <li class="accordion-navigation">
-    <a href="#panel4a">Change Service Rates</a>
-    <div id="panel4a" class="content">
-     <div class="login-box">
-            <div class="row">
-            <div class="large-12 columns">
-               <form method="post">
-                   {% csrf_token %}
+        </li>
+        <li class="accordion-navigation">
+            <a href="#panel4a">Change Service Rates</a>
+            <div id="panel4a" class="content">
+                <div class="login-box">
                     <div class="row">
-                      <div class="large-12 columns">
-                        <label class="title"><b>Delivery Fee:</b></label>
-						{{ fees_form.delivery_fee }}
-                        <label class="title"><b>Service Charge:</b></label>
-						{{ fees_form.service_charge }}
-                      </div>
+                        <div class="large-12 columns">
+                            <form method="post">
+                                {% csrf_token %}
+                                <div class="row">
+                                    <div class="large-12 columns">
+                                        <label class="title"><b>Delivery Fee:</b></label>
+                                        {{ fees_form.delivery_fee }}
+                                        <label class="title"><b>Service Charge:</b></label>
+                                        {{ fees_form.service_charge }}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="large-12 large-centered columns">
+                                        <input type="submit" class="radius success button" value="Save New Rate" />
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                    <div class="row">
-                      <div class="large-12 large-centered columns">
-                        <input type="submit" class="radius success button" value="Save New Rate" />
-                      </div>
-                    </div>
-                  </form>
+                </div>
             </div>
-          </div>
-    </div>
-    </div>
-  </li>
-</ul>
+        </li>
+    </ul>
 </div>
 
 {% endblock %}
