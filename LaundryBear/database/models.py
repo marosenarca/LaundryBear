@@ -1,3 +1,4 @@
+from decimal import *
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
@@ -70,7 +71,23 @@ class LaundryShop(models.Model):
                 total += 1
         if not total:
             return 0
-        return average/total
+        TWOPLACES = Decimal(10) ** -2
+        return Decimal(average/total).quantize(TWOPLACES)
+
+    @property
+    def raters(self):
+        price_pk = [price.pk for price in self.price_set.all()]
+        orders = Order.objects.filter(price__pk__in=price_pk)
+        total = 0
+        order_pk = [order.pk for order in orders]
+        transactions = Transaction.objects.filter(order__pk__in=order_pk).distinct()
+        for transaction in transactions:
+            if transaction.paws:
+                total += 1
+        if not total:
+            return 0
+        return total
+    
 
     def __unicode__(self):
         return self.name
