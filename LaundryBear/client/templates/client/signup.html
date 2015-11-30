@@ -24,49 +24,49 @@
             <label class="title"><b>First Name</b><strong id="required">*</strong></label>
             {{ userform.first_name }}
             {% if userform.first_name.errors %}
-            <span class="error label">{{ userform.first_name.errors }}</span>
+            <span class="error label">{{ userform.first_name.errors | striptags }}</span>
             {% endif %}
           </div>
           <div class="large-12 columns">
             <label class="title"><b>Last Name</b><strong id="required" style="margin-left: 325px;">*</strong></label>
             {{ userform.last_name }}
             {% if userform.last_name.errors %}
-            <span class="error label">{{ userform.last_name.errors }}</span>
+            <span class="error label">{{ userform.last_name.errors | striptags }}</span>
             {% endif %}
           </div>
           <div class="large-12 columns">
             <label class="title"><b>Cellphone Number</b><strong id="required" style="margin-left: 270px;">*</strong></label>
             {{ userprofileform.contact_number }}
             {% if userprofileform.contact_number.errors %}
-            <span class="error label">{{ userprofileform.contact_number.errors }}</span>
+            <span class="error label">{{ userprofileform.contact_number.errors | striptags }}</span>
             {% endif %}
           </div>
           <div class="large-12 columns">
             <label class="title"><b>Email</b><strong id="required" style="margin-left: 362px;">*</strong></label>
             {{ userform.email }}
             {% if userform.email.errors %}
-            <span class="error label">{{ userform.email.errors }}</span>
+            <span class="error label">{{ userform.email.errors | striptags }}</span>
             {% endif %}
           </div><hr>
           <div class="large-12 columns">
             <label class="title"><b>Username</b><strong id="required" style="margin-left: 330px;">*</strong></label>
             {{ userform.username }}
             {% if userform.username.errors %}
-            <span class="error label">{{ userform.username.errors }}</span>
+            <span class="error label">{{ userform.username.errors | striptags }}</span>
             {% endif %}
           </div>
           <div class="large-12 columns">
             <label class="title"><b>Password</b><strong id="required" style="margin-left: 330px;">*</strong></label>
               {{ userform.password1 }}
               {% if userform.password1.errors %}
-              <span class="error label">{{ userform.password1.errors }}</span>
+              <span class="error label">{{ userform.password1.errors | striptags }}</span>
               {% endif %}
           </div>
           <div class="large-12 columns">
             <label class="title"><b>Confirm Password</b><strong id="required" style="margin-left: 270px;">*</strong></label>
               {{ userform.password2 }}
               {% if userform.password2.errors %}
-              <span class="error label">{{ userform.password2.errors }}</span>
+              <span class="error label">{{ userform.password2.errors | striptags }}</span>
               {% endif %}
           </div>
         <hr>
@@ -82,7 +82,7 @@
           <label class="title"><b>Barangay</b><strong id="required" style="margin-left: 333px;">*</strong></label>
           {{ userprofileform.barangay }}
           {% if userprofileform.barangay.errors %}
-          <span class="error label">{{ userprofileform.barangay.errors }}</span>
+          <span class="error label">{{ userprofileform.barangay.errors | striptags }}</span>
           {% endif %}
         </div>
         <div class="large-12 columns">
@@ -93,7 +93,7 @@
           <label class="title"><b>Province</b><strong id="required" style="margin-left: 335px;">*</strong></label>
           {{ userprofileform.province }}
           {% if userprofileform.province.errors %}
-          <span class="error label">{{ userprofileform.province.errors }}</span>
+          <span class="error label">{{ userprofileform.province.errors | striptags }}</span>
           {% endif %}
         </div>
         <hr>
