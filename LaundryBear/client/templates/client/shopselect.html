@@ -94,8 +94,8 @@
         <span class="info label">Total:</span>
         <p><strong id="total-price">0</strong></p>
     </div>
-    <div class="large-12 small-2 columns expand">
-        <a href="{% url "client:view-shops" %}" style="margin-left:10px;" class="button">Back</a>
+    <div id="buttons" class="large-12 columns">
+        <a href="{% url "client:view-shops" %}" class="button">Back</a>
         <a href="{% url "client:order-summary" shop.pk %}" class="button success">Request</a>
     </div>
 </div>
