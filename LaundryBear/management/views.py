@@ -153,6 +153,7 @@ class ClientListView(AdminLoginRequiredMixin, ListView):
     paginate_by = 10
     template_name = 'management/client/viewclients.html'
     context_object_name = 'client_list'
+    ordering = ['client__first_name', 'client__last_name']
 
     def get_context_data(self, **kwargs):
         context = super(ClientListView, self).get_context_data(**kwargs)
