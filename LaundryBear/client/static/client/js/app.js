@@ -46,3 +46,15 @@ $(".reveal-modal-button").click(function() {
 });
 
 
+$(document).foundation({
+    tab: {
+      callback : function (tab) {
+        console.log(tab);
+      }
+    }
+});
+
+$('#myTabs').on('toggled', function (event, tab) {
+    console.log(tab);
+});
+

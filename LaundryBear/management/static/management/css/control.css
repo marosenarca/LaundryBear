@@ -15,7 +15,7 @@ div#form{
 }
 
 h3#adminlogin {
-	color: #0CF;
+	color: #5EB1E7;
 }
 
 .login-box {
@@ -38,26 +38,26 @@ img#writtenlogo {
 	margin-left:1%;
 }
 .top-bar {
-    background-color: #5ac8fa;
+    background-color: #5EB1E7;
 }
 
 
 .top-bar-section ul {
-    background-color: #5ac8fa;
+    background-color: #5EB1E7;
 }
 
 .top-bar-section ul.right {
-    background-color: #5ac8fa;
+    background-color: #5EB1E7;
 }
 
 
 .top-bar-section li a:not(.button) {
-    background-color: #5ac8fa;
+    background-color: #5EB1E7;
 }
 
 
 .top-bar-section ul li.active > a {
-   background-color: #5ac8fa;
+   background-color: #5EB1E7;
 }
 .top-bar-section li:hover a {
     background-color: 00FFFF;
@@ -65,7 +65,7 @@ img#writtenlogo {
 
 
 .top-bar-section ul li > a {
-    background-color: #5ac8fa;
+    background-color: #5EB1E7;
 }
 
 
@@ -76,7 +76,7 @@ img#writtenlogo {
 
 .top-bar-section .dropdown li:not(.has-form):not(.active):hover > a:not(.button) {
 color: #FFFFFF;
-background-color: #5ac8fa;
+background-color: #5EB1E7;
 }
 
 span{
@@ -91,9 +91,20 @@ h4 {
 	margin-top: 5%;
 }
 
-div.panel {
-	width: 110%;
-	height:50%;
+
+div#contain{
+  position:absolute;
+     width:500px;
+     height:200px;
+     z-index:15;
+     top:5%;
+     left:50%;
+     margin: 50px 0 0 -240px;  
+}
+
+div#contained{
+  border-radius: 10px;
+  background-color: #5EB1E7;
 }
 
 div#ufd:hover {

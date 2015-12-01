@@ -9,45 +9,66 @@
   <title>Laundry Bear | Sign Up</title>
 </head>
 <body>
-<div class="row">
-  <div id="form" class="large-12 columns">
-    <div id="insideform" class="signup-panel">
-      <p class="welcome"><a href="usersignin.html"><img src="{% static "management/icons/logologin.png"%}" /></a></p>
-      <form action="{%url 'client:signup'%}"method="post">
+  <p class="welcome"><a href="{% url 'client:login' %}"><img src="{% static "management/icons/logologin.png"%}" /></a></p>
+  <center><strong><h3 id="tag">Something Clean is Coming Your Way</h3></strong></center><hr>
+  <div class="row">
+    <div id="form" class="large-12 columns">
+      <div id="insideform" class="signup-panel">
+        <form action="{%url 'client:signup'%}"method="post">
+          <div class="large-12 columns">
+            <span id="legend" class="warning label" align="right">*Required Field</span>
+          </div>
         {% csrf_token %}
-        <hr>
         <div>
           <div class="large-12 columns">
-            <label class="title"><b>First Name</b><span id="required" class="warning label">Required field</span></label>
+            <label class="title"><b>First Name</b><strong><font color="red" size="3">*</font></strong></label>
             {{ userform.first_name }}
-            {{ userform.first_name.errors }}
+            {% if userform.first_name.errors %}
+            <span class="error label">{{ userform.first_name.errors | striptags }}</span>
+            {% endif %}
           </div>
           <div class="large-12 columns">
-            <label class="title"><b>Last Name</b><span id="required" class="warning label" style="margin-left: 253px;">Required field</span></label>
+            <label class="title"><b>Last Name</b><strong><font color="red" size="3">*</font></strong></label>
             {{ userform.last_name }}
-            {{ userform.last_name.errors }}
+            {% if userform.last_name.errors %}
+            <span class="error label">{{ userform.last_name.errors | striptags }}</span>
+            {% endif %}
           </div>
           <div class="large-12 columns">
-            <label class="title"><b>Username</b><span id="required" class="warning label" style="margin-left: 255px;">Required field</span></label>
-            {{ userform.username }}
-            {{ userform.username.errors }}
+            <label class="title"><b>Cellphone Number</b><strong><font color="red" size="3">*</font></strong></label>
+            {{ userprofileform.contact_number }}
+            {% if userprofileform.contact_number.errors %}
+            <span class="error label">{{ userprofileform.contact_number.errors | striptags }}</span>
+            {% endif %}
           </div>
           <div class="large-12 columns">
-            <label class="title"><b>Email</b><span id="required" class="warning label" style="margin-left: 325px;">Required field</span></label>
+            <label class="title"><b>Email</b><strong><font color="red" size="3">*</font></strong></label>
             {{ userform.email }}
-            {{ userform.email.errors }}
+            {% if userform.email.errors %}
+            <span class="error label">{{ userform.email.errors | striptags }}</span>
+            {% endif %}
+          </div><hr>
+          <div class="large-12 columns">
+            <label class="title"><b>Username</b><strong><font color="red" size="3">*</font></strong></label>
+            {{ userform.username }}
+            {% if userform.username.errors %}
+            <span class="error label">{{ userform.username.errors | striptags }}</span>
+            {% endif %}
           </div>
-          <div class="large-6 columns">
-            <label class="title"><b>Password</b><span id="pass1" class="warning label">Required field</span></label>
-            {{ userform.password1 }}
-            {{ userform.password1.errors }}
+          <div class="large-12 columns">
+            <label class="title"><b>Password</b><strong><font color="red" size="3">*</font></strong></label>
+              {{ userform.password1 }}
+              {% if userform.password1.errors %}
+              <span class="error label">{{ userform.password1.errors | striptags }}</span>
+              {% endif %}
           </div>
-          <div class="large-6 columns">
-            <label class="title"><b>Confirm Password</b><span id="pass2" class="warning label">Required field</span></label>
-            {{ userform.password2 }}
-            {{ userform.password2.errors }}
+          <div class="large-12 columns">
+            <label class="title"><b>Confirm Password</b><strong><font color="red" size="3">*</font></strong></strong></label>
+              {{ userform.password2 }}
+              {% if userform.password2.errors %}
+              <span class="error label">{{ userform.password2.errors | striptags }}</span>
+              {% endif %}
           </div>
-        </div>
         <hr>
         <div class="large-12 columns">
           <label class="title"><b>Building</b></label>
@@ -58,23 +79,22 @@
           {{ userprofileform.street }}
         </div>
         <div class="large-12 columns">
-          <label class="title"><b>Barangay</b><span id="required" class="warning label" style="margin-left: 260px;">Required field</span></label>
+          <label class="title"><b>Barangay</b><strong><font color="red" size="3">*</font></strong></label>
           {{ userprofileform.barangay }}
-          {{ userprofileform.barangay.errors }}
+          {% if userprofileform.barangay.errors %}
+          <span class="error label">{{ userprofileform.barangay.errors | striptags }}</span>
+          {% endif %}
         </div>
         <div class="large-12 columns">
           <label class="title"><b>City</b></label>
           {{ userprofileform.city }}
         </div>
         <div class="large-12 columns">
-          <label class="title"><b>Province</b><span id="required" class="warning label" style="margin-left: 262px;">Required field</span></label>
+          <label class="title"><b>Province</b><strong><font color="red" size="3">*</font></strong></label>
           {{ userprofileform.province }}
-          {{ userprofileform.province.errors }}
-        </div>
-        <div class="large-12 columns">
-          <label class="title"><b>Contact Number</b><span id="required" class="warning label" style="margin-left: 212px;">Required field</span></label>
-          {{ userprofileform.contact_number }}
-          {{ userprofileform.contact_number.errors }}
+          {% if userprofileform.province.errors %}
+          <span class="error label">{{ userprofileform.province.errors | striptags }}</span>
+          {% endif %}
         </div>
         <hr>
         <input type="submit" class="button" value="Sign Up"/>
