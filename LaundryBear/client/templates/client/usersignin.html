@@ -18,12 +18,14 @@
         <div><img src={% static "client/icons/pay.jpg"%}></div>
         <div><img src={% static "client/icons/receive.jpg"%}></div>
     </div>
-    <ul class="header-subnav">
-        <li><a href="#" class="is-active">Home</a></li>
-        <li><a href="{% url 'client:signup' %}" class="is-active">Sign Up</a></li>
-        <li><a href="#" class="is-active">About Us</a></li>
+    <ul class="header-subnav" data-tab>
+        <li class="tab-title active"><a href="#home" >Log In</a></li>
+        <li class="tab-title" onclick="location.href='{% url 'client:signup' %}'"><a href="{% url 'client:signup' %}" >Sign Up</a></li>
+        <li class="tab-title"><a href="#about-us">About Us</a></li>
     </ul>
-</header>
+</div>
+<div class="tabs-content">
+<div class="content active" id="home">
 {%if not user.is_authenticated %}
 <div class="row">
     <div id="form" class="login">
@@ -65,17 +67,37 @@
             </form>
         </div>
     </div>
-</div>
 {%endif%}
 </div>
+</div>
+    <div class="content" id="about-us">
+        <div class="panel"> 
+        <h2>Carry no more!</h2>
+            <h5>As a business having easy access to laundry shops, we can provide the convenience that customers want. We can provide for the pickup and delivery of dirty and washed laundry from door-to-door.</h5>
+        </div>
+
+        <div class="panel"> 
+        <h2>Convenience in 4 Easy Steps</h2>
+            <div class="row">
+            <div class="medium-3 columns"></div>
+            <div class="medium-6 medium-offset-3 columns">
+                <img src={% static "client/icons/locate.jpg"%}>
+                <img src={% static "client/icons/request.jpg"%}>
+                <img src={% static "client/icons/pay.jpg"%}>
+                <img src={% static "client/icons/receive.jpg"%}>
+            </div>
+            <div class="medium-3 columns"></div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
 <div id="logos">
     <a href="http://www.instagram.com"><img src="{% static "management/icons/instagram-icon-black.png"%}" id="logo" alt="" align="right"/></a>
     <a href="http://www.twitter.com"><img src="{% static "management/icons/twitter-icon-circle-logo.png" %}" id="logo"  alt="" align="right"/></a>
     <a href="http://www.facebook.com"><img src="{% static "management/icons/kNPKJ.gif"%}" alt="" id="logo"  align="right"/></a>
 </div>
-
-
-
     <script src="{%static "LaundryBear/js/vendor/jquery.js"%}"></script>
     <script src="{%static "LaundryBear/js/foundation.js"%}"></script>
 
@@ -84,6 +106,7 @@
     <script src="{%static "client/slick/slick.min.js"%}"></script>
     <script src="{%static "LaundryBear/js/vendor/modernizr.js"%}"></script>
     <script src="{%static "LaundryBear/js/vendor/fastclick.js"%}"></script>
+    <script src="{%static "LaundryBear/js/foundation.min.js" %}"></script>
     <script src="{%static "management/js/app.js"%}"></script>
 
 <script type="text/javascript">
@@ -106,6 +129,5 @@
      });
     });
   </script>
-
     </body>
 </html>
