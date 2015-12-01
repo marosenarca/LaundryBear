@@ -26,6 +26,7 @@ img#logo {
 	margin-right:auto;
 	margin-bottom: 5%;
 }
+
 .login-box {
   background-color: transparent;
   border: 2px solid transparent;
@@ -35,7 +36,6 @@ img#logo {
 
 div#logos img {
     display: inline-block;
-
     width: 40px;
     height: 40px;
 
