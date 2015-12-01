@@ -9,7 +9,10 @@
             <h2 style="text-align:center"> {{ shop.name }} </h2>
             <div class="row" style="margin: auto;">
                 <div class="small-12 large-10 columns small-centered" style="margin: auto;">
+                    <center><h4 style="inline:true">{{ shop.average_rating }}</h4>
                     <div class="paw-container" style="width: {% widthratio shop.average_rating 5 150 %}px; margin: auto;" ><img src="{% static "management/icons/star.png" %}" /></div>
+                    <br>
+                     <span>a total of {{ shop.raters }} reviews</span></center>
                 </div>
             </div>
             <br><br>
@@ -94,8 +97,8 @@
         <span class="info label">Total:</span>
         <p><strong id="total-price">0</strong></p>
     </div>
-    <div class="large-12 small-2 columns expand">
-        <a href="{% url "client:view-shops" %}" style="margin-left:10px;" class="button">Back</a>
+    <div id="buttons" class="large-12 columns">
+        <a href="{% url "client:view-shops" %}" class="button">Back</a>
         <a href="{% url "client:order-summary" shop.pk %}" class="button success">Request</a>
     </div>
 </div>
