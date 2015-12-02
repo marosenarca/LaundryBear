@@ -36,7 +36,7 @@
             </div>
         </div>
         {% endif %}
-        <div class="medium-3 columns">
+        <div class="medium-4 columns">
             <div class="login-box">
                 <div class="row">
                     <h3 id="adminlogin"align="center"><img id="logo"src="{% static "management/icons/logologin.png"%}" /></h3>
@@ -44,23 +44,23 @@
                 </div>
             </div>
         </div>
-        <div class="medium-6 columns center">
+        <div id="info" class="medium-4 columns">
             <form method="post">
                 {% csrf_token %}
-                <div id="info" class="row">
-                    <div class="large-7 columns">
+                <div class="row">
+                    <div class="large-12 columns">
                         <label class="title"><b>Username</b></label>
                         <input type="text" name="username" placeholder="Enter your username" required autocomplete="on" />
                     </div>
                 </div>
                 <div class="row">
-                    <div class="large-7 columns">
+                    <div class="large-12 columns">
                         <label class="title"><b>Password</b></label>
                         <input type="password" name="password" placeholder="Enter your password" required />
                     </div>
                 </div>
                 <div class="row">
-                    <div class="large-7 columns">
+                    <div class="large-12 columns">
                         <input type="submit" class="button expand" value="Sign In" />
                     </div>
                 </div>
@@ -72,27 +72,35 @@
 </div>
     <div class="content" id="about-us">
         <div class="panel"> 
-        <h2><b>Be hassle free!</b></h2>
-            <h5>Don't have time to wash your clothes? Tired of going out to look for good laundry shops? Don't catch laundry shops near you open? Worry no more because laundry bear is here!</h5>
+        <h1><font color="#1982C6">Be Hassle Free!</font></h1>
+            <h5><font color="87C7F1"><b>We give you the most relaxing way to do your laundry. Anywhere. Anytime</b></font></h5>
         </div>
 
         <div class="panel"> 
-        <h2>Convenience in 4 Easy Steps</h2>
+        <h1><font color="#1982C6">Convenience In Four Easy Steps</font></h1><br>
             <div class="row">
-            <div class="medium-3 columns"></div>
-            <div class="medium-6 medium-offset-3 columns">
-                <img src={% static "client/icons/locate.jpg"%}>
-                <img src={% static "client/icons/request.jpg"%}>
-                <img src={% static "client/icons/pay.jpg"%}>
-                <img src={% static "client/icons/receive.jpg"%}>
+                <div class="medium-3 columns">
+                    <img src={% static "client/icons/1.png"%}>
+                    <b>Locate. </b>For ease and convenience, LaundryBear find shops nearest to you. Saves you more time from searching through a lot of listed shops.
+                </div>
+                <div class="medium-3 columns">
+                    <img src={% static "client/icons/2.png"%}>
+                    <b>Order. </b>Take advantage of the Internet and send a laundry-pick-up request online. We'll do the carrying-to-the-laundry-shops ourselves.
+                </div>
+                <div class="medium-3 columns">
+                    <img src={% static "client/icons/3.png"%}>
+                    <b>Pay. </b>We give customers the easiest payment mode, cash-on-delivery.
+                </div>
+                <div class="medium-3 columns">
+                    <img src={% static "client/icons/4.png"%}>
+                    <b>Wear. </b>Customer satisfaction is our priority. Receive your laundry at the exact time you wanted it to be delivered, and enjoy the hug of the fluffy bear on you.
+                </div>
             </div>
-            <div class="medium-3 columns"></div>
             </div>
         </div>
 
-    </div>
-</div>
-
+    </div><hr id="separate">
+</div><font id="copy" size="2">©LaundryBear 2015</font>
 <div id="logos">
     <a href="http://www.instagram.com"><img src="{% static "management/icons/instagram-icon-black.png"%}" id="logo" alt="" align="right"/></a>
     <a href="http://www.twitter.com"><img src="{% static "management/icons/twitter-icon-circle-logo.png" %}" id="logo"  alt="" align="right"/></a>

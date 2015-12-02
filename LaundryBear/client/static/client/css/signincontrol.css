@@ -1,7 +1,6 @@
 @import "compass/css3";
 
 body {
-	background-color: #5EB1E7;
 	background-position: center;
 }
       
@@ -29,7 +28,7 @@ img#logo {
 .login-box {
   background-color: transparent;
   border: 2px solid transparent;
-  margin-top: 5%;
+  margin-top: 2%;
   padding: 40px 20px 0 20px;
 }
 
@@ -37,12 +36,23 @@ div#logos img {
     display: inline-block;
     width: 40px;
     height: 40px;
+    margin-top: -40px;
+}
 
+#separate{
+  margin-top: -30px;
+}
 
+#copy{
+  margin-top: -50px;
 }
 
 #info{
-  margin-top: 10%;
+  margin-top: 2%;
+  margin-left: -100px;
+  background: #87C7F1;
+  border-radius: 8px;
+  box-shadow: 3px 3px 1px #778899;
 }
 
 div#logos:after {
@@ -70,7 +80,7 @@ div#logos:after {
     .header-subnav li a {
       padding: 0.9rem 1rem 0.75rem;
       font-size: 0.875rem;
-      color: #FFF;
+      color: black;
       text-transform: uppercase;
       display: block;
       font-weight: bold;
