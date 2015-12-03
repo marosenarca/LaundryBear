@@ -27,6 +27,12 @@ $("#set-service-button").on("click", function() {
 	return false;
 });
 
+$("a[data-reveal-id=\"firstModal\"]").click(function() {
+	var reveal = $(this).data("reveal-id");
+	$("#" + reveal).foundation("reveal", "open", serviceAddUrl);
+	return false;
+});
+
 function getNextIndex() {
 	var $formsetContainer = $("#price-formset-container");
 	var editPk = $formsetContainer.data("edit-pk");
@@ -153,7 +159,6 @@ function loadServiceItems() {
 
 $("iframe").on("load", function() {
 	var contents = $(this).contents();
-	console.log("loead");
 
 	contents.find("button").on("click", function() {
 		var $form = $(this).closest("form");
