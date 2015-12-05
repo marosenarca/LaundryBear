@@ -19,7 +19,11 @@
                             <div>
                                 <span id="required" class="warning label right">Required field</span>
                                 {{ form.name }}
-                                {{ form.name.errors }}
+                                {% if form.name.errors %}
+                                <span class="error label">
+                                {{ form.name.errors | striptags }}
+                                </span>
+                                {% endif %}
                             </div>
                         </label>
                     </div>
@@ -31,7 +35,11 @@
                             <div>
                                 <span id="required" class="warning label right">Required field</span>
                                 {{ form.description }}
-                                {{ form.description.errors }}
+                                {% if form.description.errors %}
+                                <span class="error label">
+                                {{ form.description.errors | striptags }}
+                                </span>
+                                {% endif %}
                             </div>
                         </label>
                     </div>
