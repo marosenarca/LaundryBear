@@ -87,17 +87,12 @@ h4#requests {
 	margin-left: 30%;
 }
 
-h4 {
-	margin-top: 5%;
-}
-
 
 div#contain{
-    position:relative;
     width:500px;
     height:200px;
     z-index: 10;
-    display:block-table;
+    display:block;
     margin: auto;
 }
 
