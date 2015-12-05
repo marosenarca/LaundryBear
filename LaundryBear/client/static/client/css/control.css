@@ -153,3 +153,11 @@ img#star {
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
     margin: 0; }
+
+
+.inline {
+    display: table;
+    margin:auto;
+    margin-bottom: 1em;
+
+}
