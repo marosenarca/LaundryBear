@@ -24,13 +24,4 @@
     }
     body{
         background: url("/static/client/icons/back.jpg") no-repeat center;
-
     }
-
-  #buttons{
-    position:absolute;
-     z-index:15;
-     left: 33%;
-     margin: 0 500px 0 -200px;  
-  }
-
