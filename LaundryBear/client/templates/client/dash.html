@@ -33,12 +33,14 @@
                     <td>
                         {% if transaction.paws %}
                         {{ transaction.paws }}
-                        {% else %}
+                        {% elif transaction.get_choice_name == "Done" or transaction.get_choice_name == "Rejected" %}
                         <form action="{% url "client:rate" transaction.pk %}" method="post" charset="UTF-8">
                         {% csrf_token %}
                         <div id="paws"><a class="raty-click"
                                           id="{{ transaction.id }}">Imprint this Laundry Shop</a></div>
                         </form>
+                        {% else %}
+                        Not yet available
                         {% endif %}
 
                     </td>
