@@ -87,19 +87,13 @@ h4#requests {
 	margin-left: 30%;
 }
 
-h4 {
-	margin-top: 5%;
-}
-
 
 div#contain{
-  position:absolute;
-     width:500px;
-     height:200px;
-     z-index:15;
-     top:5%;
-     left:50%;
-     margin: 50px 0 0 -240px;  
+    width:500px;
+    height:200px;
+    z-index: 10;
+    display:block;
+    margin: auto;
 }
 
 div#contained{

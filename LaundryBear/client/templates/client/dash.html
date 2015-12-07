@@ -29,7 +29,13 @@
                         <div class="raty-rating" data-value="{{ transaction.order_set.first.price.laundry_shop.average_rating }}" id="{{ transaction.id }}">
                         </div>
                     </td>
-                    <td>{{ transaction.get_choice_name }}</td>
+                    <td>
+                        {%if transaction.get_choice_name == "Done"%}
+                        <span class="success label">Done</span>
+                        {% else %}
+                        Not yet available
+                        {%endif%}
+                    </td>
                     <td>
                         {% if transaction.paws %}
                         {{ transaction.paws }}
