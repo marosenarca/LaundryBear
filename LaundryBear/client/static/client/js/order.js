@@ -21,7 +21,10 @@ $("#drop1 li").click(function() {
 	}
 });
 
-$(".add-to-basket").click(function() {
+$(".add-to-basket").on("click", addToBasket);
+
+
+function addToBasket() {
 	var pieces = $(this).siblings("input").val();
 	pieces = parseFloat(pieces).toFixed(0);
 	if (pieces.length === 0 || pieces == 0) {
@@ -33,10 +36,8 @@ $(".add-to-basket").click(function() {
 	var pricePerKg = $(this).data("price-per-kilo");
 	var price = pieces * pricePerKg / 7;
 	price = parseFloat(price).toFixed(2);
-	var template = $("#row-template").html();
-	var compiledTemplate = template.replace(/__servicename__/, servicename).replace(/__pieces__/g, pieces).replace(/__price__/g, price).replace(/__pk__/, pk);
-
-	$("#table-body").append(compiledTemplate);
+	var service = {name: servicename, price: price, pieces: pieces, pk: pk, pricePerKg: pricePerKg};
+	insertRow(service);
 
 	$(this).siblings("input").val("");
 	$(this).parent().foundation("reveal", "close");
@@ -49,15 +50,15 @@ $(".add-to-basket").click(function() {
 	} else {
 		selectedServices = JSON.parse(selectedServices);
 	}
-	selectedServices.push({name: servicename, pk: pk, pricePerKg: pricePerKg, price: price, pieces: pieces});
+	selectedServices.push({name: servicename, pk: pk, pricePerKg: pricePerKg, price: price, pieces: pieces, pricePerKg: pricePerKg});
 	document.cookie = "selectedServices=" + JSON.stringify(selectedServices) + ";path=/;domain=;";
 
 	updateTotals();
-});
+}
 
 function insertRow(service) {
 	var template = $("#row-template").html();
-	var compiledTemplate = template.replace(/__servicename__/, service.name).replace(/__pieces__/g, service.pieces).replace(/__price__/g, service.price).replace(/__pk__/, service.pk);
+	var compiledTemplate = template.replace(/__servicename__/, service.name).replace(/__pieces__/g, service.pieces).replace(/__price__/g, service.price).replace(/__pk__/, service.pk).replace(/__pricePerKg__/, service.pricePerKg);
 
 	// disable
 	$("#drop1 li[value=\"" + service.pk + "\"]").prop("disabled", true);
@@ -85,6 +86,7 @@ $("#table-body").on("click", ".alert", function(e) {
 	return false;
 });
 
+
 $("#table-body").on("click", ".info", function(e) {
 	var revealId = $(e.target).data("reveal-id");
 	var modal = $("#" + revealId);
@@ -94,11 +96,24 @@ $("#table-body").on("click", ".info", function(e) {
 	var selectedServices = document.cookie.replace(/(?:(?:^|.*;\s*)selectedServices\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 	selectedServices = JSON.parse(selectedServices);
 	var index = $("#table-body .info").index(this);
-	var removed = selectedServices.splice(index, 1);
-	document.cookie = "selectedServices=" + JSON.stringify(selectedServices) + ";path=/;domain=;";
+	var removed = selectedServices.splice(index, 1)[0];
+	var pricePerKg = $(this).data("price-per-kg");
 
-	$("#drop1 li[value=\"" + removed.pk + "\"]").prop("disabled", false);
-	$(e.target).closest("tr").remove();
+	modal.find(".add-to-basket").unbind();
+	modal.find(".add-to-basket").one("click", function() {
+		var items = $(this).parent().find("input").val();
+		$(this).on("click", addToBasket);
+		if (items.length === 0 || items == 0) {
+			return false;
+		}
+		console.log(items);
+		$(e.target).closest("tr").remove();
+		document.cookie = "selectedServices=" + JSON.stringify(selectedServices) + ";path=/;domain=;";
+		// add edited
+		$(this).data("price-per-kilo", pricePerKg);
+		$(this).trigger("click");
+		return false;
+	});
 	return false;
 });
 
