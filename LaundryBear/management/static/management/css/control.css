@@ -165,8 +165,11 @@ img#star {
     padding-bottom: 0.5rem;
     margin: 0; }
 
-dl#filter {
-	margin-left: 25%;
+.inline {
+    display: table;
+    margin:auto;
+    margin-bottom: 1em;
+
 }
 
 span#required {
