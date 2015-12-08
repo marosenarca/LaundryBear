@@ -27,6 +27,5 @@ $('.raty-click').click(function() {
             }
         });
     }
-
-
 );
+
