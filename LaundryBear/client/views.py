@@ -30,23 +30,24 @@ from LaundryBear.views import LoginView, LogoutView
 #You can still add more methods if needed.
 #Check ccbv.co.uk for more information
 
-#Inherits Class Based View "Login View"
+#Inherits Class Based View "LoginView"
 class ClientLoginView(LoginView):
     template_name = "client/usersignin.html"
     form_class = LoginForm
     success_view_name = 'client:menu' #redirects to 'menu' after successful login
 
 
-
+#Inherits Class Based View "LogoutView"
 class ClientLogoutView(LogoutView):
     login_view_name = 'client:login' #redirects to 'login' after successful logout
 
 
-class DashView(ClientLoginRequiredMixin, ListView):
-    model = Transaction
+#Inherits Class Based View "ListView"
+class DashView(ClientLoginRequiredMixin, ListView): #Non-users cannot login with the help of ClientLoginRequiredMixin
+    model = Transaction #aka self
     template_name = "client/dash.html"
 
-    def get_context_data(self, **kwargs): #populates the dictionary context_data
+    def get_context_data(self, **kwargs): #populates the dictionary context_data with the needed information for the template
         context = super(DashView, self).get_context_data(**kwargs)
         context['userprofile'] = self.request.user.userprofile
         context['transaction_list'] = self.get_transactions()
@@ -64,13 +65,13 @@ class DashView(ClientLoginRequiredMixin, ListView):
         transaction = Transaction.objects.get(pk=the_post['id'])
         transaction.paws = the_post['score']
         transaction.save()
-        return redirect('client:menu')
+        return redirect('client:menu') #redirects to 'menu' after rating a transaction from a laundry shop
 
-
+#Inherits CBV "TemplateView"
 class SignupView(TemplateView):
     template_name = "client/signup.html"
 
-    def get_success_url(self):
+    def get_success_url(self): #redirects to 'menu' after user sign up
         return reverse('client:menu')
 
     def post(self, request):
@@ -104,6 +105,7 @@ class SignupView(TemplateView):
         response_kwargs.setdefault('content_type', self.content_type)
         return self.response_class(request=self.request, template=self.template_name, context=context, using=None, **response_kwargs)
 
+#Inherits CBV "TemplateView"
 class UserSettingsView(ClientLoginRequiredMixin, TemplateView):
     template_name = 'client/usersettings.html'
 
@@ -116,13 +118,14 @@ class UserSettingsView(ClientLoginRequiredMixin, TemplateView):
         context['passwordform'] = PasswordChangeForm(data=self.request.POST or None, user=self.request.user)
         return context
 
-    def post(self,request,*args,**kwargs):
+    def post(self,request,*args,**kwargs): #Saves data
         context = self.get_context_data(*args, **kwargs)
         userform = context['userform']
         userprofileform = context['userprofileform']
         usernameform = context['usernameform']
         passwordform = context['passwordform']
 
+        #Check if forms are valid
         if userform.is_valid():
             userform.save()
         else:
@@ -151,6 +154,7 @@ class UserSettingsView(ClientLoginRequiredMixin, TemplateView):
 
         return self.render_to_response(context)
 
+#Inherits CBV "ListView"
 class ShopsListView(ClientLoginRequiredMixin, ListView):
     model = LaundryShop
     paginate_by = 10
