@@ -24,25 +24,29 @@ from database.models import LaundryShop, Price, Service, UserProfile, Transactio
 
 from LaundryBear.forms import LoginForm
 from LaundryBear.views import LoginView, LogoutView
-# Create your views here.
+
+#Django uses class based views to connect with templates.
+#Each class based view has their own methods.
+#You can still add more methods if needed.
+#Check ccbv.co.uk for more information
 
 #Inherits Class Based View "Login View"
 class ClientLoginView(LoginView):
     template_name = "client/usersignin.html"
     form_class = LoginForm
-    success_view_name = 'client:menu'
+    success_view_name = 'client:menu' #redirects to 'menu' after successful login
 
 
 
 class ClientLogoutView(LogoutView):
-    login_view_name = 'client:login'
+    login_view_name = 'client:login' #redirects to 'login' after successful logout
 
 
 class DashView(ClientLoginRequiredMixin, ListView):
     model = Transaction
     template_name = "client/dash.html"
 
-    def get_context_data(self, **kwargs):
+    def get_context_data(self, **kwargs): #populates the dictionary context_data
         context = super(DashView, self).get_context_data(**kwargs)
         context['userprofile'] = self.request.user.userprofile
         context['transaction_list'] = self.get_transactions()
@@ -50,12 +54,12 @@ class DashView(ClientLoginRequiredMixin, ListView):
         return context
 
 
-    def get_transactions(self):
+    def get_transactions(self): #shows only the transactions made by the user
         queryset = super(DashView, self).get_queryset()
         queryset = queryset.filter(client=self.request.user.userprofile)
         return queryset
 
-    def post(self, request, *args, **kwargs):
+    def post(self, request, *args, **kwargs): #sets ratings
         the_post = request.POST
         transaction = Transaction.objects.get(pk=the_post['id'])
         transaction.paws = the_post['score']
