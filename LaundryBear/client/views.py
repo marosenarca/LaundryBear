@@ -30,7 +30,8 @@ from LaundryBear.views import LoginView, LogoutView
 class ClientLoginView(LoginView):
     template_name = "client/usersignin.html"
     form_class = LoginForm
-    success_view_name = 'client:view-shops' #successful logins redirects to view
+    success_view_name = 'client:menu'
+
 
 
 class ClientLogoutView(LogoutView):
