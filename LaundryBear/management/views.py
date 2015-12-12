@@ -20,6 +20,10 @@ from management.mixins import AdminLoginRequiredMixin
 from LaundryBear.views import LoginView, LogoutView
 from django.contrib.auth.forms import PasswordChangeForm
 
+#Django uses class based views to connect with templates.
+#Each class based view has their own methods.
+#You can still add more methods if needed.
+#Check ccbv.co.uk for more information
 
 class LaundryMenuView(AdminLoginRequiredMixin, TemplateView):
     template_name = 'management/shop/laundrybearmenu.html'
