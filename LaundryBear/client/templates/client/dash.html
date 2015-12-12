@@ -13,7 +13,7 @@
                 <th>Date Requested</th>
                 <th>Price</th>
                 <th>Laundry Shop</th>
-                <th>Average Rating</th>
+                <th width="140px">Average Rating</th>
                 <th>Status</th>
                 <th>Your Rating</th>
                 </thead>
@@ -30,11 +30,17 @@
                         </div>
                     </td>
                     <td>
-                        {%if transaction.get_choice_name == "Done"%}
-                        <span class="success label">Done</span>
-                        {% else %}
-                        Not yet available
-                        {%endif%}
+                        <center>
+                            {%if transaction.get_choice_name == "Done" %}
+                                <span class="success label">{{ transaction.get_choice_name | striptags }}</span>
+                            {% elif  transaction.get_choice_name == "Pending" %}
+                                <span class="label" style="background-color:#f1c40f">{{ transaction.get_choice_name | striptags }}</span>
+                            {% elif  transaction.get_choice_name == "Ongoing" %}
+                                <span class="default label">{{ transaction.get_choice_name | striptags }}</span>
+                            {% elif  transaction.get_choice_name == "Rejected" %}
+                                <span class="alert label">{{ transaction.get_choice_name | striptags }}</span>
+                            {%endif%}
+                        </center>
                     </td>
                     <td>
                         {% if transaction.paws %}
