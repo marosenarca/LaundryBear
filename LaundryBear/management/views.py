@@ -210,7 +210,6 @@ class ServicesListView(AdminLoginRequiredMixin, ListView):
             service = self.get_service_by_name(name_query)
             query_type = 'name'
         description_query = self.request.GET.get('description', False)
-        query_type = 'description'
         if description_query:
             service = self.get_service_by_description(description_query)
             query_type = 'description'
@@ -328,6 +327,38 @@ class HistoryTransactionsView(AdminLoginRequiredMixin, ListView):
         queryset = queryset.filter(status__in=filters).order_by('request_date').reverse()
 
         return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super(HistoryTransactionsView, self).get_context_data(**kwargs)
+        transaction = context['history_transaction_list']
+
+        name_query = self.request.GET.get('client name', False)
+        query_type = 'client name'
+        if name_query:
+            transaction = self.get_transaction_by_name(name_query)
+            query_type = 'client name'
+
+        shop_query = self.request.GET.get('laundry shop', False)
+        if shop_query:
+            transaction = self.get_transaction_by_shop(shop_query)
+            query_type = 'laundry shop'
+
+        date_query = self.request.GET.get('date requested', False)
+        if date_query:
+            transaction = self.get_transaction_by_date(date_query)
+            query_type = 'date requested'
+
+        context.update({'history_transaction_list': transaction})
+        context['query_type'] = query_type
+        return context
+
+    def get_transaction_by_name(self, name_query):
+        return Transaction.objects.filter(Q(client__client__first_name__icontains=name_query)|
+            Q(client__client__last_name__icontains=name_query))
+
+    def get_transaction_by_shop(self, shop_query):
+        return Transaction.objects.filter(order__price__laundry_shop__name__icontains=shop_query)
+
 
 
 class UpdateTransactionDeliveryDateView(AdminLoginRequiredMixin, UpdateView):
