@@ -2,25 +2,20 @@ import json
 
 from datetime import timedelta
 
-from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import authenticate, login
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse
-from django.forms.models import inlineformset_factory
-from django.shortcuts import redirect, render, render_to_response
+from django.shortcuts import redirect, render_to_response
 from django.template import RequestContext
 from django.forms.models import model_to_dict
-from django.utils.decorators import method_decorator
 from django.contrib.sites.models import Site
-from django.views.generic import (CreateView, DeleteView, DetailView, FormView, ListView,
-                                  RedirectView, TemplateView, UpdateView, View)
+from django.views.generic import (DetailView, ListView, TemplateView, View)
 
 from client.forms import ProfileForm, UserForm, AddressForm, TransactionForm, ChangeUsernameForm
 
 from django.contrib.auth.forms import PasswordChangeForm
 from client.mixins import ClientLoginRequiredMixin
-from database.models import LaundryShop, Price, Service, UserProfile, Transaction, Order, default_date, UserProfile
+from database.models import LaundryShop, Price, Transaction, Order, default_date
 
 from LaundryBear.forms import LoginForm
 from LaundryBear.views import LoginView, LogoutView
@@ -125,7 +120,7 @@ class UserSettingsView(ClientLoginRequiredMixin, TemplateView):
         usernameform = context['usernameform']
         passwordform = context['passwordform']
 
-        #Check if forms are valid
+        #Check if forms are valid. If not, print errors
         if userform.is_valid():
             userform.save()
         else:
@@ -167,6 +162,7 @@ class ShopsListView(ClientLoginRequiredMixin, ListView):
 
         query_type = ''
 
+        #Used for search with the use of filtering
         none_query = self.request.GET.get('browse', False)
         if none_query:
             shops = self.get_all_shops()
@@ -198,6 +194,7 @@ class ShopsListView(ClientLoginRequiredMixin, ListView):
         context['query_type'] = query_type
         return context
 
+    #Get data needed by each search
     def get_shops_by_name(self, name_query):
         return LaundryShop.objects.filter(name__icontains=name_query)
 
@@ -213,7 +210,7 @@ class ShopsListView(ClientLoginRequiredMixin, ListView):
     def get_all_shops(self):
         return LaundryShop.objects.all()
 
-
+#Inherits CBV "DetailView"
 class OrderView(ClientLoginRequiredMixin, DetailView):
     context_object_name = 'shop'
     model = LaundryShop
@@ -225,7 +222,7 @@ class OrderView(ClientLoginRequiredMixin, DetailView):
         context['service_list'] = Price.objects.filter(laundry_shop__name=the_shop)
         return context
 
-
+#Inherits CBV "DetailView"
 class OrderSummaryView(ClientLoginRequiredMixin, DetailView):
     context_object_name = 'shop'
     template_name="client/summaryoforder.html"
@@ -240,7 +237,7 @@ class OrderSummaryView(ClientLoginRequiredMixin, DetailView):
             initial=model_to_dict(self.request.user.userprofile))
         return context
 
-
+#Inherits CBV "View"
 class CreateTransactionView(ClientLoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
         return HttpResponse(status=400)
