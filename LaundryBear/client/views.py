@@ -26,11 +26,11 @@ from LaundryBear.forms import LoginForm
 from LaundryBear.views import LoginView, LogoutView
 # Create your views here.
 
-
+#Inherits Class Based View "Login View"
 class ClientLoginView(LoginView):
     template_name = "client/usersignin.html"
     form_class = LoginForm
-    success_view_name = 'client:view-shops'
+    success_view_name = 'client:view-shops' #successful logins redirects to view
 
 
 class ClientLogoutView(LogoutView):
