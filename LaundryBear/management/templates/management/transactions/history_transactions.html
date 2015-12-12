@@ -16,9 +16,8 @@
                 <div class="large-12 columns">
                     <dl id="filter" class="sub-nav inline">
                         <dt>Filter:</dt>
-                        <dd{% if query_type == "name" %} class="active"{% endif %}><a href="#">Name</a></dd>
-                        <dd{% if query_type == "shop" %} class="active"{% endif %}><a href="#">Laundry Shop</a></dd>
-                        <dd{% if query_type == "date" %} class="active"{% endif %}><a href="#">Date Requested</a></dd>
+                        <dd{% if query_type == "client name" %} class="active"{% endif %}><a href="#">Client Name</a></dd>
+                        <dd{% if query_type == "laundry shop" %} class="active"{% endif %}><a href="#">Laundry Shop</a></dd>
                     </dl>
                     <div class="row collapse">
                         <div class="small-2 columns">
@@ -37,7 +36,7 @@
         </form>
         <table id='clickytable' style="margin:auto">
             <thead>
-            <th>Name of Client</th>
+            <th>Client Name</th>
             <th>Laundry Shop</th>
             <th>Date Requested</th>
             <th>Time Requested</th>

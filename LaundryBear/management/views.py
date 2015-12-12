@@ -332,35 +332,33 @@ class HistoryTransactionsView(AdminLoginRequiredMixin, ListView):
         context = super(HistoryTransactionsView, self).get_context_data(**kwargs)
         transaction = context['history_transaction_list']
 
-        name_query = self.request.GET.get('name', False)
-        query_type = 'name'
+        name_query = self.request.GET.get('client name', False)
+        query_type = 'client name'
         if name_query:
             transaction = self.get_transaction_by_name(name_query)
-            query_type = 'name'
+            query_type = 'client name'
 
-        shop_query = self.request.GET.get('shop', False)
+        shop_query = self.request.GET.get('laundry shop', False)
         if shop_query:
             transaction = self.get_transaction_by_shop(shop_query)
-            query_type = 'shop'
+            query_type = 'laundry shop'
 
-        date_query = self.request.GET.get('date', False)
+        date_query = self.request.GET.get('date requested', False)
         if date_query:
             transaction = self.get_transaction_by_date(date_query)
-            query_type = 'date'
+            query_type = 'date requested'
 
         context.update({'history_transaction_list': transaction})
         context['query_type'] = query_type
         return context
 
     def get_transaction_by_name(self, name_query):
-        return Transaction.objects.filter((Q(client__first_name__icontains=name_query)|
-            Q(client__last_name__icontains=name_query)))
+        return Transaction.objects.filter(Q(client__client__first_name__icontains=name_query)|
+            Q(client__client__last_name__icontains=name_query))
 
     def get_transaction_by_shop(self, shop_query):
-        return Transaction.objects.filter(price__laundry_shop__name__icontains=shop_query)
+        return Transaction.objects.filter(order__price__laundry_shop__name__icontains=shop_query)
 
-    def get_transaction_by_date(self, date_query):
-        return Transaction.objects.filter(request_date__icontains=date_query)
 
 
 class UpdateTransactionDeliveryDateView(AdminLoginRequiredMixin, UpdateView):
