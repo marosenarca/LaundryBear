@@ -343,11 +343,6 @@ class HistoryTransactionsView(AdminLoginRequiredMixin, ListView):
             transaction = self.get_transaction_by_shop(shop_query)
             query_type = 'laundry shop'
 
-        date_query = self.request.GET.get('date requested', False)
-        if date_query:
-            transaction = self.get_transaction_by_date(date_query)
-            query_type = 'date requested'
-
         context.update({'history_transaction_list': transaction})
         context['query_type'] = query_type
         return context
