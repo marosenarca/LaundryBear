@@ -5,7 +5,7 @@ from django.utils import timezone
 from django.utils.timezone import now
 from django.contrib.sites.models import Site
 from datetime import timedelta
-from django.core.validators import RegexValidator
+from django.core.validators import RegexValidator  
 
 
 contactNumberValidator = RegexValidator(r'^\+?([\d][\s-]?){10,13}$', 'Invalid input!')
